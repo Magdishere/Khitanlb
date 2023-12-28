@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('home_sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('utype')->default('USR')->comment('ADM for admin and USR for normal user');
-            $table->rememberToken();
+            $table->string('top_title');
+            $table->string('title');
+            $table->string('sub_title');
+            $table->string('offer');
+            $table->string('link');
+            $table->string('image');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('home_sliders');
     }
 };
