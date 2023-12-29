@@ -422,6 +422,41 @@ ol {
 	padding: 20px 0;
 }
 
+.gradient-border {
+    --borderWidth: 3px;
+    background: #1D1F20;
+    position: relative;
+    border-radius: var(--borderWidth);
+    transition: transform 0.4s ease-in-out;
+  }
+
+.gradient-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #fb95ff, #A5388F, #812e71);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+  }
+
+
+  @keyframes animatedgradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+
 .header__logo .gradient-text {
     font-family: "Abril Fatface", sans-serif;
     background: linear-gradient(to right, #fb95ff, #A5388F, #000000);
@@ -453,6 +488,11 @@ ol {
       background-position: left;
     }
   }
+
+.gradient-border:hover{
+    cursor: pointer;
+    transform: scale(1.1); /* Adjust the scaling factor as needed */
+}
 
 
 .header__logo h2{
