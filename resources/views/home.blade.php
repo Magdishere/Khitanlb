@@ -58,27 +58,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center" style="padding: 30px; border: 1px solid rgb(0, 0, 0);">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 30px;">
                     <img src="{{asset('../assets/img/icon/fast-delivery.png')}} " style="width: 50px; height:50px;">
-                    <h5 class="font-weight-semi-bold mx-2">Free & Fast Shipping</h5>
+                    <h5 class="font-weight-bold mx-2">Free & Fast Shipping</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center" style="padding: 30px; border: 1px solid rgb(0, 0, 0);">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 30px;">
                     <img src="{{asset('../assets/img/icon/yarn-ball.png')}} " style="width: 50px; height:50px;">
-                    <h5 class="font-weight-semi-bold mx-2">High Quality</h5>
+                    <h5 class="font-weight-bold mx-2">High Quality</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center" style="padding: 30px;  border: 1px solid rgb(0, 0, 0);">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 30px;">
                     <img src="{{asset('../assets/img/icon/cashback.png')}} " style="width: 50px; height:50px;">
-                    <h5 class="font-weight-semi-bold mx-2">14-Day Return</h5>
+                    <h5 class="font-weight-bold mx-2">14-Day Return</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center" style="padding: 30px; border: 1px solid rgb(0, 0, 0);">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 30px;">
                     <img src="{{asset('../assets/img/icon/support.png')}} " style="width: 50px; height:50px;">
-                    <h5 class="font-weight-semi-bold mx-2">24/7 Support</h5>
+                    <h5 class="font-weight-bold mx-2">24/7 Support</h5>
                 </div>
             </div>
         </div>
