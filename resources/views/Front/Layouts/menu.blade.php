@@ -3,7 +3,7 @@
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
-        <div class="loader"></div>
+        <img src="{{asset('assets/img/loader.gif')}}" style="width: 250px" class="loader-img">
     </div>
 
     <!-- Offcanvas Menu Begin -->
