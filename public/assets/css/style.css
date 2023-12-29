@@ -4,7 +4,7 @@
   Author: Colorib
   Author URI: https://www.colorib.com/
   Version: 1.0
-  Created: Colorib 
+  Created: Colorib
 ******************************************************************/
 
 /*------------------------------------------------------------------
@@ -100,6 +100,21 @@ a:focus {
 	color: #ffffff;
 }
 
+.loader-img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 35%;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.image-logo{
+    width: 50px;
+    height: 40px;
+}
+
 ul,
 ol {
 	padding: 0;
@@ -116,7 +131,7 @@ ol {
 }
 
 .section-title span {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -404,7 +419,44 @@ ol {
 }
 
 .header__logo {
-	padding: 30px 0;
+	padding: 20px 0;
+}
+
+.header__logo .gradient-text {
+    font-family: "Abril Fatface", sans-serif;
+    background: linear-gradient(to right, #fb95ff, #A5388F, #000000);
+    background-size: 200% 200%;
+    animation: rainbow 2s ease-in-out infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 1);
+    font-size: 3rem; /* Adjust the font size as needed */
+    text-align: center;
+    transition: color 0.2s ease-in-out;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin: 0; /* Remove the margin for a cleaner look */
+  }
+
+  .header__logo .gradient-text:hover {
+    color: rgba(0, 0, 0, 0);
+  }
+
+  @keyframes rainbow {
+    0% {
+      background-position: left;
+    }
+    50% {
+      background-position: right;
+    }
+    100% {
+      background-position: left;
+    }
+  }
+
+
+.header__logo h2{
+    font-family: fantasy;
 }
 
 .header__logo a {
@@ -493,7 +545,7 @@ ol {
 	bottom: 0;
 	width: 100%;
 	height: 2px;
-	background: #e53637;
+	background: rgba(188,49,136,255);
 	content: "";
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
@@ -588,8 +640,9 @@ ol {
 	padding-top: 230px;
 }
 
+
 .hero__text h6 {
-	color: #e53637;
+	color: #fff;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -675,7 +728,7 @@ ol {
 
 .banner__item:hover .banner__item__text a:after {
 	width: 40px;
-	background: #e53637;
+	background: rgba(188,49,136,255);
 }
 
 .banner__item.banner__item--middle {
@@ -814,7 +867,7 @@ ol {
 }
 
 .categories__deal__countdown span {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -899,7 +952,7 @@ ol {
 }
 
 .instagram__text h3 {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-weight: 700;
 }
 
@@ -907,9 +960,15 @@ ol {
   Product
 -----------------------*/
 
+.centered-paragraph {
+    text-align: center;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the element horizontally */
+  }
+
 .product {
-	padding-top: 0;
-	padding-bottom: 60px;
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 .filter__controls {
@@ -1056,7 +1115,7 @@ ol {
 
 .product__item__text a {
 	font-size: 15px;
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-weight: 700;
 	position: absolute;
 	left: 0;
@@ -1883,7 +1942,7 @@ ol {
 }
 
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
-	border-bottom: 2px solid #e53637;
+	border-bottom: 2px solid rgba(188,49,136,255);
 }
 
 .product__details__tab__content {
@@ -2042,11 +2101,11 @@ ol {
 }
 
 .footer__copyright__text p i {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 }
 
 .footer__copyright__text p a {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 }
 
 /*---------------------
@@ -2154,7 +2213,7 @@ ol {
 }
 
 .testimonial__text span {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-size: 72px;
 }
 
@@ -2504,7 +2563,7 @@ ol {
 
 .cart__total ul li span {
 	font-weight: 700;
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	float: right;
 }
 
@@ -2555,7 +2614,7 @@ ol {
 }
 
 .checkout__input p span {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 }
 
 .checkout__input input {
@@ -2604,7 +2663,7 @@ ol {
 }
 
 .checkout__input__checkbox label input:checked~.checkmark {
-	border-color: #e53637;
+	border-color: rgba(188,49,136,255);
 }
 
 .checkout__input__checkbox label input:checked~.checkmark:after {
@@ -2628,7 +2687,7 @@ ol {
 	top: -3px;
 	width: 14px;
 	height: 7px;
-	border: solid #e53637;
+	border: solid rgba(188,49,136,255);
 	border-width: 1.5px 1.5px 0px 0px;
 	-webkit-transform: rotate(127deg);
 	-ms-transform: rotate(127deg);
@@ -2718,7 +2777,7 @@ ol {
 }
 
 .checkout__total__all li span {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-weight: 700;
 	float: right;
 }
@@ -2741,7 +2800,7 @@ ol {
 
 .blog__item:hover a::after {
 	width: 40px;
-	background: #e53637;
+	background: rgba(188,49,136,255);
 }
 
 .blog__item:hover .blog__item__text {
@@ -3051,7 +3110,7 @@ ol {
 	color: #ffffff;
 	height: 50px;
 	width: 50px;
-	background: #e53637;
+	background: rgba(188,49,136,255);
 	border-radius: 50%;
 	line-height: 50px;
 	text-align: center;
@@ -3069,7 +3128,7 @@ ol {
 }
 
 .blog__details__quote h6 {
-	color: #e53637;
+	color: rgba(188,49,136,255);
 	font-size: 15px;
 	font-weight: 700;
 	text-transform: uppercase;

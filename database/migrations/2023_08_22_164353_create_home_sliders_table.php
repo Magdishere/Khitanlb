@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-
+        Schema::create('home_sliders', function (Blueprint $table) {
+            $table->id();
             $table->string('image');
-            $table->boolean('is_popular')->default(false);
+            $table->boolean('status');
+            $table->timestamps();
         });
     }
 
@@ -27,9 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-
-            $table->dropColumn(['image', 'is_popular']);
-        });
+        Schema::dropIfExists('home_sliders');
     }
 };

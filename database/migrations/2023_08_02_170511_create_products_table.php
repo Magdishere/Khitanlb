@@ -15,18 +15,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+
             $table->string('slug')->unique();
-            $table->string('short_description')->nullable();
-            $table->text('description')->nullable();
             $table->decimal('regular_price',8,2);
             $table->decimal('sale_price',8,2)->nullable();
             $table->string('SKU');
-            $table->enum('stock_status', ['instock', 'outofstock']);
+            $table->enum('stock_status', ['Available', 'Not Available']);
             $table->boolean('featured')->default('0');
-            $table->unsignedInteger('quantity')->default('10');
+            $table->unsignedInteger('quantity')->default('1');
             $table->string('image');
-            $table->text('images')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

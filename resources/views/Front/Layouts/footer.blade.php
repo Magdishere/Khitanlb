@@ -7,7 +7,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="#"><img src="{{asset('assets/img/footer-logo.png')}}" alt=""></a>
+                            <a href="/"><img  class="" src="{{asset('assets/img/khitan_logo1.png')}}" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
                         <a href="#"><img src="{{asset('assets/img/payment.png')}}" alt=""></a>
@@ -56,8 +56,7 @@
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            All rights reserved | This website was made by <a href="https://aymasolutions.ayahosni.com" target="_blank">AYMA Solutions</a>
                         </p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
