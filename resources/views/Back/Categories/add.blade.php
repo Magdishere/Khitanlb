@@ -1,13 +1,10 @@
 @extends('layouts.master')
 @section('css')
-    <link href="{{asset('admin-assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('admin-assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin-assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('admin-assets/plugins/sumoselect/sumoselect-rtl.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/plugins/telephoneinput/telephoneinput-rtl.css')}}">
-    .hidden {
-    display: none !important;
-    }
+    <style>
+        .hidden {
+            display: none !important;
+        }
+    </style>
 @endsection
 @section('page-header')
     <div class="main-panel">
@@ -82,7 +79,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> اختر القسم الرئيسي
                                                 </label>
-                                                <select name="parent_id" class="select2 hidden form-control">
+                                                <select name="parent_id" class="select2 form-control">
                                                     <optgroup label="من فضلك أختر القسم ">
                                                        {{-- @if($categories && $categories -> count() > 0)
                                                             @foreach($categories as $category)
@@ -156,9 +153,8 @@
 
         <!-- content-wrapper ends -->
 @endsection
-@push('script')
+@section('js')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
     <script>
         $(document).ready(function () {
             $('input:radio[name="type"]').change(function () {
@@ -171,4 +167,4 @@
         });
     </script>
 
-@endpush
+@stop
