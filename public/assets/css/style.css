@@ -422,8 +422,10 @@ ol {
 	padding: 20px 0;
 }
 
+
+
 .gradient-border {
-    --borderWidth: 3px;
+    --borderWidth: 5px;
     background: #1D1F20;
     position: relative;
     border-radius: var(--borderWidth);
@@ -437,10 +439,10 @@ ol {
     left: calc(-1 * var(--borderWidth));
     height: calc(100% + var(--borderWidth) * 2);
     width: calc(100% + var(--borderWidth) * 2);
-    background: linear-gradient(60deg, #fb95ff, #A5388F, #812e71);
+    background: linear-gradient(90deg, #f8d1f8, #f5a5e5, #b33898);
     border-radius: calc(2 * var(--borderWidth));
     z-index: -1;
-    animation: animatedgradient 3s ease alternate infinite;
+    animation: animatedgradient 2s ease alternate infinite;
     background-size: 300% 300%;
   }
 
@@ -457,41 +459,10 @@ ol {
       }
   }
 
-.header__logo .gradient-text {
-    font-family: "Abril Fatface", sans-serif;
-    background: linear-gradient(to right, #fb95ff, #A5388F, #000000);
-    background-size: 200% 200%;
-    animation: rainbow 2s ease-in-out infinite;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: rgba(0, 0, 0, 1);
-    font-size: 3rem; /* Adjust the font size as needed */
-    text-align: center;
-    transition: color 0.2s ease-in-out;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin: 0; /* Remove the margin for a cleaner look */
-  }
-
-  .header__logo .gradient-text:hover {
-    color: rgba(0, 0, 0, 0);
-  }
-
-  @keyframes rainbow {
-    0% {
-      background-position: left;
-    }
-    50% {
-      background-position: right;
-    }
-    100% {
-      background-position: left;
-    }
-  }
 
 .gradient-border:hover{
     cursor: pointer;
-    transform: scale(1.1); /* Adjust the scaling factor as needed */
+    transform: scale(1.05); /* Adjust the scaling factor as needed */
 }
 
 
@@ -2214,7 +2185,7 @@ ol {
 -----------------------*/
 
 .about {
-	padding-bottom: 70px;
+	padding-bottom: 30px;
 }
 
 .about__pic {
@@ -2223,10 +2194,26 @@ ol {
 
 .about__pic img {
 	min-width: 100%;
+
+}
+
+.shadowfilter {
+
+	-webkit-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;
+    cursor: pointer;
+
+}.shadowfilter:hover img{
+	-webkit-filter: drop-shadow(0px 0px 10px #b33898);
+    cursor: pointer;
 }
 
 .about__item {
-	margin-bottom: 30px;
+	padding-top: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 40px;
 }
 
 .about__item h4 {
@@ -2237,6 +2224,7 @@ ol {
 
 .about__item p {
 	margin-bottom: 0;
+    text-align: center;
 }
 
 /*---------------------
@@ -3947,4 +3935,129 @@ ol {
 	.categories__text:before {
 		height: 250px;
 	}
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-row {
+    display: flex;
+}
+
+.profile-sidebar {
+    width: 25%;
+    padding-right: 20px;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+.profile-ul{
+    list-style: none;
+    line-height: 1.4;
+    border: 1px solid #e1e3e4;
+}
+
+.shopify-message{
+
+    border: 2px solid;
+    border-radius: 0;
+    overflow: hidden;
+    margin: 20px 0 0;
+    padding: 14px 25px 14px 55px;
+    line-height: 1.4;
+    position: relative;
+    font-size: 14px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: var(--borderWidth);
+    transition: transform 0.4s ease-in-out;
+}
+
+.shopify-message::after{
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(90deg, #f8d1f8, #f5a5e5, #b33898);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 2s ease alternate infinite;
+    background-size: 300% 300%;
+}
+
+@keyframes animatedgradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.shopify-message:hover{
+  cursor: pointer;
+  transform: scale(1.05); /* Adjust the scaling factor as needed */
+}
+
+.profile-nav a{
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #e1e3e4;
+    color: #ca39b2;
+}
+
+.profile-sidebar .profile-nav {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    overflow: visible;
+    padding: 20px;
+}
+
+.profile-sidebar .profile-nav-link {
+    list-style: none;
+}
+
+.profile-content {
+    width: 75%;
+    padding-bottom: 20px;
+}
+
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 25%;
+}
+
+.greeting,
+.order-history,
+.account-details {
+    margin-top: 20px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
 }

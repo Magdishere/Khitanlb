@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3">
                 <div class="header__logo">
-                    <a class="gradient-text" href="/"><h2 class="gradient-text">KHITAN</h2></a>
+                    <img src="{{asset('../assets/img/khitan.png')}}" style="height:50px; padding-left:60px;">
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">

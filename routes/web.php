@@ -18,5 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('about', function () {
-    return view('Front.about');
+    return view('about');
+});
+
+Route::get('user_dashboard', function () {
+    return view('Front.user_dashboard');
 });
