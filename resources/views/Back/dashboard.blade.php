@@ -1,659 +1,287 @@
-@extends('Back.Layouts.admin-layout')
-@section('content')
-    <div class="main-panel">
-        <div class="content-wrapper">
-            <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                    <div class="card"> </div>
-                </div>
+@extends('layouts.master')
+@section('css')
+    <!--- Internal Select2 css-->
+    <link href="plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <!---Internal Fileupload css-->
+    <link href="plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+    <!---Internal Fancy uploader css-->
+    <link href="plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+    <!--Internal Sumoselect css-->
+    <link rel="stylesheet" href="plugins/sumoselect/sumoselect-rtl.css')}}">
+    <!--Internal  TelephoneInput css-->
+    <link rel="stylesheet" href="plugins/telephoneinput/telephoneinput-rtl.css')}}">
+@endsection
+@section('page-header')
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">Forms</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Form-Advanced</span>
             </div>
-            <div class="row">
-                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">$12.34</h3>
-                                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="icon icon-box-success ">
-                                        <span class="mdi mdi-arrow-top-right icon-item"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">Potential growth</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">$17.34</h3>
-                                        <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="icon icon-box-success">
-                                        <span class="mdi mdi-arrow-top-right icon-item"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">Revenue current</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">$12.34</h3>
-                                        <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="icon icon-box-danger">
-                                        <span class="mdi mdi-arrow-bottom-left icon-item"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">Daily Income</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-9">
-                                    <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">$31.53</h3>
-                                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="icon icon-box-success ">
-                                        <span class="mdi mdi-arrow-top-right icon-item"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">Expense current</h6>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="d-flex my-xl-auto right-content">
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
             </div>
-            <div class="row">
-                <div class="col-md-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Transaction History</h4>
-                            <canvas id="transaction-history" class="transaction-chart"></canvas>
-                            <div class="bg-gray-light d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                                <div class="text-md-center text-xl-left">
-                                    <h6 class="mb-1">Transfer to Paypal</h6>
-                                    <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
-                                </div>
-                                <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                    <h6 class="font-weight-bold mb-0">$236</h6>
-                                </div>
-                            </div>
-                            <div class="bg-gray-light d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                                <div class="text-md-center text-xl-left">
-                                    <h6 class="mb-1">Tranfer to Stripe</h6>
-                                    <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
-                                </div>
-                                <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                    <h6 class="font-weight-bold mb-0">$593</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-row justify-content-between">
-                                <h4 class="card-title mb-1">Open Projects</h4>
-                                <p class="text-muted mb-1">Your data status</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="preview-list">
-                                        <div class="preview-item border-bottom">
-                                            <div class="preview-thumbnail">
-                                                <div class="preview-icon bg-primary">
-                                                    <i class="mdi mdi-file-document"></i>
-                                                </div>
-                                            </div>
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject">Admin dashboard design</h6>
-                                                    <p class="text-muted mb-0">Broadcast web app mockup</p>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted">15 minutes ago</p>
-                                                    <p class="text-muted mb-0">30 tasks, 5 issues </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item border-bottom">
-                                            <div class="preview-thumbnail">
-                                                <div class="preview-icon bg-success">
-                                                    <i class="mdi mdi-cloud-download"></i>
-                                                </div>
-                                            </div>
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject">Wordpress Development</h6>
-                                                    <p class="text-muted mb-0">Upload new design</p>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted">1 hour ago</p>
-                                                    <p class="text-muted mb-0">23 tasks, 5 issues </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item border-bottom">
-                                            <div class="preview-thumbnail">
-                                                <div class="preview-icon bg-info">
-                                                    <i class="mdi mdi-clock"></i>
-                                                </div>
-                                            </div>
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject">Project meeting</h6>
-                                                    <p class="text-muted mb-0">New project discussion</p>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted">35 minutes ago</p>
-                                                    <p class="text-muted mb-0">15 tasks, 2 issues</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item border-bottom">
-                                            <div class="preview-thumbnail">
-                                                <div class="preview-icon bg-danger">
-                                                    <i class="mdi mdi-email-open"></i>
-                                                </div>
-                                            </div>
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject">Broadcast Mail</h6>
-                                                    <p class="text-muted mb-0">Sent release details to team</p>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted">55 minutes ago</p>
-                                                    <p class="text-muted mb-0">35 tasks, 7 issues </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="preview-item">
-                                            <div class="preview-thumbnail">
-                                                <div class="preview-icon bg-warning">
-                                                    <i class="mdi mdi-chart-pie"></i>
-                                                </div>
-                                            </div>
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject">UI Design</h6>
-                                                    <p class="text-muted mb-0">New application planning</p>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted">50 minutes ago</p>
-                                                    <p class="text-muted mb-0">27 tasks, 4 issues </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
             </div>
-            <div class="row">
-                <div class="col-sm-4 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Revenue</h5>
-                            <div class="row">
-                                <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                                    <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                        <h2 class="mb-0">$32123</h2>
-                                        <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal">11.38% Since last month</h6>
-                                </div>
-                                <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                                    <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Sales</h5>
-                            <div class="row">
-                                <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                                    <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                        <h2 class="mb-0">$45850</h2>
-                                        <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6>
-                                </div>
-                                <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                                    <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5>Purchase</h5>
-                            <div class="row">
-                                <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                                    <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                        <h2 class="mb-0">$2039</h2>
-                                        <p class="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                                </div>
-                                <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                                    <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="pr-1 mb-3 mb-xl-0">
+                <button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
             </div>
-            <div class="row ">
-                <div class="col-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Order Status</h4>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </th>
-                                        <th> Client Name </th>
-                                        <th> Order No </th>
-                                        <th> Product Cost </th>
-                                        <th> Project </th>
-                                        <th> Payment Mode </th>
-                                        <th> Start Date </th>
-                                        <th> Payment Status </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src=""{{asset('admin-assets/images/faces/face1.jpg')}}" alt="image" />
-                                            <span class="pl-2">Henry Klein</span>
-                                        </td>
-                                        <td> 02312 </td>
-                                        <td> $14,500 </td>
-                                        <td> Dashboard </td>
-                                        <td> Credit card </td>
-                                        <td> 04 Dec 2019 </td>
-                                        <td>
-                                            <div class="badge badge-outline-success">Approved</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('admin-assets/images/faces/face2.jpg')}}" alt="image" />
-                                            <span class="pl-2">Estella Bryan</span>
-                                        </td>
-                                        <td> 02312 </td>
-                                        <td> $14,500 </td>
-                                        <td> Website </td>
-                                        <td> Cash on delivered </td>
-                                        <td> 04 Dec 2019 </td>
-                                        <td>
-                                            <div class="badge badge-outline-warning">Pending</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('admin-assets/images/faces/face5.jpg')}}" alt="image" />
-                                            <span class="pl-2">Lucy Abbott</span>
-                                        </td>
-                                        <td> 02312 </td>
-                                        <td> $14,500 </td>
-                                        <td> App design </td>
-                                        <td> Credit card </td>
-                                        <td> 04 Dec 2019 </td>
-                                        <td>
-                                            <div class="badge badge-outline-danger">Rejected</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('admin-assets/images/faces/face3.jpg')}}" alt="image" />
-                                            <span class="pl-2">Peter Gill</span>
-                                        </td>
-                                        <td> 02312 </td>
-                                        <td> $14,500 </td>
-                                        <td> Development </td>
-                                        <td> Online Payment </td>
-                                        <td> 04 Dec 2019 </td>
-                                        <td>
-                                            <div class="badge badge-outline-success">Approved</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check form-check-muted m-0">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <img src="{{asset('admin-assets/images/faces/face4.jpg')}}" alt="image" />
-                                            <span class="pl-2">Sallie Reyes</span>
-                                        </td>
-                                        <td> 02312 </td>
-                                        <td> $14,500 </td>
-                                        <td> Website </td>
-                                        <td> Credit card </td>
-                                        <td> 04 Dec 2019 </td>
-                                        <td>
-                                            <div class="badge badge-outline-success">Approved</div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-row justify-content-between">
-                                <h4 class="card-title">Messages</h4>
-                                <p class="text-muted mb-1 small">View all</p>
-                            </div>
-                            <div class="preview-list">
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <img src="{{asset('admin-assets/images/faces/face6.jpg')}}" alt="image" class="rounded-circle" />
-                                    </div>
-                                    <div class="preview-item-content d-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                <h6 class="preview-subject">Leonard</h6>
-                                                <p class="text-muted text-small">5 minutes ago</p>
-                                            </div>
-                                            <p class="text-muted">Well, it seems to be working now.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <img src="{{asset('admin-assets/images/faces/face8.jpg')}}" alt="image" class="rounded-circle" />
-                                    </div>
-                                    <div class="preview-item-content d-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                <h6 class="preview-subject">Luella Mills</h6>
-                                                <p class="text-muted text-small">10 Minutes Ago</p>
-                                            </div>
-                                            <p class="text-muted">Well, it seems to be working now.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <img src="{{asset('admin-assets/images/faces/face9.jpg')}}" alt="image" class="rounded-circle" />
-                                    </div>
-                                    <div class="preview-item-content d-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                <h6 class="preview-subject">Ethel Kelly</h6>
-                                                <p class="text-muted text-small">2 Hours Ago</p>
-                                            </div>
-                                            <p class="text-muted">Please review the tickets</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="preview-item border-bottom">
-                                    <div class="preview-thumbnail">
-                                        <img src="{{asset('admin-assets/images/faces/face11.jpg')}}" alt="image" class="rounded-circle" />
-                                    </div>
-                                    <div class="preview-item-content d-flex flex-grow">
-                                        <div class="flex-grow">
-                                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                <h6 class="preview-subject">Herman May</h6>
-                                                <p class="text-muted text-small">4 Hours Ago</p>
-                                            </div>
-                                            <p class="text-muted">Thanks a lot. It was easy to fix it .</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Portfolio Slide</h4>
-                            <div class="owl-carousel owl-theme full-width owl-carousel-dash portfolio-carousel" id="owl-carousel-basic">
-                                <div class="item">
-                                    <img src="{{asset('admin-assets/images/dashboard/Rectangle.jpg')}}" alt="">
-                                </div>
-                                <div class="item">
-                                    <img src="{{asset('admin-assets/images/dashboard/Img_5.jpg')}}" alt="">
-                                </div>
-                                <div class="item">
-                                    <img src="{{asset('admin-assets/images/dashboard/img_6.jpg')}}" alt="">
-                                </div>
-                            </div>
-                            <div class="d-flex py-4">
-                                <div class="preview-list w-100">
-                                    <div class="preview-item p-0">
-                                        <div class="preview-thumbnail">
-                                            <img src="{{asset('admin-assets/images/faces/face12.jpg')}}" class="rounded-circle" alt="">
-                                        </div>
-                                        <div class="preview-item-content d-flex flex-grow">
-                                            <div class="flex-grow">
-                                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                                    <h6 class="preview-subject">CeeCee Bass</h6>
-                                                    <p class="text-muted text-small">4 Hours Ago</p>
-                                                </div>
-                                                <p class="text-muted">Well, it seems to be working now.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-muted">Well, it seems to be working now. </p>
-                            <div class="progress progress-md portfolio-progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">To do list</h4>
-                            <div class="add-items d-flex">
-                                <input type="text" class="form-control todo-list-input" placeholder="enter task..">
-                                <button class="add btn btn-primary todo-list-add-btn">Add</button>
-                            </div>
-                            <div class="list-wrapper">
-                                <ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
-                                    <li>
-                                        <div class="form-check form-check-primary">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Create invoice </label>
-                                        </div>
-                                        <i class="remove mdi mdi-close-box"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-primary">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Meeting with Alita </label>
-                                        </div>
-                                        <i class="remove mdi mdi-close-box"></i>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check form-check-primary">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
-                                        </div>
-                                        <i class="remove mdi mdi-close-box"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-primary">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Plan weekend outing </label>
-                                        </div>
-                                        <i class="remove mdi mdi-close-box"></i>
-                                    </li>
-                                    <li>
-                                        <div class="form-check form-check-primary">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Pick up kids from school </label>
-                                        </div>
-                                        <i class="remove mdi mdi-close-box"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Visitors by Countries</h4>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-us"></i>
-                                                </td>
-                                                <td>USA</td>
-                                                <td class="text-right"> 1500 </td>
-                                                <td class="text-right font-weight-medium"> 56.35% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-de"></i>
-                                                </td>
-                                                <td>Germany</td>
-                                                <td class="text-right"> 800 </td>
-                                                <td class="text-right font-weight-medium"> 33.25% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-au"></i>
-                                                </td>
-                                                <td>Australia</td>
-                                                <td class="text-right"> 760 </td>
-                                                <td class="text-right font-weight-medium"> 15.45% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-gb"></i>
-                                                </td>
-                                                <td>United Kingdom</td>
-                                                <td class="text-right"> 450 </td>
-                                                <td class="text-right font-weight-medium"> 25.00% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-ro"></i>
-                                                </td>
-                                                <td>Romania</td>
-                                                <td class="text-right"> 620 </td>
-                                                <td class="text-right font-weight-medium"> 10.25% </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <i class="flag-icon flag-icon-br"></i>
-                                                </td>
-                                                <td>Brasil</td>
-                                                <td class="text-right"> 230 </td>
-                                                <td class="text-right font-weight-medium"> 75.00% </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div id="audience-map" class="vector-map"></div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="mb-3 mb-xl-0">
+                <div class="btn-group dropdown">
+                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
+                        <a class="dropdown-item" href="#">2015</a>
+                        <a class="dropdown-item" href="#">2016</a>
+                        <a class="dropdown-item" href="#">2017</a>
+                        <a class="dropdown-item" href="#">2018</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-            </div>
-        </footer>
-        <!-- partial -->
     </div>
+    <!-- breadcrumb -->
+@endsection
+@section('content')
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h6 class="card-title mb-1">Single Select Style</h6>
+                        <p class="text-muted card-sub-title">First import a latest version of jquery in your page. Then the jquery.sumoselect.min.js and its css (sumoselect.css)</p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mg-b-10">Single Select</p>
+                        <select name="somename" class="form-control SlectBox" onclick="console.log($(this).val())" onchange="console.log('change is firing')">
+                            <!--placeholder-->
+                            <option title="Volvo is a car"  value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mg-b-10">Disabled Select</p>
+                        <select class="SlectBox form-control" disabled>
+                            <option value="volvo">Volvo</option>
+                            <option selected value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option disabled value="opt1">option1</option>
+                            <option value="opt2">option2</option>
+                            <option value="opt3">option3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="mg-b-10">Inline Select</p>
+                        <select class="SlectBox form-control">
+                            <option>selected</option>
+                            <option>Volvo</option>
+                            <option>Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option>Volvo</option>
+                            <option>Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option>Volvo</option>
+                            <option>Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option>Volvo</option>
+                            <option>Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h6 class="card-title mb-1">Multiple Select Styles</h6>
+                        <p class="text-muted card-sub-title">First import a latest version of jquery in your page. Then the jquery.sumoselect.min.js and its css (sumoselect.css)</p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mg-b-10">Multiple Select</p>
+                        <select multiple="multiple" class="testselect2">
+                            <option selected value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mg-b-10">Disabled Select</p>
+                        <select multiple="multiple" class="testselect2" disabled >
+                            <option selected value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option disabled="disabled" value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option class="someclass" value="audi">Audi</option>
+                            <option class="someclass" value="bmw">BMW</option>
+                            <option class="someclass" value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="hyundai">Hyundai</option>
+                            <option value="mitsubishi">Mitsubishi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="mg-b-10">Optgroup Support</p>
+                        <select   multiple="multiple" class="testselect2">
+                            <option selected value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option disabled="disabled" value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option class="someclass" value="audi">Audi</option>
+                            <option class="someclass" value="bmw">BMW</option>
+                            <option class="someclass" value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="hyundai">Hyundai</option>
+                            <option value="mitsubishi">Mitsubishi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h6 class="card-title mb-1">Multiple Select Styles</h6>
+                        <p class="text-muted card-sub-title">First import a latest version of jquery in your page. Then the jquery.sumoselect.min.js and its css (sumoselect.css)</p>
+                    </div>
+                    <div class="mb-4">
+                        <p class="mg-b-10">Multiple Select-1</p>
+                        <select multiple="multiple" onchange="console.log($(this).children(':selected').length)" class="selectsum1">
+                            <option selected value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option disabled="disabled" value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option selected value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="mitsubishi">Mitsubishi</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p class="mg-b-10">Multiple Select-2</p>
+                        <select multiple="multiple" onchange="console.log($(this).children(':selected').length)" class="selectsum2">
+                            <option selected value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option disabled="disabled" value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                            <option selected value="bmw">BMW</option>
+                            <option value="porsche">Porche</option>
+                            <option value="ferrari">Ferrari</option>
+                            <option value="mitsubishi">Mitsubishi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h6 class="card-title mb-1">Telephone Input</h6>
+                        <p class="text-muted card-sub-title">A JavaScript plugin for entering and validating international telephone numbers. It adds a flag dropdown to any input, detects the user's country, displays a relevant placeholder and provides formatting/validation methods.</p>
+                    </div>
+                    <div class="input-group">
+                        <input class="form-control" id="phone" name="phone" type="tel">
+                        <span class="input-group-btn">
+										<button class="btn ripple btn-primary bl-tl-0 bl-bl-0" type="button">Submit</button>
+									</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h6 class="card-title mb-1">File Upload</h6>
+                        <p class="text-muted card-sub-title">Dropify is a jQuery plugin to create a beautiful file uploader that converts a standard <code>input type="file"</code> into a nice drag & drop zone with previews and custom styles.</p>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-sm-12 col-md-4">
+                            <input type="file" class="dropify" data-height="200" />
+                        </div>
+                        <div class="col-sm-12 col-md-4 mg-t-10 mg-sm-t-0">
+                            <input type="file" class="dropify" data-default-file="img/photos/1.jpg')}}" data-height="200"  />
+                        </div>
+                        <div class="col-sm-12 col-md-4 mg-t-10 mg-sm-t-0">
+                            <input type="file" class="dropify" disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div>
+                        <input id="demo" type="file" name="files" accept=".jpg, .png, image/jpeg, image/png, html, zip, css,js" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
+@endsection
+@section('js')
+    <!--Internal  Datepicker js -->
+    <script src="plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+    <!-- Internal Select2 js-->
+    <script src="plugins/select2/js/select2.min.js')}}"></script>
+    <!--Internal Fileuploads js-->
+    <script src="plugins/fileuploads/js/fileupload.js')}}"></script>
+    <script src="plugins/fileuploads/js/file-upload.js')}}"></script>
+    <!--Internal Fancy uploader js-->
+    <script src="plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
+    <script src="plugins/fancyuploder/jquery.fileupload.js')}}"></script>
+    <script src="plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
+    <script src="plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
+    <script src="plugins/fancyuploder/fancy-uploader.js')}}"></script>
+    <!--Internal  Form-elements js-->
+    <script src="js/advanced-form-elements.js')}}"></script>
+    <script src="js/select2.js')}}"></script>
+    <!--Internal Sumoselect js-->
+    <script src="plugins/sumoselect/jquery.sumoselect.js')}}"></script>
+    <!-- Internal TelephoneInput js-->
+    <script src="plugins/telephoneinput/telephoneinput.js')}}"></script>
+    <script src="plugins/telephoneinput/inttelephoneinput.js')}}"></script>
 @endsection
