@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminCategoriesController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 
-Route::prefix('admin')->middleware(['admin'])->group(function () {
+Route::prefix('admin')->group(function () {
     // Admin dashboard route
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    //CATEGORIES ROUTES
+    Route::resource('Admin-Categories', AdminCategoriesController::class);
+
 
 });

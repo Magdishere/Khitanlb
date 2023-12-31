@@ -11,6 +11,7 @@
     <link rel="icon" href="{{asset('assets/img/khitan_logo1.png')}}" type="image/x-icon">
 
     <!-- Google Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
 

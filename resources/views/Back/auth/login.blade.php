@@ -29,7 +29,7 @@
                         <form action="{{route('admin.login')}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>email *</label>
+                                <label>Email *</label>
                                 <input name="email" type="email" class="form-control p_input">
                             </div>
                             <div class="form-group">
