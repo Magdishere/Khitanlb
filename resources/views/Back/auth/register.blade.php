@@ -25,18 +25,25 @@
             <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
                 <div class="card col-lg-4 mx-auto">
                     <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-left mb-3">Login</h3>
-                        <form action="{{ route('admin.login') }}" method="POST">
+                        <h3 class="card-title text-left mb-3">Register</h3>
+                        <form action="{{ route('admin.register') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>Email *</label>
+                                <label>Name</label>
+                                <input name="name" type="text" class="form-control p_input">
+                                @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
                                 <input name="email" type="email" class="form-control p_input">
                                 @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Password *</label>
+                                <label>Password</label>
                                 <input name="password" type="password" class="form-control p_input">
                                 @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -50,15 +57,16 @@
                                 <a href="#" class="forgot-pass">Forgot password</a>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                                <button type="submit" class="btn btn-primary btn-block enter-btn">Register</button>
                             </div>
                             <div class="d-flex">
-                                <button class="btn btn-facebook mr-2 col">
+                                <button class="btn btn-facebook col mr-2">
                                     <i class="mdi mdi-facebook"></i> Facebook </button>
                                 <button class="btn btn-google col">
                                     <i class="mdi mdi-google-plus"></i> Google plus </button>
                             </div>
-                            <p class="sign-up">Don't have an Account?<a href="#"> Sign Up</a></p>
+                            <p class="sign-up text-center">Already have an Account?<a href="#"> Sign Up</a></p>
+                            <p class="terms">By creating an account you are accepting our<a href="#"> Terms & Conditions</a></p>
                         </form>
                     </div>
                 </div>
@@ -69,6 +77,7 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="{{asset('admin-assets/vendors/js/vendor.bundle.base.js')}}"></script>

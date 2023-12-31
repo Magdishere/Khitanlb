@@ -170,7 +170,11 @@
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
+                    <form action="{{ route('admin.logout') }}" method="POST" style="display: none;" id="logout-form">
+                        @csrf
+                    </form>
+
+                    <a class="dropdown-item preview-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <div class="preview-thumbnail">
                             <div class="preview-icon bg-dark rounded-circle">
                                 <i class="mdi mdi-logout text-danger"></i>
