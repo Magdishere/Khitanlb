@@ -1,32 +1,28 @@
-(function($) {
-  'use strict';
-  $(function() {
-    /* Code for attribute data-custom-class for adding custom class to tooltip */
-    if (typeof $.fn.popover.Constructor === 'undefined') {
-      throw new Error('Bootstrap Popover must be included first!');
-    }
-
-    var Popover = $.fn.popover.Constructor;
-
-    // add customClass option to Bootstrap Tooltip
-    $.extend(Popover.Default, {
-      customClass: ''
-    });
-
-    var _show = Popover.prototype.show;
-
-    Popover.prototype.show = function() {
-
-      // invoke parent method
-      _show.apply(this, Array.prototype.slice.apply(arguments));
-
-      if (this.config.customClass) {
-        var tip = this.getTipElement();
-        $(tip).addClass(this.config.customClass);
-      }
-
-    };
-
-    $('[data-toggle="popover"]').popover()
-  });
-})(jQuery);
+$(function() {
+	'use strict'
+	$('[data-toggle="popover"]').popover();
+	$('[data-popover-color="head-primary"]').popover({
+		template: '<div class="popover popover-head-primary" role="tooltip"><div class="arrow"><\/div><h3 class="popover-header"><\/h3><div class="popover-body"><\/div><\/div>'
+	});
+	$('[data-popover-color="head-secondary"]').popover({
+		template: '<div class="popover popover-head-secondary" role="tooltip"><div class="arrow"><\/div><h3 class="popover-header"><\/h3><div class="popover-body"><\/div><\/div>'
+	});
+	$('[data-popover-color="primary"]').popover({
+		template: '<div class="popover popover-primary" role="tooltip"><div class="arrow"><\/div><h3 class="popover-header"><\/h3><div class="popover-body"><\/div><\/div>'
+	});
+	$('[data-popover-color="secondary"]').popover({
+		template: '<div class="popover popover-secondary" role="tooltip"><div class="arrow"><\/div><h3 class="popover-header"><\/h3><div class="popover-body"><\/div><\/div>'
+	});
+	// By default, Bootstrap doesn't auto close popover after appearing in the page
+	// resulting other popover overlap each other. Doing this will auto dismiss a popover
+	// when clicking anywhere outside of it
+	$(document).on('click', function(e) {
+		$('[data-toggle="popover"],[data-original-title]').each(function() {
+			//the 'is' for buttons that trigger popups
+			//the 'has' for icons within a button that triggers a popup
+			if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+				(($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
+			}
+		});
+	});
+});

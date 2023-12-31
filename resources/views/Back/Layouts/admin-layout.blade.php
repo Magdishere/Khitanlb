@@ -7,19 +7,19 @@
     <title>Khitan</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/css/vendor.bundle.base.css')}}">
+    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css')}}">
+    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css')}}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/jvectormap/jquery-jvectormap.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/owl-carousel-2/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('admin-assets/vendors/owl-carousel-2/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="vendors/jvectormap/jquery-jvectormap.css')}}">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="vendors/owl-carousel-2/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="vendors/owl-carousel-2/owl.theme.default.min.css')}}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="{{asset('admin-assets/css/style.css')}}">
+    <link rel="stylesheet" href="css/style.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{('admin-assets/images/favicon.png')}}" />
 </head>
@@ -39,24 +39,25 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="{{asset('admin-assets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="vendors/js/vendor.bundle.base.js')}}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
-<script src="{{asset('admin-assets/vendors/chart.js/Chart.min.js')}}"></script>
-<script src="{{asset('admin-assets/vendors/progressbar.js/progressbar.min.js')}}"></script>
-<script src="{{asset('admin-assets/vendors/jvectormap/jquery-jvectormap.min.js')}}"></script>
-<script src="{{asset('admin-assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
-<script src="{{asset('admin-assets/vendors/owl-carousel-2/owl.carousel.min.js')}}"></script>
+<script src="vendors/chart.js/Chart.min.js')}}"></script>
+<script src="vendors/progressbar.js/progressbar.min.js')}}"></script>
+<script src="vendors/jvectormap/jquery-jvectormap.min.js')}}"></script>
+<script src="vendors/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+<script src="vendors/owl-carousel-2/owl.carousel.min.js')}}"></script>
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="{{asset('admin-assets/js/off-canvas.js')}}"></script>
-<script src="{{asset('admin-assets/js/hoverable-collapse.js')}}"></script>
-<script src="{{asset('admin-assets/js/misc.js')}}"></script>
-<script src="{{asset('admin-assets/js/settings.js')}}"></script>
-<script src="{{asset('admin-assets/js/todolist.js')}}"></script>
+<script src="js/off-canvas.js')}}"></script>
+<script src="js/hoverable-collapse.js')}}"></script>
+<script src="js/misc.js')}}"></script>
+<script src="js/settings.js')}}"></script>
+<script src="js/todolist.js')}}"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-<script src="{{asset('admin-assets/js/dashboard.js')}}"></script>
+<script src="js/dashboard.js')}}"></script>
+@vite(['public/admin-assets/scss/style.scss', 'public/admin-assets/css/style.css'])
 @stack('script')
 <!-- End custom js for this page -->
 </body>
