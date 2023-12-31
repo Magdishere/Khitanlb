@@ -57,6 +57,7 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="{{asset('admin-assets/js/dashboard.js')}}"></script>
+@stack('script')
 <!-- End custom js for this page -->
 </body>
 </html>

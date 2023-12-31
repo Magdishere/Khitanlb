@@ -17,152 +17,148 @@
                         <div class="card-body">
                             <h4 class="card-title">Add a Category</h4>
                             <form class="form-sample">
-                                <p class="card-description"> Personal info </p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">First Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Last Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label> صوره القسم </label>
+                                    <input type="file" name="image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
+                                    <label class="border-0 mb-0 cursor" for="restaurant-logo">
+                                        <img src="{{asset('provider-assets/images/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
+                                        <span id="img_here"></span>
+                                        <img src="{{asset('provider-assets/images/camera-icon.png')}}" id="img_scr" alt="img" class="provider-rest-img d-none" style="width: 130px; height: 130px">
+
+                                        <span class="file-custom"></span>
+                                    </label>
+                                    @error('photo')
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Gender</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control">
-                                                    <option>Male</option>
-                                                    <option>Female</option>
+
+                                <div class="form-body">
+
+                                    <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1"> اسم القسم
+                                                </label>
+                                                <input type="text" id="name"
+                                                       class="form-control"
+                                                       placeholder="  "
+                                                       value="{{old('name')}}"
+                                                       name="name">
+                                                @error("name")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1"> اسم بالرابط
+                                                </label>
+                                                <input type="text" id="name"
+                                                       class="form-control"
+                                                       placeholder="  "
+                                                       value="{{old('slug')}}"
+                                                       name="slug">
+                                                @error("slug")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row hidden" id="cats_list" >
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="projectinput1"> اختر القسم الرئيسي
+                                                </label>
+                                                <select name="parent_id" class="select2 form-control">
+                                                    <optgroup label="من فضلك أختر القسم ">
+                                                       {{-- @if($categories && $categories -> count() > 0)
+                                                            @foreach($categories as $category)
+                                                                <option
+                                                                    value="{{$category -> id }}">{{$category -> name }}</option>
+                                                            @endforeach
+                                                        @endif--}}
+                                                    </optgroup>
                                                 </select>
+                                                @error('parent_id')
+                                                <span class="text-danger"> {{$message}}</span>
+                                                @enderror
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Date of Birth</label>
-                                            <div class="col-sm-9">
-                                                <input class="form-control" placeholder="dd/mm/yyyy" />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group mt-1">
+                                                <span>الحالة</span>
+                                                <input type="checkbox" value="1" name="is_active" id="s6" checked="" hidden />
+                                                <label class="slider-v3" for="s6" style="margin-bottom: 9px"></label>
+
+                                                @error("is_active")
+                                                <span class="text-danger">{{$message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Category</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control">
-                                                    <option>Category1</option>
-                                                    <option>Category2</option>
-                                                    <option>Category3</option>
-                                                    <option>Category4</option>
-                                                </select>
+
+
+
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="radio" name="type" id="radio2" class="radio" value="1"/>
+                                                <label for="radio2">قسم رئيسي</label>
                                             </div>
+                                            @error("type")
+                                            <span class="text-danger">{{$message }}</span>
+                                            @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Membership</label>
-                                            <div class="col-sm-4">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked> Free </label>
-                                                </div>
+
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="radio" name="type" id="radio3" class="radio" value="2"/>
+                                                <label for="radio3">قسم فرعي</label>
+                                                @error("type")
+                                                <span class="text-danger">{{$message }}</span>
+                                                @enderror
                                             </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2"> Professional </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="card-description"> Address </p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Address 1</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">State</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Address 2</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Postcode</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">City</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Country</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control">
-                                                    <option>America</option>
-                                                    <option>Italy</option>
-                                                    <option>Russia</option>
-                                                    <option>Britain</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+
+                                <ul class="pro-submit">
+                                    <li>
+                                        <button type="submit"  class="btn btn-style1" style="margin: 20px;">Update profile</button>
+                                    </li>
+                                </ul>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-            </div>
-        </footer>
-        <!-- partial -->
     </div>
+
+        <!-- content-wrapper ends -->
 @endsection
+@push('script')
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('input:radio[name="type"]').change(function () {
+                if (this.checked && this.value == '2') {
+                    $('#cats_list').removeClass('hidden');
+                } else {
+                    $('#cats_list').addClass('hidden');
+                }
+            });
+        });
+    </script>
+
+@endpush
