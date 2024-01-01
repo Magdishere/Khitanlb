@@ -26,7 +26,9 @@ class CategoryRequest extends FormRequest
         return [
             'name_en' => 'required',
             'name_ar' => 'required',
+            'image_path' => 'required',
             'type' => 'required|in:1,2',
+            'parent_id' => 'required',
             'slug' => 'required|unique:categories,slug,'.$this -> id
         ];
     }
