@@ -28,9 +28,9 @@
                                     <label> صوره القسم </label>
                                     <input type="file" name="image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
-                                        <img src="{{asset('provider-assets/images/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
+                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
                                         <span id="img_here"></span>
-                                        <img src="{{asset('provider-assets/images/camera-icon.png')}}" id="img_scr" alt="img" class="provider-rest-img d-none" style="width: 130px; height: 130px">
+                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="provider-rest-img d-none" style="width: 130px; height: 130px">
 
                                         <span class="file-custom"></span>
                                     </label>
@@ -81,12 +81,12 @@
                                                 </label>
                                                 <select name="parent_id" class="select2 form-control">
                                                     <optgroup label="من فضلك أختر القسم ">
-                                                       {{-- @if($categories && $categories -> count() > 0)
+                                                        @if($categories && $categories -> count() > 0)
                                                             @foreach($categories as $category)
                                                                 <option
                                                                     value="{{$category -> id }}">{{$category -> name }}</option>
                                                             @endforeach
-                                                        @endif--}}
+                                                        @endif
                                                     </optgroup>
                                                 </select>
                                                 @error('parent_id')
@@ -114,7 +114,7 @@
 
                                         <div class="col-md-3">
                                             <div>
-                                                <input type="radio" name="type" id="radio2" class="radio" value="1"/>
+                                                <input type="radio" name="type" id="radio2" class="radio" value="1" checked/>
                                                 <label for="radio2">قسم رئيسي</label>
                                             </div>
                                             @error("type")
@@ -166,5 +166,14 @@
             });
         });
     </script>
+
+
+<script>
+    let input = document.getElementById("input_scr");
+    let img = document.getElementById("img_scr");
+    img.onclick = function (){
+        input.click();
+    }
+</script>
 
 @stop
