@@ -10,11 +10,11 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
-                <h3 class="page-title"> Form elements </h3>
+                <h3 class="page-title"> Add Category </h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                        <li class="breadcrumb-item"><a href="#">Categories</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Category</li>
                     </ol>
                 </nav>
             </div>
@@ -23,10 +23,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add a Category</h4>
-                            <form action="{{route('Admin-Categories.store')}}" method="POST" class="form-sample">
+                            <form action="{{route('Admin-Categories.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label> صوره القسم </label>
+                                    <label>Category Image</label>
                                     <input type="file" name="category_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
                                         <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
@@ -42,17 +42,13 @@
 
                                 <div class="form-body">
 
-                                    <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
+                                    <h4 class="form-section"><i class="ft-home"></i>Category Details</h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1"> اسم القسم
+                                                <label for="projectinput1">Category Name
                                                 </label>
-                                                <input type="text" id="name"
-                                                       class="form-control"
-                                                       placeholder="  "
-                                                       value="{{old('name')}}"
-                                                       name="name">
+                                                <input class="form-control" type="text" name="name[en]" id="name_en" value="{{ old('name.en') }}" required>
                                                 @error("name")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -61,27 +57,60 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1"> اسم بالرابط
+                                                <label for="projectinput1">اسم القسم
                                                 </label>
-                                                <input type="text" id="name"
-                                                       class="form-control"
-                                                       placeholder="  "
-                                                       value="{{old('slug')}}"
-                                                       name="slug">
-                                                @error("slug")
+                                                <input class="form-control" type="text" name="name[ar]" id="name_ar" value="{{ old('name.ar') }}" required>
+                                                @error("name")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
                                         </div>
                                     </div>
 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="projectinput1">Slug
+                                            </label>
+                                            <input type="text" id="name"
+                                                class="form-control"
+                                                placeholder="  "
+                                                value="{{old('slug')}}"
+                                                name="slug">
+                                            @error("slug")
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="radio" name="type" id="radio2" class="radio" value="1" checked/>
+                                        <label for="radio2">Main Category</label>
+                                    </div>
+                                    @error("type")
+                                    <span class="text-danger">{{$message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div>
+                                        <input type="radio" name="type" id="radio3" class="radio" value="2"/>
+                                        <label for="radio3">Sub-category</label>
+                                        @error("type")
+                                        <span class="text-danger">{{$message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
                                     <div class="row hidden" id="cats_list" >
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="projectinput1"> اختر القسم الرئيسي
+                                                <label for="projectinput1">Select Main Category
                                                 </label>
                                                 <select name="parent_id" class="select2 form-control">
-                                                    <optgroup label="من فضلك أختر القسم ">
+                                                    <optgroup label="Please Select Main Category">
                                                         @if($categories && $categories -> count() > 0)
                                                             @foreach($categories as $category)
                                                                 <option
@@ -98,35 +127,13 @@
                                         </div>
                                     </div>
 
-                                        <div class="col-md-3">
-                                            <div>
-                                                <input type="radio" name="type" id="radio2" class="radio" value="1" checked/>
-                                                <label for="radio2">قسم رئيسي</label>
-                                            </div>
-                                            @error("type")
-                                            <span class="text-danger">{{$message }}</span>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div>
-                                                <input type="radio" name="type" id="radio3" class="radio" value="2"/>
-                                                <label for="radio3">قسم فرعي</label>
-                                                @error("type")
-                                                <span class="text-danger">{{$message }}</span>
-                                                @enderror
-                                            </div>
-
-
-
-                                        </div>
                                     </div>
                                 </div>
 
 
-                                <ul class="pro-submit">
+                                <ul class="pro-submit" style="list-style:none;">
                                     <li>
-                                        <button type="submit"  class="btn btn-style1" style="margin: 20px;">Update profile</button>
+                                        <button type="submit"  class="btn btn-success">Save Category</button>
                                     </li>
                                 </ul>
                             </form>

@@ -37,42 +37,35 @@ class AdminCategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
-    {
-        try {
-
-            $filePath = "";
-            if ($request->has('images')) {
-                $filePath = uploadImage('categories', $request->file('category_image'));
-            }
-
-            if ($request -> type == 1)
-            {
-
-                $category = Category::create([
-                    'image_path' => $filePath,
-                    'name' => $request->name,
-                    'slug' => $request->slug,
-                    'parent_id' =>$request->request->add(['parent_id' => null]),
-                ]);
-            } else {
-                $category = Category::create([
-                    'image_path' => $request->image,
-                    'name' => $request->name,
-                    'slug' => $request->slug,
-                    'parent_id' =>$request->parent_id,
-                ]);
-            }
-
-            $request->except('_token');
-
-
-            return redirect()->route('provider.dashboard')->with(['success' => 'تم ألاضافة بنجاح']);
-
-        } catch (\Exception $ex) {
-            return $ex;
-            return redirect()->route('provider.dashboard')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+{
+    try {
+        $filePath = "";
+        if ($request->has('category_image')) {
+            $filePath = uploadImage('categories', $request->file('category_image'));
         }
+
+        $categoryData = [
+            'slug' => $request->input('slug'),
+            'image_path' => $filePath,
+            'parent_id' => $request->type == 1 ? null : $request->parent_id,
+        ];
+
+
+        foreach (config('translatable.locales') as $locale) {
+            $categoryData[$locale] = [
+                'name' => $request->input('name.' . $locale),
+            ];
+        }
+
+        dd($categoryData);
+
+        $category = Category::create($categoryData);
+
+        return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
+    } catch (\Exception $ex) {
+        return redirect()->route('Admin-Categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
     }
+}
 
 
     /**

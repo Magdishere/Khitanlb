@@ -31,6 +31,8 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::prefix('admin')->middleware(['admin'])->group(function () {
     // Admin dashboard route
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    //Admin Category
     Route::resource('Admin-Categories', AdminCategoriesController::class);
     Route::resource('admin-products', AdminProductsController::class);
 
