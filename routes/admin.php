@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminCategoriesController;
+use App\Http\Controllers\admin\AdminProductsController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,6 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     // Admin dashboard route
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::resource('Admin-Categories', AdminCategoriesController::class);
+    Route::resource('admin-products', AdminProductsController::class);
 
 });
