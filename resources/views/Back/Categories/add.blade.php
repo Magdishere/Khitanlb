@@ -23,10 +23,11 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add a Category</h4>
-                            <form class="form-sample">
+                            <form action="{{route('Admin-Categories.store')}}" method="POST" class="form-sample">
+                                @csrf
                                 <div class="form-group">
                                     <label> صوره القسم </label>
-                                    <input type="file" name="image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
+                                    <input type="file" name="category_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
                                         <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
                                         <span id="img_here"></span>
@@ -96,21 +97,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group mt-1">
-                                                <span>الحالة</span>
-                                                <input type="checkbox" value="1" name="is_active" id="s6" checked="" hidden />
-                                                <label class="slider-v3" for="s6" style="margin-bottom: 9px"></label>
-
-                                                @error("is_active")
-                                                <span class="text-danger">{{$message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-
 
                                         <div class="col-md-3">
                                             <div>

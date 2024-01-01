@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\CategoryRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\admin\Category;
 use Illuminate\Http\Request;
 
@@ -40,30 +40,23 @@ class AdminCategoriesController extends Controller
     {
         try {
 
-            //validation
-
-            if (!$request->has('is_active'))
-                $request->request->add(['is_active' => 0]);
-            else
-                $request->request->add(['is_active' => 1]);
-
             $filePath = "";
             if ($request->has('images')) {
-                $filePath = uploadImage('maincategories', $request->image);
+                $filePath = uploadImage('categories', $request->file('category_image'));
             }
 
             if ($request -> type == 1)
             {
 
                 $category = Category::create([
-                    'images' => $filePath,
+                    'image_path' => $filePath,
                     'name' => $request->name,
                     'slug' => $request->slug,
                     'parent_id' =>$request->request->add(['parent_id' => null]),
                 ]);
             } else {
                 $category = Category::create([
-                    'images' => $request->image,
+                    'image_path' => $request->image,
                     'name' => $request->name,
                     'slug' => $request->slug,
                     'parent_id' =>$request->parent_id,

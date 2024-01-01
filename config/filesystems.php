@@ -44,6 +44,13 @@ return [
             'throw' => false,
         ],
 
+        'maincategories' => [
+            'driver' => 'local',
+            'root' => public_path('/admin-assets/uploads/images/categories/'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
