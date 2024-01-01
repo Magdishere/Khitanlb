@@ -23,13 +23,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add a Category</h4>
-                            <form action="{{route('admin-products.store')}}" method="POST" class="form-sample">
+                            <form action="{{route('admin-products.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                 <div class="form-group">
                                     <label> صوره القسم </label>
-                                    <input type="file" name="category_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
+                                    <input type="file" name="product_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
                                         <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
                                         <span id="img_here"></span>
@@ -45,7 +45,7 @@
                                     <div class="col-md-6">
                                 <div class="form-group">
                                     <label> صوره القسم </label>
-                                    <input type="file" name="category_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
+                                    <input type="file" name="product_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
                                         <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
                                         <span id="img_here"></span>
@@ -68,12 +68,12 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> Product name in English
                                                 </label>
-                                                <input type="text" id="name"
+                                                <input type="text" id="name_en"
                                                        class="form-control"
                                                        placeholder="  "
-                                                       value="{{old('name')}}"
-                                                       name="name">
-                                                @error("name")
+                                                       value="{{old('name_en')}}"
+                                                       name="name_en">
+                                                @error("name_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
@@ -82,12 +82,12 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> Product name in Arabic
                                                 </label>
-                                                <input type="text" id="name"
+                                                <input type="text" id="name_ar"
                                                        class="form-control"
                                                        placeholder="  "
-                                                       value="{{old('name')}}"
+                                                       value="{{old('name_ar')}}"
                                                        name="name">
-                                                @error("name")
+                                                @error("name_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
@@ -143,7 +143,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> quantity
                                                 </label>
-                                                <input type="text" id="quantity"
+                                                <input type="number" id="quantity"
                                                        class="form-control"
                                                        placeholder="  "
                                                        value="{{old('quantity')}}"
@@ -214,12 +214,8 @@
                                                 </label>
                                                 <select name="stock_status" class="select2 form-control">
                                                     <optgroup label="stock status">
-                                                        {{-- @if($categories && $categories -> count() > 0)
-                                                             @foreach($categories as $category)
-                                                                 <option
-                                                                     value="{{$category -> id }}">{{$category -> name }}</option>
-                                                             @endforeach
-                                                         @endif--}}
+                                                                 <option value="Available">Available</option>
+                                                                 <option value="Not Available">Not Available</option>
                                                     </optgroup>
                                                 </select>
                                                 @error('stock_status')
@@ -234,12 +230,12 @@
                                                 </label>
                                                 <select name="category_id" class="select2 form-control">
                                                     <optgroup label="stock status">
-                                                        {{-- @if($categories && $categories -> count() > 0)
+                                                         @if($categories && $categories -> count() > 0)
                                                              @foreach($categories as $category)
                                                                  <option
                                                                      value="{{$category -> id }}">{{$category -> name }}</option>
                                                              @endforeach
-                                                         @endif--}}
+                                                         @endif
                                                     </optgroup>
                                                 </select>
                                                 @error('category_id')

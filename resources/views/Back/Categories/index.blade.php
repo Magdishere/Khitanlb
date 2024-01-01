@@ -1,4 +1,4 @@
-@extends('Back.Layouts.admin-layout')
+@extends('layouts.master')
 @section('content')
     <div class="main-panel">
         <div class="content-wrapper">

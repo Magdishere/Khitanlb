@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\Category;
 use App\Models\admin\Products;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class AdminProductsController extends Controller
      */
     public function create()
     {
-        return view('Back.Products.add');
+        $categories = Category::get();
+        return view('Back.Products.add', compact('categories'));
     }
 
     /**
@@ -36,7 +38,45 @@ class AdminProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $filePath = "";
+            if ($request->has('product_image')) {
+                $filePath = uploadImage('products', $request->category_image);
+            }
+
+
+            $data = [
+                'slug' => $request->input('slug'),
+                'image_path' => $filePath,
+                'parent_id' => $request->type == 1 ? null : $request->parent_id,
+                'regular_price' => $request->input('regular_price'),
+                'sale_price' => $request->input('sale_price'),
+                'SKU' => $request->input('SKU'),
+                'quantity' => $request->input('quantity'),
+                'category_id' => $request->input('category_id'),
+                'stock_status' => $request->input('stock_status'),
+                'featured' => $request->input('featured', false),
+
+                'en' => [
+                    'name' => $request->input('name_en'),
+                    'short_description_en' => $request->input('short_description_en'),
+                    'description_en' => $request->input('description_en'),
+                ],
+                'ar' => [
+                    'name' => $request->input('name_ar'),
+                    'short_description_ar' => $request->input('short_description_ar'),
+                    'description_ar' => $request->input('description_ar'),
+                ],
+            ];
+
+
+            $category = Category::create($data);
+
+            return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
+        } catch (\Exception $ex) {
+            return redirect()->route('Admin-Categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
     }
 
     /**
