@@ -48,15 +48,15 @@ class AdminProductsController extends Controller
 
             $data = [
                 'slug' => $request->input('slug'),
-                'image_path' => $filePath,
-                'parent_id' => $request->type == 1 ? null : $request->parent_id,
                 'regular_price' => $request->input('regular_price'),
                 'sale_price' => $request->input('sale_price'),
                 'SKU' => $request->input('SKU'),
+                'stock_status' => $request->input('stock_status'),
                 'quantity' => $request->input('quantity'),
                 'category_id' => $request->input('category_id'),
-                'stock_status' => $request->input('stock_status'),
                 'featured' => $request->input('featured', false),
+                'image' => $filePath,
+
 
                 'en' => [
                     'name' => $request->input('name_en'),
