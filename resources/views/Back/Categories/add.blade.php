@@ -48,8 +48,8 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Category Name
                                                 </label>
-                                                <input class="form-control" type="text" name="name[en]" id="name_en" value="{{ old('name.en') }}" required>
-                                                @error("name")
+                                                <input class="form-control" type="text" name="name_en" id="name_en" value="{{ old('name.en') }}" required>
+                                                @error("name_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
@@ -59,8 +59,8 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">اسم القسم
                                                 </label>
-                                                <input class="form-control" type="text" name="name[ar]" id="name_ar" value="{{ old('name.ar') }}" required>
-                                                @error("name")
+                                                <input class="form-control" type="text" name="name_ar" id="name_ar" value="{{ old('name.ar') }}" required>
+                                                @error("name_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>

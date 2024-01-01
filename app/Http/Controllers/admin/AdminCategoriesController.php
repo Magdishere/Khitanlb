@@ -39,27 +39,23 @@ class AdminCategoriesController extends Controller
     public function store(CategoryRequest $request)
 {
     try {
+
         $filePath = "";
         if ($request->has('category_image')) {
-            $filePath = uploadImage('categories', $request->file('category_image'));
+            $filePath = uploadImage('categories', $request->category_image);
         }
 
-        $categoryData = [
+
+        $data = [
             'slug' => $request->input('slug'),
             'image_path' => $filePath,
             'parent_id' => $request->type == 1 ? null : $request->parent_id,
+            'en' => ['name' => $request->input('name_en')],
+            'ar' => ['name' => $request->input('name_ar')],
         ];
 
 
-        foreach (config('translatable.locales') as $locale) {
-            $categoryData[$locale] = [
-                'name' => $request->input('name.' . $locale),
-            ];
-        }
-
-        dd($categoryData);
-
-        $category = Category::create($categoryData);
+        $category = Category::create($data);
 
         return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
     } catch (\Exception $ex) {

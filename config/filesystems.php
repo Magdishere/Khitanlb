@@ -44,7 +44,7 @@ return [
             'throw' => false,
         ],
 
-        'maincategories' => [
+        'categories' => [
             'driver' => 'local',
             'root' => public_path('/admin-assets/uploads/images/categories/'),
             'url' => env('APP_URL').'/public',
