@@ -77,7 +77,7 @@
                                                        class="form-control"
                                                        placeholder="  "
                                                        value="{{old('name_ar')}}"
-                                                       name="name">
+                                                       name="name_ar">
                                                 @error("name_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -88,6 +88,20 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <label for="projectinput1"> Slug
+                                                </label>
+                                                <input type="text" id="slug"
+                                                       class="form-control"
+                                                       placeholder="  "
+                                                       value="{{old('slug')}}"
+                                                       name="slug">
+                                                @error("slug")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
                                                 <label for="projectinput1"> Price
                                                 </label>
                                                 <input type="text" id="regular_price"
@@ -96,20 +110,6 @@
                                                        value="{{old('regular_price')}}"
                                                        name="regular_price">
                                                 @error("regular_price")
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="projectinput1"> Sale Price
-                                                </label>
-                                                <input type="text" id="sale_price"
-                                                       class="form-control"
-                                                       placeholder="  "
-                                                       value="{{old('sale_price')}}"
-                                                       name="sale_price">
-                                                @error("sale_price")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>

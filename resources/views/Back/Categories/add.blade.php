@@ -36,7 +36,7 @@
 
                                         <span class="file-custom"></span>
                                     </label>
-                                    @error('photo')
+                                    @error('category_image')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
                                 </div>

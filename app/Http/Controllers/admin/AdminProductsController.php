@@ -4,8 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
-use App\Models\admin\Products;
-use App\Models\Product;
+use App\Models\admin\Product;
 use Illuminate\Http\Request;
 
 class AdminProductsController extends Controller
@@ -43,11 +42,8 @@ class AdminProductsController extends Controller
 
             $filePath = "";
             if ($request->has('product_image')) {
-                $filePath = uploadImage('products', $request->category_image);
+                $filePath = uploadImage('products', $request->product_image);
             }
-
-
-
 
 
             $data = [
@@ -73,13 +69,15 @@ class AdminProductsController extends Controller
                 ],
             ];
 
-
+//            if (empty($data['en']['name']) || empty($data['ar']['name'])) {
+//                throw new \Exception('Both English and Arabic names are required.');
+//            }
 
             $Product = Product::create($data);
 
             if($request->hasFile('product_images')){
                 foreach($request->file('product_images') as $image){
-                    $filesPath = uploadImage('products', $request->product_images);
+                    $filesPath = uploadImage('products', $image);
                     $Product->images()->create([
                         'image_path' => $filesPath,
                     ]);
@@ -87,8 +85,9 @@ class AdminProductsController extends Controller
             }
 
 
-            return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
+            return 'success';
         } catch (\Exception $ex) {
+            return $ex;
             return redirect()->route('Admin-Categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
