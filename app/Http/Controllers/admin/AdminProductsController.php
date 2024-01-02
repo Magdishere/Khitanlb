@@ -49,7 +49,6 @@ class AdminProductsController extends Controller
             $data = [
                 'slug' => $request->input('slug'),
                 'regular_price' => $request->input('regular_price'),
-                'sale_price' => $request->input('sale_price'),
                 'SKU' => $request->input('SKU'),
                 'stock_status' => $request->input('stock_status'),
                 'quantity' => $request->input('quantity'),

@@ -18,7 +18,6 @@ return new class extends Migration
 
             $table->string('slug')->unique();
             $table->decimal('regular_price',8,2);
-            $table->decimal('sale_price',8,2)->nullable();
             $table->string('SKU');
             $table->enum('stock_status', ['Available', 'Not Available']);
             $table->boolean('featured')->default('0');
