@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
 use App\Models\admin\Products;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminProductsController extends Controller
@@ -46,6 +47,9 @@ class AdminProductsController extends Controller
             }
 
 
+
+
+
             $data = [
                 'slug' => $request->input('slug'),
                 'regular_price' => $request->input('regular_price'),
@@ -70,7 +74,18 @@ class AdminProductsController extends Controller
             ];
 
 
-            $category = Category::create($data);
+
+            $Product = Product::create($data);
+
+            if($request->hasFile('product_images')){
+                foreach($request->file('product_images') as $image){
+                    $filesPath = uploadImage('products', $request->product_images);
+                    $Product->images()->create([
+                        'image_path' => $filesPath,
+                    ]);
+                }
+            }
+
 
             return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
         } catch (\Exception $ex) {
@@ -81,10 +96,10 @@ class AdminProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\admin\Products  $products
+     * @param  \App\Models\admin\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $products)
+    public function show(Product $products)
     {
         //
     }
@@ -92,10 +107,10 @@ class AdminProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\admin\Products  $products
+     * @param  \App\Models\admin\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $products)
+    public function edit(Product $products)
     {
         //
     }
@@ -104,10 +119,10 @@ class AdminProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\admin\Products  $products
+     * @param  \App\Models\admin\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Product $products)
     {
         //
     }
@@ -115,10 +130,10 @@ class AdminProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\admin\Products  $products
+     * @param  \App\Models\admin\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy(Product $products)
     {
         //
     }

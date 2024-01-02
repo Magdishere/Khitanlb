@@ -4414,7 +4414,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     background-color: transparent;
     border: 0; }
   .form-control:focus {
-    color: #ffff;
+    color: black;
     background-color: #fff;
     border-color: #b3c6ff;
     outline: 0;

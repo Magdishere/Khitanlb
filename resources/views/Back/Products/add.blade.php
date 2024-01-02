@@ -10,11 +10,11 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
-                <h3 class="page-title"> Form elements </h3>
+                <h3 class="page-title"> Products</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                        <li class="breadcrumb-item"><a href="#">Add Product</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Products</li>
                     </ol>
                 </nav>
             </div>
@@ -22,13 +22,13 @@
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add a Category</h4>
+                            <h4 class="card-title">Add a Product</h4>
                             <form action="{{route('admin-products.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
                                 <div class="form-group">
-                                    <label> صوره القسم </label>
+                                    <label>Product Main Image</label>
                                     <input type="file" name="product_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
                                     <label class="border-0 mb-0 cursor" for="restaurant-logo">
                                         <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
@@ -44,15 +44,8 @@
                                     </div>
                                     <div class="col-md-6">
                                 <div class="form-group">
-                                    <label> صوره القسم </label>
-                                    <input type="file" name="product_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
-                                    <label class="border-0 mb-0 cursor" for="restaurant-logo">
-                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px">
-                                        <span id="img_here"></span>
-                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="provider-rest-img d-none" style="width: 130px; height: 130px">
-
-                                        <span class="file-custom"></span>
-                                    </label>
+                                    <label>Product Images</label>
+                                    <input type="file" name="product_images[]" id="product_images" class="" accept="image/*" multiple>
                                     @error('photo')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -61,8 +54,6 @@
                                 </div>
 
                                 <div class="form-body">
-
-                                    <h4 class="form-section"><i class="ft-home"></i> بيانات القسم </h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
