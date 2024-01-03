@@ -172,7 +172,7 @@ class AdminSlidesController extends Controller
         }
 
         $slides->delete();
-        session()->flash('delete');
+        toastr()->addSuccess('Slide deleted successfully.');
         return redirect()->route('admin-slides.index');
     }
 }

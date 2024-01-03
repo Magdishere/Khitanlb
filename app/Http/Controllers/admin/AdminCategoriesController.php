@@ -16,7 +16,8 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        return view('Back.Categories.index');
+        $categories = Category::get();
+        return view('Back.Categories.index', compact('categories'));
     }
 
     /**
@@ -104,8 +105,16 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $slides = Category::findOrFail($request->id);
+
+        if ($slides->image) {
+            Storage::disk('categries')->delete($slides->image);
+        }
+
+        $slides->delete();
+        toastr()->addSuccess('Category deleted successfully.');
+        return redirect()->route('admin-slides.index');
     }
 }

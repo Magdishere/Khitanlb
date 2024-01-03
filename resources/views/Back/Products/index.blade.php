@@ -79,10 +79,11 @@
                                     <td>{{$product->description}}</td>
                                     <td>{{$product->name}}</td>
                                     <td class="text-center">
-                                        <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale"  data-toggle="modal" href="#edit"><i class="fa fa-edit"></i>Edit</a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
+                                        <a class="modal-effect btn btn-sm btn-warning" href="{{route('admin-products.edit', $product->id)}}"><i class="fa fa-edit"></i>Edit</a>
+                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$product->id}}"><i class="fa fa-trash"></i>Delete</a>
                                     </td>
                             </tr>
+                            @include('Back.Products.delete')
                             @endforeach
                             </tbody>
                         </table>
