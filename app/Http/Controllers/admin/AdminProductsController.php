@@ -15,8 +15,8 @@ class AdminProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('Back.Products.index');
+    {   $products = Product::all();
+        return view('Back.Products.index', compact('products'));
     }
 
     /**
@@ -85,10 +85,9 @@ class AdminProductsController extends Controller
             }
 
 
-            return 'success';
+            return redirect()->route('admin-products.index')->with(['success' => 'تم ألاضافة بنجاح']);
         } catch (\Exception $ex) {
-            return $ex;
-            return redirect()->route('Admin-Categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            return redirect()->route('admin-products.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
 

@@ -150,9 +150,9 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> short description in English</label>
                                                 <textarea type="text" id="short_description_en"
-                                                       class="form-control"
-                                                       placeholder="  "
-                                                          name="short_description_en"></textarea>
+                                                        class="form-control"
+                                                        placeholder="  "
+                                                        name="short_description_en"></textarea>
                                                 @error("short_description_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror

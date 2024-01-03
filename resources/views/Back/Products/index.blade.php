@@ -11,7 +11,7 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <button class="btn" data-toggle="modal" style="background-color: black; color:pink;"><i class="fa fa-plus"></i> Add Product</button>
+                <a class="btn" style="background-color: black; color:pink;" href="{{route('admin-products.create')}}"><i class="fa fa-plus"></i> Add Product</a>
             </div>
             <div class="mb-3 mb-xl-0">
                 <div class="btn-group dropdown">
@@ -54,24 +54,36 @@
                                     <th class="wd-15p border-bottom-0">Price</th>
                                     <th class="wd-10p border-bottom-0">SKU</th>
                                     <th class="wd-25p border-bottom-0">Quantity</th>
+                                    <th class="wd-25p border-bottom-0">Category</th>
                                     <th class="wd-25p border-bottom-0">Image</th>
                                     <th class="wd-25p border-bottom-0">Featured</th>
                                     <th class="wd-25p border-bottom-0">Short Description</th>
                                     <th class="wd-25p border-bottom-0">Description</th>
+                                    <th class="wd-25p border-bottom-0">All Images</th>
+                                    <th class="wd-25p border-bottom-0">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Nathan</td>
-                                    <td>Mills</td>
-                                    <td>Senior Marketing Designer</td>
-                                    <td>2014/10/8</td>
-                                    <td>$765,980</td>
-                                    <td>n.mills@datatables.net</td>
-                                    <td>Mills</td>
-                                    <td>Senior Marketing Designer</td>
-                                    <td>2014/10/8</td>
-                                    <td>$765,980</td>
+                                    @foreach($products as $product)
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->slug}}</td>
+                                        <td>{{$product->regular_price}}</td>
+                                        <td>{{$product->SKU}}</td>
+                                        <td>{{$product->quantity}}</td>
+                                        <td>Category</td>
+                                        <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->name}}</td>
+                                        <td class="text-center">
+                                            <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale"  data-toggle="modal" href="#edit"><i class="fa fa-edit"></i>Edit</a>
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
+                                        </td>
+                                    @endforeach
                                 </tr>
                             </tbody>
                         </table>
