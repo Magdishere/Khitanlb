@@ -149,10 +149,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1"> short description in English</label>
-                                                <textarea type="text" id="short_description_en"
+                                                <input type="text" id="short_description_en"
                                                         class="form-control"
                                                         placeholder="  "
-                                                        name="short_description_en"></textarea>
+                                                        name="short_description_en">
                                                 @error("short_description_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -162,10 +162,10 @@
                                             <div class="form-group">
                                                 <label for="projectinput1"> short description in Arabic
                                                 </label>
-                                                <textarea type="text" id="short_description_ar"
+                                                <input type="text" id="short_description_ar"
                                                           class="form-control"
                                                           placeholder="  "
-                                                          name="short_description_ar"></textarea>
+                                                          name="short_description_ar">
                                                 @error("short_description_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -176,10 +176,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1"> Description in English </label>
-                                                <textarea type="text" id="description_en"
+                                                <input type="text" id="description_en"
                                                        class="form-control"
                                                        placeholder="  "
-                                                          name="description_en"></textarea>
+                                                          name="description_en">
                                                 @error("description_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -188,10 +188,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1"> Description in Arabic </label>
-                                                <textarea type="text" id="description_ar"
+                                                <input type="text" id="description_ar"
                                                        class="form-control"
                                                        placeholder="  "
-                                                          name="description_ar"></textarea>
+                                                          name="description_ar">
                                                 @error("description_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
