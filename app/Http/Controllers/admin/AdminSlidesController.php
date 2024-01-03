@@ -94,7 +94,14 @@ class AdminSlidesController extends Controller
         try {
             // Find the slide by ID
             $slide = Slides::findOrFail($id);
-            return view('Back.Slides.edit', compact('slide')); // Adjust the view name as per your application
+
+            // Retrieve translated attributes for English
+            $enAttributes = $slide->translate('en');
+
+            // Retrieve translated attributes for Arabic
+            $arAttributes = $slide->translate('ar');
+
+            return view('Back.Slides.edit', compact('slide', 'enAttributes', 'arAttributes'));
         } catch (\Exception $ex) {
             // Show error message using Toastr
             Toastr::error('Slide not found.', 'Error');
@@ -102,7 +109,6 @@ class AdminSlidesController extends Controller
             return redirect()->route('admin-slides.index');
         }
     }
-
     /**
      * Update the specified resource in storage.
      *

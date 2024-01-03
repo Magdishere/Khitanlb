@@ -11,7 +11,6 @@ class Slides extends Model implements \Astrotomic\Translatable\Contracts\Transla
     use HasFactory;
     use Translatable;
 
-    protected $fillable = ['title', 'description', 'link', 'image'];
+    protected $fillable = ['image'];
     public $translatedAttributes = ['title', 'description', 'link'];
-
 }

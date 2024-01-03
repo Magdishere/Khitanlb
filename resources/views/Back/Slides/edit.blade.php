@@ -28,10 +28,16 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Slide Image</label>
-                                    <input type="file" name="image" id="image" accept="image/*" >
+                                    <input type="file" name="image" id="image" accept="image/*" onchange="previewImage(this)">
                                     @error('image')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
+                                    @if($slide->image)
+                                        <img id="image-preview" src="{{ asset('../admin-assets/uploads/images/slides/' . $slide->image) }}" style="width: 150px; height: 100px" alt="Slide Image">
+                                    @else
+                                        <img id="image-preview" style="width: 150px; height: 100px" alt="No Image">
+                                    @endif
+
                                 </div>
 
                                 <div class="form-body">
@@ -40,22 +46,20 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1">Title
-                                                </label>
-                                                <input class="form-control" type="text" name="title_en" id="title_en" value="{{ $slide->title }}" required>
+                                                <label for="projectinput1">Title (English)</label>
+                                                <input class="form-control" type="text" name="title_en" id="title_en" value="{{ $slide->translate('en')->title }}" required>
                                                 @error("title_en")
-                                                <span class="text-danger">{{$message}}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1">العنوان
-                                                </label>
-                                                <input class="form-control" type="text" name="title_ar" id="title_ar" value="{{ old('name.ar') }}" required>
+                                                <label for="projectinput1">Title (Arabic)</label>
+                                                <input class="form-control" type="text" name="title_ar" id="title_ar" value="{{ $slide->translate('ar')->title }}" required>
                                                 @error("title_ar")
-                                                <span class="text-danger">{{$message}}</span>
+                                                <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -65,7 +69,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Description
                                                 </label>
-                                                <input class="form-control" type="text" name="description_en" id="description_en" value="{{ $slide->description }}" required>
+                                                <input class="form-control" type="text" name="description_en" id="description_en" value="{{ $slide->translate('en')->description }}" required>
                                                 @error("description_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -76,7 +80,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">الوصف
                                                 </label>
-                                                <input class="form-control" type="text" name="description_ar" id="description_ar" value="{{ old('name.ar') }}" required>
+                                                <input class="form-control" type="text" name="description_ar" id="description_ar" value="{{ $slide->translate('ar')->description }}" required>
                                                 @error("description_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -88,7 +92,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Button Content
                                                 </label>
-                                                <input class="form-control" type="text" name="link_en" id="link_en" value="{{ old('name.en') }}" required>
+                                                <input class="form-control" type="text" name="link_en" id="link_en" value="{{ $slide->translate('en')->link }}" required>
                                                 @error("link_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -99,7 +103,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">محتوى الزر
                                                 </label>
-                                                <input class="form-control" type="text" name="link_ar" id="link_ar" value="{{ old('name.ar') }}" required>
+                                                <input class="form-control" type="text" name="link_ar" id="link_ar" value="{{ $slide->translate('ar')->link }}" required>
                                                 @error("link_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -124,6 +128,23 @@
 @endsection
 @section('js')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('image-preview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+            }
+        }
+    </script>
     <script>
         $(document).ready(function () {
             $('input:radio[name="type"]').change(function () {
