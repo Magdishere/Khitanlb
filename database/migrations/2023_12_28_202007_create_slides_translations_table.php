@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('slides_id')->references('id')->on('slides')->onDelete('cascade');
 
             $table->string('title');
-            $table->string('descrption');
+            $table->string('description');
             $table->string('link');
 
         });

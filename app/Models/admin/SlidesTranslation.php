@@ -9,6 +9,7 @@ class SlidesTranslation extends Model
 {
     use HasFactory;
 
+    protected $table = 'slides_translations';
     protected $fillable = ['title', 'description', 'link', 'image'];
     public $timestamps = false;
 }

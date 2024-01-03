@@ -61,9 +61,10 @@ class AdminSlidesController extends Controller
                 ],
             ];
 
+
             $slides = Slides::create($data);
 
-            return redirect()->route('admin-sldies.index')->with(['success' => 'تم ألاضافة بنجاح']);
+            return redirect()->route('admin-slides.index')->with(['success' => 'تم ألاضافة بنجاح']);
         } catch (\Exception $ex) {
             return redirect()->route('admin-slides.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
