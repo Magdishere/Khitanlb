@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminCategoriesController;
 use App\Http\Controllers\admin\AdminProductsController;
 use App\Http\Controllers\admin\AdminSalesController;
+use App\Http\Controllers\admin\AdminSlidesController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,6 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('Admin-Categories', AdminCategoriesController::class);
     Route::resource('admin-products', AdminProductsController::class);
     Route::resource('admin-sales', AdminSalesController::class);
+    Route::resource('admin-slides', AdminSlidesController::class);
 
 });
