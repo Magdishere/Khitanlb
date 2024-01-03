@@ -59,13 +59,13 @@ class AdminProductsController extends Controller
 
                 'en' => [
                     'name' => $request->input('name_en'),
-                    'short_description_en' => $request->input('short_description_en'),
-                    'description_en' => $request->input('description_en'),
+                    'short_description' => $request->input('short_description_en'),
+                    'description' => $request->input('description_en'),
                 ],
                 'ar' => [
                     'name' => $request->input('name_ar'),
-                    'short_description_ar' => $request->input('short_description_ar'),
-                    'description_ar' => $request->input('description_ar'),
+                    'short_description' => $request->input('short_description_ar'),
+                    'description' => $request->input('description_ar'),
                 ],
             ];
 

@@ -64,27 +64,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($products as $product)
                                 <tr>
-                                    @foreach($products as $product)
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->slug}}</td>
-                                        <td>{{$product->regular_price}}</td>
-                                        <td>{{$product->SKU}}</td>
-                                        <td>{{$product->quantity}}</td>
-                                        <td>Category</td>
-                                        <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale"  data-toggle="modal" href="#edit"><i class="fa fa-edit"></i>Edit</a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
-                                        </td>
-                                    @endforeach
-                                </tr>
+                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{$product->name}}</td>
+                                    <td>{{$product->slug}}</td>
+                                    <td>{{$product->regular_price}}</td>
+                                    <td>{{$product->SKU}}</td>
+                                    <td>{{$product->quantity}}</td>
+                                    <td>Category</td>
+                                    <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
+                                    <td>{{$product->featured}}</td>
+                                    <td>{{$product->short_description}}</td>
+                                    <td>{{$product->description}}</td>
+                                    <td>{{$product->name}}</td>
+                                    <td class="text-center">
+                                        <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale"  data-toggle="modal" href="#edit"><i class="fa fa-edit"></i>Edit</a>
+                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
+                                    </td>
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
