@@ -117,36 +117,38 @@ class AdminSlidesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function update(Request $request, $id)
     {
         try {
-            // Find the slide by ID
-            $slide = Slides::findOrFail($id);
+            $slides = Slides::findOrFail($id);
 
-            // Update the image if a new one is provided
+            // Check if a new image is being uploaded
             if ($request->hasFile('image')) {
-                $imagePath = uploadImage('slides', $request->image);
-                $slide->image = $imagePath;
+                // Delete the old image if it exists
+                if ($slides->image) {
+                    Storage::disk('slides')->delete($slides->image);
+                }
+
+                // Upload the new image
+                $slides->image = uploadImage('slides', $request->image);
             }
 
-            // Update the language-specific fields
-            $slide->en()->update([
-                'title' => $request->input('title_en'),
-                'description' => $request->input('description_en'),
-                'link' => $request->input('link_en'),
-            ]);
+            // Update other fields
+            $slides->translate('en')->title = $request->input('title_en');
+            $slides->translate('en')->description = $request->input('description_en');
+            $slides->translate('en')->link = $request->input('link_en');
 
-            $slide->ar()->update([
-                'title' => $request->input('title_ar'),
-                'description' => $request->input('description_ar'),
-                'link' => $request->input('link_ar'),
-            ]);
+            $slides->translate('ar')->title = $request->input('title_ar');
+            $slides->translate('ar')->description = $request->input('description_ar');
+            $slides->translate('ar')->link = $request->input('link_ar');
 
             // Save the changes
-            $slide->save();
+            $slides->save();
 
             // Show success message using Toastr
-            Toastr::success('Slide updated successfully.');
+            toastr()->addSuccess('Slide updated successfully.');
             return redirect()->route('admin-slides.index');
         } catch (\Exception $ex) {
             // Show error message using Toastr
@@ -170,7 +172,7 @@ class AdminSlidesController extends Controller
         }
 
         $slides->delete();
-        session()->flash('delete');
+        toastr()->addSuccess('Slide deleted successfully.');
         return redirect()->route('admin-slides.index');
     }
 }

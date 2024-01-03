@@ -24,8 +24,11 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Add a Slide</h4>
-                            <form action="{{route('admin-slides.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
+                            <form action="{{route('admin-slides.update', $slide->id)}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
+                                @if($slide->exists)
+                                    @method('PUT')
+                                @endif
                                 <div class="form-group">
                                     <label>Slide Image</label>
                                     <input type="file" name="image" id="image" accept="image/*" onchange="previewImage(this)">
