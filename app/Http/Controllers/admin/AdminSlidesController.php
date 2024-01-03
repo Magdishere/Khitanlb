@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Slides;
 use Flasher\Toastr\Laravel\Facade\Toastr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class AdminSlidesController extends Controller
@@ -154,8 +155,16 @@ class AdminSlidesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $slides = Slides::findOrFail($request->id);
+
+        if ($slides->image) {
+            Storage::disk('slides')->delete($slides->image);
+        }
+
+        $slides->delete();
+        session()->flash('delete');
+        return redirect()->route('admin-slides.index');
     }
 }

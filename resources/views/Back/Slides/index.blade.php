@@ -66,9 +66,10 @@
                                         <td>{{ $slide->link }}</td>
                                         <td class="text-center">
                                             <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale"  data-toggle="modal" href="{{route('admin-slides.edit', $slide->id)}}"><i class="fa fa-edit"></i>Edit</a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$slide->id}}"><i class="fa fa-trash"></i>Delete</a>
                                         </td>
                                     </tr>
+                                    @include('Back.Slides.delete')
                                 @endforeach
                             </tbody>
                         </table>
@@ -85,4 +86,14 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+<script>
+    $('#modaldemo9').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var section_name = button.data('section_name')
+        var modal = $(this)
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #section_name').val(section_name);
+    })
+</script>
 @endsection
