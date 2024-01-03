@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\admin\Slides;
+use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
 
 class AdminSlidesController extends Controller
@@ -28,7 +29,7 @@ class AdminSlidesController extends Controller
     {
         return view('Back.Slides.add');
 
-}
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,7 +65,8 @@ class AdminSlidesController extends Controller
 
             $slides = Slides::create($data);
 
-            return redirect()->route('admin-slides.index')->with(['success' => 'تم ألاضافة بنجاح']);
+            toastr()->addSuccess('Your account has been restored.');
+            return redirect()->route('admin-slides.index');
         } catch (\Exception $ex) {
             return redirect()->route('admin-slides.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
@@ -89,7 +91,16 @@ class AdminSlidesController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            // Find the slide by ID
+            $slide = Slides::findOrFail($id);
+            return view('Back.Slides.edit', compact('slide')); // Adjust the view name as per your application
+        } catch (\Exception $ex) {
+            // Show error message using Toastr
+            Toastr::error('Slide not found.', 'Error');
+
+            return redirect()->route('admin-slides.index');
+        }
     }
 
     /**
@@ -101,7 +112,40 @@ class AdminSlidesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            // Find the slide by ID
+            $slide = Slides::findOrFail($id);
+
+            // Update the image if a new one is provided
+            if ($request->hasFile('image')) {
+                $imagePath = uploadImage('slides', $request->image);
+                $slide->image = $imagePath;
+            }
+
+            // Update the language-specific fields
+            $slide->en()->update([
+                'title' => $request->input('title_en'),
+                'description' => $request->input('description_en'),
+                'link' => $request->input('link_en'),
+            ]);
+
+            $slide->ar()->update([
+                'title' => $request->input('title_ar'),
+                'description' => $request->input('description_ar'),
+                'link' => $request->input('link_ar'),
+            ]);
+
+            // Save the changes
+            $slide->save();
+
+            // Show success message using Toastr
+            Toastr::success('Slide updated successfully.');
+            return redirect()->route('admin-slides.index');
+        } catch (\Exception $ex) {
+            // Show error message using Toastr
+            Toastr::error('An error occurred. Please try again later.');
+            return redirect()->route('admin-slides.index');
+        }
     }
 
     /**
