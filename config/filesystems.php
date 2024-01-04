@@ -62,6 +62,12 @@ return [
             'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
+        'sales' => [
+            'driver' => 'local',
+            'root' => public_path('/admin-assets/uploads/images/sales/'),
+            'url' => env('APP_URL').'/public',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

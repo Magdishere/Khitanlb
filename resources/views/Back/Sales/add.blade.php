@@ -48,13 +48,42 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Type</label>
+                                                <select name="type" class="form-control">
+                                                    <option value="fixed">Fixed</option>
+                                                    <option value="percent">Percent</option>
+                                                </select>
+                                                @error("name")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Value</label>
+                                                <input type="number" name="value" id="value" class="form-control" required>
+                                                @error("value")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput1">Type
-                                                </label>
-                                                <input class="form-control" type="text" name="type" id="type" value="{{ old('name.ar') }}" required>
-                                                @error("type")
+                                                <label for="projectinput1">Position</label>
+                                                <select name="position" class="form-control">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+
+                                                @error("position")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
@@ -82,11 +111,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-2 col-form-label" for="animals">Animals</label>
+                                        <label class="col-2 col-form-label" for="animals">Products</label>
                                         <div class="col-10">
-                                            <select multiple name="meal_id[]" id="animals" class="filter-multi-select">
+                                            <select multiple name="product_id[]" id="animals" class="filter-multi-select">
                                                 @foreach($products as $product)
-                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                    <option value="{{ $product->id }}">
+                                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Slide Image" style="max-width: 50px;">
+
+                                                        {{ $product->name }}
+                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>

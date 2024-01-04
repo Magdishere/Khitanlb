@@ -1,8 +1,6 @@
 <?php
 namespace App\Sale\Strategies;
 
-use App\Sale\SaleStrategyInterface;
-
 class BogoSaleStrategy implements SaleStrategyInterface {
     public function calculateDiscount($regularPrice, $discountValue) {
         // For simplicity, let's assume $discountValue represents the "buy X get Y free" pattern
