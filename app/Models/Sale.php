@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\admin\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    protected $fillable = ['type', 'name'];
+    protected $guarded = [];
 
     public function specificSale($type)
     {
@@ -17,4 +18,10 @@ class Sale extends Model
         // Assuming the specific sale table has a 'sale_id' foreign key
         return $this->hasOne("App\Models\{$modelClassName}", 'sale_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'sale_product');
+    }
+
 }
