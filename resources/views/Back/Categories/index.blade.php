@@ -51,8 +51,8 @@
                                         <td>{{$category->name}}</td>
                                         <td>{{$category->slug}}</td>
                                         <td class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" href=""><i class="fa fa-edit"></i>Edit</a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
+                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('Admin-Categories.edit', $category->id)}}"><i class="fa fa-edit"></i> Edit</a>
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i> Delete</a>
                                         </td>
                                     </tr>
                                     @include('Back.Categories.delete')

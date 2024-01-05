@@ -13,7 +13,7 @@
             <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
-                        <h4 class="content-title mb-0 my-auto">Add Product</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Product</span>
+                        <h4 class="content-title mb-0 my-auto">Edit Product</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Product</span>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add a Product</h4>
+                            <h4 class="card-title">Edit Product</h4>
                             <form action="{{route('admin-products.update', $products->id)}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 @if($products->exists)

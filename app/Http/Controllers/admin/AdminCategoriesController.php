@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\admin\Category;
+use Flasher\Toastr\Laravel\Facade\Toastr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class AdminCategoriesController extends Controller
@@ -58,7 +60,8 @@ class AdminCategoriesController extends Controller
 
         $category = Category::create($data);
 
-        return redirect()->route('Admin-Categories.index')->with(['success' => 'تم ألاضافة بنجاح']);
+        toastr()->addSuccess('Category added successfully.');
+        return redirect()->route('Admin-Categories.index');
     } catch (\Exception $ex) {
         return redirect()->route('Admin-Categories.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
     }
@@ -84,7 +87,26 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        try {
+            // Find the slide by ID
+            $categories = Category::findOrFail($id);
+
+
+            // Retrieve translated attributes for English
+            $enAttributes = $categories->translate('en');
+
+            // Retrieve translated attributes for Arabic
+            $arAttributes = $categories->translate('ar');
+
+
+            return view('Back.Categories.edit', compact('categories'));
+        } catch (\Exception $ex) {
+            // Show error message using Toastr
+            Toastr::error('Product not found.', 'Error');
+
+            return redirect()->route('Admin-Categories.index');
+        }
     }
 
     /**
@@ -96,7 +118,36 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $categories = Category::findOrFail($id);
+
+            // Check if a new image is being uploaded
+            if ($request->hasFile('image_path')) {
+                // Delete the old image if it exists
+                if ($categories->image_path) {
+                    Storage::disk('categories')->delete($categories->image_path);
+                }
+
+                // Upload the new image
+                $categories->image = uploadImage('categories', $request->image_path);
+            }
+
+            // Update other fields
+            $categories->translate('en')->name = $request->input('name_en');
+
+            $categories->translate('ar')->name = $request->input('name_ar');
+
+            // Save the changes
+            $categories->save();
+
+            // Show success message using Toastr
+            toastr()->addSuccess('Category updated successfully.');
+            return redirect()->route('Admin-Categories.index');
+        } catch (\Exception $ex) {
+            // Show error message using Toastr
+            Toastr::error('An error occurred. Please try again later.');
+            return redirect()->route('Admin-Categories.index');
+        }
     }
 
     /**
@@ -107,13 +158,13 @@ class AdminCategoriesController extends Controller
      */
     public function destroy(Request $request)
     {
-        $slides = Category::findOrFail($request->id);
+        $categories = Category::findOrFail($request->id);
 
-        if ($slides->image) {
-            Storage::disk('categries')->delete($slides->image);
+        if ($categories->image) {
+            Storage::disk('categries')->delete($categories->image);
         }
 
-        $slides->delete();
+        $categories->delete();
         toastr()->addSuccess('Category deleted successfully.');
         return redirect()->route('admin-slides.index');
     }
