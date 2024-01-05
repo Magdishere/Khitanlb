@@ -134,7 +134,7 @@
 
                                 <ul class="pro-submit" style="list-style:none;">
                                     <li>
-                                        <button type="submit"  class="btn btn-success">Save Category</button>
+                                        <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Category</button>
                                     </li>
                                 </ul>
                             </form>

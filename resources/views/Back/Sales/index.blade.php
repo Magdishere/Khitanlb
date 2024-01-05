@@ -12,7 +12,7 @@
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
                 <div class="pr-1 mb-3 mb-xl-0">
-                    <a class="btn" style="background-color: black; color:pink;" href="{{route('admin-products.create')}}"><i class="fa fa-plus"></i> Add Product</a>
+                    <a class="btn" style="background-color: black; color:pink;" href="{{route('admin-sales.create')}}"><i class="fa fa-plus"></i> Add Sale</a>
                 </div>
             </div>
         </div>

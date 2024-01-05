@@ -1,7 +1,7 @@
 <!-- Title -->
 <title> Khitan </title>
 <!-- Favicon -->
-<link rel="icon" href="{{asset('admin-assets/img/brand/favicon.png')}}" type="image/x-icon"/>
+<link rel="icon" href="{{asset('admin-assets/img/khitan_logo1.png')}}" type="image/x-icon"/>
 <!-- Icons css -->
 <link href="{{asset('admin-assets/css/icons.css')}}" rel="stylesheet">
 <!--  Custom Scroll bar-->

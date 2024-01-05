@@ -13,7 +13,7 @@
             <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
-                        <h4 class="content-title mb-0 my-auto">Add Sales</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Saless</span>
+                        <h4 class="content-title mb-0 my-auto">Add Sales</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Sales</span>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add a Sales</h4>
+                            <h4 class="card-title">Add Sale</h4>
                             <form  id="form" action="{{route('admin-sales.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
