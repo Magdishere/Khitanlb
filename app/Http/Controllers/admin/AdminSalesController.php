@@ -13,7 +13,8 @@ class AdminSalesController extends Controller
     public function index()
     {
         $products = Product::get();
-        return view('Back.Sales.index', compact('products'));
+        $sales = Sale::get();
+        return view('Back.Sales.index', compact('products', 'sales'));
     }
 
     public function create()

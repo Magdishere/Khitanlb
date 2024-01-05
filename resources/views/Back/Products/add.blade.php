@@ -9,15 +9,15 @@
 @section('page-header')
     <div class="main-panel">
         <div class="content-wrapper">
-            <div class="page-header">
-                <h3 class="page-title"> Products</h3>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Add Product</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Products</li>
-                    </ol>
-                </nav>
+            <!-- breadcrumb -->
+            <div class="breadcrumb-header justify-content-between">
+                <div class="my-auto">
+                    <div class="d-flex">
+                        <h4 class="content-title mb-0 my-auto">Add Product</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Products</span>
+                    </div>
+                </div>
             </div>
+            <!-- breadcrumb -->
             <div class="row">
                 <div class="col-12 grid-margin">
                     <div class="card">
@@ -239,9 +239,9 @@
                                 </div>
 
 
-                                <ul class="pro-submit">
+                                <ul class="pro-submit" style="list-style:none;">
                                     <li>
-                                        <button type="submit"  class="btn btn-style1" style="margin: 20px;">Update profile</button>
+                                        <button type="submit"  class="btn " style="background-color: black; color:pink;">Add Product</button>
                                     </li>
                                 </ul>
                             </form>
