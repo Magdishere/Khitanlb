@@ -13,7 +13,7 @@
             <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
-                        <h4 class="content-title mb-0 my-auto">Add Slide</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Slides</span>
+                        <h4 class="content-title mb-0 my-auto">Add Sales</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / Saless</span>
                     </div>
                 </div>
             </div>
@@ -23,20 +23,74 @@
                 <div class="col-12 grid-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Add a Slide</h4>
+                            <h4 class="card-title">Add a Sales</h4>
                             <form  id="form" action="{{route('admin-sales.store')}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Slide Image</label>
-                                    <input type="file" name="banner" id="banner" accept="image/*" >
+                                    <label>Sales Image</label>
+                                    <input type="file" name="banner" id="banner" accept="image/*" onchange="previewImage(this)">
                                     @error('banner')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
+
+                                        <img id="image-preview" style="width: 150px; height: 100px" alt="No Image">
+
                                 </div>
 
                                 <div class="form-body">
 
-                                    <h4 class="form-section"><i class="ft-home"></i>Slide Details</h4>
+                                    <h4 class="form-section"><i class="ft-home"></i>Sales Details</h4>
+                                    <div class="form-group row">
+                                        <label class="col-2 col-form-label" for="choose-for-category">Sale for category or product</label>
+                                    </div>
+                                    <!-- Update the radio inputs with the new name -->
+                                    <div class="col-md-3">
+                                        <div>
+                                            <input type="radio" name="sale_type" id="radio2" class="radio" value="1" checked/>
+                                            <label for="radio2">For Category</label>
+                                        </div>
+                                        @error("sale_type")
+                                        <span class="text-danger">{{$message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div>
+                                            <input type="radio" name="sale_type" id="radio3" class="radio" value="2"/>
+                                            <label for="radio3">For product</label>
+                                            @error("sale_type")
+                                            <span class="text-danger">{{$message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row" id="for-category">
+                                        <label class="col-2 col-form-label" for="choose-for-category">Category</label>
+                                        <div class="col-10">
+                                            <select multiple name="product_id[]" id="choose-for-category" class="filter-multi-select">
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $category->image) }}" alt="Sales Image" style="max-width: 50px;">
+
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row hidden" id="for-product">
+                                        <label class="col-2 col-form-label" for="choose-for-product">Products</label>
+                                        <div class="col-10">
+                                            <select multiple name="product_id[]" id="choose-for-product" class="filter-multi-select">
+                                                @foreach($products as $product)
+                                                    <option value="{{ $product->id }}">
+                                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Sales Image" style="max-width: 50px;">
+
+                                                        {{ $product->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -110,24 +164,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-2 col-form-label" for="animals">Products</label>
-                                        <div class="col-10">
-                                            <select multiple name="product_id[]" id="animals" class="filter-multi-select">
-                                                @foreach($products as $product)
-                                                    <option value="{{ $product->id }}">
-                                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Slide Image" style="max-width: 50px;">
 
-                                                        {{ $product->name }}
-                                                     </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
 
                                     <ul class="pro-submit" style="list-style:none;">
                                         <li>
-                                            <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Slide</button>
+                                            <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Sales</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -142,15 +183,34 @@
     <!-- content-wrapper ends -->
 @endsection
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('image-preview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+            }
+        }
+    </script>
+
     <script>
         // Use the plugin once the DOM has been loaded.
         $(function () {
             // Apply the plugin
             var notifications = $('#notifications');
-            $('#animals').on("optionselected", function(e) {
+            $('#choose-for-product').on("optionselected", function(e) {
                 createNotification("selected", e.detail.label);
             });
-            $('#animals').on("optiondeselected", function(e) {
+            $('#choose-for-product').on("optiondeselected", function(e) {
                 createNotification("deselected", e.detail.label);
             });
             function createNotification(event,label) {
@@ -162,58 +222,7 @@
                         n.remove();
                     });
             }
-            var shapes = $('#shapes').filterMultiSelect({
-                selectAllText: 'all...',
-                placeholderText: 'click to select a shape',
-                filterText: 'search',
-                labelText: 'Shapes',
-                caseSensitive: true,
-            });
-            var cars = $('#cars').filterMultiSelect();
-            var pl1 = $('#programming_languages_1').filterMultiSelect();
-            $('#b1').click((e) => {
-                pl1.enableOption("1");
-            });
-            $('#b2').click((e) => {
-                pl1.disableOption("1");
-            });
-            var pl2 = $('#programming_languages_2').filterMultiSelect();
-            $('#b3').click((e) => {
-                pl2.enable();
-            });
-            $('#b4').click((e) => {
-                pl2.disable();
-            });
-            var pl3 = $('#programming_languages_3').filterMultiSelect({
-                allowEnablingAndDisabling: false,
-            });
-            $('#b5').click((e) => {
-                pl3.enableOption("1");
-            });
-            $('#b6').click((e) => {
-                pl3.disableOption("1");
-            });
-            $('#b7').click((e) => {
-                pl3.enable();
-            });
-            $('#b8').click((e) => {
-                pl3.disable();
-            });
-            var cities = $('#cities').filterMultiSelect({
-                items: [["San Francisco","a"],
-                    ["Milan","b",false,true],
-                    ["Singapore","c",true],
-                    ["Berlin","d",true,true],
-                ],
-            });
-            var colors = $('#colors').filterMultiSelect();
-            var trees = $('#trees').filterMultiSelect({
-                selectionLimit: 3,
-            });
-            $('#jsonbtn1').click((e) => {
-                var b = true;
-                $('#jsonresult1').text(JSON.stringify(getJson(b),null,"  "));
-            });
+
             var getJson = function (b) {
                 var result = $.fn.filterMultiSelect.applied
                     .map((e) => JSON.parse(e.getSelectedOptionsAsJson(b)))
@@ -242,14 +251,17 @@
 
     <script>
         $(document).ready(function () {
-            $('input:radio[name="type"]').change(function () {
+            $('input:radio[name="sale_type"]').change(function () {
                 if (this.checked && this.value == '2') {
-                    $('#cats_list').removeClass('hidden');
+                    $('#for-category').addClass('hidden');
+                    $('#for-product').removeClass('hidden');
                 } else {
-                    $('#cats_list').addClass('hidden');
+                    $('#for-category').removeClass('hidden');
+                    $('#for-product').addClass('hidden');
                 }
             });
         });
+
     </script>
 
 
