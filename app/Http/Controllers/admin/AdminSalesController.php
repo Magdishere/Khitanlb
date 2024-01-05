@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\Category;
 use App\Models\admin\Product;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class AdminSalesController extends Controller
     public function create()
     {
         $products = Product::doesntHave('sales')->get();
-        return view('Back.Sales.add', compact('products'));
+        $categories = Category::get();
+        return view('Back.Sales.add', compact('products', 'categories'));
     }
     public function store(Request $request)
     {
@@ -44,8 +46,14 @@ class AdminSalesController extends Controller
                 'end_date' =>  date('Y-m-d H:i:s', strtotime($request->ends_date)),
             ]);
 
-            // Attach selected products
-            $sale->products()->attach($request->input('product_id'));
+            if ($request->sale_type == 1) {
+                // Sale for category
+                $sale->categories()->attach($request->input('category_id'));
+            } elseif ($request->sale_type == 2) {
+                // Sale for product
+                $sale->products()->attach($request->input('product_id'));
+            }
+
 
             return redirect()->route('admin.sales')->with('success', 'Sales has been applied');
         } catch (\Exception $exception) {

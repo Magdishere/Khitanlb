@@ -84,6 +84,350 @@
         </div>
     </div>
 </section>
+<!-- Services Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <header class="row" style="color:#FFFFFF;background:rgba(253,45,125,0.6);">
+            <div class="col-md-4">
+                <h4 class="-m -fs20 -elli">Flash Sales Don't Miss !!</h4>
+            </div>
+            <div class="col-md-4">
+                Time Left:
+                <time class="-b -ws-p" datetime="2024-01-05T11:00:00+02:00" data-cd="true">13h : 19m : 15s</time>
+            </div>
+            <div class="col-md-4">
+                <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs">See All
+                    <svg style="fill:#FFFFFF;" viewBox="0 0 24 24" class="ic" width="24" height="24">
+                        <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-icons.a66628fd.svg#arrow-right"></use></svg>
+                </a>
+            </div>
+        </header>
+        <div class="row" style="
+    background-color: white;
+    box-shadow: 5px 5px 10px rgb(0 0 0 / 7%);
+    border-radius: 12px;
+">
+            <div class="col-md-12">
+                <h2>Trending <b>Products</b></h2>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <div class="item carousel-item active">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://images.kogan.com/image/fetch/s--4uUL-TgJ--/b_white,c_pad,f_auto,h_400,q_auto:good,w_600/https://assets.kogan.com/files/product/HKI/20170324_New_iPad/KHIPADAIR332WGRY_1.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Apple iPad</h4>
+                                            <p class="item-price"><strike>$400.00</strike> <span>$369.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/61t0HecIZbL._SY355_.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Sony Headphone</h4>
+                                            <p class="item-price"><strike>$25.00</strike> <span>$23.99</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://9to5mac.files.wordpress.com/2018/03/colorware.jpg?quality=82&strip=all&w=1500" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Macbook Air</h4>
+                                            <p class="item-price"><strike>$899.00</strike> <span>$649.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/81G9qD2BfKL._SX425_.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Nikon DSLR</h4>
+                                            <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item carousel-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://media.playstation.com/is/image/SCEA/playstation-4-slim-vertical-product-shot-01-us-07sep16?$native_t$" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Sony Play Station</h4>
+                                            <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://icdn5.digitaltrends.com/image/huawei-matebook-x-pro-2018-review-15-1500x1000.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Macbook Pro</h4>
+                                            <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://www.cnetfrance.fr/i/edit/2015/06/bose-soundlink-mini-ii-770x577.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Bose Speaker</h4>
+                                            <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://www.boostmobile.com/content/dam/boostmobile/en/products/phones/samsung/galaxy-s8/black/device-front.png.transform/pdpCarousel/image.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Samsung Galaxy S8</h4>
+                                            <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item carousel-item">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="http://www.tozostore.com/wp-content/uploads/2017/03/%E6%9C%AA%E6%A0%87%E9%A2%98-1-1.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Apple iPhone</h4>
+                                            <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://www.bhphotovideo.com/images/images2500x2500/canon_0020c003_eos_rebel_t6s_dslr_1116104.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Canon DSLR</h4>
+                                            <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://images-na.ssl-images-amazon.com/images/I/81CM3aNz%2B-L._SX569_.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Google Pixel</h4>
+                                            <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="https://www.att.com/catalog/en/skus/Apple/Apple%20Watch%20Series%203%2042mm/overview/344802-PDP-watch-S3-img1@2x.jpg" class="img-responsive img-fluid" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>Apple Watch</h4>
+                                            <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
+                                            <div class="star-rating">
+                                                <ul class="list-inline">
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                </ul>
+                                            </div>
+                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel controls -->
+                    <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="section-title centered-paragraph">
+                <h2>ٍSales</h2>
+                <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                    <img src="{{asset('../assets/img/banner/banner-9.jpg')}} " style="height: 300px; width: 600px">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                    <img src="{{asset('../assets/img/banner/banner-5.jpg')}} "  style="height: 300px; width: 600px">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                    <img src="{{asset('../assets/img/banner/banner-8.jpg')}} " style="height: 300px; width: 600px">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                    <img src="{{asset('../assets/img/banner/banner-7.jpg')}} "  style="height: 300px; width: 600px">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Product Section Begin -->
 <section class="product spad">
