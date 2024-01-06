@@ -90,17 +90,19 @@ class AdminCategoriesController extends Controller
 
         try {
             // Find the slide by ID
-            $categories = Category::findOrFail($id);
+            $category = Category::findOrFail($id);
 
 
             // Retrieve translated attributes for English
-            $enAttributes = $categories->translate('en');
+            $enAttributes = $category->translate('en');
 
             // Retrieve translated attributes for Arabic
-            $arAttributes = $categories->translate('ar');
+            $arAttributes = $category->translate('ar');
 
 
-            return view('Back.Categories.edit', compact('categories'));
+            $categories = Category::get();
+
+            return view('Back.Categories.edit', compact('category','categories', 'enAttributes', 'arAttributes'));
         } catch (\Exception $ex) {
             // Show error message using Toastr
             Toastr::error('Product not found.', 'Error');

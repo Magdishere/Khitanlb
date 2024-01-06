@@ -24,9 +24,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Edit a Category</h4>
-                            <form action="{{route('Admin-Categories.edit', $categories->id)}}" method="POST" class="form-sample" enctype="multipart/form-data">
+                            <form action="{{route('Admin-Categories.edit', $category->id)}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
-                                @if($categories->exists)
+                                @if($category->exists)
                                     @method('PUT')
                                 @endif
                                 <div class="form-group">
@@ -52,7 +52,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Category Name
                                                 </label>
-                                                <input class="form-control" type="text" name="name_en" id="name_en" value="{{ old('name.en') }}" required>
+                                                <input class="form-control" type="text" name="name_en" id="name_en" value="{{ $category->translate('en')->name }}" required>
                                                 @error("name_en")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -63,7 +63,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">اسم القسم
                                                 </label>
-                                                <input class="form-control" type="text" name="name_ar" id="name_ar" value="{{ old('name.ar') }}" required>
+                                                <input class="form-control" type="text" name="name_ar" id="name_ar" value="{{ $category->translate('ar')->name }}" required>
                                                 @error("name_ar")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -79,7 +79,7 @@
                                             <input type="text" id="name"
                                                 class="form-control"
                                                 placeholder="  "
-                                                value="{{old('slug')}}"
+                                                value="{{ $category->slug }}"
                                                 name="slug">
                                             @error("slug")
                                             <span class="text-danger">{{$message}}</span>
@@ -88,9 +88,10 @@
                                     </div>
                                 </div>
 
+
                                 <div class="col-md-3">
                                     <div>
-                                        <input type="radio" name="type" id="radio2" class="radio" value="1" checked/>
+                                        <input type="radio" name="type" id="radio2" class="radio" value="1" @if($category->parent_id == null) checked @endif />
                                         <label for="radio2">Main Category</label>
                                     </div>
                                     @error("type")
@@ -100,7 +101,7 @@
 
                                 <div class="col-md-3">
                                     <div>
-                                        <input type="radio" name="type" id="radio3" class="radio" value="2"/>
+                                        <input type="radio" name="type" id="radio3" class="radio" value="2" @if($category->parent_id !== null) checked @endif/>
                                         <label for="radio3">Sub-category</label>
                                         @error("type")
                                         <span class="text-danger">{{$message }}</span>
@@ -108,17 +109,17 @@
                                     </div>
 
                                 </div>
-                                    <div class="row hidden" id="cats_list" >
+
+                                    <div class="row @if($category->parent_id !== null) '' @else hidden @endif" id="cats_list">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="projectinput1">Select Main Category
                                                 </label>
                                                 <select name="parent_id" class="select2 form-control">
                                                     <optgroup label="Please Select Main Category">
-                                                        @if($categories && $categories -> count() > 0)
-                                                            @foreach($categories as $category)
-                                                                <option
-                                                                    value="{{$category -> id }}">{{$category -> name }}</option>
+                                                        @if($categories && $categories->count() > 0)
+                                                            @foreach($categories as $cat)
+                                                                <option value="{{ $cat->id }}" @if($cat->id == $category->parent_id) selected @endif>{{ $cat->name }}</option>
                                                             @endforeach
                                                         @endif
                                                     </optgroup>
@@ -132,7 +133,7 @@
                                     </div>
 
                                     </div>
-                                </div>
+
 
 
                                 <ul class="pro-submit" style="list-style:none;">
