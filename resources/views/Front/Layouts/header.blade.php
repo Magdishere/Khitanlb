@@ -40,7 +40,7 @@
                 <nav class="header__menu mobile-menu">
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="./shop.html">Shop</a></li>
+                        <li><a href="/shop">Shop</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="{{url('about')}}">About Us</a></li>

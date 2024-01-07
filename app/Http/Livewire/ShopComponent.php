@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
-use App\Models\Category;
+use App\Models\admin\Product;
+use App\Models\admin\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
@@ -67,7 +67,7 @@ class ShopComponent extends Component
             $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->paginate($this->pageSize);
         }
 
-        $categories = Category::orderBy('name', 'ASC')->get();
+        $categories = Category::orderByTranslation('name', 'ASC')->get();
         return view('livewire.shop-component' , ['products' => $products, 'categories' =>$categories]);
     }
 }

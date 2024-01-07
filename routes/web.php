@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShopComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,6 @@ Route::get('about', function () {
 Route::get('user_dashboard', function () {
     return view('Front.user_dashboard');
 });
+
+Route::get('/shop', ShopComponent::class)->name('shop');
+
