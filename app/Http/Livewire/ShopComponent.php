@@ -19,7 +19,8 @@ class ShopComponent extends Component
 
     public function addToCard($product_id, $product_name, $product_price){
 
-        Cart::instance('cart')->add($product_id, $product_name,1, $product_price)->associate('\App\Models\Product');
+
+        Cart::instance('cart')->add($product_id, $product_name,1, $product_price)->associate('\App\Models\admin\Product');
         session()->flash('success_message', 'Item added to the cart');
         return redirect()->route('shop.cart');
     }
@@ -36,7 +37,7 @@ class ShopComponent extends Component
 
     public function addToWishlist($product_id, $product_name, $product_price){
 
-        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\Product");
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
 

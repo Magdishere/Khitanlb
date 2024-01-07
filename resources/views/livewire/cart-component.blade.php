@@ -32,6 +32,9 @@
                                             </div>
                                         </div>
                                     </td>
+                                    <td class="product__cart__item">
+                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->image) }}">
+                                    </td>
                                     <td class="cart__price">$ 30.00</td>
                                     <td class="cart__close"><i class="fa fa-close"></i></td>
                                 </tr>

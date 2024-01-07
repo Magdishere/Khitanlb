@@ -179,9 +179,9 @@
                                 <div class="product__item__text">
                                     <h6>{{$product->name}}</h6>
                                     @if (App\Sale\Sale::calculateDiscountedPrice($product->id) != '-')
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{$product->id}}, '{{$product->name}}', {{$product->regular_price}}')">+ Add To Cart</a>
+                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{ $product->id }}', '{{ $product->name }}', {{ App\Sale\Sale::calculateDiscountedPrice($product->id) }})"                                            >+ Add To Cart</a>
                                     @else
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{$product->id}}, '{{$product->name}}', {{App\Sale\Sale::calculateDiscountedPrice($product->id)}}')">+ Add To Cart</a>
+
                                     @endif
                                     <div class="rating">
                                         <i class="fa fa-star-o"></i>

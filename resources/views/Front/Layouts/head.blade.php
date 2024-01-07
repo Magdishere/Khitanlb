@@ -146,5 +146,5 @@
             color: #ffc000;
         }
     </style> --}}
-
+    @livewireStyles
 </head>
