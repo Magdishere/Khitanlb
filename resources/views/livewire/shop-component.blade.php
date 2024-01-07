@@ -1,4 +1,5 @@
 
+
 <!-- Shop Section Begin -->
 <section class="shop spad">
     <div class="container">
@@ -181,7 +182,11 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6>{{$product->name}}</h6>
-                                    <a href="#" class="add-cart" wire:click.prevent="addToCart('{{$product->slug}}')">+ Add To Cart</a>
+                                    @if (App\Sale\Sale::calculateDiscountedPrice($product->id) != '-')
+                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{ $product->id }}', '{{ $product->name }}', {{ App\Sale\Sale::calculateDiscountedPrice($product->id) }})"                                            >+ Add To Cart</a>
+                                    @else
+
+                                    @endif
                                     <div class="rating">
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
