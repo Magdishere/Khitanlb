@@ -16,6 +16,8 @@ class ShopComponent extends Component
 
     public $min_value = 10;
     public $max_value = 1000;
+    public $categoryInputs = [];
+
 
     public function store($product_id, $product_name, $product_price){
 
@@ -54,20 +56,27 @@ class ShopComponent extends Component
 
     public function render()
     {
-        if($this->orderBy == 'Price: Low to High'){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('regular_price', 'ASC')->paginate($this->pageSize);
+        $products = Product::query();
 
-        }elseif($this->orderBy == 'Price: High to Low'){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('regular_price', 'DESC')->paginate($this->pageSize);
+        if (!empty($this->categoryInputs)) {
+            dd($this->categoryInputs);
+            $products->whereIn('category_id', $this->categoryInputs);
+        } else {
+            $products->whereBetween('regular_price', [$this->min_value, $this->max_value]);
 
-        }elseif($this->orderBy == 'Sort By Newest'){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            if ($this->orderBy == 'Price: Low to High') {
+                $products->orderBy('regular_price', 'ASC');
+            } elseif ($this->orderBy == 'Price: High to Low') {
+                $products->orderBy('regular_price', 'DESC');
+            } elseif ($this->orderBy == 'Sort By Newest') {
+                $products->orderBy('created_at', 'DESC');
+            }
 
-        }else{
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->paginate($this->pageSize);
+            $products = $products->paginate($this->pageSize);
         }
 
         $categories = Category::orderByTranslation('name', 'ASC')->get();
-        return view('livewire.shop-component' , ['products' => $products, 'categories' =>$categories]);
+
+        return view('livewire.shop-component', ['products' => $products, 'categories' => $categories]);
     }
 }

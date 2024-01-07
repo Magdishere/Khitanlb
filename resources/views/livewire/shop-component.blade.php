@@ -22,9 +22,13 @@
                                         <div class="shop__sidebar__categories">
                                             <ul class="nice-scroll">
                                                 @foreach($categories as $category)
-                                                    <li><a href="#">{{ $category->name }}</a></li>
+                                                    <li>
+                                                        <input type="checkbox" wire:model="categoryInputs" value="{{$category->id}}">
+                                                        {{$category->name}}
+                                                    </li>
                                                 @endforeach
                                             </ul>
+
                                         </div>
                                     </div>
                                 </div>
