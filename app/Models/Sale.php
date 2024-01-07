@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\admin\Category;
+use App\Models\admin\CategorySale;
 use App\Models\admin\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +24,16 @@ class Sale extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'sale_product');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_sales');
+    }
+
+    public function categorySales()
+    {
+        return $this->hasMany(CategorySale::class);
     }
 
 }

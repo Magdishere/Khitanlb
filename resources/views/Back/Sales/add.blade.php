@@ -66,7 +66,7 @@
                                     <div class="form-group row" id="for-category">
                                         <label class="col-2 col-form-label" for="choose-for-category">Category</label>
                                         <div class="col-10">
-                                            <select multiple name="product_id[]" id="choose-for-category" class="filter-multi-select">
+                                            <select multiple name="category_id[]" id="choose-for-category" class="filter-multi-select">
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $category->image) }}" alt="Sales Image" style="max-width: 50px;">

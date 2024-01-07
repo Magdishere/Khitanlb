@@ -29,4 +29,9 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
     {
         return $this->hasMany(ProductImage::class);
     }
+
+    public function categorySales()
+    {
+        return $this->hasManyThrough(CategorySale::class, Category::class);
+    }
 }

@@ -43,6 +43,7 @@ class AdminSalesController extends Controller
                 'type' => $request->type,
                 'value' => $request->value,
                 'position' => $request->position,
+                'target_type' => ($request->sale_type == 1) ? 'category' : (($request->sale_type == 2) ? 'product' : null),
                 'start_date' => date('Y-m-d H:i:s', strtotime($request->starts_date)),
                 'end_date' =>  date('Y-m-d H:i:s', strtotime($request->ends_date)),
             ]);

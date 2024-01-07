@@ -13,16 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('category_sales', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('name');
-            $table->integer('value');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('banner')->nullable();
-            $table->integer('position')->default(0);
-            $table->string('target_type')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('category_sales');
     }
 };

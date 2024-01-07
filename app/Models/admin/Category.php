@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
@@ -15,4 +16,10 @@ class Category extends Model implements \Astrotomic\Translatable\Contracts\Trans
     protected $table = 'categories';
     public $translatedAttributes = ['name'];
     protected $fillable = ['parent_id', 'slug', 'image_path', 'is_popular', 'name'];
+
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class, 'category_sales');
+    }
+
 }
