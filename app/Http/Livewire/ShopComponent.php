@@ -6,7 +6,7 @@ use App\Models\admin\Product;
 use App\Models\admin\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopComponent extends Component
 {
@@ -17,7 +17,7 @@ class ShopComponent extends Component
     public $min_value = 10;
     public $max_value = 1000;
 
-    public function store($product_id, $product_name, $product_price){
+    public function addToCard($product_id, $product_name, $product_price){
 
         Cart::instance('cart')->add($product_id, $product_name,1, $product_price)->associate('\App\Models\Product');
         session()->flash('success_message', 'Item added to the cart');
