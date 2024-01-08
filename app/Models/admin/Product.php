@@ -34,4 +34,30 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
     {
         return $this->hasManyThrough(CategorySale::class, Category::class);
     }
+
+    public function scopeSortBy($query, $sorting)
+    {
+        switch ($sorting) {
+            case 'date':
+                $query->orderBy('created_at', 'DESC');
+                break;
+            case 'price':
+                $query->orderBy('price', 'ASC');
+                break;
+            case 'price-desc':
+                $query->orderBy('price', 'DESC');
+                break;
+            case 'alphabet':
+                $query->orderBy('name', 'ASC');
+                break;
+            case 'alphabet-desc':
+                $query->orderBy('name', 'DESC');
+                break;
+            default:
+                $query->orderBy('created_at', 'ASC');
+                break;
+        }
+
+        return $query;
+    }
 }

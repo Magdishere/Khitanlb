@@ -1,6 +1,3 @@
-
-
-<!-- Shop Section Begin -->
 <section class="shop spad">
     <div class="container">
         <div class="row">
@@ -42,12 +39,12 @@
                                     <div class="card-body">
                                         <div class="shop__sidebar__price">
                                             <ul>
-                                                <li><a href="#">$0.00 - $50.00</a></li>
-                                                <li><a href="#">$50.00 - $100.00</a></li>
-                                                <li><a href="#">$100.00 - $150.00</a></li>
-                                                <li><a href="#">$150.00 - $200.00</a></li>
-                                                <li><a href="#">$200.00 - $250.00</a></li>
-                                                <li><a href="#">250.00+</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(0, 50)">$0.00 - $50.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(50, 100)">$50.00 - $100.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(100, 150)">$100.00 - $150.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(150, 200)">$150.00 - $200.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(200, 250)">$200.00 - $250.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(250, null)">250.00+</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -158,11 +155,17 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__right">
-                                <p>Sort by Price:</p>
-                                <select>
-                                    <option value="">Low To High</option>
-                                    <option value="">$0 - $55</option>
-                                    <option value="">$55 - $100</option>
+                                <p>Sort by:</p>
+                                @dump($orderBy)
+                                <select wire:model="orderBy">
+                                    <option value="featured">Featured</option>
+                                    <option value="bestseller">Best selling</option>
+                                    <option value="alphabet">Alphabetically, A-Z</option>
+                                    <option value="alphabet-desc">Alphabetically, Z-A</option>
+                                    <option value="price">Price, low to high</option>
+                                    <option value="price-desc">Price, high to low</option>
+                                    <option value="date-desc">Date new to old</option>
+                                    <option value="date">Date old to new</option>
                                 </select>
                             </div>
                         </div>
@@ -172,7 +175,7 @@
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}">
+                                <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                     <ul class="product__hover">
                                         <li><a href="#"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a></li>
                                         <li><a href="#"><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
@@ -181,9 +184,9 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6>{{$product->name}}</h6>
-                                    @if (App\Sale\Sale::calculateDiscountedPrice($product->id) != '-')
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{ $product->id }}', '{{ $product->name }}', {{ App\Sale\Sale::calculateDiscountedPrice($product->id) }})"                                            >+ Add To Cart</a>
+                                    <h6>{{$product['name']}}</h6>
+                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
                                     @else
 
                                     @endif
@@ -194,11 +197,11 @@
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </div>
-                                    @if (App\Sale\Sale::calculateDiscountedPrice($product->id) != '-')
-                                    <span class="text-1000 fw-bold"><del>${{$product->regular_price}}</del></span>
-                                    <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product->id)}}</span>
+                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                    <span class="text-1000 fw-bold"><del>${{$product['regular_price']}}</del></span>
+                                    <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
                                     @else
-                                        <span class="text-1000" style="font-weight: bold;">${{$product->regular_price}}</span>
+                                        <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
                                     @endif
 
                                     <div class="product__color__select">
@@ -232,4 +235,3 @@
         </div>
     </div>
 </section>
-<!-- Shop Section End -->
