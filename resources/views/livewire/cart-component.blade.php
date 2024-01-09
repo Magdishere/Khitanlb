@@ -1,4 +1,5 @@
 
+
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
@@ -39,8 +40,8 @@
                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}">
                                     </td>
                                     <td class="cart__price text-center">${{ $item->price }}</td>
+                                    <td class="action cart__close" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="removeFromCart('{{$item->rowId}}')"><i class="fa fa-close"></i></a></td>
 
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -72,7 +73,9 @@
                         <ul>
                             <li>Total <span>${{Cart::subtotal()}}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <div class="continue__btn update__btn">
+                            <a href="#" style="font-size:13px;"></i>Proceed To Checkout</a>
+                        </div>
                     </div>
                 </div>
             </div>

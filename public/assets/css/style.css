@@ -2480,6 +2480,13 @@ ol {
 	border-radius: 50%;
 	line-height: 40px;
 	text-align: center;
+    transition: color 0.3s ease;
+}
+.shopping__cart__table table tbody tr td.cart__close i:hover {
+
+	color: #eb3ba7;
+    background: #000000;
+
 }
 
 .continue__btn.update__btn {
@@ -2505,6 +2512,13 @@ ol {
 	border: 1px solid #e1e1e1;
 	padding: 14px 35px;
 	display: inline-block;
+    transition: 0.3s ease;
+}
+.continue__btn a:hover {
+	color: #eb3ba7;
+    background: #000000;
+    border: 1px solid #000000;
+
 }
 
 .cart__discount {

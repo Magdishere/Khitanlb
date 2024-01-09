@@ -61,6 +61,17 @@ class CartComponent extends Component
     $this->cartContent = Cart::instance('cart')->content();
 
 }
+
+    public function removeFromCart($rowId)
+    {
+        // Remove the entire row (product) from the cart
+        Cart::instance('cart')->remove($rowId);
+
+        $this->emitTo('cart-icon-component', 'refreshComponent');
+
+        // Refresh the cart content after the removal
+        $this->cartContent = Cart::instance('cart')->content();
+    }
     // Create similar methods for removing items and clearing the cart if needed
     public function render()
     {
