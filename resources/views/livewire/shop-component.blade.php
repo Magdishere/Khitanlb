@@ -40,12 +40,12 @@
                                     <div class="card-body">
                                         <div class="shop__sidebar__price">
                                             <ul>
-                                                <li><a href="#" wire:click.prevent="setPriceRange(0, 50)">$0.00 - $50.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(1, 50)">$1.00 - $50.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(50, 100)">$50.00 - $100.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(100, 150)">$100.00 - $150.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(150, 200)">$150.00 - $200.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(200, 250)">$200.00 - $250.00</a></li>
-                                                <li><a href="#" wire:click.prevent="setPriceRange(250, null)">250.00+</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(250, 1000)">250.00+</a></li>
                                             </ul>
                                         </div>
                                     </div>
