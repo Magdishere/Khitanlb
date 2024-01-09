@@ -39,12 +39,12 @@
                                     <div class="card-body">
                                         <div class="shop__sidebar__price">
                                             <ul>
-                                                <li><a href="#" wire:click.prevent="setPriceRange(0, 50)">$0.00 - $50.00</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(1, 50)">$1.00 - $50.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(50, 100)">$50.00 - $100.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(100, 150)">$100.00 - $150.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(150, 200)">$150.00 - $200.00</a></li>
                                                 <li><a href="#" wire:click.prevent="setPriceRange(200, 250)">$200.00 - $250.00</a></li>
-                                                <li><a href="#" wire:click.prevent="setPriceRange(250, null)">250.00+</a></li>
+                                                <li><a href="#" wire:click.prevent="setPriceRange(250, 1000)">250.00+</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -156,7 +156,6 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__right">
                                 <p>Sort by:</p>
-                                @dump($orderBy)
                                 <select wire:model="orderBy">
                                     <option value="featured">Featured</option>
                                     <option value="bestseller">Best selling</option>

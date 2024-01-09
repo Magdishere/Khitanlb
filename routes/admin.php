@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminAttributeController;
 use App\Http\Controllers\admin\AdminCategoriesController;
 use App\Http\Controllers\admin\AdminProductsController;
 use App\Http\Controllers\admin\AdminSalesController;
@@ -38,6 +39,6 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('Admin-Categories', AdminCategoriesController::class);
     Route::resource('admin-products', AdminProductsController::class);
     Route::resource('admin-sales', AdminSalesController::class);
+    Route::resource('admin-attributes', AdminAttributeController::class);
     Route::resource('admin-slides', AdminSlidesController::class);
-
 });

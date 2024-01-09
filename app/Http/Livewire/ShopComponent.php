@@ -25,10 +25,7 @@ class ShopComponent extends Component
     public $orderBy = 'featured';
     protected $listeners = ['sortBy'];
 
-    public function updated($propertyName)
-    {
-        logger("{$propertyName} updated to: " . $this->{$propertyName});
-    }
+
 
     public function setPriceRange($min, $max)
     {
