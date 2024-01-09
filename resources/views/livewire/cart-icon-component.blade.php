@@ -9,6 +9,4 @@
         <span class="pro-count blue">{{Cart::count()}}</span>
         @endif
     </a>
-    @foreach(Cart::instance('cart')->content() as $item)
-    @endforeach
 </div>

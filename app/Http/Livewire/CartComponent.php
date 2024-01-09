@@ -28,26 +28,39 @@ class CartComponent extends Component
             Cart::instance('cart')->update($rowId, $newQuantity);
         }
 
+        $this->emitTo('cart-icon-component', 'refreshComponent');
+
+
         // Refresh the cart content after the update
         $this->cartContent = Cart::instance('cart')->content();
     }
 
     public function decreaseQuantity($rowId)
-    {
-        // Find the cart item by rowId
-        $cartItem = Cart::instance('cart')->get($rowId);
+{
+    // Find the cart item by rowId
+    $cartItem = Cart::instance('cart')->get($rowId);
 
-        if ($cartItem && $cartItem->qty > 1) {
-            // Decrease the quantity by 1, but ensure it doesn't go below 1
-            $newQuantity = $cartItem->qty - 1;
+    if ($cartItem) {
+        // Decrease the quantity by 1
+        $newQuantity = max(0, $cartItem->qty - 1);
 
+        if ($newQuantity == 0) {
+            // If the new quantity is 0, remove the item from the cart
+            Cart::instance('cart')->remove($rowId);
+        } else {
             // Update the cart item with the new quantity
             Cart::instance('cart')->update($rowId, $newQuantity);
         }
-        // Refresh the cart content after the update
-        $this->cartContent = Cart::instance('cart')->content();
+
+
+        $this->emitTo('cart-icon-component', 'refreshComponent');
 
     }
+
+    // Refresh the cart content after the update
+    $this->cartContent = Cart::instance('cart')->content();
+
+}
     // Create similar methods for removing items and clearing the cart if needed
     public function render()
     {
