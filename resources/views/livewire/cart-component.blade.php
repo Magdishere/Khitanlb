@@ -73,7 +73,9 @@
                         <ul>
                             <li>Total <span>${{Cart::subtotal()}}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
+                        <div class="continue__btn update__btn">
+                            <a href="#" style="font-size:13px;"></i>Proceed To Checkout</a>
+                        </div>
                     </div>
                 </div>
             </div>
