@@ -40,7 +40,7 @@ class ShopComponent extends Component
     {
         Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\admin\Product');
         session()->flash('success_message', 'Item added to the cart');
-        return redirect()->route('shop.cart');
+        return redirect()->route('shop');
     }
 
     public function changePageSize($size)

@@ -4061,3 +4061,33 @@ td {
     padding: 10px;
     border: 1px solid #ddd;
 }
+
+
+
+
+.detail-qty {
+    max-width: 80px;
+    padding: 9px 20px;
+    position: relative;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .detail-qty > a {
+    font-size: 16px;
+    position: absolute;
+    right: 8px;
+    color: #707070;
+  }
+
+  .detail-qty > a:hover {
+    color: hsl(330, 80%, 61%);
+  }
+
+  .detail-qty > a.qty-up {
+    top: 0;
+  }
+
+  .detail-qty > a.qty-down {
+    bottom: 0;
+  }

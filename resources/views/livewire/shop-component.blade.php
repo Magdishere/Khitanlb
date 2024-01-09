@@ -1,3 +1,4 @@
+
 <section class="shop spad">
     <div class="container">
         <div class="row">
@@ -156,7 +157,6 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="shop__product__option__right">
                                 <p>Sort by:</p>
-                                @dump($orderBy)
                                 <select wire:model="orderBy">
                                     <option value="featured">Featured</option>
                                     <option value="bestseller">Best selling</option>
@@ -186,9 +186,9 @@
                                 <div class="product__item__text">
                                     <h6>{{$product['name']}}</h6>
                                     @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCard('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
+                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
                                     @else
-
+                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
                                     @endif
                                     <div class="rating">
                                         <i class="fa fa-star-o"></i>

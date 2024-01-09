@@ -46,6 +46,7 @@ class CartComponent extends Component
         }
         // Refresh the cart content after the update
         $this->cartContent = Cart::instance('cart')->content();
+
     }
     // Create similar methods for removing items and clearing the cart if needed
     public function render()
