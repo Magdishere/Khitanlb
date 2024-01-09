@@ -1,3 +1,20 @@
+{{--
+    <!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>Cart</h4>
+                    <div class="breadcrumb__links">
+                        <a href="./index.html">Home</a>
+                        <span>Cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> --}}
     <!-- Shopping Cart Section Begin -->
     <section class="shopping-cart spad">
         <div class="container">
@@ -7,10 +24,11 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
+                                    <th class="text-center">Product</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Image</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,17 +43,20 @@
                                             <h5>{{$item->regular_price}}</h5>
                                         </div>
                                     </td>
-                                    <td class="quantity__item">
+                                    <td class="quantity__item text-center">
                                         <div class="quantity">
                                             <div class="pro-qty-2">
-                                                <input type="text" value="1">
+                                                <a href="#" class="fa fa-angle-left inc qtybtn" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">{{$item->qty}}</span>
+                                                <a href="#" class="fa fa-angle-right inc qtybtn" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="product__cart__item">
-                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->image) }}">
+                                        <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}">
                                     </td>
-                                    <td class="cart__price">$ 30.00</td>
+                                    <td class="cart__price text-center">${{ $item->price }}</td>
+
                                     <td class="cart__close"><i class="fa fa-close"></i></td>
                                 </tr>
                                 @endforeach
@@ -66,8 +87,7 @@
                     <div class="cart__total">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>$ 169.50</span></li>
-                            <li>Total <span>$ 169.50</span></li>
+                            <li>Total <span>${{Cart::subtotal()}}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">Proceed to checkout</a>
                     </div>
