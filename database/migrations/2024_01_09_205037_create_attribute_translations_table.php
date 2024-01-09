@@ -4,16 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-class CreateAttributeOptionsTable extends Migration
+return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('attribute_options', function (Blueprint $table) {
+        Schema::create('attribute_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('attribute_id')->constrained();
-            $table->string('image');
-            $table->timestamps();
+            $table->string('locale')->index();
+            $table->string('name');
+            $table->unique(['attribute_id', 'locale']);
         });
     }
 
@@ -24,6 +29,6 @@ class CreateAttributeOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_options');
+        Schema::dropIfExists('attribute_translations');
     }
 };

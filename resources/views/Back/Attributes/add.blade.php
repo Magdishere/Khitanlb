@@ -61,7 +61,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        <input type="file" name="option_image" class="file-upload custom-file-input hidden" id="input_option_image" onchange="previewFile()" hidden>
+                                                        <input type="file" name="option_image[]" class="file-upload custom-file-input hidden" id="input_option_image" onchange="previewFile()" hidden>
                                                         <label class="border-0 mb-0 cursor" for="option_image">
                                                             <img src="{{ asset('admin-assets/img/camera-icon.png') }}" id="img_option_image" alt="img" class="img-fluid" style="width: 50px; height: 50px">
                                                             <span id="img_here"></span>
@@ -77,8 +77,8 @@
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
                                                                     <label for="option_name_en">Option Name (English)</label>
-                                                                    <input class="form-control" type="text" name="option_name_en" id="option_name_en" value="{{ old('option_name.en') }}" required>
-                                                                    @error("option_name_en")
+                                                                    <input class="form-control" type="text" name="option_name_en[]" value="{{ old('option_name.en') }}" required>
+                                                                    @error("option_name_en.*")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
@@ -86,8 +86,8 @@
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
                                                                     <label for="option_name_ar">Option Name (Arabic)</label>
-                                                                    <input class="form-control" type="text" name="option_name_ar" id="option_name_ar" value="{{ old('option_name.ar') }}" required>
-                                                                    @error("option_name_ar")
+                                                                    <input class="form-control" type="text" name="option_name_ar[]" value="{{ old('option_name.ar') }}" required>
+                                                                    @error("option_name_ar.*")
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
                                                                 </div>
@@ -98,16 +98,13 @@
                                                                 </a>
                                                             </div>
                                                         </div>
-                                                        @error("option_name_en")
+                                                        @error("option_name_en.*")
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- End Option Template Content -->
-                                        </div>
-                                    </div>
-                                    <a href="#" id="moreOptions">More Options +</a>
+                                            <a href="#" id="moreOptions">More Options +</a>
 
                                 </div>
 
@@ -149,7 +146,7 @@
             clone.find('.option-name-en').attr('id', 'option_name_en' + counter);
             clone.find('.option-name-ar').attr('id', 'option_name_ar' + counter);
 
-            clone.find('.file-upload').attr('onchange', 'previewFile(' + counter + ')');
+            clone.find('.file-upload').attr('onchange', 'previewFile()');
             clone.find('.img-option-image').attr('onclick', 'triggerInput(' + counter + ')');
 
             clone.find('.input-group-append').attr('onclick', 'removeOption(' + counter + ')');
