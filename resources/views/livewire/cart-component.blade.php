@@ -39,8 +39,8 @@
                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}">
                                     </td>
                                     <td class="cart__price text-center">${{ $item->price }}</td>
+                                    <td class="action cart__close" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="removeFromCart('{{$item->rowId}}')"><i class="fa fa-close"></i></a></td>
 
-                                    <td class="cart__close"><i class="fa fa-close"></i></td>
                                 </tr>
                                 @endforeach
                             </tbody>
