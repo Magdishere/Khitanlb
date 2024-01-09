@@ -1,21 +1,4 @@
-{{--
-    <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__text">
-                    <h4>Cart</h4>
-                    <div class="breadcrumb__links">
-                        <a href="./index.html">Home</a>
-                        <span>Cart</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> --}}
-    <!-- Shopping Cart Section Begin -->
+
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
@@ -43,8 +26,8 @@
                                             <h5>{{$item->regular_price}}</h5>
                                         </div>
                                     </td>
-                                    <td class="quantity__item text-center">
-                                        <div class="quantity">
+                                    <td class="quantity__item">
+                                        <div class="quantity text-center">
                                             <div class="pro-qty-2">
                                                 <a href="#" class="fa fa-angle-left inc qtybtn" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"><i class="fi-rs-angle-small-down"></i></a>
                                                 <span class="qty-val">{{$item->qty}}</span>
@@ -66,7 +49,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn">
-                                <a href="#">Continue Shopping</a>
+                                <a href="/shop">Continue Shopping</a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -95,4 +78,4 @@
             </div>
         </div>
     </section>
-    <!-- Shopping Cart Section End -->
+
