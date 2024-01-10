@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\Attribute;
 use App\Models\admin\Category;
 use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,8 @@ class AdminProductsController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('Back.Products.add', compact('categories'));
+        $attributes = Attribute::with('options')->get();
+        return view('Back.Products.add', compact('categories', 'attributes'));
     }
 
     /**
@@ -86,6 +88,11 @@ class AdminProductsController extends Controller
                 }
             }
 
+            if ($request->has('attribute_options')) {
+                $attributeOptions = $request->input('attribute_options');
+                $products->attributeOptions()->attach($attributeOptions);
+            }
+
             toastr()->addSuccess('Product Added successfully.');
             return redirect()->route('admin-products.index');
         } catch (\Exception $ex) {
@@ -125,8 +132,9 @@ class AdminProductsController extends Controller
             // Retrieve translated attributes for Arabic
             $arAttributes = $products->translate('ar');
 
+            $attributes = Attribute::with('options')->get();
 
-            return view('Back.Products.edit', compact('products', 'enAttributes', 'arAttributes', 'categories'));
+            return view('Back.Products.edit', compact('products', 'enAttributes', 'arAttributes', 'attributes', 'categories'));
         } catch (\Exception $ex) {
             // Show error message using Toastr
             Toastr::error('Product not found.', 'Error');
@@ -178,6 +186,16 @@ class AdminProductsController extends Controller
                     ]);
                 }
             }
+            if ($request->has('attribute_options')) {
+                $attributeOptions = $request->input('attribute_options');
+
+                // Sync the selected attribute options with the product
+                $products->attributeOptions()->sync($attributeOptions);
+            } else {
+                // If no attribute options are selected, you might want to detach all existing options
+                $products->attributeOptions()->detach();
+            }
+
 
             // Show success message using Toastr
             toastr()->addSuccess('Product updated successfully.');

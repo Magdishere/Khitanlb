@@ -145,6 +145,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div>
+                                     @foreach(json_decode($attributes, true) as $attribute)
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                            <label for="projectinput1"> {{$attribute['name']}}</label>
+                                            <select class="js-example-basic-multiple" name="attribute_options[]" multiple="multiple" {{ isset($attribute['select_attributes']) ? $attribute['select_attributes'] : '' }}>
+                                                @foreach($attribute['options'] as $option)
+                                                    <option value="{{ $option['id'] }}" {{ isset($option['attributes']) ? $option['attributes'] : '' }}>
+                                                        {{ $option['translations'][0]['value'] }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                       </div>
+                                      @endforeach
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -256,6 +272,7 @@
 @endsection
 @section('js')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('input:radio[name="type"]').change(function () {
