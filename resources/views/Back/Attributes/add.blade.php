@@ -36,7 +36,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="attribute_name_en">Attribute Name (English)</label>
-                                                <input class="form-control" type="text" name="name_en" id="attribute_name_en" value="{{ old('name.en') }}" required>
+                                                <input class="form-control" type="text" name="name_en" id="attribute_name_en" value="{{ old('name_en') }}" required>
                                                 @error("name_en")
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -46,7 +46,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="attribute_name_ar">Attribute Name (Arabic)</label>
-                                                <input class="form-control" type="text" name="name_ar" id="attribute_name_ar" value="{{ old('name.ar') }}" required>
+                                                <input class="form-control" type="text" name="name_ar" id="attribute_name_ar" value="{{ old('name_ar') }}" required>
                                                 @error("name_ar")
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -61,14 +61,14 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        <input type="file" name="option_image[]" class="file-upload custom-file-input hidden" id="input_option_image" onchange="previewFile()" hidden>
-                                                        <label class="border-0 mb-0 cursor" for="option_image">
-                                                            <img src="{{ asset('admin-assets/img/camera-icon.png') }}" id="img_option_image" alt="img" class="img-fluid" style="width: 50px; height: 50px">
-                                                            <span id="img_here"></span>
-                                                            <img src="{{ asset('admin-assets/img/camera-icon.png') }}" id="img_option_image" alt="img" class="provider-rest-img d-none" style="width: 50px; height: 50px">
+                                                        <input type="file" name="option_image[]" class="file-upload custom-file-input" id="input_option_image1" onchange="previewFile(1)">
+                                                        <label class="border-0 mb-0 cursor" for="option_image1">
+                                                            <img src="{{ asset('admin-assets/img/camera-icon.png') }}" id="img_option_image1" alt="img" class="img-option-image-class img-fluid" style="width: 50px; height: 50px">
+                                                            <span id="img_here1"></span>
+                                                            <img src="{{ asset('admin-assets/img/camera-icon.png') }}" id="img_op" alt="img" class="provider-rest-img d-none" style="width: 50px; height: 50px">
                                                             <span class="file-custom"></span>
                                                         </label>
-                                                        @error('option_image')
+                                                        @error('option_image.*')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -76,7 +76,7 @@
                                                         <div class="input-group">
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
-                                                                    <label for="option_name_en">Option Name (English)</label>
+                                                                    <label for="option_name_en1">Option Name (English)</label>
                                                                     <input class="form-control" type="text" name="option_name_en[]" value="{{ old('option_name.en') }}" required>
                                                                     @error("option_name_en.*")
                                                                     <span class="text-danger">{{$message}}</span>
@@ -85,7 +85,7 @@
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="form-group">
-                                                                    <label for="option_name_ar">Option Name (Arabic)</label>
+                                                                    <label for="option_name_ar1">Option Name (Arabic)</label>
                                                                     <input class="form-control" type="text" name="option_name_ar[]" value="{{ old('option_name.ar') }}" required>
                                                                     @error("option_name_ar.*")
                                                                     <span class="text-danger">{{$message}}</span>
@@ -93,7 +93,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="input-group-append m-5">
-                                                                <a href="#" class="header-icons">
+                                                                <a href="#" class="header-icons" onclick="removeOption(1)">
                                                                     <i class="header-icons fe fe-x"></i>
                                                                 </a>
                                                             </div>
@@ -105,14 +105,15 @@
                                                 </div>
                                             </div>
                                             <a href="#" id="moreOptions">More Options +</a>
+                                        </div>
+                                    </div>
 
+                                    <ul class="pro-submit" style="list-style:none;">
+                                        <li>
+                                            <button type="submit" class="btn" style="background-color: black; color:pink;">Save Attribute</button>
+                                        </li>
+                                    </ul>
                                 </div>
-
-                                <ul class="pro-submit" style="list-style:none;">
-                                    <li>
-                                        <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Attribute</button>
-                                    </li>
-                                </ul>
                             </form>
                         </div>
                     </div>
@@ -127,7 +128,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
-            let optionCounter = 1;
+            let optionCounter = 2;
 
             $('a#moreOptions').click(function (e) {
                 e.preventDefault();
@@ -141,13 +142,11 @@
             clone.attr('id', 'optionSet' + counter);
 
             // Update IDs and attributes accordingly for the cloned elements
-            clone.find('.file-upload').attr('id', 'input_option_image' + counter);
-            clone.find('.img-option-image').attr('id', 'img_option_image' + counter);
+            clone.find('.file-upload').attr('id', 'input_option_image' + counter).attr('onchange', 'previewFile(' + counter + ')');
+            clone.find('.img-option-image-class').attr('id', 'img_option_image' + counter);
             clone.find('.option-name-en').attr('id', 'option_name_en' + counter);
             clone.find('.option-name-ar').attr('id', 'option_name_ar' + counter);
-
-            clone.find('.file-upload').attr('onchange', 'previewFile()');
-            clone.find('.img-option-image').attr('onclick', 'triggerInput(' + counter + ')');
+            clone.find('.img-here').attr('id', 'img_here' + counter);
 
             clone.find('.input-group-append').attr('onclick', 'removeOption(' + counter + ')');
             clone.removeClass('d-none');
@@ -159,14 +158,10 @@
             $('#optionSet' + counter).remove();
         }
 
-    </script>
-
-
-    <script>
-        function previewFile() {
-            var input = document.getElementById('input_option_image');
-            var img = document.getElementById('img_option_image');
-            var imgHere = document.getElementById('img_here');
+        function previewFile(counter) {
+            var input = document.getElementById('input_option_image' + counter);
+            var img = document.getElementById('img_option_image' + counter);
+            var imgHere = document.getElementById('img_here' + counter);
 
             var file = input.files[0];
             var reader = new FileReader();
@@ -183,12 +178,6 @@
     </script>
 
     <script>
-        let input = document.getElementById("input_option_image");
-        let img = document.getElementById("img_option_image");
-        img.onclick = function () {
-            input.click();
-        }
-
         function triggerInput(counter) {
             $('#input_option_image' + counter).click();
         }
