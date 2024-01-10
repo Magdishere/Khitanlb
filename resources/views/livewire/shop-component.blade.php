@@ -177,7 +177,13 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                     <ul class="product__hover">
-                                        <li><a href="#"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a></li>
+                                        <li>
+                                            @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                            @else
+                                                <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                            @endif
+                                        </li>
                                         <li><a href="#"><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
                                         </li>
                                         <li><a href="#"><img src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>

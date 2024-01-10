@@ -58,9 +58,9 @@ class ShopComponent extends Component
 
     public function removeFromWishlist($product_id)
     {
-        foreach (Cart::instance('wishlist')->content() as $witem) {
-            if ($witem->id == $product_id) {
-                Cart::instance('wishlist')->remove($witem->rowId);
+        foreach (Cart::instance('wishlist')->content() as $item) {
+            if ($item->id == $product_id) {
+                Cart::instance('wishlist')->remove($item->rowId);
                 $this->emitTo('wishlist-icon-component', 'refreshComponent');
                 return;
             }

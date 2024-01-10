@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\ShopComponent;
+use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,5 @@ Route::get('user_dashboard', function () {
 
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/cart', CartComponent::class)->name('shop.cart');
+Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 

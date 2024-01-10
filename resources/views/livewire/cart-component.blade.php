@@ -1,5 +1,6 @@
 
 
+
     <section class="shopping-cart spad">
         <div class="container">
             <div class="row">
@@ -16,6 +17,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (Cart::instance('cart')->count() == 0)
+                                <tr>
+                                    <td colspan="5" class="text-center">No Items in the Cart</td>
+                                </tr>
+                                @else
                                 @foreach(Cart::instance('cart')->content() as $item)
                                 <tr>
                                     <td class="product__cart__item">
@@ -44,6 +50,7 @@
 
                                 </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -81,4 +88,3 @@
             </div>
         </div>
     </section>
-
