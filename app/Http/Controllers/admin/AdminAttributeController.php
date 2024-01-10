@@ -10,10 +10,20 @@ use Illuminate\Http\Request;
 
 class AdminAttributeController extends Controller
 {
+    public function index()
+    {
+        $attributes = Attribute::with('options')->get();
+        return view('Back.Attributes.index', compact('attributes'));
+    }
     public function create()
     {
         $categories = Category::get();
         return view('Back.Attributes.add', compact('categories'));
+    }
+    public function show()
+    {
+        $attributes = Attribute::with('options')->get();
+        return view('Back.Attributes.show', compact('attributes'));
     }
 
     public function store(Request $request)

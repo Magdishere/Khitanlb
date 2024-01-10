@@ -31,3 +31,12 @@
 <!-- custom js -->
 <script src="{{asset('admin-assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{asset('admin-assets/plugins/side-menu/sidemenu.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            width: '100%' // Set the desired width, can be in pixels or percentage
+        });
+    });
+</script>

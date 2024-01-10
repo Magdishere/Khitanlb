@@ -60,4 +60,11 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
 
         return $query;
     }
+
+    public function attributeOptions()
+    {
+        return $this->belongsToMany(AttributeOption::class, 'product_attribute_options')
+            ->withPivot('is_default', 'price')
+            ->withTimestamps();
+    }
 }
