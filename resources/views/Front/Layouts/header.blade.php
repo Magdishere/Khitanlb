@@ -57,10 +57,8 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="header__nav__option">
-                    <div class="mr-2">
                 @livewire('cart-icon-component')
                 @livewire('wishlist-icon-component')
-                    </div>
                 </div>
             </div>
         </div>
