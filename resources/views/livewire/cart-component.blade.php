@@ -1,5 +1,21 @@
 
+<div>
 
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Cart</h4>
+                        <div class="breadcrumb__links">
+                            <a href="./index.html">Home</a>
+                            <span>Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="shopping-cart spad">
         <div class="container">
@@ -88,3 +104,4 @@
             </div>
         </div>
     </section>
+</div>
