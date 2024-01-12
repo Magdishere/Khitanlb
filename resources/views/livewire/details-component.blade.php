@@ -54,7 +54,11 @@
                                 <i class="fa fa-star-o"></i>
                                 <span> - 5 Reviews</span>
                             </div>
-                            <h3>$270.00 <span>70.00</span></h3>
+                            @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                            <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}} <span>{{$product->regular_price}}</span></h3>
+                            @else
+                                <h3>${{$product->regular_price}}</h3>
+                            @endif
                             <p>{{$product->short_description}}</p>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
