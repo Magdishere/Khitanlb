@@ -1,5 +1,6 @@
 
 
+
 <section class="shopping-cart spad">
     <div class="container">
         <div class="row">
@@ -27,15 +28,14 @@
                                         <img src="img/shopping-cart/cart-1.jpg" alt="">
                                     </div>
                                     <div class="product__cart__item__text">
-                                        <h6>{{$item->model->name}}</h6>
-                                        <h5>{{$item->regular_price}}</h5>
+                                        <h6 class="text-center">{{$item->model->name}}</h6>
                                     </div>
                                 </td>
                                 <td class="product__cart__item">
                                     <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}">
                                 </td>
                                 <td class="cart__price text-center">${{ $item->price }}</td>
-                                <td class="action cart__close" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="removeFromWishlist('{{$item->rowId}}')"><i class="fa fa-close"></i></a></td>
+                                <td class="action cart__close text-center" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="removeFromWishlist('{{$item->rowId}}')"><i class="fa fa-close"></i></a></td>
                             </tr>
                             @endforeach
                             @endif

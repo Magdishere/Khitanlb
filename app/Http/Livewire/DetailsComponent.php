@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
+use App\Models\admin\Product;
 use Livewire\Component;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {

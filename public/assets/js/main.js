@@ -34,7 +34,7 @@
     /*------------------
         Background Set
     --------------------*/
-    $('.set-bg').each(function () {
+    $('.product__thumb__pic').each(function () {
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
     });
