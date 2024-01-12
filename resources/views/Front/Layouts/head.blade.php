@@ -23,10 +23,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css">
-    {{-- <style type="text/css">
-     body{
-         background-color: #f8f8f8;
-     }
+<style type="text/css">
         .carousel {
             margin: 50px auto;
             padding: 0 70px;
@@ -145,6 +142,6 @@
             font-size: 14px;
             color: #ffc000;
         }
-    </style> --}}
+    </style>
     @livewireStyles
 </head>
