@@ -107,6 +107,13 @@
                                 <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
                                 <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
                             </div>
+                            <div class="product__details__last__option">
+                                <ul>
+                                    <li><span>SKU:</span> {{$product->SKU}}</li>
+                                    <li><span>Category:</span> {{$product->category->name}}</li>
+                                    <li><span>Tag:</span> Clothes, Skin, Body</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
