@@ -1,4 +1,4 @@
-
+<div>
 
     <!-- Shop Details Section Begin -->
     <section class="shop-details">
@@ -55,7 +55,7 @@
                                 <span> - 5 Reviews</span>
                             </div>
                             @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                            <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}} <span>{{$product->regular_price}}</span></h3>
+                                <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}} <span>{{$product->regular_price}}</span></h3>
                             @else
                                 <h3>${{$product->regular_price}}</h3>
                             @endif
@@ -123,15 +123,15 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#tabs-5"
-                                    role="tab">Description</a>
+                                       role="tab">Description</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
-                                    Previews(5)</a>
+                                        Previews(5)</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Additional
-                                    information</a>
+                                        information</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -150,13 +150,13 @@
                                                 file, coordinate appointments, surf the internet, exchange text messages
                                                 and more. Every product that is labeled as a Pocket PC must be
                                                 accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
+                                                a touchscreen and touchpad.</p>
                                             <p>As is the case with any new technology product, the cost of a Pocket PC
                                                 was substantial during it’s early release. For approximately $700.00,
                                                 consumers could purchase one of top-of-the-line Pocket PCs in 2003.
                                                 These days, customers are finding that prices have become much more
                                                 reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
+                                                $350.00, a new Pocket PC can now be purchased.</p>
                                         </div>
                                         <div class="product__details__tab__content__item">
                                             <h5>Material used</h5>
@@ -166,7 +166,7 @@
                                                 tend to have a shine to them compared to wool and cotton suits, this can
                                                 make the suit look cheap. The texture of velvet is luxurious and
                                                 breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
+                                                worn all year round.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                         <p class="note">Nam tempus turpis at metus scelerisque placerat nulla deumantos
                                             solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis
                                             ut risus. Sedcus faucibus an sullamcorper mattis drostique des commodo
-                                        pharetras loremos.</p>
+                                            pharetras loremos.</p>
                                         <div class="product__details__tab__content__item">
                                             <h5>Products Infomation</h5>
                                             <p>A Pocket PC is a handheld computer, which features many of the same
@@ -184,13 +184,13 @@
                                                 file, coordinate appointments, surf the internet, exchange text messages
                                                 and more. Every product that is labeled as a Pocket PC must be
                                                 accompanied with specific software to operate the unit and must feature
-                                            a touchscreen and touchpad.</p>
+                                                a touchscreen and touchpad.</p>
                                             <p>As is the case with any new technology product, the cost of a Pocket PC
                                                 was substantial during it’s early release. For approximately $700.00,
                                                 consumers could purchase one of top-of-the-line Pocket PCs in 2003.
                                                 These days, customers are finding that prices have become much more
                                                 reasonable now that the newness is wearing off. For approximately
-                                            $350.00, a new Pocket PC can now be purchased.</p>
+                                                $350.00, a new Pocket PC can now be purchased.</p>
                                         </div>
                                         <div class="product__details__tab__content__item">
                                             <h5>Material used</h5>
@@ -200,7 +200,7 @@
                                                 tend to have a shine to them compared to wool and cotton suits, this can
                                                 make the suit look cheap. The texture of velvet is luxurious and
                                                 breathable. Velvet is a great choice for dinner party jacket and can be
-                                            worn all year round.</p>
+                                                worn all year round.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -213,7 +213,7 @@
     </section>
     <!-- Shop Details Section End -->
 
-    {{-- <!-- Related Section Begin -->
+    <!-- Related Section Begin -->
     <section class="related spad">
         <div class="container">
             <div class="row">
@@ -363,4 +363,6 @@
             </div>
         </div>
     </section>
-    <!-- Related Section End --> --}}
+    <!-- Related Section End -->
+</div>
+
