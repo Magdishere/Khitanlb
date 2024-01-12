@@ -172,17 +172,24 @@
                     </div>
                 </div>
                 <div class="row">
+                    @php
+                        $items = Cart::instance('wishlist')->content()->pluck('id');
+                    @endphp
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                     <ul class="product__hover">
                                         <li>
-                                            @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                                <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                            @else
-                                                <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                            @endif
+                                    @if($items->contains($product->id))
+                                        <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                    @else
+                                        @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                        @else
+                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                        @endif
+                                    @endif
                                         </li>
                                         <li><a href="#"><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
                                         </li>
