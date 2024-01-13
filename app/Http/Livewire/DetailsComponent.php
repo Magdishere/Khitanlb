@@ -8,7 +8,11 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {
+    public $selectedColor;
+    public $selectedSize = null;
     public $slug;
+    public $calculatedPrice;
+
 
     public function mount($slug){
 
@@ -22,11 +26,17 @@ class DetailsComponent extends Component
         return redirect()->route('shop.cart');
     }
 
+
+
     public function render()
     {
         $product = Product::where('slug', $this->slug)->first();
         $rproducts = Product::where('category_id', $product->category_id)->inRandomOrder()->limit(4)->get();
         $nproducts = Product::Latest()->take(4)->get();
-        return view('livewire.details-component', ['product' => $product ,'rproducts' => $rproducts , 'nproducts' => $nproducts]);
+        return view('livewire.details-component', [
+            'product' => $product
+            ,'rproducts' => $rproducts ,
+            'nproducts' => $nproducts,
+        ]);
     }
 }

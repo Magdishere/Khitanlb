@@ -13,6 +13,10 @@ class AttributeOption extends Model
     protected $guarded = [];
     public $translatedAttributes = ['name'];
 
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class);
+    }
     public function options()
     {
         return $this->hasMany(AttributeOption::class);
