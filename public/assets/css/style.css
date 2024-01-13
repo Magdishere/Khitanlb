@@ -1126,6 +1126,23 @@ ol {
 .product__item__pic .product__hover li img.heart {
     background: no-repeat #eb3ba7;
 }
+.product__item__pic .product__hover li img.p_details:hover {
+    background: linear-gradient(90deg, #f577d9, #eb3ba7, #8a1570);
+    background-size: 200% 200%;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 
 .product__item__text {
