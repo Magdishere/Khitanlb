@@ -84,6 +84,7 @@
                             </div>
                             <div class="product__details__btns__option">
                                 @if($items->contains($product->id))
+                                @dump($product->id)
                                 <a href="#" style="color:#eb3ba7;" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><i class="fa fa-heart"></i> Remove from wishlist</a>
                                 @else
                                     @if(App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
