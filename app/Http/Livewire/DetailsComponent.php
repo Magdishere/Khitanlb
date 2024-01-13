@@ -8,8 +8,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {
+    public $selectedColor;
+    public $selectedSize = null;
     public $slug;
+    public $calculatedPrice;
     public $wishlistContent = [];
+
 
     public function mount($slug){
 
@@ -32,11 +36,15 @@ class DetailsComponent extends Component
     }
 
 
+
     public function addToWishlist($product_id, $product_name, $product_price)
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
+
+
+
 
     public function removeFromWishlist($rowId)
     {
@@ -49,5 +57,6 @@ class DetailsComponent extends Component
         // Refresh the cart content after the removal
         $this->wishlistContent = Cart::instance('wishlist')->content();
     }
-    //
+
+
 }
