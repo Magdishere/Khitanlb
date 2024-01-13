@@ -212,7 +212,7 @@
                                         </li>
                                         <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
                                         </li>
-                                        <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
+                                        <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
