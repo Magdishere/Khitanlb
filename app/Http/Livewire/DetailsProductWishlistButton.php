@@ -8,16 +8,29 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class DetailsProductWishlistButton extends Component
 {
     public $product;
+    public $items;
 
-    public function mount($product)
+    protected $listeners = ['refreshComponent' => 'refreshWishlist'];
+
+    public function mount($product, $items)
     {
         $this->product = $product;
+        $this->items = $items;
     }
 
-    public function render()
+    public function addToWishlist($product_id, $product_name, $product_price)
     {
-        return view('livewire.details-product-wishlist-button');
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
+        $this->emit('refreshWishlist');
     }
 
-
+    public function removeFromWishlist($product_id)
+    {
+        foreach (Cart::instance('wishlist')->content() as $item) {
+            if ($item->id == $product_id) {
+                Cart::instance('wishlist')->remove($item->rowId);
+                $this->emit('refreshWishlist');
+            }
+        }
+    }
 }

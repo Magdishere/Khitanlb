@@ -37,24 +37,4 @@ class DetailsComponent extends Component
 
 
 
-    public function addToWishlist($product_id, $product_name, $product_price)
-    {
-        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
-        $this->emitTo('wishlist-icon-component', 'refreshComponent');
-    }
-
-
-    public function removeFromWishlist($rowId)
-    {
-        // Remove the entire row (product) from the cart
-
-        Cart::instance('wishlist')->remove($rowId);
-
-        $this->emitTo('wishlist-icon-component', 'refreshComponent');
-
-        // Refresh the cart content after the removal
-        $this->wishlistContent = Cart::instance('wishlist')->content();
-    }
-
-
 }
