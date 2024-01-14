@@ -48,15 +48,15 @@ class DetailsComponent extends Component
 
     public function removeFromWishlist($rowId)
     {
-        // Remove the entire row (product) from the cart
+        foreach (Cart::instance('wishlist')->content() as $item) {
+            if ($item->id == $rowId) {
+                Cart::instance('wishlist')->remove($item->rowId);
+                $this->emitTo('wishlist-icon-component', 'refreshComponent');
 
-        Cart::instance('wishlist')->remove($rowId);
-
-        $this->emitTo('wishlist-icon-component', 'refreshComponent');
-
-        // Refresh the cart content after the removal
-        $this->wishlistContent = Cart::instance('wishlist')->content();
+            }
+        }
     }
+
 
 
 }

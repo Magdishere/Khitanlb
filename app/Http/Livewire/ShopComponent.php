@@ -62,7 +62,7 @@ class ShopComponent extends Component
             if ($item->id == $product_id) {
                 Cart::instance('wishlist')->remove($item->rowId);
                 $this->emitTo('wishlist-icon-component', 'refreshComponent');
-                return;
+
             }
         }
     }

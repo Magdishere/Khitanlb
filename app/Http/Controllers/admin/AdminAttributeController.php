@@ -28,6 +28,7 @@ class AdminAttributeController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             $attributeData = [
                 'en' => [
