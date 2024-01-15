@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\CartComponent;
+use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\WishlistComponent;
@@ -32,5 +33,6 @@ Route::get('user_dashboard', function () {
 Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/cart', CartComponent::class)->name('shop.cart');
 Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
+Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 
