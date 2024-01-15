@@ -5,7 +5,7 @@
         @if(App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
             <a href="#" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><i class="fa fa-heart"></i> add to wishlist</a>
         @else
-            <a href="#" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><i class="fa fa-heart"></i> add to wishlist</a>
+            <a href="#" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', '{{ $product['regular_price']}}')"><i class="fa fa-heart"></i> add to wishlist</a>
         @endif
     @endif
 </div>
