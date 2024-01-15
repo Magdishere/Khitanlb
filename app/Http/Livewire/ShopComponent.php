@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\admin\AttributeOption;
 use App\Models\admin\Product;
 use App\Models\admin\Category;
 use App\Services\ProductRepository;
@@ -87,10 +88,11 @@ class ShopComponent extends Component
         // Paginate the results
         $products = $productsQuery->paginate($this->pageSize);
         $categories = Category::where('parent_id', null)->orderByTranslation('name', 'ASC')->get();
-
+        $attributeOptions = AttributeOption::with('attribute')->get();
         return view('livewire.shop-component', [
             'products' => $products,
             'categories' => $categories,
+            'attributeOptions' => $attributeOptions,
         ]);
     }
     public function sortBy($field)

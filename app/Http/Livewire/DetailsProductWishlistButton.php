@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -10,7 +9,7 @@ class DetailsProductWishlistButton extends Component
     public $product;
     public $items;
 
-    protected $listeners = ['refreshComponent' => 'refreshWishlist'];
+    protected $listeners = ['favoriteToggled' => 'refreshComponent']; // Update the listener here
 
     public function mount($product, $items)
     {
@@ -21,7 +20,7 @@ class DetailsProductWishlistButton extends Component
     public function addToWishlist($product_id, $product_name, $product_price)
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
-        $this->emit('refreshWishlist');
+        $this->emitTo('details-component', 'refreshComponent');
     }
 
     public function removeFromWishlist($product_id)
@@ -29,8 +28,22 @@ class DetailsProductWishlistButton extends Component
         foreach (Cart::instance('wishlist')->content() as $item) {
             if ($item->id == $product_id) {
                 Cart::instance('wishlist')->remove($item->rowId);
-                $this->emit('refreshWishlist');
+
+                $this->emit('favoriteToggled', $item->slug);
+                // Manually trigger a refresh for the current component
+                $this->refreshComponent();
             }
         }
+    }
+
+    public function refreshComponent()
+    {
+        // Manually refresh the current component
+        $this->emit('refreshComponent');
+    }
+
+    public function render()
+    {
+        return view('livewire.details-product-wishlist-button');
     }
 }

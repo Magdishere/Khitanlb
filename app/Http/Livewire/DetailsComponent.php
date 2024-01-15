@@ -15,6 +15,7 @@ class DetailsComponent extends Component
     public $wishlistContent = [];
 
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
     public function mount($slug){
 
         $this->slug = $slug;
@@ -27,6 +28,12 @@ class DetailsComponent extends Component
         return redirect()->route('shop.cart');
     }
 
+    public function addToCart($product_id, $product_name, $product_price)
+    {
+        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\admin\Product');
+        session()->flash('success_message', 'Item added to the cart');
+        $this->emitTo('cart-icon-component', 'refreshComponent');
+    }
     public function render()
     {
         $product = Product::where('slug', $this->slug)->first();
