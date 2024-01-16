@@ -4131,3 +4131,41 @@ td {
   .detail-qty > a.qty-down {
     bottom: 0;
   }
+
+
+.whatsapp {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background-image: url('../img/whatsapp2.png'); /* Default image */
+    background-size: cover;
+    transition: background-image 0.3s ease-in-out; /* Specify the transition property */
+}
+
+.whatsapp:hover {
+    background-image: url('../img/whatsapp.png'); /* Image on hover */
+}
+.tiktok {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background-image: url('../img/tiktok2.png'); /* Default image */
+    background-size: cover;
+    transition: background-image 0.3s ease-in-out; /* Specify the transition property */
+}
+
+.tiktok:hover {
+    background-image: url('../img/tiktok.png'); /* Image on hover */
+}
+.insta {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    background-image: url('../img/insta2.png'); /* Default image */
+    background-size: cover;
+    transition: background-image 0.3s ease-in-out; /* Specify the transition property */
+}
+
+.insta:hover {
+    background-image: url('../img/insta.png'); /* Image on hover */
+}

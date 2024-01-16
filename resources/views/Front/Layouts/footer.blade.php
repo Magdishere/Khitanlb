@@ -10,7 +10,9 @@
                             <a href="/"><img  class="" src="{{asset('assets/img/khitan_logo1.png')}}" alt=""></a>
                         </div>
                         <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="{{asset('assets/img/payment.png')}}" alt=""></a>
+                        <a class="whatsapp" href="#"></a>
+                        <a class="tiktok" href="#"></a>
+                        <a class="insta" href="#"></a>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">

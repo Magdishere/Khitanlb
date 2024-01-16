@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-7">
                     <div class="header__top__left">
-                        <p>Free shipping, 30-day return or refund guarantee.</p>
+                        <p>Cash on delivery, we delivery all over Lebanon.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
