@@ -101,18 +101,13 @@
                                 <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="shop__sidebar__color">
-                                            @foreach($attributeOptions as $options)
-                                                @if($options->attribute->name == 'color')
-                                                    @foreach($options->translations as $translation)
-                                                        @if($translation->locale == app()->getLocale())
-                                                            <label class="c-{{ $loop->index + 1 }}" for="sp-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
-                                                                <input type="radio" wire:model="selectedColor" value="">
-                                                            </label>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
+                                            @foreach($attributeOptions->where('attribute.name', 'color') as $options)
+                                                @foreach($options->translations->where('locale', app()->getLocale()) as $translation)
+                                                    <label class="c-{{ $loop->index + 1 }}" for="sp-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
+                                                        <input type="radio" wire:model="selectedColor" value="">
+                                                    </label>
+                                                @endforeach
                                             @endforeach
-
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +192,8 @@
                                         <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
                                     @endif
                                     <div class="rating">
+                                        @dump($selectedColors)
+
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
@@ -210,16 +207,19 @@
                                         <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
                                     @endif
 
+
                                     <div class="product__color__select">
-                                        <label for="pc-4">
-                                            <input type="radio" id="pc-4">
-                                        </label>
-                                        <label class="active black" for="pc-5">
-                                            <input type="radio" id="pc-5">
-                                        </label>
-                                        <label class="grey" for="pc-6">
-                                            <input type="radio" id="pc-6">
-                                        </label>
+                                        @foreach($product->attributeOptions as $options)
+                                            @if($options->attribute->name == 'color')
+                                                @foreach($options->translations as $translation)
+                                                    @if($translation->locale == app()->getLocale())
+                                                        <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                                                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

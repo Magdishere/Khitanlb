@@ -67,4 +67,39 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
             ->withPivot('is_default', 'price')
             ->withTimestamps();
     }
+
+    public function getDefaultOptionsColor($product_id)
+    {
+        $defaultOptions = [];
+
+        foreach ($this->attributeOptions as $options) {
+            $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
+
+            if ($attributeName === 'color') {
+                $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
+                $defaultOptions[strtolower($attributeName)] = optional($options->translations->where('attribute_option_id', optional($defaultOption)->attribute_option_id)->first())->value;
+            }
+        }
+
+        return $defaultOptions;
+    }
+    public function getDefaultOptionsSize($product_id)
+    {
+        $defaultOptions = [];
+
+        foreach ($this->attributeOptions as $options) {
+            $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
+
+            if ($attributeName === 'size') {
+                $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
+                $defaultOptions[strtolower($attributeName)] = optional($options->translations->where('attribute_option_id', optional($defaultOption)->attribute_option_id)->first())->value;
+            }
+        }
+
+        return $defaultOptions;
+    }
+
+
+
+
 }
