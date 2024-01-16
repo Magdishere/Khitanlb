@@ -42,6 +42,21 @@ class DetailsComponent extends Component
         return view('livewire.details-component', ['product' => $product ,'rproducts' => $rproducts , 'nproducts' => $nproducts]);
     }
 
+    public function addToWishlist($product_id, $product_name, $product_price)
+    {
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
+        $this->emitTo('wishlist-icon-component', 'refreshComponent');
+    }
 
+    public function removeFromWishlist($product_id)
+    {
+        foreach (Cart::instance('wishlist')->content() as $item) {
+            if ($item->id == $product_id) {
+                Cart::instance('wishlist')->remove($item->rowId);
+                $this->emitTo('wishlist-icon-component', 'refreshComponent');
+
+            }
+        }
+    }
 
 }

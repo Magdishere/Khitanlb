@@ -20,7 +20,8 @@ class DetailsProductWishlistButton extends Component
     public function addToWishlist($product_id, $product_name, $product_price)
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
-        $this->emitTo('details-component', 'refreshComponent');
+        $this->emit('details-component');
+        $this->emit('refreshComponent');
     }
 
     public function removeFromWishlist($product_id)

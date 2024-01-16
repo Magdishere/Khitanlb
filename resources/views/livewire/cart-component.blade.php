@@ -106,7 +106,7 @@
                             <li>Total <span>${{Cart::subtotal()}}</span></li>
                         </ul>
                         <div class="continue__btn update__btn">
-                            <a href="#" style="font-size:13px;"></i>Proceed To Checkout</a>
+                            <a href="{{route('checkout')}}" style="font-size:13px;"></i>Proceed To Checkout</a>
                         </div>
                     </div>
                 </div>

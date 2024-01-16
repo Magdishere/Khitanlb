@@ -63,7 +63,6 @@
                                 @endif
                             </div>
 
-
                             <livewire:details-product-wishlist-button :product="$product" :items="$items" wire:key="{{ $product->id }}" />
                             <div class="product__details__last__option">
                                 <ul>
