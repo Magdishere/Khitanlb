@@ -90,7 +90,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         foreach ($this->attributeOptions as $options) {
             $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
 
-            if ($attributeName === 'size') {
+            if ($attributeName === 'color') {
                 $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
                 $defaultOptions[strtolower($attributeName)] = optional($options->translations->where('attribute_option_id', optional($defaultOption)->attribute_option_id)->first())->value;
             }
@@ -98,8 +98,6 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
 
         return $defaultOptions;
     }
-
-
 
 
 }
