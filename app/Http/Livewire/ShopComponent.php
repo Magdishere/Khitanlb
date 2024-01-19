@@ -16,6 +16,7 @@ class ShopComponent extends Component
 {
     use WithPagination;
     public $selectedColors = [];
+    public $selectedSize = [];
 
     public $min_value = 10;
     public $max_value = 1000;

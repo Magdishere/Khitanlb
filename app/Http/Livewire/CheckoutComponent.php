@@ -6,8 +6,9 @@ use App\Models\OrderItem;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Cart;
 use App\Models\Order;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
 class CheckoutComponent extends Component
 {
     public $ship_to_different;
@@ -39,28 +40,28 @@ class CheckoutComponent extends Component
         $this->validateOnly($field,[
             'firstname' => 'required',
             'lastname' => 'required',
+            'country' => 'required',
+            'street_address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
             'mobile' => 'required',
             'email' => 'required|email',
-            'line1' => 'required|numeric',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
-            'zipcode' => 'required',
         ]);
     }
 
     public function placeOrder()
     {
         $this->validate([
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'mobile' => 'required',
-                'email' => 'required|email',
-                'line1' => 'required|numeric',
-                'city' => 'required',
-                'province' => 'required',
-                'country' => 'required',
-                'zipcode' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'country' => 'required',
+            'street_address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
+            'mobile' => 'required',
+            'email' => 'required|email',
         ]);
 
         dd($this->createOrder());
@@ -74,7 +75,6 @@ class CheckoutComponent extends Component
             $order->user_id = Auth::user()->id;
             $order->subtotal = session()->get('checkout')['subtotal'];
             $order->discount = session()->get('checkout')['discount'];
-            $order->tax = session()->get('checkout')['tax'];
             $order->total = session()->get('checkout')['total'];
             $order->firstname = $this->firstname;
             $order->lastname = $this->lastname;

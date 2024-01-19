@@ -46,14 +46,12 @@
                                         </div>
                                         <div class="product__cart__item__text">
                                             <h6>{{$item->model->name}}</h6>
-                                            <h6> color:</h6>
                                             <div class="shop__sidebar__color">
                                                 <label class="c-{{ $item->model->id }}" for="sp-{{ $item->model->id }}" style="background: {{ $item->options['color'] }}">
                                                     <input type="radio" wire:model="selectedColor" value="">
                                                 </label>
                                             </div>
-                                            <h6> color:</h6>
-                                            {{ $item->options['size'] }}
+                                            <h6> Size: {{ $item->options['size'] }}</h6>
 
                                             <h5>{{$item->regular_price}}</h5>
                                         </div>
