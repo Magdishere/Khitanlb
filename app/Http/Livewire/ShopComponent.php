@@ -54,7 +54,7 @@ class ShopComponent extends Component
         if ($selectedColor === null || $selectedSize === null) {
             $defaultOptions = Product::find($product_id);
             $defaultOptionsColor = $defaultOptions->getDefaultOptionsColor($product_id);
-            $defaultOptionsSize = $defaultOptions->getDefaultOptionsColor($product_id);
+            $defaultOptionsSize = $defaultOptions->getDefaultOptionsSize($product_id);
             $selectedColor = $selectedColor ?? $defaultOptionsColor['color'] ?? null;
             $selectedSize = $selectedSize ?? $defaultOptionsSize['size'] ?? null;
         }
