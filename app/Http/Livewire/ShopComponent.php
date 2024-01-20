@@ -56,6 +56,7 @@ class ShopComponent extends Component
             $defaultOptions = Product::find($product_id);
             $defaultOptionsColor = $defaultOptions->getDefaultOptionsColor($product_id);
             $defaultOptionsSize = $defaultOptions->getDefaultOptionsSize($product_id);
+            $defaultOptionsSizePrice = $defaultOptions->getDefaultSizePrice($product_id);
             $selectedColor = $selectedColor ?? $defaultOptionsColor['color'] ?? null;
             $selectedSize = $selectedSize ?? $defaultOptionsSize['size'] ?? null;
         }
@@ -68,7 +69,8 @@ class ShopComponent extends Component
         // Update quantity if the same product with attributes already exists
         $existingItem->isNotEmpty() ? Cart::instance('cart')->update($existingItem->first()->rowId, 1) :
             // Add as a new item if not already in the cart
-            Cart::instance('cart')->add($product_id, $product_name, 1, $product_price, ['color' => $selectedColor, 'size' => $selectedSize])->associate('\App\Models\admin\Product');
+            $totalPrice = $product_price + $defaultOptionsSizePrice;
+            Cart::instance('cart')->add($product_id, $product_name, 1, $totalPrice, ['color' => $selectedColor, 'size' => $selectedSize])->associate('\App\Models\admin\Product');
 
         session()->flash('success_message', 'Item added to the cart');
         return redirect()->route('shop');

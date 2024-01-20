@@ -88,16 +88,34 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         $defaultOptions = [];
 
         foreach ($this->attributeOptions as $options) {
-            $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
+            if ($options['attribute_id'] == 9 && $options->pivot->is_default == 1) {
+                $attributeName = optional($options->attribute->translations()->where('locale', 'en')->first())->name;
 
-            if ($attributeName === 'color') {
-                $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
-                $defaultOptions[strtolower($attributeName)] = optional($options->translations->where('attribute_option_id', optional($defaultOption)->attribute_option_id)->first())->value;
+                if ($attributeName === 'size') {
+                    $defaultOptions[strtolower($attributeName)] = optional($options->translations->where('locale', 'en')->first())->value;
+                }
+            }
+        }
+        return $defaultOptions;
+    }
+
+    public function getDefaultSizePrice($product_id)
+    {
+        $defaultSizePrice = 0;
+
+        foreach ($this->attributeOptions as $options) {
+            if ($options['attribute_id'] == 9 && $options->pivot->is_default == 1) {
+                $attributeName = optional($options->attribute->translations()->where('locale', 'en')->first())->name;
+
+                if ($attributeName === 'size') {
+                    $defaultSizePrice = $options->pivot->price;
+                }
             }
         }
 
-        return $defaultOptions;
+        return $defaultSizePrice;
     }
+
 
 
 }
