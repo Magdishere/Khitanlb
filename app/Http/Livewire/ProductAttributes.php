@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\admin\Product;
 use Livewire\Component;
 
 class ProductAttributes extends Component
 {
     public $product;
-    public $selectedColor = null;
+    public $selectedColors = [];
     public $selectedSize = null;
     public $calculatedPrice;
 
@@ -15,11 +16,17 @@ class ProductAttributes extends Component
     {
         $this->product = $product;
         $this->calculatePrice();
+
+        $products = Product::where('id', $product->id)->get();
+        foreach ($products as $product) {
+            $this->selectedColors[$product->id] = null;
+        }
     }
 
     public function updatedSelectedColor()
     {
         $this->calculatePrice();
+        $this->emit('colorSelected', $this->selectedColors);
     }
 
     public function updatedSelectedSize()
@@ -30,10 +37,10 @@ class ProductAttributes extends Component
     private function calculatePrice()
     {
         $basePrice = $this->product->regular_price;
-        $colorPrice = $this->selectedColor ? $this->selectedColor : 0;
+        $colorPrice = $this->selectedColors ? $this->selectedColors : 0;
         $sizePrice = $this->selectedSize ? $this->selectedSize : 0;
 
-        $totalPrice = $basePrice + $colorPrice + $sizePrice;
+        $totalPrice = $basePrice + $sizePrice;
         $this->calculatedPrice = $totalPrice;
     }
 

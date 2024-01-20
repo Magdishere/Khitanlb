@@ -9,13 +9,14 @@
 
 <div class="product__details__option">
     <div class="product__details__option__color">
+        <span>@dump($selectedColors)</span>
         <span>Color:</span>
         @foreach($product->attributeOptions as $options)
             @if($options->attribute->name == 'color')
                 @foreach($options->translations as $translation)
                     @if($translation->locale == app()->getLocale())
-                        <label class="{{ $options->pivot->is_default === 1 ? 'active' : '' }} c-{{ $loop->index + 1 }}" for="sp-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
-                            <input type="radio" wire:model="selectedColor" value="{{ $options->pivot->price }}">
+                        <label class="{{ $options->pivot->is_default === 1 ? 'active' : '' }} c-{{ $loop->index + 1 }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
                         </label>
                     @endif
                 @endforeach

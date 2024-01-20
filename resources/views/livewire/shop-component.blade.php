@@ -200,8 +200,11 @@
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </div>
+
                                     @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                    <span class="text-1000 fw-bold"><del>${{$product['regular_price']}}</del></span>
+                                    <span class="text-1000 fw-bold">
+    <del>${{ $product['regular_price'] + (new \App\Models\admin\Product())->getDefaultSizePrice($product) }}</del>
+                                    </span>
                                     <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
                                     @else
                                         <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
