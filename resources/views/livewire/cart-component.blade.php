@@ -100,9 +100,9 @@
                             @endforeach
                         </ul>
                         <ul class="checkout__total__all">
-                            <li>Subtotal <span>${{Cart::subtotal()}}</span></li>
-                            <li>Shipping <span>${{Cart::tax()}}</span></li>
-                            <li>Total <span>${{Cart::total()}}</span></li>
+                            <li>Subtotal <span>${{ Cart::subtotal() }}</span></li>
+                            <li>Shipping <span>${{ 5.00 }}</span></li>
+                            <li>Total <span>${{ Cart::subtotal() + 5.00 }}</span></li>
                         </ul>
                         <div class="checkout__input__checkbox">
                             <label for="acc-or">
