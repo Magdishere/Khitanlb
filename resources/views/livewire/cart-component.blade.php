@@ -90,22 +90,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="cart__discount">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Coupon code">
-                            <button type="submit">Apply</button>
-                        </form>
-                    </div>
-                    <div class="cart__total">
-                        <h6>Cart total</h6>
-                        <ul>
-                            <li>Total <span>${{Cart::subtotal()}}</span></li>
+                <div class="col-lg-4 col-md-6">
+                    <div class="checkout__order">
+                        <h4 class="order__title">Your order</h4>
+                        <div class="checkout__order__products">Product <span>Total</span></div>
+                        <ul class="checkout__total__products">
+                            @foreach(Cart::instance('cart')->content() as $item)
+                            <li>{{$item->name}}<span>${{$item->price}}</span></li>
+                            @endforeach
                         </ul>
-                        <div class="continue__btn update__btn">
-                            <a href="{{route('checkout')}}" style="font-size:13px;"></i>Proceed To Checkout</a>
+                        <ul class="checkout__total__all">
+                            <li>Subtotal <span>${{Cart::subtotal()}}</span></li>
+                            <li>Shipping <span>${{Cart::tax()}}</span></li>
+                            <li>Total <span>${{Cart::total()}}</span></li>
+                        </ul>
+                        <div class="checkout__input__checkbox">
+                            <label for="acc-or">
+                                Create an account?
+                                <input type="checkbox" id="acc-or">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
+                        <div class="checkout__input__checkbox">
+                            <label for="payment">
+                                Check Payment
+                                <input type="checkbox" id="payment">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="checkout__input__checkbox">
+                            <label for="paypal">
+                                Paypal
+                                <input type="checkbox" id="paypal">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <button type="submit" class="site-btn">PROCEED TO CHECKOUT</button>
                     </div>
                 </div>
             </div>

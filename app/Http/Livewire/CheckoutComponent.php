@@ -41,8 +41,8 @@ class CheckoutComponent extends Component
             'firstname' => 'required',
             'lastname' => 'required',
             'country' => 'required',
-            'street_address' => 'required',
             'city' => 'required',
+            'street_address' => 'required',
             'state' => 'required',
             'zipcode' => 'required',
             'mobile' => 'required',
@@ -56,8 +56,8 @@ class CheckoutComponent extends Component
             'firstname' => 'required',
             'lastname' => 'required',
             'country' => 'required',
-            'street_address' => 'required',
             'city' => 'required',
+            'street_address' => 'required',
             'state' => 'required',
             'zipcode' => 'required',
             'mobile' => 'required',
@@ -78,14 +78,13 @@ class CheckoutComponent extends Component
             $order->total = session()->get('checkout')['total'];
             $order->firstname = $this->firstname;
             $order->lastname = $this->lastname;
+            $order->country = $this->country;
+            $order->city = $this->city;
+            $order->street_address = $this->street_address;
+            $order->state = $this->state;
+            $order->zipcode = $this->zipcode;
             $order->mobile = $this->mobile;
             $order->email = $this->email;
-            $order->line1 = $this->line1;
-            $order->line2 = $this->line2;
-            $order->city = $this->city;
-            $order->province = $this->province;
-            $order->country = $this->country;
-            $order->zipcode = $this->zipcode;
             $order->status = 'ordered';
             $order->is_shipping_different = $this->ship_to_different ?1:0;
             $order->save();

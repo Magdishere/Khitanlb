@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\OrderItem;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Order;
 class CheckoutsComponent extends Component
 {
@@ -15,36 +15,25 @@ class CheckoutsComponent extends Component
     public $lastname;
     public $mobile;
     public $email;
-    public $line1;
-    public $line2;
     public $city;
-    public $province;
+    public $street_address;
+    public $state;
     public $country;
     public $zipcode;
 
-    public $s_firstname;
-    public $s_lastname;
-    public $s_mobile;
-    public $s_email;
-    public $s_line1;
-    public $s_line2;
-    public $s_city;
-    public $s_province;
-    public $s_country;
-    public $s_zipcode;
 
     public function updated($field)
     {
         $this->validateOnly($field,[
             'firstname' => 'required',
             'lastname' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'street_address' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
             'mobile' => 'required',
             'email' => 'required|email',
-            'line1' => 'required|numeric',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
-            'zipcode' => 'required',
         ]);
     }
 
@@ -53,13 +42,13 @@ class CheckoutsComponent extends Component
         $this->validate([
             'firstname' => 'required',
             'lastname' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'street_address' => 'required',
+            'state' => 'required',
+            'zipcode' => 'required',
             'mobile' => 'required',
             'email' => 'required|email',
-            'line1' => 'required|numeric',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
-            'zipcode' => 'required',
         ]);
 
         // Retrieve checkout data from the session
@@ -75,10 +64,9 @@ class CheckoutsComponent extends Component
         $order->lastname = $this->lastname;
         $order->mobile = $this->mobile;
         $order->email = $this->email;
-        $order->line1 = $this->line1;
-        $order->line2 = $this->line2;
+        $order->street_address = $this->street_address;
         $order->city = $this->city;
-        $order->province = $this->province;
+        $order->state = $this->state;
         $order->country = $this->country;
         $order->zipcode = $this->zipcode;
         $order->status = 'ordered';

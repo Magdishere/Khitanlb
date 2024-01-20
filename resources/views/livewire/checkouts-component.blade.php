@@ -56,6 +56,13 @@
                                     @enderror
                                 </div>
                                 <div class="checkout__input">
+                                    <p>City/Village<span>*</span></p>
+                                    <input type="text" name="city" value="" placeholder="Beirut" wire:model="city">
+                                    @error('city')
+                                        <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </div>
+                                <div class="checkout__input">
                                     <p>Address<span>*</span></p>
                                     <input type="text" name="street_address" placeholder="Street, building, floor,..." class="checkout__input__add" wire:model="street_address">
                                     @error('street_address')
@@ -127,6 +134,7 @@
                                     <h4 class="order__title">Your order</h4>
                                     <div class="checkout__order__products">Product <span>Total</span></div>
                                     <ul class="checkout__total__products">
+
                                         <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
                                         <li>02. German chocolate <span>$ 170.0</span></li>
                                         <li>03. Sweet autumn <span>$ 170.0</span></li>
