@@ -45,7 +45,6 @@
                                         <div class="product__cart__item__pic">
                                             <img src="img/shopping-cart/cart-1.jpg" alt="">
                                         </div>
-                                        @dump($item)
                                         <div class="product__cart__item__text">
                                             <h6>{{$item->model->name}}</h6>
                                             <div class="shop__sidebar__color">
