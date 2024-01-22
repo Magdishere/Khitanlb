@@ -56,11 +56,6 @@
                                         <input type="text" value="1">
                                     </div>
                                 </div>
-                                @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                    <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
-                                @else
-                                    <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})">Add To Cart</a>
-                                @endif
                             </div>
 
                             <livewire:details-product-wishlist-button :product="$product" :items="$items" wire:key="{{ $product->id }}" />
