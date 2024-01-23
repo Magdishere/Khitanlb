@@ -22,7 +22,7 @@
         <section class="checkout spad">
             <div class="container">
                 <div class="checkout__form">
-                    <form method="POST" wire:submit.prevent="placeOrder">
+                    <form action="#">
                         <div class="row">
                             <div class="col-lg-8 col-md-6">
                                 <h6 class="coupon__code"><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click
@@ -50,14 +50,14 @@
                                 </div>
                                 <div class="checkout__input">
                                     <p>Country<span>*</span></p>
-                                    <input type="text" name="country"  placeholder="Lebanon" wire:model="country">
+                                    <input type="text" name="country" value="" placeholder="Lebanon" wire:model="country">
                                     @error('country')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </div>
                                 <div class="checkout__input">
                                     <p>City/Village<span>*</span></p>
-                                    <input type="text" name="city"  placeholder="Beirut" wire:model="city">
+                                    <input type="text" name="city" value="" placeholder="Beirut" wire:model="city">
                                     @error('city')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -71,14 +71,14 @@
                                 </div>
                                 <div class="checkout__input">
                                     <p>State/Governorate<span>*</span></p>
-                                    <input type="text" name="state"  placeholder="North Lebanon" wire:model="state">
+                                    <input type="text" name="state" value="" placeholder="North Lebanon" wire:model="state">
                                     @error('state')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror
                                 </div>
                                 <div class="checkout__input">
                                     <p>Postcode / ZIP<span>*</span></p>
-                                    <input type="text" name="zipcode"  placeholder="+961..." wire:model="zipcode">
+                                    <input type="text" name="zipcode" value="" placeholder="+961..." wire:model="zipcode">
                                     @error('zipcode')
                                         <p class="text-danger">{{$message}}</p>
                                     @enderror
@@ -87,8 +87,8 @@
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Phone<span>*</span></p>
-                                            <input type="phone" name="mobile"  placeholder="71-xxxxxx" wire:model="mobile">
-                                            @error('mobile')
+                                            <input type="phone" name="phone" value="" placeholder="71-xxxxxx" wire:model="phone">
+                                            @error('phone')
                                                 <p class="text-danger">{{$message}}</p>
                                             @enderror
                                         </div>
@@ -96,7 +96,7 @@
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Email<span>*</span></p>
-                                            <input type="email" name="email"  placeholder="something@example.com" wire:model="email">
+                                            <input type="email" name="email" value="" placeholder="something@example.com" wire:model="email">
                                             @error('email')
                                                 <p class="text-danger">{{$message}}</p>
                                             @enderror
@@ -134,14 +134,15 @@
                                     <h4 class="order__title">Your order</h4>
                                     <div class="checkout__order__products">Product <span>Total</span></div>
                                     <ul class="checkout__total__products">
-                                        @foreach(Cart::instance('cart')->content() as $item)
-                                        <li>{{$item->name}}<span>${{$item->price}}</span></li>
-                                        @endforeach
+
+                                        <li>01. Vanilla salted caramel <span>$ 300.0</span></li>
+                                        <li>02. German chocolate <span>$ 170.0</span></li>
+                                        <li>03. Sweet autumn <span>$ 170.0</span></li>
+                                        <li>04. Cluten free mini dozen <span>$ 110.0</span></li>
                                     </ul>
                                     <ul class="checkout__total__all">
-                                        <li>Subtotal <span>${{ Cart::subtotal() }}</span></li>
-                                        <li>Shipping <span>${{ 5.00 }}</span></li>
-                                        <li>Total <span>${{ Cart::subtotal() + 5.00 }}</span></li>
+                                        <li>Subtotal <span>$750.99</span></li>
+                                        <li>Total <span>${{Cart::subtotal()}}</span></li>
                                     </ul>
                                     <div class="checkout__input__checkbox">
                                         <label for="acc-or">

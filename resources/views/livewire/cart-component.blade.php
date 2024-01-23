@@ -126,7 +126,7 @@
                                 <span class="checkmark"></span>
                             </label>
                         </div>
-                        <button type="submit" class="site-btn">PROCEED TO CHECKOUT</button>
+                        <a href="{{route('checkouts')}}" class="site-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>

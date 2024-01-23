@@ -2,7 +2,7 @@
 
         <!-- Map Begin -->
         <div class="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23482.270873743813!2d35.671224076665!3d33.58442550408972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d5a40da94c159%3A0xbfdf9ad71a15b16!2sBeshmezzine%2C%20Lebanon!5e0!3m2!1sen!2sus!4v1632071401915!5m2!1sen!2sus" height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23482.270873743813!2d35.7971367!3d34.320184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521fbbd1c550cdb%3A0x89fc694c143f7858!2sBechmizzine%2C%20Lebanon!5e0!3m2!1sen!2sus!4v1632071401915!5m2!1sen!2sus" height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
         <!-- Map End -->
     <!-- Contact Section Begin -->
