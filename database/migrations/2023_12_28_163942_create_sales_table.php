@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('name');
             $table->integer('value');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->string('banner')->nullable();
             $table->integer('position')->default(0);
             $table->string('target_type')->nullable();

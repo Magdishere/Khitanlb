@@ -22,7 +22,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
 
     public function sales()
     {
-        return $this->belongsToMany(Sale::class, 'sale_product');
+        return $this->belongsToMany(Sale::class, 'sale_product')->where('is_active', 1);
     }
 
     public function images()

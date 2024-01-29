@@ -4,7 +4,51 @@
         .hidden {
             display: none !important;
         }
+
+        input[type=checkbox] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+
+        .checklabel {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 100px;
+            height: 50px;
+            background: grey;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+        .checklabel:after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 45px;
+            height: 40px;
+            background: #fff;
+            border-radius: 90px;
+            transition: 0.3s;
+        }
+
+        input:checked + .checklabel {
+            background: rgba(253, 45, 125, 0.6);
+        }
+
+        input:checked + .checklabel:after {
+            left: calc(100% - 5px);
+            transform: translateX(-100%);
+        }
+
+        .checklabel:active:after {
+            width: 130px;
+        }
+
     </style>
+
 @endsection
 @section('page-header')
     <div class="main-panel">
@@ -163,6 +207,17 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Flash Sale</label>
+                                                <input name="is_flash_sale" type="checkbox" id="switch" /><label class="checklabel" for="switch">Toggle</label>                                                @error("starts_date")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                     </div>
 
 
