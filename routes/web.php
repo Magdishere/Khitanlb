@@ -5,6 +5,7 @@ use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\CheckoutsComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\DetailsComponent;
+use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', HomeComponent::class)->name('home');
 
 Route::get('about', function () {
     return view('about');
@@ -39,3 +38,4 @@ Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/checkouts', CheckoutsComponent::class)->name('checkouts');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 
+Auth::routes();
