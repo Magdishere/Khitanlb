@@ -46,14 +46,21 @@ class AdminSalesController extends Controller
                 'target_type' => ($request->sale_type == 1) ? 'category' : (($request->sale_type == 2) ? 'product' : null),
                 'start_date' => date('Y-m-d H:i:s', strtotime($request->starts_date)),
                 'end_date' =>  date('Y-m-d H:i:s', strtotime($request->ends_date)),
+                'is_active' => $request->has('is_active') ? true : false,
+                'is_flash_sale' => $request->has('is_flash_sale') ? true : false,
             ]);
 
             if ($request->sale_type == 1) {
                 // Sale for category
                 $sale->categories()->attach($request->input('category_id'));
             } elseif ($request->sale_type == 2) {
-                // Sale for product
-                $sale->products()->attach($request->input('product_id'));
+                // Remove null values from the product_id array
+                $productIds = array_filter($request->input('product_id'));
+
+                // Sale for product only if there are valid product_ids
+                if (!empty($productIds)) {
+                    $sale->products()->attach($productIds);
+                }
             }
 
 

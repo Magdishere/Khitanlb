@@ -212,12 +212,24 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1">Flash Sale</label>
-                                                <input name="is_flash_sale" type="checkbox" id="switch" /><label class="checklabel" for="switch">Toggle</label>                                                @error("starts_date")
+                                                <input name="is_flash_sale" type="checkbox" id="flash_sale" />
+                                                <label class="checklabel" for="flash_sale">Toggle</label>
+                                                @error("is_flash_sale")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
                                         </div>
 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Active</label>
+                                                <input name="is_active" type="checkbox" id="is_active" checked/>
+                                                <label class="checklabel" for="is_active">Toggle</label>
+                                                @error("is_active")
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
 
 
