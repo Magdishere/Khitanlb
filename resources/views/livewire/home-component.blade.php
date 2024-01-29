@@ -77,6 +77,7 @@
     </div>
 </section>
 <!-- Services Section Begin -->
+@if($flashSale)
 <section class="product spad">
     <div class="container">
         <header class="row" style="color:#FFFFFF;background:rgba(253,45,125,0.6);">
@@ -114,23 +115,46 @@
                             <div class="row">
                                 @foreach($flashSale->products as $product)
                                     <div class="col-sm-3">
-                                        <div class="thumb-wrapper">
-                                            <div class="img-box">
-                                                <img src="{{asset('assets/imgs/products')}}/{{$product->image}}" class="img-responsive img-fluid" alt="">
-                                            </div>
-                                            <div class="thumb-content">
-                                                <h4>{{$product->name}}</h4>
-                                                <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-                                                <div class="star-rating">
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                    </ul>
+                                        <div class="product-cart-wrap mb-30">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="{{route('product.details', ['slug'=>$product->slug])}}">
+                                                        <img class="default-img" src="{{asset('assets/imgs/products')}}/{{$product->image}}" alt="{{$product->name}}">
+                                                        <img class="hover-img" src="{{asset('assets/imgs/products')}}/{{$product->image}}" alt="{{$product->name}}">
+                                                    </a>
                                                 </div>
-                                                <a href="#" class="btn btn-primary">Add to Cart</a>
+                                                <div class="product-action-1">
+                                                    <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                        <i class="fi-rs-search"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">Hot</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <div class="product-category">
+                                                    <a href="shop.html">Music</a>
+                                                </div>
+                                                <h2><a href="product-details.html">{{$product->name}}</a></h2>
+                                                <div class="rating-result" title="90%">
+                                            <span>
+                                                <span>90%</span>
+                                            </span>
+                                                </div>
+                                                <div class="product-price">
+                                                    <span>${{$product->regular_price}}</span>
+                                                    {{-- <span class="old-price">$245.8</span> --}}
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                    @if($witems->contains($product->id))
+                                                        <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted" href="#" wire:click.prevent='removeFromWishlist({{$product->id}})'><i class="fi-rs-heart"></i></a>
+                                                    @else
+                                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                    @endif
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -266,6 +290,7 @@
         </div>
     </div>
 </section>
+@endif
 <!-- Services Section Begin -->
 <section class="product spad">
     <div class="container">
