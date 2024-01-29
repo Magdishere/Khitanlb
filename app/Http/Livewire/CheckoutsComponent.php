@@ -54,12 +54,13 @@ class CheckoutsComponent extends Component
         // Retrieve checkout data from the session
         $checkoutData = session()->get('checkout', []);
 
+        dd($checkoutData);
+
         $order = new Order();
         $order->user_id = Auth::user()->id;
-        $order->subtotal = Cart::subtotal(); // Use default value if not set
+        $order->subtotal = session()->get('checkout')['subtotal'];
         $order->discount = $order->discount = $checkoutData['discount'] ?? 0;  // Use default value if not set
-        $order->tax = Cart::tax(); // Use default value if not set
-        $order->total = Cart::total(); // Use default value if not set
+        $order->total = session()->get('checkout')['total'];
         $order->firstname = $this->firstname;
         $order->lastname = $this->lastname;
         $order->mobile = $this->mobile;
