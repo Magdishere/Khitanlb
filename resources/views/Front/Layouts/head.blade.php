@@ -123,8 +123,8 @@
             bottom: -50px;
         }
         .carousel-indicators li, .carousel-indicators li.active {
-            width: 10px;
-            height: 10px;
+            width: 17px;
+            height: 4px;
             margin: 4px;
             border-radius: 50%;
             border-color: transparent;

@@ -77,206 +77,105 @@
     </div>
 </section>
 <!-- Services Section Begin -->
-@if($flashSale)
 <section class="product spad">
     <div class="container">
         <header class="row" style="color:#FFFFFF;background:rgba(253,45,125,0.6);">
-            <div class="col-md-4">
-                <h4 class="-m -fs20 -elli">Flash Sales Don't Miss !!</h4>
+            <div class="col-md-6">
+                <h4 class="-m -fs20 -elli" style="color: white">Flash Sales Don't Miss !!</h4>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6" style="font-size: 24px; text-align: right;">
                 Time Left:
                 <time id="countdownTimer" class="-b -ws-p" datetime="{{$flashSale->start_date}}" data-cd="true">{{$flashSale->start_date}}</time>
-            </div>
-            <div class="col-md-4">
-                <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs">See All
+                <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs" style="color: #0b2e13"> >>
                     <svg style="fill:#FFFFFF;" viewBox="0 0 24 24" class="ic" width="24" height="24">
                         <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-icons.a66628fd.svg#arrow-right"></use></svg>
                 </a>
             </div>
         </header>
-        <div class="row" style="
-    background-color: white;
-    box-shadow: 5px 5px 10px rgb(0 0 0 / 7%);
-    border-radius: 12px;
-">
+        <div class="row" style="background-color: white; box-shadow: 5px 5px 10px rgb(0 0 0 / 7%); border-radius: 12px;">
             <div class="col-md-12">
-                <h2>Trending <b>Products</b></h2>
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                     <!-- Carousel indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        @foreach($flashSale->products->chunk(4) as $key => $chunk)
+                            <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
+                        @endforeach
                     </ol>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        <div class="item carousel-item active">
-                            <div class="row">
-                                @foreach($flashSale->products as $product)
-                                    <div class="col-sm-3">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="{{route('product.details', ['slug'=>$product->slug])}}">
-                                                        <img class="default-img" src="{{asset('assets/imgs/products')}}/{{$product->image}}" alt="{{$product->name}}">
-                                                        <img class="hover-img" src="{{asset('assets/imgs/products')}}/{{$product->image}}" alt="{{$product->name}}">
-                                                    </a>
+                        @foreach($flashSale->products->chunk(4) as $key => $chunk)
+                            <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
+                                <div class="row product__filter">
+                                    @php
+                                        $items = Cart::instance('wishlist')->content()->pluck('id');
+                                    @endphp
+                                @foreach($chunk as $product)
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="product__item">
+                                                <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
+                                                    <ul class="product__hover">
+                                                        <li>
+                                                            @if($items->contains($product->id))
+                                                                <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                            @else
+                                                                @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                @else
+                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                @endif
+                                                            @endif
+                                                        </li>
+                                                        <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
+                                                        </li>
+                                                        <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
+                                                    </ul>
                                                 </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                                        <i class="fi-rs-search"></i></a>
-                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">Hot</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href="shop.html">Music</a>
-                                                </div>
-                                                <h2><a href="product-details.html">{{$product->name}}</a></h2>
-                                                <div class="rating-result" title="90%">
-                                            <span>
-                                                <span>90%</span>
-                                            </span>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>${{$product->regular_price}}</span>
-                                                    {{-- <span class="old-price">$245.8</span> --}}
-                                                </div>
-                                                <div class="product-action-1 show">
-                                                    {{--@if($witems->contains($product->id))
-                                                        <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted" href="#" wire:click.prevent='removeFromWishlist({{$product->id}})'><i class="fi-rs-heart"></i></a>
+                                                <div class="product__item__text">
+                                                    <h6>{{$product['name']}}</h6>
+                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
                                                     @else
-                                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
-                                                    @endif--}}
-                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}}, '{{$product->name}}', {{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
+                                                    @endif
+                                                    <div class="rating">
+
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+
+                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                        <span class="text-1000 fw-bold">
+    <del>${{ $product['regular_price'] + (new \App\Models\admin\Product())->getDefaultSizePrice($product) }}</del>
+                                    </span>
+                                                        <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
+                                                    @else
+                                                        <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
+                                                    @endif
+
+
+                                                    <div class="product__color__select">
+                                                        @foreach($product->attributeOptions as $options)
+                                                            @if($options->attribute->name == 'color')
+                                                                @foreach($options->translations as $translation)
+                                                                    @if($translation->locale == app()->getLocale())
+                                                                        <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                                                                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
+                                                                        </label>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="item carousel-item">
-                            <div class="row">
-                                @foreach($flashSale->products as $products)
-
-                                @endforeach
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://www.boostmobile.com/content/dam/boostmobile/en/products/phones/samsung/galaxy-s8/black/device-front.png.transform/pdpCarousel/image.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Samsung Galaxy S8</h4>
-                                            <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-                        <div class="item carousel-item">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="http://www.tozostore.com/wp-content/uploads/2017/03/%E6%9C%AA%E6%A0%87%E9%A2%98-1-1.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Apple iPhone</h4>
-                                            <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://www.bhphotovideo.com/images/images2500x2500/canon_0020c003_eos_rebel_t6s_dslr_1116104.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Canon DSLR</h4>
-                                            <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/81CM3aNz%2B-L._SX569_.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Google Pixel</h4>
-                                            <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://www.att.com/catalog/en/skus/Apple/Apple%20Watch%20Series%203%2042mm/overview/344802-PDP-watch-S3-img1@2x.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Apple Watch</h4>
-                                            <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- Carousel controls -->
                     <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
@@ -290,7 +189,6 @@
         </div>
     </div>
 </section>
-@endif
 <!-- Services Section Begin -->
 <section class="product spad">
     <div class="container">
