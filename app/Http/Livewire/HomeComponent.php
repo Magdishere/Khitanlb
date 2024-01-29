@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\admin\Category;
+use App\Models\admin\Product;
 use App\Models\HomeSlider;
-use App\Models\Product;
-use App\Models\Category;
-use Cart;
+
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
 class HomeComponent extends Component
