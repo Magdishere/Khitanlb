@@ -52,15 +52,14 @@ class CheckoutsComponent extends Component
         ]);
 
         // Retrieve checkout data from the session
-        $checkoutData = session()->get('checkout', []);
+        $cartContent = Cart::instance('cart')->content();
 
-        dd($checkoutData);
 
         $order = new Order();
         $order->user_id = Auth::user()->id;
-        $order->subtotal = session()->get('checkout')['subtotal'];
-        $order->discount = $order->discount = $checkoutData['discount'] ?? 0;  // Use default value if not set
-        $order->total = session()->get('checkout')['total'];
+        $order->subtotal = Cart::subtotal();
+        $order->discount = $order->discount = $cartContent['discount'] ?? 0;  // Use default value if not set
+        $order->total = Cart::total();
         $order->firstname = $this->firstname;
         $order->lastname = $this->lastname;
         $order->mobile = $this->mobile;
@@ -74,6 +73,8 @@ class CheckoutsComponent extends Component
         $order->is_shipping_different = $this->ship_to_different ? 1 : 0;
         $order->save();
 
+        session()->flash('message', 'Order made successfully!');
+
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
@@ -82,6 +83,8 @@ class CheckoutsComponent extends Component
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
+
+
     }
 
 

@@ -17,7 +17,9 @@
             </div>
         </section>
         <!-- Breadcrumb Section End -->
-
+        @if(Session::has('message'))
+        <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+        @endif
         <!-- Checkout Section Begin -->
         <section class="checkout spad">
             <div class="container">
