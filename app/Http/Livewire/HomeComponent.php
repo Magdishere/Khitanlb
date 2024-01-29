@@ -6,6 +6,7 @@ use App\Models\admin\Category;
 use App\Models\admin\Product;
 use App\Models\HomeSlider;
 
+use App\Models\Sale;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
@@ -25,6 +26,13 @@ class HomeComponent extends Component
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
-        return view('livewire.home-component', ['slides' => $slides, 'lproducts' => $lproducts, 'fproducts' => $fproducts, 'pcategories' => $pcategories]);
+        $flashSale = Sale::with('products')->where('is_active', 1)->where('is_flash_sale', 1)->first();
+        return view('livewire.home-component', [
+            'flashSale' => $flashSale,
+            'slides' => $slides,
+            'lproducts' => $lproducts,
+            'fproducts' => $fproducts,
+            'pcategories' => $pcategories
+        ]);
     }
 }

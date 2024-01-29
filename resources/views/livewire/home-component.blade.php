@@ -85,7 +85,7 @@
             </div>
             <div class="col-md-4">
                 Time Left:
-                <time class="-b -ws-p" datetime="2024-01-05T11:00:00+02:00" data-cd="true">13h : 19m : 15s</time>
+                <time id="countdownTimer" class="-b -ws-p" datetime="{{$flashSale->start_date}}" data-cd="true">{{$flashSale->start_date}}</time>
             </div>
             <div class="col-md-4">
                 <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs">See All
@@ -112,157 +112,36 @@
                     <div class="carousel-inner">
                         <div class="item carousel-item active">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://images.kogan.com/image/fetch/s--4uUL-TgJ--/b_white,c_pad,f_auto,h_400,q_auto:good,w_600/https://assets.kogan.com/files/product/HKI/20170324_New_iPad/KHIPADAIR332WGRY_1.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Apple iPad</h4>
-                                            <p class="item-price"><strike>$400.00</strike> <span>$369.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
+                                @foreach($flashSale->products as $product)
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <div class="img-box">
+                                                <img src="{{asset('assets/imgs/products')}}/{{$product->image}}" class="img-responsive img-fluid" alt="">
                                             </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                                            <div class="thumb-content">
+                                                <h4>{{$product->name}}</h4>
+                                                <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="#" class="btn btn-primary">Add to Cart</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/61t0HecIZbL._SY355_.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Sony Headphone</h4>
-                                            <p class="item-price"><strike>$25.00</strike> <span>$23.99</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://9to5mac.files.wordpress.com/2018/03/colorware.jpg?quality=82&strip=all&w=1500" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Macbook Air</h4>
-                                            <p class="item-price"><strike>$899.00</strike> <span>$649.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://images-na.ssl-images-amazon.com/images/I/81G9qD2BfKL._SX425_.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Nikon DSLR</h4>
-                                            <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="item carousel-item">
                             <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://media.playstation.com/is/image/SCEA/playstation-4-slim-vertical-product-shot-01-us-07sep16?$native_t$" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Sony Play Station</h4>
-                                            <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://icdn5.digitaltrends.com/image/huawei-matebook-x-pro-2018-review-15-1500x1000.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Macbook Pro</h4>
-                                            <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <div class="img-box">
-                                            <img src="https://www.cnetfrance.fr/i/edit/2015/06/bose-soundlink-mini-ii-770x577.jpg" class="img-responsive img-fluid" alt="">
-                                        </div>
-                                        <div class="thumb-content">
-                                            <h4>Bose Speaker</h4>
-                                            <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                @foreach($flashSale->products as $products)
+
+                                @endforeach
                                 <div class="col-sm-3">
                                     <div class="thumb-wrapper">
                                         <div class="img-box">
@@ -844,3 +723,31 @@
 </section>
 <!-- Latest Blog Section End -->
 
+<script>
+    // Function to update the countdown timer
+    function updateCountdown() {
+        // Get the current date and time
+        var now = new Date().getTime();
+
+        // Get the start date of the flash sale from the HTML element
+        var startDate = new Date(document.getElementById('countdownTimer').getAttribute('datetime')).getTime();
+
+        // Calculate the time remaining in milliseconds
+        var timeRemaining = startDate - now;
+
+        // Calculate days, hours, minutes, and seconds
+        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Update the HTML element with the countdown values
+        document.getElementById('countdownTimer').innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        // Update the countdown every second
+        setTimeout(updateCountdown, 1000);
+    }
+
+    // Call the updateCountdown function to start the countdown
+    updateCountdown();
+</script>
