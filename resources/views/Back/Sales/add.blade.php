@@ -125,7 +125,7 @@
                                         <label class="col-2 col-form-label" for="choose-for-product">Products</label>
                                         <div class="col-10">
                                             <select multiple name="product_id[]" id="choose-for-product" class="filter-multi-select">
-                                                @foreach($products as $product)
+                                                @foreach($uniqueProducts as $product)
                                                     <option value="{{ $product->id }}">
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Sales Image" style="max-width: 50px;">
 
