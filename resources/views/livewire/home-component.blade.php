@@ -3,7 +3,7 @@
 <section class="hero">
     <div class="hero__slider owl-carousel">
         @foreach($slides as $slide)
-        <div class="hero__items set-bg" data-setbg="{{ asset('admin-assets/uploads/images/slides/' .  $slide['image']) }}">
+        <div class="hero__items set-bg" style="background-image: url('{{ asset('admin-assets/uploads/images/slides/' . $slide['image']) }}')">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-7 col-md-8">
