@@ -82,6 +82,7 @@ class HomeComponent extends Component
     {
 
         $slides = Slides::get();
+        $sproducts = Product::with('sales')->get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
@@ -91,7 +92,8 @@ class HomeComponent extends Component
             'slides' => $slides,
             'lproducts' => $lproducts,
             'fproducts' => $fproducts,
-            'pcategories' => $pcategories
+            'pcategories' => $pcategories,
+            'sproducts' => $sproducts
         ]);
     }
 }

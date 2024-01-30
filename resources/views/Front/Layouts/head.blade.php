@@ -86,7 +86,6 @@
             width: 40px;
             background: none;
             margin: auto 0;
-            background: rgba(0, 0, 0, 0.2);
         }
         .carousel .carousel-control i {
             font-size: 30px;
@@ -123,8 +122,8 @@
             bottom: -50px;
         }
         .carousel-indicators li, .carousel-indicators li.active {
-            width: 17px;
-            height: 4px;
+            width: 20px;
+            height: 0px;
             margin: 4px;
             border-radius: 50%;
             border-color: transparent;

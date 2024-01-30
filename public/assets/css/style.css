@@ -425,7 +425,7 @@ ol {
 
 
 .gradient-border {
-    --borderWidth: 5px;
+    --borderWidth: 2px;
     background: #1D1F20;
     position: relative;
     border-radius: var(--borderWidth);
