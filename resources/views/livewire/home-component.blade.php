@@ -2,16 +2,15 @@
 <!-- Hero Section Begin -->
 <section class="hero">
     <div class="hero__slider owl-carousel">
-        <div class="hero__items set-bg" data-setbg="{{asset('assets/img/hero/hero1.jpg')}}">
+        @foreach($slides as $slide)
+        <div class="hero__items set-bg" data-setbg="{{ asset('admin-assets/uploads/images/slides/' .  $slide['image']) }}">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-7 col-md-8">
                         <div class="hero__text">
-                            <h6>Summer Collection</h6>
-                            <h2>Fall - Winter Collections 2030</h2>
-                            <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                            <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                            <h2>{{$slide->title}}</h2>
+                            <p>{{$slide->description}}</p>
+                            <a href="{{route('shop')}}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
@@ -22,26 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="hero__items set-bg" data-setbg="{{asset('assets/img/hero/h4.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-5 col-lg-7 col-md-8">
-                        <div class="hero__text">
-                            <h6>Summer Collection</h6>
-                            <h2>Fall - Winter Collections 2030</h2>
-                            <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                                commitment to exceptional quality.</p>
-                            <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                            <div class="hero__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-whatsapp"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>
 <!-- Hero Section End -->
@@ -80,14 +60,15 @@
 <!-- Services Section Begin -->
 <section class="product spad">
     <div class="container">
-        <header class="row" style="color:#FFFFFF;background:rgba(253,45,125,0.6);">
+        <header class="row" style="color:#FFFFFF;background:rgba(0, 0, 0);">
             <div class="col-md-6">
-                <h4 class="-m -fs20 -elli" style="color: white">Flash Sales Don't Miss !!</h4>
+                <h4 class="-m -fs20 -elli mt-1" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;">Flash sales, Up to 50%.</h4>
+
             </div>
             <div class="col-md-6" style="font-size: 24px; text-align: right;">
                 Time Left:
                 <time id="countdownTimer" class="-b -ws-p" datetime="{{$flashSale->start_date}}" data-cd="true">{{$flashSale->start_date}}</time>
-                <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs" style="color: #0b2e13"> >>
+                <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;"> >>
                     <svg style="fill:#FFFFFF;" viewBox="0 0 24 24" class="ic" width="24" height="24">
                         <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-icons.a66628fd.svg#arrow-right"></use></svg>
                 </a>
@@ -104,7 +85,7 @@
                     </ol>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        @foreach($flashSale->products->chunk(4) as $key => $chunk)
+                        @foreach($flashSale->products->chunk(3) as $key => $chunk)
                             <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
                                 <div class="row product__filter">
                                     @php
@@ -379,9 +360,8 @@
             <div class="col-lg-4">
                 <div class="instagram__text">
                     <h2>Instagram</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                    <h3>#Male_Fashion</h3>
+                    <p>Visit our Instagram and explore our posts!</p>
+                    <h6>@khitanlb_2</h6>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\admin\Category;
 use App\Models\admin\Product;
+use App\Models\admin\Slides;
 use App\Models\HomeSlider;
 
 use App\Models\Sale;
@@ -80,7 +81,7 @@ class HomeComponent extends Component
     public function render()
     {
 
-        $slides = HomeSlider::where('status', 1)->get();
+        $slides = Slides::get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
