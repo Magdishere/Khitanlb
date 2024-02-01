@@ -4,17 +4,18 @@
     <div class="hero__slider owl-carousel">
         @foreach($slides as $slide)
         <div class="hero__items set-bg" style="background-image: url('{{ asset('admin-assets/uploads/images/slides/' . $slide['image']) }}')">
+            <div class="hero__overlay"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-7 col-md-8">
                         <div class="hero__text">
-                            <h2>{{$slide->title}}</h2>
-                            <p>{{$slide->description}}</p>
-                            <a href="{{route('shop')}}" class="primary-btn">Shop now <span class="arrow_right"></span></a>
+                            <h2 style="color: palevioletred;">{{$slide->title}}</h2>
+                            <p class="text-white">{{$slide->description}}</p>
+                            <a href="{{route('shop')}}" class="primary-btn slide-btn" background-color: transparent;">Shop now <span class="arrow_right"></span></a>
                             <div class="hero__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-whatsapp"></i></a>
+                                <a class="socialmedia-btn" href="#"><i class="fa fa-facebook"></i></a>
+                                <a class="socialmedia-btn" href="#"><i class="fa fa-instagram"></i></a>
+                                <a class="socialmedia-btn" href="#"><i class="fa fa-whatsapp"></i></a>
                             </div>
                         </div>
                     </div>
@@ -26,7 +27,22 @@
 </section>
 <!-- Hero Section End -->
 
-<!-- Services Section Begin -->
+<!-- Categories Section Begin -->
+<section class="product spad">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="owl-carousel categories-carousel">
+                    @foreach($categories as $category)
+                    <div class="">
+                        <img src="{{ asset('admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Logo">
+                        <h6 class="text-center">{{$category->name}}</h6>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+</section>
+
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -508,3 +524,4 @@
     // Call the updateCountdown function to start the countdown
     updateCountdown();
 </script>
+

@@ -11,7 +11,7 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="#">Sign in</a>
+                <a href="{{route('login')}}">Sign in</a>
                 <a href="#">FAQs</a>
             </div>
             <div class="offcanvas__top__hover">
@@ -33,4 +33,7 @@
             <p>Cash on delivery, we delivery all over Lebanon.</p>
         </div>
     </div>
+    {{-- <div id="global-loader">
+        <img src="{{asset('assets/img/loading.gif')}}" class="loader-img" alt="Loader">
+    </div> --}}
     <!-- Offcanvas Menu End -->

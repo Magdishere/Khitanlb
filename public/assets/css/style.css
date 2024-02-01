@@ -422,7 +422,14 @@ ol {
 	padding: 20px 0;
 }
 
-
+.hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+}
 
 .gradient-border {
     --borderWidth: 2px;
@@ -463,6 +470,33 @@ ol {
 .gradient-border:hover{
     cursor: pointer;
     transform: scale(1.05); /* Adjust the scaling factor as needed */
+}
+
+/* Slide Button */
+
+.slide-btn {
+    color: palevioletred;
+    border: 1px solid palevioletred;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
+}
+
+.socialmedia-btn{
+    color: palevioletred;
+    transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
+}
+
+.socialmedia-btn:hover{
+    transform: scale(1.2); /* Increase the size on hover */
+    color: #ffffff;
+}
+
+
+.slide-btn:hover{
+    transform: scale(1.2); /* Increase the size on hover */
+    color: #ffffff;
+    border: 1px solid rgb(255, 255, 255);
 }
 
 
@@ -647,7 +681,7 @@ ol {
 }
 
 .hero__items {
-	height: 800px;
+	height: 700px;
 	padding-top: 230px;
 }
 
@@ -710,14 +744,13 @@ ol {
 }
 
 .hero__social {
-	margin-top: 190px;
+	margin-top: 20px;
 }
 
 .hero__social a {
 	font-size: 16px;
-	color: #3d3d3d;
 	display: inline-block;
-	margin-right: 32px;
+	margin-right: 20px;
 }
 
 .hero__social a:last-child {

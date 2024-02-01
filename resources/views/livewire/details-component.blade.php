@@ -5,10 +5,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__text">
-                        <h4>About Us</h4>
+                        <h4>Product Details</h4>
                         <div class="breadcrumb__links">
                             <a href="./index.html">Home</a>
-                            <span>About Us</span>
+                            <span>{{$product->name}}</span>
                         </div>
                     </div>
                 </div>

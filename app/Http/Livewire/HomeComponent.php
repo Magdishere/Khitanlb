@@ -85,14 +85,16 @@ class HomeComponent extends Component
         $sproducts = Product::with('sales')->get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
-        $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
+        $categories = Category::get();
+        // $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
         $flashSale = Sale::with('products')->where('is_active', 1)->where('is_flash_sale', 1)->first();
         return view('livewire.home-component', [
             'flashSale' => $flashSale,
             'slides' => $slides,
+            'categories' => $categories,
             'lproducts' => $lproducts,
             'fproducts' => $fproducts,
-            'pcategories' => $pcategories,
+            // 'pcategories' => $pcategories,
             'sproducts' => $sproducts
         ]);
     }

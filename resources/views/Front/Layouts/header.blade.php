@@ -13,8 +13,15 @@
                 <div class="col-lg-6 col-md-5">
                     <div class="header__top__right">
                         <div class="header__top__links">
-                            <a href="#">Sign in</a>
-                            <a href="#">FAQs</a>
+                        @guest <!-- Check if the user is a guest (not logged in) -->
+                        <a href="{{ route('login') }}">Sign in</a>
+                        @else <!-- If the user is logged in, show the user's name and logout link -->
+                            <a href="#" style="color: rgba(188,49,136,255);">{{ Auth::user()->name }}</a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endguest
                         </div>
                         <div class="header__top__hover">
                             <span>Usd <i class="arrow_carrot-down"></i></span>
