@@ -33,9 +33,11 @@
             <div class="container">
                 <div class="owl-carousel categories-carousel">
                     @foreach($categories as $category)
-                    <div class="">
-                        <img src="{{ asset('admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Logo">
-                        <h6 class="text-center">{{$category->name}}</h6>
+                    <div class="category-item">
+                        <div class="circle-container">
+                            <img src="{{ asset('admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Logo" class="img-inside-circle">
+                        </div>
+                        <h5 class="text-center pt-5">{{$category->name}}</h5>
                     </div>
                     @endforeach
                 </div>
@@ -44,6 +46,45 @@
 </section>
 
 <section class="product spad">
+    <div class="tickerwrapper">
+        <ul class='list'>
+           <li class='listitem'>
+             <span>Free & Fast Shipping</span>
+           </li>
+           <li class='listitem'>
+            <span>High Quality</span>
+           </li>
+           <li class='listitem'>
+            <span>14-Day Return</span>
+           </li>
+           <li class='listitem'>
+            <span>24/7 Support</span>
+           </li>
+           <li class='listitem'>
+            <span>Free & Fast Shipping</span>
+          </li>
+          <li class='listitem'>
+           <span>High Quality</span>
+          </li>
+          <li class='listitem'>
+           <span>14-Day Return</span>
+          </li>
+          <li class='listitem'>
+           <span>24/7 Support</span>
+          </li>
+          <li class='listitem'>
+           <span>Free & Fast Shipping</span>
+          </li>
+          <li class='listitem'>
+           <span>High Quality</span>
+          </li>
+          <li class='listitem'>
+           <span>14-Day Return</span>
+          </li>
+       </ul>
+     </div>
+</section>
+{{-- <section class="product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -72,7 +113,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
     @if($flashSale)
         <!-- Services Section Begin -->
         <section class="product spad">
@@ -523,5 +564,46 @@
 
     // Call the updateCountdown function to start the countdown
     updateCountdown();
+
+
+var $tickerWrapper = $(".tickerwrapper");
+var $list = $tickerWrapper.find("ul.list");
+var $clonedList = $list.clone();
+var listWidth = 10;
+
+$list.find("li").each(function (i) {
+			listWidth += $(this, i).outerWidth(true);
+});
+
+var endPos = $tickerWrapper.width() - listWidth;
+
+$list.add($clonedList).css({
+	"width" : listWidth + "px"
+});
+
+$clonedList.addClass("cloned").appendTo($tickerWrapper);
+
+//TimelineMax
+var infinite = new TimelineMax({repeat: -1, paused: true});
+var time = 20;
+
+infinite
+
+  .fromTo($list, time, {rotation:0.01,x:0}, {force3D:true, x: -listWidth, ease: Linear.easeNone}, 0)
+  .fromTo($clonedList, time, {rotation:0.01, x:listWidth}, {force3D:true, x:0, ease: Linear.easeNone}, 0)
+  .set($list, {force3D:true, rotation:0.01, x: listWidth})
+  .to($clonedList, time, {force3D:true, rotation:0.01, x: -listWidth, ease: Linear.easeNone}, time)
+  .to($list, time, {force3D:true, rotation:0.01, x: 0, ease: Linear.easeNone}, time)
+  .progress(1).progress(0)
+  .play();
+
+//Pause/Play
+$tickerWrapper.on("mouseenter", function(){
+	infinite.pause();
+}).on("mouseleave", function(){
+	infinite.play();
+});
+
 </script>
+
 
