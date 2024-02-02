@@ -15,6 +15,15 @@ class HomeComponent extends Component
 {
     public $selectedColors;
 
+    public function mount()
+    {
+        // Initialize selectedColors for each product
+        $products = Product::all();
+        foreach ($products as $product) {
+            $this->selectedColors[$product->id] = null;
+        }
+    }
+
     public function addToWishlist($product_id, $product_name, $product_price)
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
@@ -51,14 +60,6 @@ class HomeComponent extends Component
         session()->flash('success_message', 'Item added to the cart');
         return redirect()->route('shop');
     }
-    public function mount()
-    {
-        // Initialize selectedColors for each product
-        $products = Product::all();
-        foreach ($products as $product) {
-            $this->selectedColors[$product->id] = null;
-        }
-    }
 
     public function removeFromWishlist($product_id)
     {
@@ -87,8 +88,33 @@ class HomeComponent extends Component
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8);
         $categories = Category::get();
         // $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
-        $flashSale = Sale::with('products')->where('is_active', 1)->where('is_flash_sale', 1)->first();
+        $flashSale = Sale::with('products')
+            ->with('categories')
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', 1)
+            ->where('is_flash_sale', 1)->first();
+
+        $bannerSale = Sale::with('products')
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', 1)
+            ->where('is_flash_sale', 0)
+            ->where('banner_type', 'image')
+            ->where('position', '!=', 0)
+            ->orderBy('position')
+            ->get();
+
+        $countdownSale = Sale::with('products')
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', 1)
+            ->where('banner_type', 'countdown')
+            ->first();
+
         return view('livewire.home-component', [
+            'bannerSale' => $bannerSale,
+            'countdownSale' => $countdownSale,
             'flashSale' => $flashSale,
             'slides' => $slides,
             'categories' => $categories,

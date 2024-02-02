@@ -17,7 +17,11 @@ class AdminSalesController extends Controller
     public function index()
     {
         $products = Product::get();
-        $sales = Sale::get();
+        $sales = Sale::with('products')
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', 1)
+            ->get();
         return view('Back.Sales.index', compact('products', 'sales'));
     }
 
@@ -97,8 +101,9 @@ class AdminSalesController extends Controller
                 'name' => $request->name,
                 'type' => $request->type,
                 'value' => $request->value,
-                'position' => $request->is_flash_sale ? 0 : $request->position,
+                'position' => $request->is_flash_sale || $request->banner_type == 'countdown' ? 0 : $request->position,
                 'banner' => $request->is_flash_sale ? null : $filePath,
+                'banner_type' => $request->is_flash_sale ? 'none' : $request->banner_type,
                 'target_type' => ($request->sale_type == 1) ? 'category' : (($request->sale_type == 2) ? 'product' : null),
                 'start_date' => date('Y-m-d H:i:s', strtotime($request->starts_date)),
                 'end_date' => date('Y-m-d H:i:s', strtotime($request->ends_date)),

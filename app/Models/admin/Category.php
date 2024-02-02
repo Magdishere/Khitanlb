@@ -22,4 +22,8 @@ class Category extends Model implements \Astrotomic\Translatable\Contracts\Trans
         return $this->belongsToMany(Sale::class, 'category_sales');
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
