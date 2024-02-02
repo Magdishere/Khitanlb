@@ -13,6 +13,8 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
             rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" type="text/css">

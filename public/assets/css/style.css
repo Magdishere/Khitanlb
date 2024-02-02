@@ -258,6 +258,62 @@ ol {
 	}
 }
 
+/*Services*/
+
+.tickerwrapper {
+    /* the outer div */
+    position: relative;
+    top: 30px;
+    left: 0%;
+    border-top: 1px solid #a0a0a0; /* Add top border */
+    border-bottom: 1px solid #a0a0a0; /* Add bottom border */
+    border-left: none; /* Remove left border */
+    border-right: none; /* Remove right border */
+    background: #fff;
+    width: 99.9%;
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .tickerwrapper ul.list {
+    position: relative;
+    display: inline-block;
+    list-style: none;
+    padding:0;
+    margin:0;
+  }
+
+  .tickerwrapper ul.list.cloned {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+  .tickerwrapper ul.list li {
+    float: left;
+    padding-left: 40px;
+  }
+
+  .listitem span {
+    font-weight: bold;
+    text-transform: uppercase;
+    background: transparent;
+    background-clip: text; /* Clip the gradient to the text */
+    color: transparent; /* Make the text transparent */
+    -webkit-background-clip: text; /* For WebKit browsers */
+    animation: glow 2s infinite alternate; /* Adjust the animation duration and other properties */
+}
+
+@keyframes glow {
+    from {
+        color: #ff8a00; /* Adjust the text color for the 'from' state */
+    }
+    to {
+        color: #e52e71; /* Adjust the text color for the 'to' state */
+    }
+}
+
 .spacial-controls {
 	position: fixed;
 	width: 111px;
@@ -700,6 +756,26 @@ ol {
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
 }
+
+.category-item {
+    text-align: center;
+}
+
+.circle-container {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto; /* Center the circle */
+}
+
+.img-inside-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevent distortion by covering the entire container */
+    border-radius: 50%;
+}
+
 
 .hero__text h2 {
 	color: #111111;
