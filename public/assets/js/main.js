@@ -238,6 +238,24 @@
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function () {
+        const musicButton = document.querySelector('.music-div a');
+        const music = document.getElementById('music');
+
+        musicButton.addEventListener('click', function (event) {
+            event.preventDefault();
+
+
+            if (music.paused) {
+                music.play();
+                musicButton.classList.remove('muted');
+            } else {
+                music.pause();
+                musicButton.classList.add('muted');
+            }
+        });
+    });
+
 
 
 })(jQuery);

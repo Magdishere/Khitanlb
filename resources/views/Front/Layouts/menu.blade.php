@@ -6,6 +6,11 @@
 {{--        <img src="{{asset('assets/img/loader.gif')}}" style="width: 250px" class="loader-img">--}}
 {{--    </div>--}}
 
+
+    <audio id="music">
+        <source src="{{asset('assets/music/katana-lofive.mp3')}}" loop type="audio/mp3">
+        <!-- Add more source elements for additional songs -->
+    </audio>
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">

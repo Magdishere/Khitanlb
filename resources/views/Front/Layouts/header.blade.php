@@ -31,6 +31,11 @@
                                 <li>USD</li>
                             </ul>
                         </div>
+                        <div class="header__top__hover music-div">
+                            <a id="musicButton" href="#">
+
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
