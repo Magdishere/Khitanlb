@@ -3,12 +3,8 @@
 namespace App\Sale;
 
 use App\Models\admin\Product;
-use App\Sale\Strategies\BogoSaleStrategy;
 use App\Sale\Strategies\DefaultSaleStrategy;
-use App\Sale\Strategies\FixedSaleStrategy;
-use App\Sale\Strategies\PercentSaleStrategy;
 use App\Sale\Strategies\SaleCalculator;
-use Illuminate\Support\Carbon;
 
 class Sale
 {
@@ -28,6 +24,7 @@ class Sale
             $productSale = $product->sales
                 ->where('start_date', '<=', now())
                 ->where('end_date', '>=', now())
+                ->where('is_active', 1)
                 ->first();
 
             // Initialize variables to store discount type and value
@@ -39,6 +36,7 @@ class Sale
                 $categorySale = $product->category->sales
                     ->where('start_date', '<=', now())
                     ->where('end_date', '>=', now())
+                    ->where('is_active', 1)
                     ->first();
 
                 // Update discount type and value based on category sale

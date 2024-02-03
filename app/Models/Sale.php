@@ -58,6 +58,19 @@ class Sale extends Model
         return $this->is_active ? 'Active' : 'Inactive';
     }
 
+    public function scopeActiveSales($query)
+    {
+        return $query->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', true);
+    }
+    public function scopeActiveFlashSales($query)
+    {
+        return $query->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', true)
+            ->where('is_flash_sale', true);
+    }
 
 
 }

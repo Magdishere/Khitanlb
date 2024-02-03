@@ -6,21 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
 use App\Models\admin\Product;
 use App\Models\Sale;
+use App\Sale\Commands\CreateSaleCommand;
+use App\Sale\Strategies\interfaces\CategorySaleStrategyInterface;
+use App\Sale\Strategies\interfaces\ImageSaleStrategyInterface;
+use App\Sale\Strategies\interfaces\ProductCategoryCheckStrategyInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rule;
 
 
 class AdminSalesController extends Controller
 {
+    protected $commandInvoker;
+
+    public function __construct(CreateSaleCommand $createSale)
+    {
+        $this->createSale = $createSale;
+    }
+
     public function index()
     {
         $products = Product::get();
         $sales = Sale::with('products')
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
-            ->where('is_active', 1)
+            ->activeSales()
             ->get();
         return view('Back.Sales.index', compact('products', 'sales'));
     }
@@ -29,8 +36,7 @@ class AdminSalesController extends Controller
     {
         // 1. Get category ids of category sales
         $categorySaleIds = Sale::where('target_type', 'category')
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
+            ->activeSales()
             ->with('categories:id')
             ->get()
             ->pluck('categories.*.id')
@@ -41,9 +47,13 @@ class AdminSalesController extends Controller
         $categoryProducts = Product::whereIn('category_id', $categorySaleIds)->get();
 
         // 3. Get products that are not associated with any sale and not in the categoryProducts
-        $productsWithoutSale = Product::doesntHave('sales')
+        $productsWithoutSale = Product::whereDoesntHave('sales', function ($query) {
+            $query->where('is_active', 1);
+        })
             ->whereNotIn('id', $categoryProducts->pluck('id'))
             ->get();
+
+
 
         // Remove duplicate products based on their IDs
         $uniqueProducts = $productsWithoutSale->unique('id')->values();
@@ -55,122 +65,137 @@ class AdminSalesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(
+        Request $request,
+        ImageSaleStrategyInterface $imageSaleStrategy,
+        CategorySaleStrategyInterface $categorySaleStrategy,
+        ProductCategoryCheckStrategyInterface $productCategoryCheckStrategy
+    )
     {
         try {
 
-            $filePath = null;
-            if ($request->has('banner')) {
-                $filePath = uploadImage('sales', $request->banner);
-            }
-
             DB::beginTransaction();
 
-            // Deactivate other flash sales
-            if ($request->is_flash_sale) {
-                Sale::where('is_flash_sale', true)->update([
-                    'is_active' => false,
-                ]);
-            } else {
-                // Check if there are active sales for the current time
-                $activeSales = Sale::where('start_date', '<=', now())
-                    ->where('end_date', '>=', now())
-                    ->where('is_active', true)
-                    ->get();
+            //Upload the image if existed
+            $filePath = $this->handleImageUpload($request);
 
-                /*
-                 * Check a position of image  if the sale banner_type is image
-                 */
+            //If you create a new flash sale deactivate the old ones
+            $this->deactivateFlashSales($request);
 
-                if ($request->banner_type = 'image') {
+            //If the sale type is image then validate and adjusts image sale banner positions.
+            $this->applyImageSaleStrategy($request, $imageSaleStrategy);
 
-                    // Check if all active sales have positions 1, 2, 3, or 4
-                    $validPositions = [1, 2, 3, 4];
-                    $activePositions = $activeSales->pluck('position')->toArray();
+            //If the sale type is category
+            //validate that category not in running sale
+            $categorySaleStrategy->checkExistingCategorySale($request);
 
-                    if (empty(array_diff($validPositions, $activePositions))) {
-                        // If all positions 1, 2, 3, 4 are taken, create a new sale with position 0
-                        $request->merge(['position' => 0]);
-                    }
+            //If the sale type is product
+            //validate that product's category not in running sale
+            $productCategoryCheckStrategy->checkProductsInSameCategory($request);
 
-                    // Validate the request to ensure the position is unique
-                    $request->validate([
-                        'position' => [
-                            'required',
-                            'integer',
-                            Rule::notIn($activePositions),
-                        ],
-                    ]);
-                }
-            }
-
-            // If the Sale is for a category, check if there is another sale in the same category
-            $existingCategorySale = Sale::where('target_type', 'category')
-                ->where('start_date', '<=', now())
-                ->where('end_date', '>=', now())
-                ->where('is_active', true)
-                ->whereHas('categories', function ($query) use ($request) {
-                    $query->where('category_id', $request->input('category_id'));
-                })
-                ->first();
-
-            if ($existingCategorySale) {
-                // There is another sale in the same category, prevent creation
-                throw new \Exception('There is already an active sale in the same category.');
-            }
-
-            $activeCategories = Sale::where('start_date', '<=', now())
-                ->where('end_date', '>=', now())
-                ->where('target_type', 'category')
-                ->where('is_active', true)
-                ->whereHas('categories')
-                ->pluck('id');
-
-            // 2- Check if any products belong to any of these categories
-            $productsInActiveCategories = Product::whereIn('category_id', $activeCategories)->exists();
-
-            // Now, you can use $productsInActiveCategories to determine whether to create a new sale
-            if ($productsInActiveCategories) {
-                // Don't create a new sale, as there are products in the active categories
-                throw new \Exception('Cannot create a new sale as there are products in the active categories.');
-            }
-
-            $saleData = [
-                'name' => $request->name,
-                'type' => $request->type,
-                'value' => $request->value,
-                'position' => $request->is_flash_sale || $request->banner_type == 'countdown' ? 0 : $request->position,
-                'banner' => $request->is_flash_sale ? null : $filePath,
-                'banner_type' => $request->is_flash_sale ? 'none' : $request->banner_type,
-                'target_type' => ($request->sale_type == 1) ? 'category' : (($request->sale_type == 2) ? 'product' : null),
-                'start_date' => date('Y-m-d H:i:s', strtotime($request->starts_date)),
-                'end_date' => date('Y-m-d H:i:s', strtotime($request->ends_date)),
-                'is_active' => $request->has('is_active') ? true : false,
-                'is_flash_sale' => $request->has('is_flash_sale') ? true : false,
-            ];
+            //store the sale in db
+            $saleData = $this->prepareSaleData($request, $filePath);
 
             $sale = Sale::create($saleData);
 
-            if ($request->sale_type == 1) {
-                // Sale for category
-                $sale->categories()->attach($request->input('category_id'));
-            } elseif ($request->sale_type == 2) {
-                // Remove null values from the product_id array
-                $productIds = array_filter($request->input('product_id'));
-
-                // Sale for product only if there are valid product_ids
-                if (!empty($productIds)) {
-                    $sale->products()->attach($productIds);
-                }
-            }
+            $this->attachSaleRelationships($sale, $request);
 
             DB::commit();
 
-            return redirect()->route('admin.sales')->with('success', 'Sales has been applied');
+            return redirect()->route('admin-sales.index')->with('success', 'Sales has been applied');
         } catch (\Exception $exception) {
             return $exception;
             DB::rollBack();
-            return redirect()->route('admin.sales')->with(['error' => 'حدث خطأ برجاء المحاولة لاحقا']);
+            return redirect()->route('admin-sales.index')->with(['error' => 'حدث خطأ برجاء المحاولة لاحقا']);
         }
     }
+
+    private function handleImageUpload(Request $request)
+    {
+        if ($request->has('banner')) {
+            return uploadImage('sales', $request->banner);
+        }
+
+        return null;
+    }
+
+    private function deactivateFlashSales(Request $request)
+    {
+        if ($request->is_flash_sale) {
+            Sale::where('is_flash_sale', true)->update([
+                'is_active' => false,
+            ]);
+        }
+    }
+
+    private function applyImageSaleStrategy(Request $request, ImageSaleStrategyInterface $imageSaleStrategy)
+    {
+        if ($request->banner_type === 'image') {
+            $activeSales = Sale::activeSales()->get();
+            $imageSaleStrategy->applyImageSale($request, $activeSales);
+        }
+    }
+
+    private function prepareSaleData(Request $request, $filePath)
+    {
+         $saleData = [
+            'name' => $request->name,
+            'type' => $request->type,
+            'value' => $request->value,
+            'position' => $this->calculatePosition($request),
+            'banner' => $this->calculateBanner($request, $filePath),
+            'banner_type' => $this->calculateBannerType($request),
+            'target_type' => $this->calculateTargetType($request),
+            'start_date' => $this->parseDate($request->starts_date),
+            'end_date' => $this->parseDate($request->ends_date),
+            'is_active' => $request->has('is_active'),
+            'is_flash_sale' => $request->has('is_flash_sale'),
+        ];
+
+        return $saleData;
+    }
+
+    private function attachSaleRelationships($sale, $request)
+    {
+        if ($request->sale_type == 1) {
+            // Sale for category
+            $sale->categories()->attach($request->input('category_id'));
+        } elseif ($request->sale_type == 2) {
+            // Remove null values from the product_id array
+            $productIds = array_filter($request->input('product_id'));
+
+            // Sale for product only if there are valid product_ids
+            if (!empty($productIds)) {
+                $sale->products()->attach($productIds);
+            }
+        }
+
+    }
+
+    private function calculatePosition(Request $request)
+    {
+        // Your logic to calculate position based on conditions
+        return $request->is_flash_sale || $request->banner_type == 'countdown' ? 0 : $request->position;
+    }
+
+    private function calculateBanner(Request $request, $filePath)
+    {
+        return $request->is_flash_sale ? null : $filePath;
+    }
+
+    private function calculateBannerType(Request $request)
+    {
+        return $request->is_flash_sale ? 'none' : $request->banner_type;
+    }
+
+    private function calculateTargetType(Request $request)
+    {
+        return ($request->sale_type == 1) ? 'category' : (($request->sale_type == 2) ? 'product' : null);
+    }
+
+    private function parseDate($dateString)
+    {
+        return date('Y-m-d H:i:s', strtotime($dateString));
+    }
+
 }

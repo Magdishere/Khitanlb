@@ -90,15 +90,11 @@ class HomeComponent extends Component
         // $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(8);
         $flashSale = Sale::with('products')
             ->with('categories')
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
-            ->where('is_active', 1)
-            ->where('is_flash_sale', 1)->first();
+            ->activeFlashSales()
+            ->first();
 
         $bannerSale = Sale::with('products')
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
-            ->where('is_active', 1)
+            ->activeSales()
             ->where('is_flash_sale', 0)
             ->where('banner_type', 'image')
             ->where('position', '!=', 0)
@@ -106,9 +102,7 @@ class HomeComponent extends Component
             ->get();
 
         $countdownSale = Sale::with('products')
-            ->where('start_date', '<=', now())
-            ->where('end_date', '>=', now())
-            ->where('is_active', 1)
+            ->activeSales()
             ->where('banner_type', 'countdown')
             ->first();
 

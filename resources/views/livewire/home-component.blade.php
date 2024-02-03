@@ -136,12 +136,13 @@
                     <div class="col-md-12">
                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                             <!-- Carousel indicators -->
-                            @php
-                                $categoryProducts = \App\Models\admin\Product::where('category_id', $flashSale->categories->first()->id)->get();
-                            @endphp
+
 
                             <ol class="carousel-indicators">
                                 @if($flashSale == 'category')
+                                    @php
+                                        $categoryProducts = \App\Models\admin\Product::where('category_id', $flashSale->categories->first()->id)->get();
+                                    @endphp
                                     @foreach($categoryProducts->chunk(3) as $key => $chunk)
                                         <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
                                     @endforeach
@@ -229,6 +230,9 @@
                                     </div>
                                 @endforeach
                                 @elseif($flashSale->target_type == 'category')
+                                    @php
+                                        $categoryProducts = \App\Models\admin\Product::where('category_id', $flashSale->categories->first()->id)->get();
+                                    @endphp
                                     @foreach($categoryProducts as $product)
                                         <div class="col-lg-4 col-md-6 col-sm-6">
                                             <div class="product__item">
