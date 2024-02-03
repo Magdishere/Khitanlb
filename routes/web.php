@@ -6,6 +6,7 @@ use App\Http\Livewire\CheckoutsComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\SaleProducts;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\WishlistComponent;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,6 @@ Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/checkouts', CheckoutsComponent::class)->name('checkouts');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
+Route::get('/sale-product/{id}', SaleProducts::class)->name('sale.product');
 
 Auth::routes();

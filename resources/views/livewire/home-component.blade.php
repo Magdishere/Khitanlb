@@ -126,7 +126,7 @@
                     <div class="col-md-6" style="font-size: 24px; text-align: right;">
                         Time Left:
                         <time id="countdownTimer" class="-b -ws-p" datetime="{{$flashSale->start_date}}" data-cd="true">{{$flashSale->start_date}}</time>
-                        <a href="/flash-sales/" class="-df -i-ctr -upp -m -mls -pvxs" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;"> >>
+                        <a href="{{route('sale.product', ['id'=>$flashSale->id])}}" class="-df -i-ctr -upp -m -mls -pvxs" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;"> >>
                             <svg style="fill:#FFFFFF;" viewBox="0 0 24 24" class="ic" width="24" height="24">
                                 <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-icons.a66628fd.svg#arrow-right"></use></svg>
                         </a>
@@ -136,19 +136,31 @@
                     <div class="col-md-12">
                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                             <!-- Carousel indicators -->
+                            @php
+                                $categoryProducts = \App\Models\admin\Product::where('category_id', $flashSale->categories->first()->id)->get();
+                            @endphp
+
                             <ol class="carousel-indicators">
-                                @foreach($flashSale->products->chunk(4) as $key => $chunk)
-                                    <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
-                                @endforeach
+                                @if($flashSale == 'category')
+                                    @foreach($categoryProducts->chunk(3) as $key => $chunk)
+                                        <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
+                                    @endforeach
+                                @elseif($flashSale == 'product')
+                                    @foreach($flashSale->products->chunk(3) as $key => $chunk)
+                                        <li data-target="#myCarousel" data-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
+                                    @endforeach
+                                @endif
                             </ol>
                             <!-- Wrapper for carousel items -->
                             <div class="carousel-inner">
+                                @php
+                                    $items = Cart::instance('wishlist')->content()->pluck('id');
+                                @endphp
+                                @if($flashSale->target_type == 'product')
                                 @foreach($flashSale->products->chunk(3) as $key => $chunk)
                                     <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
                                         <div class="row product__filter">
-                                            @php
-                                                $items = Cart::instance('wishlist')->content()->pluck('id');
-                                            @endphp
+
                                             @foreach($chunk as $product)
                                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                                     <div class="product__item">
@@ -216,6 +228,72 @@
                                         </div>
                                     </div>
                                 @endforeach
+                                @elseif($flashSale->target_type == 'category')
+                                    @foreach($categoryProducts as $product)
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="product__item">
+                                                <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
+                                                    <ul class="product__hover">
+                                                        <li>
+                                                            @if($items->contains($product->id))
+                                                                <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                            @else
+                                                                @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                @else
+                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                @endif
+                                                            @endif
+                                                        </li>
+                                                        <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
+                                                        </li>
+                                                        <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="product__item__text">
+                                                    <h6>{{$product['name']}}</h6>
+                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
+                                                    @else
+                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
+                                                    @endif
+                                                    <div class="rating">
+
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+
+                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                        <span class="text-1000 fw-bold">
+    <del>${{ $product['regular_price'] + (new \App\Models\admin\Product())->getDefaultSizePrice($product) }}</del>
+                                    </span>
+                                                        <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
+                                                    @else
+                                                        <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
+                                                    @endif
+
+
+                                                    <div class="product__color__select">
+                                                        @foreach($product->attributeOptions as $options)
+                                                            @if($options->attribute->name == 'color')
+                                                                @foreach($options->translations as $translation)
+                                                                    @if($translation->locale == app()->getLocale())
+                                                                        <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                                                                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
+                                                                        </label>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <!-- Carousel controls -->
                             <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
@@ -241,26 +319,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
-                    <img src="{{asset('../assets/img/banner/banner-9.jpg')}} " style="height: 300px; width: 600px">
+            @foreach($bannerSale as $banners)
+                <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                        <a href="{{route('sale.product', ['id'=>$banners->id])}}">
+                            <img src="{{asset($banners->banner)}} " style="height: 300px; width: 600px">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
-                    <img src="{{asset('../assets/img/banner/banner-5.jpg')}} "  style="height: 300px; width: 600px">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
-                    <img src="{{asset('../assets/img/banner/banner-8.jpg')}} " style="height: 300px; width: 600px">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
-                    <img src="{{asset('../assets/img/banner/banner-7.jpg')}} "  style="height: 300px; width: 600px">
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -415,29 +482,29 @@
     </div>
 </section>
 <!-- Product Section End -->
-
+@if($countdownSale)
 <!-- Categories Section Begin -->
 <section class="categories spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="categories__text">
-                    <h2>Clothings Hot <br /> <span>Shoe Collection</span> <br /> Accessories</h2>
-                </div>
-            </div>
+{{--            <div class="col-lg-3">--}}
+{{--                <div class="categories__text">--}}
+{{--                    <h2>Clothings Hot <br /> <span>Shoe Collection</span> <br /> Accessories</h2>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="col-lg-4">
                 <div class="categories__hot__deal">
-                    <img src="{{asset('assets/img/product-sale.png')}}" alt="">
+                    <img src="{{$countdownSale->banner}}" alt="">
                     <div class="hot__deal__sticker">
                         <span>Sale Of</span>
-                        <h5>$29.99</h5>
+                        <h5>%{{$countdownSale->value}}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-1">
+            <div class="col-lg-7 offset-lg-1">
                 <div class="categories__deal__countdown">
                     <span>Deal Of The Week</span>
-                    <h2>Multi-pocket Chest Bag Black</h2>
+                    <h2>{{$countdownSale->name}}</h2>
                     <div class="categories__deal__countdown__timer" id="countdown">
                         <div class="cd-item">
                             <span>3</span>
@@ -463,7 +530,7 @@
     </div>
 </section>
 <!-- Categories Section End -->
-
+    @endif
 <!-- Instagram Section Begin -->
 <section class="instagram spad">
     <div class="container">

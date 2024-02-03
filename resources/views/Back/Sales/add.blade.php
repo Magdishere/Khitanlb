@@ -175,6 +175,7 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Position</label>
                                                 <select name="position" class="form-control">
+                                                    <option value="0">0</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -231,6 +232,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="form-group">
+                                    <label for="banner_type">Select Banner Type</label>
+                                    <select name="banner_type" id="banner_type" class="form-control">
+                                        <option value="countdown">Countdown Banner</option>
+                                        <option value="image">Image Banner</option>
+                                    </select>
+                                </div>
 
 
                                     <ul class="pro-submit" style="list-style:none;">

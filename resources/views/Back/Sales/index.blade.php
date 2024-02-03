@@ -43,6 +43,7 @@
                                     <th class="wd-15p border-bottom-0">End Date</th>
                                     <th class="wd-10p border-bottom-0">Banner</th>
                                     <th class="wd-10p border-bottom-0">Position</th>
+                                    <th class="wd-10p border-bottom-0">Flash Sale</th>
                                     <th class="wd-10p border-bottom-0">Actions</th>
                                 </tr>
                             </thead>
@@ -50,10 +51,14 @@
                                 @foreach($sales as $sale)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>Anything</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ $sale->target_type }}</td>
+                                        <td>{{$sale->name}}</td>
+                                        <td>{{$sale->start_date}}</td>
+                                        <td>{{$sale->end_date}}</td>
+                                        <td><image src="{{$sale->banner}}"></image></td>
+                                        <td>{{$sale->position }}</td>
+                                        <td>{{$sale->isFlashSaleActive() }}</td>
+                                        <td>{{$sale->isActive() }}</td>
                                         <td></td>
                                         <td class="text-center">
                                             <a class="modal-effect btn btn-sm btn-warning" href=""><i class="fa fa-edit"></i>Edit</a>

@@ -12,6 +12,13 @@ class Sale extends Model
 {
     protected $guarded = [];
 
+    public function getBannerAttribute()
+    {
+        // Assuming there is an 'image' column in the 'sales' table
+        $imagePath = 'admin-assets/uploads/images/sales/' . $this->attributes['banner'];
+
+        return asset($imagePath);
+    }
     public function specificSale($type)
     {
         // Assuming you have a 'type' column in the 'sales' table
@@ -30,10 +37,27 @@ class Sale extends Model
     {
         return $this->belongsToMany(Category::class, 'category_sales');
     }
+//    public function getProductsAttribute()
+//    {
+//        return $this->products()->where('category_id', $this->categories->first()->id)->get();
+//    }
 
     public function categorySales()
     {
         return $this->hasMany(CategorySale::class);
     }
+
+    public function isFlashSaleActive()
+    {
+        return $this->is_flash_sale ? 'Flash Sale' : 'Not Flash Sale';
+    }
+
+
+     public function isActive()
+    {
+        return $this->is_active ? 'Active' : 'Inactive';
+    }
+
+
 
 }
