@@ -78,23 +78,61 @@ class AdminSalesController extends Controller
                     ->where('is_active', true)
                     ->get();
 
-                // Check if all active sales have positions 1, 2, 3, or 4
-                $validPositions = [1, 2, 3, 4];
-                $activePositions = $activeSales->pluck('position')->toArray();
+                /*
+                 * Check a position of image  if the sale banner_type is image
+                 */
 
-                if (empty(array_diff($validPositions, $activePositions))) {
-                    // If all positions 1, 2, 3, 4 are taken, create a new sale with position 0
-                    $request->merge(['position' => 0]);
+                if ($request->banner_type = 'image') {
+
+                    // Check if all active sales have positions 1, 2, 3, or 4
+                    $validPositions = [1, 2, 3, 4];
+                    $activePositions = $activeSales->pluck('position')->toArray();
+
+                    if (empty(array_diff($validPositions, $activePositions))) {
+                        // If all positions 1, 2, 3, 4 are taken, create a new sale with position 0
+                        $request->merge(['position' => 0]);
+                    }
+
+                    // Validate the request to ensure the position is unique
+                    $request->validate([
+                        'position' => [
+                            'required',
+                            'integer',
+                            Rule::notIn($activePositions),
+                        ],
+                    ]);
                 }
+            }
 
-                // Validate the request to ensure the position is unique
-                $request->validate([
-                    'position' => [
-                        'required',
-                        'integer',
-                        Rule::notIn($activePositions),
-                    ],
-                ]);
+            // If the Sale is for a category, check if there is another sale in the same category
+            $existingCategorySale = Sale::where('target_type', 'category')
+                ->where('start_date', '<=', now())
+                ->where('end_date', '>=', now())
+                ->where('is_active', true)
+                ->whereHas('categories', function ($query) use ($request) {
+                    $query->where('category_id', $request->input('category_id'));
+                })
+                ->first();
+
+            if ($existingCategorySale) {
+                // There is another sale in the same category, prevent creation
+                throw new \Exception('There is already an active sale in the same category.');
+            }
+
+            $activeCategories = Sale::where('start_date', '<=', now())
+                ->where('end_date', '>=', now())
+                ->where('target_type', 'category')
+                ->where('is_active', true)
+                ->whereHas('categories')
+                ->pluck('id');
+
+            // 2- Check if any products belong to any of these categories
+            $productsInActiveCategories = Product::whereIn('category_id', $activeCategories)->exists();
+
+            // Now, you can use $productsInActiveCategories to determine whether to create a new sale
+            if ($productsInActiveCategories) {
+                // Don't create a new sale, as there are products in the active categories
+                throw new \Exception('Cannot create a new sale as there are products in the active categories.');
             }
 
             $saleData = [

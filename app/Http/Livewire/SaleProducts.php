@@ -106,31 +106,46 @@ class SaleProducts extends Component
 
     public function render()
     {
-        $sale = Sale::where('id', $this->id)->with('products')
-            ->with('categories')->first();
+        $sale = Sale::where('id', $this->id)->with(['products', 'categories'])->first();
 
-        if ($sale->target_type == 'product'){
-            $productsQuery = $sale->products;
+        $productsQuery = Product::query();
 
-        }elseif ($sale->target_type == 'category'){
+        if ($sale->target_type == 'product') {
+            $productIds = $sale->products->pluck('id')->toArray();
+
+            if (!empty($this->categoryInputs)) {
+                $productsQuery->whereIn('category_id', $this->categoryInputs);
+            }
+
+            if (!empty($this->orderBy)) {
+                ProductRepository::sortBy($productsQuery, $this->orderBy);
+            }
+
+            if (!empty($this->min_price) && !empty($this->max_price)) {
+                $productsQuery->whereBetween('regular_price', [$this->min_price, $this->max_price]);
+            }
+
+            // Paginate the results
+            $products = $productsQuery->whereIn('id', $productIds)->paginate();
+        } elseif ($sale->target_type == 'category') {
             $categoryId = $sale->categories->first()->id;
-            $productsQuery = Product::where('id', $categoryId);
+
+            if (!empty($this->categoryInputs)) {
+                $productsQuery->whereIn('category_id', $this->categoryInputs);
+            }
+
+            if (!empty($this->orderBy)) {
+                ProductRepository::sortBy($productsQuery, $this->orderBy);
+            }
+
+            if (!empty($this->min_price) && !empty($this->max_price)) {
+                $productsQuery->whereBetween('regular_price', [$this->min_price, $this->max_price]);
+            }
+
+            // Paginate the results
+            $products = $productsQuery->where('id', $categoryId)->paginate();
         }
 
-        if (!empty($this->categoryInputs)) {
-            $productsQuery->whereIn('category_id', $this->categoryInputs);
-        }
-
-//        if (!empty($this->orderBy)) {
-//            ProductRepository::sortBy($productsQuery, $this->orderBy);
-//        }
-
-        if (!empty($this->min_price) && !empty($this->max_price)) {
-            $productsQuery->whereBetween('regular_price', [$this->min_price, $this->max_price]);
-        }
-
-        // Paginate the results
-        $products = $productsQuery;
         $categories = Category::where('parent_id', null)->orderByTranslation('name', 'ASC')->get();
         $attributeOptions = AttributeOption::with('attribute')->get();
 
