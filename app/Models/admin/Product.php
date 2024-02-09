@@ -73,7 +73,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         $defaultOptions = [];
 
         foreach ($this->attributeOptions as $options) {
-            $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
+            $attributeName = optional($options->attribute->translations()->where('locale', 'en')->first())->name;
 
             if ($attributeName === 'color') {
                 $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();

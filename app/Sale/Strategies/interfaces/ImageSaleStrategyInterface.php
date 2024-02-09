@@ -7,5 +7,5 @@ use Illuminate\Support\Facades\Request;
 
 interface ImageSaleStrategyInterface
 {
-    public function applyImageSale($request, $activeSales);
+    public function validateBannerPosition($request, $activeSales);
 }
