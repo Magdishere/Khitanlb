@@ -9,6 +9,7 @@ use App\Models\HomeSlider;
 
 use App\Models\Sale;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class HomeComponent extends Component
@@ -23,6 +24,7 @@ class HomeComponent extends Component
             $this->selectedColors[$product->id] = null;
         }
     }
+
 
     public function addToWishlist($product_id, $product_name, $product_price)
     {
@@ -112,6 +114,18 @@ class HomeComponent extends Component
             ->where('banner_type', 'countdown')
             ->first();
 
+        // First, retrieve the top 6 most ordered product IDs
+        $topProductIds = DB::table('order_items')
+        ->select('product_id', DB::raw('COUNT(*) as total_orders'))
+        ->groupBy('product_id')
+        ->orderByRaw('COUNT(*) DESC')
+        ->take(6)
+        ->pluck('product_id');
+
+        // Then, retrieve the corresponding products using the retrieved product IDs
+        $mostOrderedProducts = Product::whereIn('id', $topProductIds)->get();
+
+
         return view('livewire.home-component', [
             'bannerSale' => $bannerSale,
             'countdownSale' => $countdownSale,
@@ -121,7 +135,8 @@ class HomeComponent extends Component
             'lproducts' => $lproducts,
             'fproducts' => $fproducts,
             // 'pcategories' => $pcategories,
-            'sproducts' => $sproducts
+            'sproducts' => $sproducts,
+            'mostOrderedProducts' => $mostOrderedProducts
         ]);
     }
 }
