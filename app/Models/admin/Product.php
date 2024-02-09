@@ -34,6 +34,13 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
     {
         return $this->hasManyThrough(CategorySale::class, Category::class);
     }
+    public function getActiveSales()
+    {
+        return $this->sales()->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', true)
+            ->get();
+    }
 
     public function scopeSortBy($query, $sorting)
     {
