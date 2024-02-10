@@ -100,10 +100,14 @@
                             <li>{{$item->name}}<span>${{$item->price}}</span></li>
                             @endforeach
                         </ul>
+                        @php
+                            $subtotal = floatval(preg_replace('/[^0-9\.]/', '', Cart::subtotal())) + 5.00; // Retrieve subtotal and convert to float
+                        @endphp
+
                         <ul class="checkout__total__all">
                             <li>Subtotal <span>${{ Cart::subtotal() }}</span></li>
                             <li>Shipping <span>${{ 5.00 }}</span></li>
-                            <li>Total <span>${{ Cart::subtotal() + 5.00 }}</span></li>
+                            <li>Total <span>${{ number_format($subtotal, 2) }}</span></li>
                         </ul>
                         <div class="checkout__input__checkbox">
                             <label for="acc-or">
