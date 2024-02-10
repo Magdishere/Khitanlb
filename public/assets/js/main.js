@@ -21,14 +21,28 @@
         /*------------------
             Gallery filter
         --------------------*/
-        $('.filter__controls li').on('click', function () {
-            $('.filter__controls li').removeClass('active');
-            $(this).addClass('active');
-        });
-        if ($('.product__filter').length > 0) {
-            var containerEl = document.querySelector('.product__filter');
-            var mixer = mixitup(containerEl);
-        }
+        // Function to handle filter selection
+    $('.filter__controls li').on('click', function() {
+        $('.filter__controls li').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    // Check if product filter container exists
+    if ($('.product__filter').length > 0) {
+        // Get the active filter class
+        var activeFilter = $('.filter__controls li.active').data('filter');
+        // Show only products corresponding to the active filter
+        $('.product__filter').find('.mix').hide().filter(activeFilter).show();
+        // Initialize MixItUp plugin
+        var containerEl = document.querySelector('.product__filter');
+        var mixer = mixitup(containerEl);
+    }
+
+    // Prevent default behavior of color selection input
+    $('.product__color__select input[type="radio"]').on('click', function(event) {
+        event.preventDefault();
+    });
+
     });
 
     /*------------------

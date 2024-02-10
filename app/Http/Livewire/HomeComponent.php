@@ -9,13 +9,13 @@ use App\Models\HomeSlider;
 
 use App\Models\Sale;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class HomeComponent extends BaseComponent
 {
     public function render()
     {
-
         $slides = Slides::get();
         $sproducts = Product::with('sales')->get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get()->take(8);
@@ -40,6 +40,18 @@ class HomeComponent extends BaseComponent
             ->where('banner_type', 'countdown')
             ->first();
 
+        $topProductIds = DB::table('order_items')
+            ->select('product_id', DB::raw('COUNT(*) as total_orders'))
+            ->groupBy('product_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->take(6)
+            ->pluck('product_id');
+
+        // Then, retrieve the corresponding products using the retrieved product IDs
+        $mostOrderedProducts = Product::whereIn('id', $topProductIds)->get();
+
+
+
         return view('livewire.home-component', [
             'bannerSale' => $bannerSale,
             'countdownSale' => $countdownSale,
@@ -49,7 +61,8 @@ class HomeComponent extends BaseComponent
             'lproducts' => $lproducts,
             'fproducts' => $fproducts,
             // 'pcategories' => $pcategories,
-            'sproducts' => $sproducts
+            'sproducts' => $sproducts,
+            'mostOrderedProducts' => $mostOrderedProducts
         ]);
     }
 }
