@@ -541,7 +541,9 @@
             @endforeach
         </div>
     </div>
+
 </section>
+
 <!-- Product Section End -->
 @if($countdownSale)
 <!-- Categories Section Begin -->
