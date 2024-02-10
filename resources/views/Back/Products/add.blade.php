@@ -145,22 +145,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                     @foreach(json_decode($attributes, true) as $attribute)
-                                       <div class="col-md-6">
-                                          <div class="form-group">
-                                            <label for="projectinput1"> {{$attribute['name']}}</label>
-                                            <select class="js-example-basic-multiple" name="attribute_options[]" multiple="multiple" {{ isset($attribute['select_attributes']) ? $attribute['select_attributes'] : '' }}>
-                                                @foreach($attribute['options'] as $option)
-                                                    <option value="{{ $option['id'] }}" {{ isset($option['attributes']) ? $option['attributes'] : '' }}>
-                                                        {{ $option['translations'][0]['value'] }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                        <div class="row">
+                                            @foreach(json_decode($attributes, true) as $attribute)
+                                                @if($attribute['name'] !== null)
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">{{$attribute['name']}}</label>
+                                                            <select class="js-example-basic-multiple" name="attribute_options[]" multiple="multiple" {{ isset($attribute['select_attributes']) ? $attribute['select_attributes'] : '' }}>
+                                                                @foreach($attribute['options'] as $option)
+                                                                    <option value="{{ $option['id'] }}" {{ isset($option['attributes']) ? $option['attributes'] : '' }}>
+                                                                        {{ $option['translations'][0]['value'] }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
-                                       </div>
-                                      @endforeach
-                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">

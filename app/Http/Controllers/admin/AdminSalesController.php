@@ -19,10 +19,6 @@ class AdminSalesController extends Controller
 {
     protected $commandInvoker;
 
-    public function __construct(CreateSaleCommand $createSale)
-    {
-        $this->createSale = $createSale;
-    }
 
     public function index()
     {

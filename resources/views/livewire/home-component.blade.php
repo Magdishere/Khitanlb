@@ -11,7 +11,7 @@
                         <div class="hero__text">
                             <h2 style="color: palevioletred;">{{$slide->title}}</h2>
                             <p class="text-white">{{$slide->description}}</p>
-                            <a href="{{route('shop')}}" class="primary-btn slide-btn" background-color: transparent;">Shop now <span class="arrow_right"></span></a>
+                            <a href="{{route('shop')}}" class="primary-btn slide-btn" style="background-color: transparent;">Shop now <span class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a class="socialmedia-btn" href="#"><i class="fa fa-facebook"></i></a>
                                 <a class="socialmedia-btn" href="#"><i class="fa fa-instagram"></i></a>
@@ -161,7 +161,6 @@
                                 @foreach($flashSale->products->chunk(3) as $key => $chunk)
                                     <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
                                         <div class="row product__filter">
-
                                             @foreach($chunk as $product)
                                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                                     <div class="product__item">
@@ -233,69 +232,75 @@
                                     @php
                                         $categoryProducts = \App\Models\admin\Product::where('category_id', $flashSale->categories->first()->id)->get();
                                     @endphp
-                                    @foreach($categoryProducts as $product)
-                                        <div class="col-lg-4 col-md-6 col-sm-6">
-                                            <div class="product__item">
-                                                <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
-                                                    <ul class="product__hover">
-                                                        <li>
-                                                            @if($items->contains($product->id))
-                                                                <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                    @foreach($categoryProducts ->chunk(3) as $key => $chunk)
+                                    <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
+                                        <div class="row product__filter">
+                                            @foreach($chunk as $product)
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="product__item">
+                                                        <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
+                                                            <ul class="product__hover">
+                                                                <li>
+                                                                    @if($items->contains($product->id))
+                                                                        <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                    @else
+                                                                        @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                        @else
+                                                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
+                                                                        @endif
+                                                                    @endif
+                                                                </li>
+                                                                <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
+                                                                </li>
+                                                                <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product__item__text">
+                                                            <h6>{{$product['name']}}</h6>
+                                                            @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                                <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
                                                             @else
-                                                                @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                                                @else
-                                                                    <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                                                @endif
+                                                                <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
                                                             @endif
-                                                        </li>
-                                                        <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
-                                                        </li>
-                                                        <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__item__text">
-                                                    <h6>{{$product['name']}}</h6>
-                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
-                                                    @else
-                                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
-                                                    @endif
-                                                    <div class="rating">
+                                                            <div class="rating">
 
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
+                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                            </div>
 
-                                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                                        <span class="text-1000 fw-bold">
-    <del>${{ $product['regular_price'] + (new \App\Models\admin\Product())->getDefaultSizePrice($product) }}</del>
-                                    </span>
-                                                        <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
-                                                    @else
-                                                        <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
-                                                    @endif
+                                                            @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+                                                                <span class="text-1000 fw-bold">
+        <del>${{ $product['regular_price'] + (new \App\Models\admin\Product())->getDefaultSizePrice($product) }}</del>
+                                        </span>
+                                                                <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>
+                                                            @else
+                                                                <span class="text-1000" style="font-weight: bold;">${{$product['regular_price']}}</span>
+                                                            @endif
 
 
-                                                    <div class="product__color__select">
-                                                        @foreach($product->attributeOptions as $options)
-                                                            @if($options->attribute->name == 'color')
-                                                                @foreach($options->translations as $translation)
-                                                                    @if($translation->locale == app()->getLocale())
-                                                                        <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
-                                                                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
-                                                                        </label>
+                                                            <div class="product__color__select">
+                                                                @foreach($product->attributeOptions as $options)
+                                                                    @if($options->attribute->name == 'color')
+                                                                        @foreach($options->translations as $translation)
+                                                                            @if($translation->locale == app()->getLocale())
+                                                                                <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                                                                                    <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
+                                                                                </label>
+                                                                            @endif
+                                                                        @endforeach
                                                                     @endif
                                                                 @endforeach
-                                                            @endif
-                                                        @endforeach
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div>
+                                    </div>
                                     @endforeach
                                 @endif
                             </div>
@@ -314,27 +319,29 @@
         <!-- Services Section Begin -->
     @endif
 
-<section class="product spad">
-    <div class="container">
-        <div class="col-lg-12">
-            <div class="section-title centered-paragraph">
-                <h2>ٍSales</h2>
-                <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
-            </div>
-        </div>
-        <div class="row">
-            @foreach($bannerSale as $banners)
-                <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                    <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
-                        <a href="{{route('sale.product', ['id'=>$banners->id])}}">
-                            <img src="{{asset($banners->banner)}} " style="height: 300px; width: 600px">
-                        </a>
+ @if($bannerSale)
+   <section class="product spad">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="section-title centered-paragraph">
+                        <h2>ٍSales</h2>
+                        <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </div>
-</section>
+                <div class="row">
+                    @foreach($bannerSale as $banners)
+                        <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                            <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                                <a href="{{route('sale.product', ['id'=>$banners->id])}}">
+                                    <img src="{{asset($banners->banner)}} " style="height: 300px; width: 600px">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+@endif
 
 <!-- Product Section Begin -->
 <section class="product spad">
@@ -501,7 +508,14 @@
                     <img src="{{$countdownSale->banner}}" alt="">
                     <div class="hot__deal__sticker">
                         <span>Sale Of</span>
-                        <h5>%{{$countdownSale->value}}</h5>
+                        @if($countdownSale->sale_type = 'fixed')
+                            <h5>${{$countdownSale->value}}</h5>
+                        @elseif('percent')
+                            <h5>%{{$countdownSale->value}}</h5>
+                        @else
+                            <h5>{{$countdownSale->value}}</h5>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -637,43 +651,43 @@
     updateCountdown();
 
 
-var $tickerWrapper = $(".tickerwrapper");
-var $list = $tickerWrapper.find("ul.list");
-var $clonedList = $list.clone();
-var listWidth = 10;
+    var $tickerWrapper = $(".tickerwrapper");
+    var $list = $tickerWrapper.find("ul.list");
+    var $clonedList = $list.clone();
+    var listWidth = 10;
 
-$list.find("li").each(function (i) {
-			listWidth += $(this, i).outerWidth(true);
-});
+    $list.find("li").each(function (i) {
+        listWidth += $(this, i).outerWidth(true);
+    });
 
-var endPos = $tickerWrapper.width() - listWidth;
+    var endPos = $tickerWrapper.width() - listWidth;
 
-$list.add($clonedList).css({
-	"width" : listWidth + "px"
-});
+    $list.add($clonedList).css({
+        "width" : listWidth + "px"
+    });
 
-$clonedList.addClass("cloned").appendTo($tickerWrapper);
+    $clonedList.addClass("cloned").appendTo($tickerWrapper);
 
-//TimelineMax
-var infinite = new TimelineMax({repeat: -1, paused: true});
-var time = 20;
+    //TimelineMax
+    var infinite = new TimelineMax({repeat: -1, paused: true});
+    var time = 20;
 
-infinite
+    infinite
 
-  .fromTo($list, time, {rotation:0.01,x:0}, {force3D:true, x: -listWidth, ease: Linear.easeNone}, 0)
-  .fromTo($clonedList, time, {rotation:0.01, x:listWidth}, {force3D:true, x:0, ease: Linear.easeNone}, 0)
-  .set($list, {force3D:true, rotation:0.01, x: listWidth})
-  .to($clonedList, time, {force3D:true, rotation:0.01, x: -listWidth, ease: Linear.easeNone}, time)
-  .to($list, time, {force3D:true, rotation:0.01, x: 0, ease: Linear.easeNone}, time)
-  .progress(1).progress(0)
-  .play();
+        .fromTo($list, time, {rotation:0.01,x:0}, {force3D:true, x: -listWidth, ease: Linear.easeNone}, 0)
+        .fromTo($clonedList, time, {rotation:0.01, x:listWidth}, {force3D:true, x:0, ease: Linear.easeNone}, 0)
+        .set($list, {force3D:true, rotation:0.01, x: listWidth})
+        .to($clonedList, time, {force3D:true, rotation:0.01, x: -listWidth, ease: Linear.easeNone}, time)
+        .to($list, time, {force3D:true, rotation:0.01, x: 0, ease: Linear.easeNone}, time)
+        .progress(1).progress(0)
+        .play();
 
-//Pause/Play
-$tickerWrapper.on("mouseenter", function(){
-	infinite.pause();
-}).on("mouseleave", function(){
-	infinite.play();
-});
+    //Pause/Play
+    $tickerWrapper.on("mouseenter", function(){
+        infinite.pause();
+    }).on("mouseleave", function(){
+        infinite.play();
+    });
 
 </script>
 
