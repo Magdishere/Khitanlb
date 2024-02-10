@@ -2,13 +2,9 @@
 
 namespace App\Sale;
 
-use App\Models\admin\Product;
-use App\Sale\Strategies\BogoSaleStrategy;
+use App\Models\Admin\Product;
 use App\Sale\Strategies\DefaultSaleStrategy;
-use App\Sale\Strategies\FixedSaleStrategy;
-use App\Sale\Strategies\PercentSaleStrategy;
 use App\Sale\Strategies\SaleCalculator;
-use Illuminate\Support\Carbon;
 
 class Sale
 {
@@ -20,47 +16,46 @@ class Sale
      */
     public static function calculateDiscountedPrice($productId)
     {
-        // Retrieve the product information based on the provided ID
-        $product = Product::where('id', $productId)->first();
+        $product = Product::find($productId);
 
         if ($product) {
-            // Check if there is a direct sale on the product
-            $productSale = $product->sales
-                ->where('start_date', '<=', now())
-                ->where('end_date', '>=', now())
-                ->first();
+            $discount = self::getDiscountInfo($product);
 
-            // Initialize variables to store discount type and value
-            $discountType = $productSale ? $productSale->type : null;
-            $discountValue = $productSale ? $productSale->value : null;
-
-            // If there is no direct sale on the product, check if its category has a sale
-            if (!$productSale) {
-                $categorySale = $product->category->sales
-                    ->where('start_date', '<=', now())
-                    ->where('end_date', '>=', now())
-                    ->first();
-
-                // Update discount type and value based on category sale
-                $discountType = $categorySale ? $categorySale->type : null;
-                $discountValue = $categorySale ? $categorySale->value : null;
-            }
-
-            // If a valid discount type is found, calculate the discounted price
-            if ($discountType !== null) {
+            if ($discount) {
                 $regularPrice = $product->regular_price;
-                $strategy = self::getSaleStrategy($discountType);
+                $strategy = self::getSaleStrategy($discount['type']);
 
-                // Create a SaleCalculator instance with the chosen strategy
                 $calculator = new SaleCalculator($strategy);
-
-                // Calculate and format the discounted price
-                return number_format($calculator->calculateDiscountedPrice($regularPrice, $discountValue), 2);
+                return number_format($calculator->calculateDiscountedPrice($regularPrice, $discount['value']), 2);
             }
         }
 
-        // If there is no valid product or sale information, return a default value
         return '-';
+    }
+
+    /**
+     * Get the discount information for a given product.
+     *
+     * @param  \App\Models\Admin\Product  $product
+     * @return array|null  Discount information or null if not found
+     */
+    protected static function getDiscountInfo(Product $product)
+    {
+        $productSale = $product->getActiveSales()->first();
+
+        if ($productSale) {
+            return ['type' => $productSale->type, 'value' => $productSale->value];
+        }
+
+        $categorySale = $product->category->sales()
+            ->activeSales()
+            ->first();
+
+        if ($categorySale) {
+            return ['type' => $categorySale->type, 'value' => $categorySale->value];
+        }
+
+        return null;
     }
 
     /**
@@ -71,10 +66,7 @@ class Sale
      */
     protected static function getSaleStrategy($discountType)
     {
-        // Construct the fully qualified class name for the strategy
         $strategyClass = 'App\\Sale\\Strategies\\' . ucfirst($discountType) . 'SaleStrategy';
-
-        // Check if the strategy class exists, if not, use the DefaultSaleStrategy
         return class_exists($strategyClass) ? new $strategyClass() : new DefaultSaleStrategy();
     }
 }

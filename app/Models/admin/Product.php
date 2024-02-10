@@ -34,6 +34,13 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
     {
         return $this->hasManyThrough(CategorySale::class, Category::class);
     }
+    public function getActiveSales()
+    {
+        return $this->sales()->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->where('is_active', true)
+            ->get();
+    }
 
     public function scopeSortBy($query, $sorting)
     {
@@ -73,7 +80,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         $defaultOptions = [];
 
         foreach ($this->attributeOptions as $options) {
-            $attributeName = optional($options->attribute->translations()->where('locale', app()->getLocale())->first())->name;
+            $attributeName = optional($options->attribute->translations()->where('locale', 'en')->first())->name;
 
             if ($attributeName === 'color') {
                 $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
