@@ -90,6 +90,19 @@
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
 
+    <script>
+
+    $(document).ready(function(){
+        // Event delegation for dynamically added elements
+        $(".header__menu ul").on("click", "a", function(){
+            // Remove active class from all list items within the header__menu
+            $(this).removeClass("active");
+            // Add active class to the clicked list item
+            $(this).addClass("active");
+        });
+    });
+    </script>
+
 
     @livewireScripts
 </body>

@@ -685,6 +685,7 @@
 </section>
 <!-- Latest Blog Section End -->
 </div>
+@push('js')
 <script>
     // Function to update the countdown timer
     function updateCountdown() {
@@ -755,3 +756,4 @@
 </script>
 
 
+@endpush
