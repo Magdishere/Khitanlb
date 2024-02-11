@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="about__pic">
-                    <img src="{{asset('assets/img/about/about1.jpg')}}" alt="">
+                    <img src="{{asset('assets/img/about/a.jpg')}}" alt="">
                 </div>
             </div>
         </div>
@@ -66,8 +66,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <span>Our Team</span>
-                    <h2>Meet Our Team</h2>
+                    <h2>Meet The Owner</h2>
                 </div>
             </div>
         </div>

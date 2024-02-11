@@ -1,5 +1,5 @@
 
-
+<div>
 <!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
@@ -69,8 +69,8 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="header__nav__option">
-                @livewire('cart-icon-component')
-                @livewire('wishlist-icon-component')
+                    @livewire('cart-icon-component')
+                    @livewire('wishlist-icon-component')
                 </div>
             </div>
         </div>
@@ -78,3 +78,4 @@
     </div>
 </header>
 <!-- Header Section End -->
+</div>
