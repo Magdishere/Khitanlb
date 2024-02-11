@@ -319,7 +319,9 @@
         <!-- Services Section Begin -->
     @endif
 
- @if($bannerSale)
+
+
+@if($bannerSale)
    <section class="product spad">
             <div class="container">
                 <div class="col-lg-12">
@@ -343,7 +345,7 @@
         </section>
 @endif
 
-<!-- Product Section Begin -->
+    <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -559,6 +561,9 @@
 @if($countdownSale)
 <!-- Categories Section Begin -->
 <section class="categories spad">
+
+
+
     <div class="container">
         <div class="row">
 {{--            <div class="col-lg-3">--}}
@@ -582,35 +587,42 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 offset-lg-1">
+
+                @if($countdownSale && $end_date > \Carbon\Carbon::now())
+                <div class="col-lg-7 offset-lg-1">
                 <div class="categories__deal__countdown">
                     <span>Deal Of The Week</span>
                     <h2>{{$countdownSale->name}}</h2>
-                    <div class="categories__deal__countdown__timer" id="countdown">
+                    <div class="categories__deal__countdown__timer">
                         <div class="cd-item">
-                            <span>3</span>
+                            <span id="days" class="countdown_timer" wire:key="days">{{ $days }}</span>
                             <p>Days</p>
                         </div>
                         <div class="cd-item">
-                            <span>1</span>
+                            <span id="hours" class="countdown_timer" wire:key="hours">{{ $hours }}</span>
                             <p>Hours</p>
                         </div>
                         <div class="cd-item">
-                            <span>50</span>
+                            <span id="minutes" class="countdown_timer" wire:key="minutes">{{ $minutes }}</span>
                             <p>Minutes</p>
                         </div>
                         <div class="cd-item">
-                            <span>18</span>
+                            <span id="seconds" class="countdown_timer" wire:key="seconds">{{ $seconds }}</span>
                             <p>Seconds</p>
                         </div>
+                        </div>
                     </div>
-                    <a href="#" class="primary-btn">Shop now</a>
+                    <a href="{{route('sale.product', ['id'=>$countdownSale->id])}}" class="primary-btn">Shop now</a>
+                @else
+                    <h2>Wait for new sale soon</h2>
                 </div>
-            </div>
-        </div>
+                </div>
+                @endif
     </div>
 </section>
-<!-- Categories Section End -->
+
+
+        <!-- Categories Section End -->
     @endif
 <!-- Instagram Section Begin -->
 <section class="instagram spad">
@@ -684,74 +696,41 @@
     </div>
 </section>
 <!-- Latest Blog Section End -->
+    <script>
+        function countdown() {
+            var daysElement = document.getElementById('days');
+            var hoursElement = document.getElementById('hours');
+            var minutesElement = document.getElementById('minutes');
+            var secondsElement = document.getElementById('seconds');
+
+            var days = parseInt(daysElement.innerHTML);
+            var hours = parseInt(hoursElement.innerHTML);
+            var minutes = parseInt(minutesElement.innerHTML);
+            var seconds = parseInt(secondsElement.innerHTML);
+
+            var totalSeconds = (days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60) + seconds;
+
+            if (totalSeconds <= 0) {
+                // Countdown is finished, do something here
+                return;
+            }
+
+            totalSeconds--;
+            days = Math.floor(totalSeconds / (24 * 60 * 60));
+            hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+            minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            seconds = totalSeconds % 60;
+
+            daysElement.innerHTML = days;
+            hoursElement.innerHTML = hours;
+            minutesElement.innerHTML = minutes;
+            secondsElement.innerHTML = seconds;
+
+            setTimeout(countdown, 1000);
+        }
+
+        countdown();
+
+    </script>
+
 </div>
-<script>
-    // Function to update the countdown timer
-    function updateCountdown() {
-        // Get the current date and time
-        var now = new Date().getTime();
-
-        // Get the start date of the flash sale from the HTML element
-        var startDate = new Date(document.getElementById('countdownTimer').getAttribute('datetime')).getTime();
-
-        // Calculate the time remaining in milliseconds
-        var timeRemaining = startDate - now;
-
-        // Calculate days, hours, minutes, and seconds
-        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-        // Update the HTML element with the countdown values
-        document.getElementById('countdownTimer').innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-        // Update the countdown every second
-        setTimeout(updateCountdown, 1000);
-    }
-
-    // Call the updateCountdown function to start the countdown
-    updateCountdown();
-
-
-    var $tickerWrapper = $(".tickerwrapper");
-    var $list = $tickerWrapper.find("ul.list");
-    var $clonedList = $list.clone();
-    var listWidth = 10;
-
-    $list.find("li").each(function (i) {
-        listWidth += $(this, i).outerWidth(true);
-    });
-
-    var endPos = $tickerWrapper.width() - listWidth;
-
-    $list.add($clonedList).css({
-        "width" : listWidth + "px"
-    });
-
-    $clonedList.addClass("cloned").appendTo($tickerWrapper);
-
-    //TimelineMax
-    var infinite = new TimelineMax({repeat: -1, paused: true});
-    var time = 20;
-
-    infinite
-
-        .fromTo($list, time, {rotation:0.01,x:0}, {force3D:true, x: -listWidth, ease: Linear.easeNone}, 0)
-        .fromTo($clonedList, time, {rotation:0.01, x:listWidth}, {force3D:true, x:0, ease: Linear.easeNone}, 0)
-        .set($list, {force3D:true, rotation:0.01, x: listWidth})
-        .to($clonedList, time, {force3D:true, rotation:0.01, x: -listWidth, ease: Linear.easeNone}, time)
-        .to($list, time, {force3D:true, rotation:0.01, x: 0, ease: Linear.easeNone}, time)
-        .progress(1).progress(0)
-        .play();
-
-    //Pause/Play
-    $tickerWrapper.on("mouseenter", function(){
-        infinite.pause();
-    }).on("mouseleave", function(){
-        infinite.play();
-    });
-
-</script>
-
-
