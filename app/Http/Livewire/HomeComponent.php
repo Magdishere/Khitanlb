@@ -8,12 +8,31 @@ use App\Models\admin\Slides;
 use App\Models\HomeSlider;
 
 use App\Models\Sale;
+use App\Services\TimeService;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class HomeComponent extends BaseComponent
 {
+    public $days;
+    public $hours;
+    public $minutes;
+    public $seconds;
+    public $email;
+
+    public function updateTimeValues($diff)
+    {
+        $timeValues = TimeService::updateTimeValues($diff);
+        extract($timeValues);
+
+        $this->days = $days;
+        $this->hours = $hours;
+        $this->minutes = $minutes;
+        $this->seconds = $seconds;
+    }
+
     public function render()
     {
         $slides = Slides::get();
@@ -40,6 +59,19 @@ class HomeComponent extends BaseComponent
             ->where('banner_type', 'countdown')
             ->first();
 
+        $ends_at = null;
+
+        if (isset($countdownSale ->end_date)) {
+            $ends_at = Carbon::parse($countdownSale->end_date);
+        }
+
+        $now = Carbon::now();
+        $diff = $ends_at !== null ? $ends_at->diffInSeconds($now) : null;
+
+        $this->updateTimeValues($diff);
+
+        $end_date = $ends_at;
+
         $topProductIds = DB::table('order_items')
             ->select('product_id', DB::raw('COUNT(*) as total_orders'))
             ->groupBy('product_id')
@@ -62,6 +94,7 @@ class HomeComponent extends BaseComponent
             'fproducts' => $fproducts,
             // 'pcategories' => $pcategories,
             'sproducts' => $sproducts,
+            'end_date' => $end_date,
             'mostOrderedProducts' => $mostOrderedProducts
         ]);
     }

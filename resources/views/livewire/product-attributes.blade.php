@@ -13,8 +13,8 @@
     @endif
 <p>{{$product->short_description}}
 
-<div class="product__details__option">
-    <div class="product__details__option__color">
+<div class="row product__details__option">
+    <div class="col-md-12 my-3 product__details__option__color">
         <span>Color:</span>
         @foreach($product->attributeOptions as $options)
             @if($options->attribute->name == 'color')
@@ -29,7 +29,7 @@
         @endforeach
     </div>
 
-    <div class="product__details__option__size">
+    <div class="col-md-12 my-3 product__details__option__size">
         <span>-</span>
         @foreach($product->attributeOptions as $options)
             @if($options->attribute->name !== 'color')
