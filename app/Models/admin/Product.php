@@ -6,6 +6,7 @@ use App\Models\Sale;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\admin\Category;
+use Illuminate\Http\Request;
 
 class Product extends Model implements \Astrotomic\Translatable\Contracts\Translatable
 {
@@ -124,5 +125,15 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
     }
 
 
+//     public function search(Request $request)
+//     {
+//         $query = $request->input('query');
+
+//         // Perform search query on products table
+//         $results = Product::where('name', 'like', '%'.$query.'%')->get();
+
+//         // Return search results as JSON response
+//         return response()->json($results);
+//     }
 
 }

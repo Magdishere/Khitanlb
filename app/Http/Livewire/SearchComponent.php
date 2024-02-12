@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
-use App\Models\Category;
+use App\Models\admin\Product;
+use App\Models\admin\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class SearchComponent extends Component
 {

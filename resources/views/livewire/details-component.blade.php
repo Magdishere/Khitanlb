@@ -63,7 +63,6 @@
                                 <ul>
                                     <li><span>SKU:</span> {{$product->SKU}}</li>
                                     <li><span>Category:</span> {{$product->category->name}}</li>
-                                    <li><span>Tag:</span> Clothes, Skin, Body</li>
                                 </ul>
                             </div>
                         </div>
