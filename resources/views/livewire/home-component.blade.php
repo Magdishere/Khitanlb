@@ -696,41 +696,74 @@
     </div>
 </section>
 <!-- Latest Blog Section End -->
-    <script>
-        function countdown() {
-            var daysElement = document.getElementById('days');
-            var hoursElement = document.getElementById('hours');
-            var minutesElement = document.getElementById('minutes');
-            var secondsElement = document.getElementById('seconds');
+</div>
+<script>
+    // Function to update the countdown timer
+    function updateCountdown() {
+        // Get the current date and time
+        var now = new Date().getTime();
 
-            var days = parseInt(daysElement.innerHTML);
-            var hours = parseInt(hoursElement.innerHTML);
-            var minutes = parseInt(minutesElement.innerHTML);
-            var seconds = parseInt(secondsElement.innerHTML);
+        // Get the start date of the flash sale from the HTML element
+        var startDate = new Date(document.getElementById('countdownTimer').getAttribute('datetime')).getTime();
 
-            var totalSeconds = (days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60) + seconds;
+        // Calculate the time remaining in milliseconds
+        var timeRemaining = startDate - now;
 
-            if (totalSeconds <= 0) {
-                // Countdown is finished, do something here
-                return;
-            }
+        // Calculate days, hours, minutes, and seconds
+        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-            totalSeconds--;
-            days = Math.floor(totalSeconds / (24 * 60 * 60));
-            hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-            minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-            seconds = totalSeconds % 60;
+        // Update the HTML element with the countdown values
+        document.getElementById('countdownTimer').innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
-            daysElement.innerHTML = days;
-            hoursElement.innerHTML = hours;
-            minutesElement.innerHTML = minutes;
-            secondsElement.innerHTML = seconds;
+        // Update the countdown every second
+        setTimeout(updateCountdown, 1000);
+    }
 
-            setTimeout(countdown, 1000);
-        }
+    // Call the updateCountdown function to start the countdown
+    updateCountdown();
 
-        countdown();
+
+    var $tickerWrapper = $(".tickerwrapper");
+    var $list = $tickerWrapper.find("ul.list");
+    var $clonedList = $list.clone();
+    var listWidth = 10;
+
+    $list.find("li").each(function (i) {
+        listWidth += $(this, i).outerWidth(true);
+    });
+
+    var endPos = $tickerWrapper.width() - listWidth;
+
+    $list.add($clonedList).css({
+        "width" : listWidth + "px"
+    });
+
+    $clonedList.addClass("cloned").appendTo($tickerWrapper);
+
+    //TimelineMax
+    var infinite = new TimelineMax({repeat: -1, paused: true});
+    var time = 20;
+
+    infinite
+
+        .fromTo($list, time, {rotation:0.01,x:0}, {force3D:true, x: -listWidth, ease: Linear.easeNone}, 0)
+        .fromTo($clonedList, time, {rotation:0.01, x:listWidth}, {force3D:true, x:0, ease: Linear.easeNone}, 0)
+        .set($list, {force3D:true, rotation:0.01, x: listWidth})
+        .to($clonedList, time, {force3D:true, rotation:0.01, x: -listWidth, ease: Linear.easeNone}, time)
+        .to($list, time, {force3D:true, rotation:0.01, x: 0, ease: Linear.easeNone}, time)
+        .progress(1).progress(0)
+        .play();
+
+    //Pause/Play
+    $tickerWrapper.on("mouseenter", function(){
+        infinite.pause();
+    }).on("mouseleave", function(){
+        infinite.play();
+    });
 
     </script>
 
-</div>
+

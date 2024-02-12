@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <nav class="header__menu mobile-menu">
+                <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/shop">Shop</a></li>
@@ -79,3 +79,5 @@
 </header>
 <!-- Header Section End -->
 </div>
+
+
