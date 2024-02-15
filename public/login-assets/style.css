@@ -34,6 +34,7 @@ body{
   transform-origin: left;
   transform-style: preserve-3d;
 }
+
 .container #flip:checked ~ .cover{
   transform: rotateY(-180deg);
 }
@@ -214,4 +215,6 @@ body{
   .container #flip:checked ~ .forms .login-form{
     display: none;
   }
+
+
 }

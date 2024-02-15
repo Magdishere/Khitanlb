@@ -106,7 +106,7 @@ class AdminSalesController extends Controller
 
 
 
-    public function edit()
+    public function edit($saleId)
     {
         // 1. Get category ids of category sales
         $categorySaleIds = Sale::where('target_type', 'category')
@@ -135,7 +135,7 @@ class AdminSalesController extends Controller
         // Get all categories
         $categories = Category::get();
 
-        return view('Back.Sales.edit', compact('uniqueProducts', 'categories'));
+        return view('Back.Sales.edit', compact('uniqueProducts', 'categories', 'saleId'));
     }
 
 

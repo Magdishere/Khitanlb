@@ -633,9 +633,9 @@
                     <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta.jpg')}}" alt=""></div>
                     <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta2.jpg')}}" alt=""></div>
                     <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta3.jpg')}}" alt=""></div>
-                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/4.jpg')}}" alt=""></div>
-                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/5.jpg')}}" alt=""></div>
-                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/6.jpg')}}" alt=""></div>
+                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta3.jpg')}}" alt=""></div>
+                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta2.jpg')}}" alt=""></div>
+                    <div class="instagram__pic__item set-bg"><img src="{{asset('assets/img/instagram/insta.jpg')}}" alt=""></div>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -697,6 +697,8 @@
 </section>
 <!-- Latest Blog Section End -->
 </div>
+
+@push('js')
 <script>
     // Function to update the countdown timer
     function updateCountdown() {
@@ -767,3 +769,4 @@
     </script>
 
 
+@endpush

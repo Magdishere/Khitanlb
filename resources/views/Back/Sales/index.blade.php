@@ -80,7 +80,7 @@
                                         <td>{{$sale->isActive() }}</td>
                                         <td></td>
                                         <td class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" href=""><i class="fa fa-edit"></i>Edit</a>
+                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('admin-sales.edit', $sale->id)}}"><i class="fa fa-edit"></i>Edit</a>
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete"><i class="fa fa-trash"></i>Delete</a>
                                         </td>
                                     </tr>

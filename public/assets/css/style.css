@@ -131,7 +131,7 @@ ol {
 }
 
 .section-title span {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -917,7 +917,7 @@ ol {
 
 .banner__item:hover .banner__item__text a:after {
 	width: 40px;
-	background: rgba(188,49,136,255);
+	background: #d78093;
 }
 
 .banner__item.banner__item--middle {
@@ -1056,7 +1056,7 @@ ol {
 }
 
 .categories__deal__countdown span {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -1141,7 +1141,7 @@ ol {
 }
 
 .instagram__text h3 {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-weight: 700;
 }
 
@@ -1302,10 +1302,10 @@ ol {
 }
 
 .product__item__pic .product__hover li img.heart {
-    background: no-repeat #eb3ba7;
+    background: no-repeat #d78093;
 }
 .product__item__pic .product__hover li img.p_details:hover {
-    background: linear-gradient(90deg, #f577d9, #eb3ba7, #8a1570);
+    background: linear-gradient(90deg, #f577d9, #d78093, #8a1570);
     background-size: 200% 200%;
     animation: gradientAnimation 5s linear infinite;
 }
@@ -1330,7 +1330,7 @@ ol {
 
 .product__item__text a {
 	font-size: 15px;
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-weight: 700;
 	position: absolute;
 	left: 0;
@@ -2157,7 +2157,7 @@ ol {
 }
 
 .product__details__tab .nav-tabs .nav-item .nav-link.active {
-	border-bottom: 2px solid rgba(188,49,136,255);
+	border-bottom: 2px solid #d78093;
 }
 
 .product__details__tab__content {
@@ -2316,11 +2316,11 @@ ol {
 }
 
 .footer__copyright__text p i {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 }
 
 .footer__copyright__text p a {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 }
 
 /*---------------------
@@ -2445,7 +2445,7 @@ ol {
 }
 
 .testimonial__text span {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-size: 72px;
 }
 
@@ -2688,7 +2688,7 @@ ol {
 }
 .shopping__cart__table table tbody tr td.cart__close i:hover {
 
-	color: #eb3ba7;
+	color: #d78093;
     background: #000000;
 
 }
@@ -2719,7 +2719,7 @@ ol {
     transition: 0.3s ease;
 }
 .continue__btn a:hover {
-	color: #eb3ba7;
+	color: #d78093;
     background: #000000;
     border: 1px solid #000000;
 
@@ -2809,7 +2809,7 @@ ol {
 
 .cart__total ul li span {
 	font-weight: 700;
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	float: right;
 }
 
@@ -2860,7 +2860,7 @@ ol {
 }
 
 .checkout__input p span {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 }
 
 .checkout__input input {
@@ -2909,7 +2909,7 @@ ol {
 }
 
 .checkout__input__checkbox label input:checked~.checkmark {
-	border-color: rgba(188,49,136,255);
+	border-color: #d78093;
 }
 
 .checkout__input__checkbox label input:checked~.checkmark:after {
@@ -2933,7 +2933,7 @@ ol {
 	top: -3px;
 	width: 14px;
 	height: 7px;
-	border: solid rgba(188,49,136,255);
+	border: solid #d78093;
 	border-width: 1.5px 1.5px 0px 0px;
 	-webkit-transform: rotate(127deg);
 	-ms-transform: rotate(127deg);
@@ -3023,7 +3023,7 @@ ol {
 }
 
 .checkout__total__all li span {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-weight: 700;
 	float: right;
 }
@@ -3046,7 +3046,7 @@ ol {
 
 .blog__item:hover a::after {
 	width: 40px;
-	background: rgba(188,49,136,255);
+	background: #d78093;
 }
 
 .blog__item:hover .blog__item__text {
@@ -3356,7 +3356,7 @@ ol {
 	color: #ffffff;
 	height: 50px;
 	width: 50px;
-	background: rgba(188,49,136,255);
+	background: #d78093;
 	border-radius: 50%;
 	line-height: 50px;
 	text-align: center;
@@ -3374,7 +3374,7 @@ ol {
 }
 
 .blog__details__quote h6 {
-	color: rgba(188,49,136,255);
+	color: #d78093;
 	font-size: 15px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -4380,3 +4380,33 @@ td {
 }
 
 
+/* User Name */
+
+.pulse-link {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .pulse-link:hover {
+    animation: pulse 0.5s infinite alternate;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  /*Logout btn style*/
+
+  .logout-btn-style {
+    color: initial; /* Resetting the color */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .logout-btn-style:hover {
+    color: #d78093;
+  }

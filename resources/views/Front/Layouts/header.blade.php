@@ -16,8 +16,8 @@
                         @guest <!-- Check if the user is a guest (not logged in) -->
                         <a href="{{ route('login') }}">Sign in</a>
                         @else <!-- If the user is logged in, show the user's name and logout link -->
-                            <a href="#" style="color: rgba(188,49,136,255);">{{ Auth::user()->name }}</a>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                            <a href="#" class="pulse-link" style="color: #d78093;">{{ Auth::user()->name }}</a>
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn-style">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
