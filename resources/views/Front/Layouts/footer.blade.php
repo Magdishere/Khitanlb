@@ -173,6 +173,45 @@
 
     </script>
 
+    <script>
+        // **************************************** count sales ********************************************
+
+        function countdown() {
+            var daysElement = document.getElementById('days');
+            var hoursElement = document.getElementById('hours');
+            var minutesElement = document.getElementById('minutes');
+            var secondsElement = document.getElementById('seconds');
+
+            var days = parseInt(daysElement.innerHTML);
+            var hours = parseInt(hoursElement.innerHTML);
+            var minutes = parseInt(minutesElement.innerHTML);
+            var seconds = parseInt(secondsElement.innerHTML);
+
+            var totalSeconds = (days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60) + seconds;
+
+            if (totalSeconds <= 0) {
+                // Countdown is finished, do something here
+                return;
+            }
+
+            totalSeconds--;
+            days = Math.floor(totalSeconds / (24 * 60 * 60));
+            hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+            minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            seconds = totalSeconds % 60;
+
+            daysElement.innerHTML = days;
+            hoursElement.innerHTML = hours;
+            minutesElement.innerHTML = minutes;
+            secondsElement.innerHTML = seconds;
+
+            setTimeout(countdown, 1000);
+        }
+
+        countdown();
+
+    </script>
+
 
 
     @livewireScripts
