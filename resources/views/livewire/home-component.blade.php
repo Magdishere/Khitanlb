@@ -700,35 +700,6 @@
 
 @push('js')
 <script>
-    console.log('hiii aya')
-    // Function to update the countdown timer
-    function updateCountdown() {
-        // Get the current date and time
-        var now = new Date().getTime();
-
-        // Get the start date of the flash sale from the HTML element
-        var startDate = new Date(document.getElementById('countdownTimer').getAttribute('datetime')).getTime();
-
-        // Calculate the time remaining in milliseconds
-        var timeRemaining = startDate - now;
-
-        // Calculate days, hours, minutes, and seconds
-        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-        // Update the HTML element with the countdown values
-        document.getElementById('countdownTimer').innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-        // Update the countdown every second
-        setTimeout(updateCountdown, 1000);
-    }
-
-    // Call the updateCountdown function to start the countdown
-    updateCountdown();
-
-
     var $tickerWrapper = $(".tickerwrapper");
     var $list = $tickerWrapper.find("ul.list");
     var $clonedList = $list.clone();
