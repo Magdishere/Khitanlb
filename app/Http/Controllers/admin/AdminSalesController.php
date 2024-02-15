@@ -108,36 +108,27 @@ class AdminSalesController extends Controller
 
     public function edit($saleId)
     {
-        // 1. Get category ids of category sales
-        $categorySaleIds = Sale::where('target_type', 'category')
-            ->activeSales()
-            ->with('categories:id')
-            ->get()
-            ->pluck('categories.*.id')
-            ->flatten()
-            ->toArray();
+        // 1. Find the sale by its ID
+        $sale = Sale::findOrFail($saleId);
 
-        // 2. Get products where category_id is in the obtained ids
-        $categoryProducts = Product::whereIn('category_id', $categorySaleIds)->get();
+        // Initialize an empty array to hold the associated IDs
+        $associatedIds = [];
 
-        // 3. Get products that are not associated with any sale and not in the categoryProducts
-        $productsWithoutSale = Product::whereDoesntHave('sales', function ($query) {
-            $query->where('is_active', 1);
-        })
-            ->whereNotIn('id', $categoryProducts->pluck('id'))
-            ->get();
-
-
-
-        // Remove duplicate products based on their IDs
-        $uniqueProducts = $productsWithoutSale->unique('id')->values();
+        // 2. Check the target_type of the sale
+        if ($sale->target_type === 'category') {
+            // If target_type is category, get category IDs associated with this sale
+            $associatedIds = $sale->categories()->pluck('id')->toArray();
+        } elseif ($sale->target_type === 'product') {
+            // If target_type is product, get product IDs associated with this sale
+            $associatedIds = $sale->products()->pluck('products.id')->toArray();
 
         // Get all categories
         $categories = Category::get();
+        $products = Product::get();
 
-        return view('Back.Sales.edit', compact('uniqueProducts', 'categories', 'saleId'));
+        return view('Back.Sales.edit', compact('associatedIds', 'products', 'categories', 'saleId'));
     }
-
+}
 
     public function update(
         Request $request,

@@ -537,6 +537,19 @@ ol {
     background-color: transparent;
     transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
 }
+.count-down-banner-btn {
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
+}
+
+.count-down-banner-btn:hover{
+    transform: scale(1.2); /* Increase the size on hover */
+    color: #d78093;
+    border: 1px solid #d78093;
+}
 
 .socialmedia-btn{
     color: palevioletred;

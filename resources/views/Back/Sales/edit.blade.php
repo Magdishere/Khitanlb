@@ -68,7 +68,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Edit Sale</h4>
-                            <form  id="form" action="{{route('admin-sales.update', ['admin_sale' => $saleId])}}" method="POST" class="form-sample" enctype="multipart/form-data">
+                            <form  id="form" action="{{route('admin-sales.update', $saleId)}}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -113,7 +113,7 @@
                                         <div class="col-10">
                                             <select multiple name="category_id[]" id="choose-for-category" class="filter-multi-select">
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">
+                                                    <option value="{{ $category }}">
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $category->image) }}" alt="Sales Image" style="max-width: 50px;">
 
                                                         {{ $category->name }}
@@ -126,7 +126,7 @@
                                         <label class="col-2 col-form-label" for="choose-for-product">Products</label>
                                         <div class="col-10">
                                             <select multiple name="product_id[]" id="choose-for-product" class="filter-multi-select">
-                                                @foreach($uniqueProducts as $product)
+                                                @foreach($products as $product)
                                                     <option value="{{ $product->id }}">
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Sales Image" style="max-width: 50px;">
 
