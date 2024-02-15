@@ -6,7 +6,6 @@
 @include('Front.Layouts.header')
 
 
-
 {{$slot}}
 
 

@@ -700,6 +700,7 @@
 
 @push('js')
 <script>
+    console.log('hiii aya')
     // Function to update the countdown timer
     function updateCountdown() {
         // Get the current date and time
