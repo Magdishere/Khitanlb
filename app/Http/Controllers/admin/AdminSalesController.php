@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\admin\Category;
 use App\Models\admin\Product;
 use App\Models\Sale;
-use App\Sale\Commands\CreateSaleCommand;
 use App\Sale\Strategies\Factories\SaleStrategyFactory;
 use App\Sale\Strategies\interfaces\CategorySaleStrategyInterface;
 use App\Sale\Strategies\interfaces\ImageSaleStrategyInterface;
@@ -115,20 +114,20 @@ class AdminSalesController extends Controller
         $associatedIds = [];
 
         // 2. Check the target_type of the sale
-        if ($sale->target_type === 'category') {
+            if ($sale->target_type === 'category') {
             // If target_type is category, get category IDs associated with this sale
-            $associatedIds = $sale->categories()->pluck('id')->toArray();
+            $associatedIds = $sale->categories()->select('categories.id')->pluck('id')->toArray();
         } elseif ($sale->target_type === 'product') {
             // If target_type is product, get product IDs associated with this sale
-            $associatedIds = $sale->products()->pluck('products.id')->toArray();
+            $associatedIds = $sale->products()->select('products.id')->pluck('id')->toArray();
+        }
 
-        // Get all categories
+        // Get all categories and products
         $categories = Category::get();
         $products = Product::get();
 
-        return view('Back.Sales.edit', compact('associatedIds', 'products', 'categories', 'saleId'));
+        return view('Back.Sales.edit', compact('associatedIds', 'products', 'categories', 'saleId', 'sale'));
     }
-}
 
     public function update(
         Request $request,

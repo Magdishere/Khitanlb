@@ -89,26 +89,27 @@
                                         <label class="col-2 col-form-label" for="choose-for-category">Sale for category or product</label>
                                     </div>
                                     <!-- Update the radio inputs with the new name -->
-                                    <div class="col-md-3">
-                                        <div>
-                                            <input type="radio" name="sale_type" id="radio2" class="radio" value="1" checked/>
-                                            <label for="radio2">For Category</label>
-                                        </div>
-                                        @error("sale_type")
-                                        <span class="text-danger">{{$message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div>
-                                            <input type="radio" name="sale_type" id="radio3" class="radio" value="2"/>
-                                            <label for="radio3">For product</label>
+
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="radio"  name="sale_type" id="radio2" class="radio" value="1" @if($sale->target_type === 'category') checked @endif />
+                                                <label for="radio2">For Category</label>
+                                            </div>
                                             @error("sale_type")
                                             <span class="text-danger">{{$message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
+                                        <div class="col-md-3">
+                                            <div>
+                                                <input type="radio" name="sale_type" id="radio3" class="radio" value="2" @if($sale->target_type === 'product') checked @endif />
+                                                <label for="radio3">For product</label>
+                                                @error("sale_type")
+                                                <span class="text-danger">{{$message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
 
-                                    <div class="form-group row" id="for-category">
+                                    <div class="form-group row" id="for-category" >
                                         <label class="col-2 col-form-label" for="choose-for-category">Category</label>
                                         <div class="col-10">
                                             <select multiple name="category_id[]" id="choose-for-category" class="filter-multi-select">
@@ -136,12 +137,13 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1">Name
                                                 </label>
-                                                <input type="text" name="name" id="name" class="form-control" required>
+                                                <input type="text" name="name" id="name" class="form-control" value="{{$sale->name}}" required>
                                                 @error("name")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -259,7 +261,26 @@
     <!-- content-wrapper ends -->
 @endsection
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function handleRadioChange() {
+                if ($('#radio3').is(':checked')) {
+                    $('#for-category').addClass('hidden');
+                    $('#for-product').removeClass('hidden');
+                } else {
+                    $('#for-category').removeClass('hidden');
+                    $('#for-product').addClass('hidden');
+                }
+            }
+
+            handleRadioChange();
+
+            $('input:radio[name="sale_type"]').change(handleRadioChange);
+        });
+
+    </script>
+
+
     <script>
         function previewImage(input) {
             var preview = document.getElementById('image-preview');
@@ -325,21 +346,6 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function () {
-            $('input:radio[name="sale_type"]').change(function () {
-                if (this.checked && this.value == '2') {
-                    $('#for-category').addClass('hidden');
-                    $('#for-product').removeClass('hidden');
-                } else {
-                    $('#for-category').removeClass('hidden');
-                    $('#for-product').addClass('hidden');
-                }
-            });
-        });
-
-    </script>
-
 
     <script>
         let input = document.getElementById("input_scr");
@@ -348,5 +354,6 @@
             input.click();
         }
     </script>
+
 
 @stop

@@ -182,6 +182,7 @@
     <script>
         // **************************************** count sales ********************************************
 
+
         function countdown() {
             var daysElement = document.getElementById('days');
             var hoursElement = document.getElementById('hours');
