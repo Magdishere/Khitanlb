@@ -326,14 +326,14 @@
             <div class="container">
                 <div class="col-lg-12">
                     <div class="section-title centered-paragraph">
-                        <h2>ٍSales</h2>
+                        <h2>Sales</h2>
                         <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
                     </div>
                 </div>
                 <div class="row">
                     @foreach($bannerSale as $banners)
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                            <div class="d-flex align-items-center bg-light mb-4 text-center gradient-border" style="padding: 15px;">
+                            <div class="d-flex align-items-center mb-4 text-center">
                                 <a href="{{route('sale.product', ['id'=>$banners->id])}}">
                                     <img src="{{asset($banners->banner)}} " style="height: 300px; width: 600px">
                                 </a>
@@ -636,7 +636,7 @@
     </div>
     <div class="shadow-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 0;"></div>
 </section>
-{{-- <!-- Latest Blog Section Begin -->
+<!-- Latest Blog Section Begin -->
 <section class="latest spad">
     <div class="container">
         <div class="row">
@@ -681,7 +681,7 @@
         </div>
     </div>
 </section>
-<!-- Latest Blog Section End --> --}}
+<!-- Latest Blog Section End -->
 </div>
 
 @push('js')

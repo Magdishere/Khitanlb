@@ -1177,6 +1177,7 @@ ol {
 .product {
 	padding-top: 50px;
 	padding-bottom: 20px;
+    background: #f3f2ee;
 }
 
 .filter__controls {
@@ -1199,7 +1200,7 @@ ol {
 }
 
 .filter__controls li.active {
-	color: #111111;
+	color: black;
 }
 
 .product__item {
@@ -3057,6 +3058,7 @@ ol {
 
 .latest {
 	padding-bottom: 55px;
+    background: #f3f2ee;
 }
 
 .blog__item {
