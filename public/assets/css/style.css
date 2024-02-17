@@ -265,13 +265,8 @@ ol {
     position: relative;
     top: 30px;
     left: 0%;
-    border-top: 1px solid #a0a0a0; /* Add top border */
-    border-bottom: 1px solid #a0a0a0; /* Add bottom border */
-    border-left: none; /* Remove left border */
-    border-right: none; /* Remove right border */
-    background: #fff;
     width: 99.9%;
-    height: 30px;
+    height: 20px;
     overflow: hidden;
     cursor: pointer;
   }
@@ -306,13 +301,24 @@ ol {
 }
 
 @keyframes glow {
-    from {
-        color: #ff8a00; /* Adjust the text color for the 'from' state */
+    0% {
+        color: #000000; /* Start color */
     }
-    to {
-        color: #e52e71; /* Adjust the text color for the 'to' state */
+    25% {
+        color: #ff99cc; /* Intermediate color 1 - Pink */
+    }
+    50% {
+        color: #aa106a; /* Intermediate color 2 - Yellow */
+    }
+    75% {
+        color: #ff66de; /* Intermediate color 3 - Blue */
+    }
+    100% {
+        color: #d78093; /* End color - Main color */
     }
 }
+
+
 
 .spacial-controls {
 	position: fixed;

@@ -94,17 +94,22 @@
 
     <script>
 
+
     $(document).ready(function(){
         // Event delegation for dynamically added elements
-        $(".header__menu ul").on("click", "a", function(){
-            // Remove active class from all list items within the header__menu
-            $(this).removeClass("active");
-            // Add active class to the clicked list item
+        $(".header__menu ul li").on("click", "li", function(){
+
+
+            // Remove active class from all anchor tags within the header__menu
+            $(".header__menu li").removeClass("active");
+            // Add active class to the clicked anchor tag
             $(this).addClass("active");
         });
     });
 
 
+    </script>
+    <script>
     // Function to update the countdown timer
     function updateCountdown() {
         // Get the current date and time
@@ -131,7 +136,8 @@
 
     // Call the updateCountdown function to start the countdown
     updateCountdown();
-
+    </script>
+<script>
 
     var $tickerWrapper = $(".tickerwrapper");
     var $list = $tickerWrapper.find("ul.list");
