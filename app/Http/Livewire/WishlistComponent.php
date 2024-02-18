@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class WishlistComponent extends Component
+class WishlistComponent extends BaseComponent
 {
 
     public $wishlistContent = [];
@@ -75,6 +75,29 @@ class WishlistComponent extends Component
     $this->wishlistContent = Cart::instance('wishlist')->content();
 
 }
+
+    public function mount()
+    {
+        // Retrieve all items from the wishlist when the component is mounted
+        $this->wishlistContent = Cart::instance('wishlist')->content();
+    }
+
+
+    public function addToCartAll()
+{
+    foreach ($this->wishlistContent as $item) {
+        $this->addToCart($item['id'], $item['name'], $item['price']);
+    }
+
+    Cart::instance('wishlist')->destroy();
+
+    $this->emitTo('wishlist-icon-component', 'refreshComponent');
+    // Flash success message and redirect
+    session()->flash('success_message', 'All items from the wishlist added to the cart');
+    return redirect()->back();
+}
+
+
 
 
     public function render()

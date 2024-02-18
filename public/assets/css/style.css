@@ -35,7 +35,9 @@ body {
 	height: 100%;
 	font-family: "Nunito Sans", sans-serif;
 	-webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
 }
+
 
 h1,
 h2,
@@ -126,11 +128,13 @@ ol {
 -----------------------*/
 
 .section-title {
+    padding-top: 20px;
 	margin-bottom: 45px;
 	text-align: center;
 }
 
 .section-title span {
+
 	color: #d78093;
 	font-size: 14px;
 	font-weight: 700;
@@ -862,7 +866,19 @@ ol {
     height: 100%;
     object-fit: cover; /* Prevent distortion by covering the entire container */
     border-radius: 50%;
+    transition: transform 0.3s ease; /* Smooth transition for scaling */
 }
+
+.img-inside-circle:hover{
+    transform: scale(1.1); /* Increase size on hover */
+
+}
+
+.cat-name-text:hover{
+    color: #d78093;
+    font-weight: bold;
+}
+
 
 
 .hero__text h2 {
@@ -1047,6 +1063,19 @@ ol {
 
 .categories__hot__deal img {
 	min-width: 100%;
+}
+
+.sales-images-banner{
+    border-radius: 5px;
+    height: 300px;
+    width: 600px;
+}
+
+.sales-images-banner:hover {
+    transform: scale(1.05); /* Increase size on hover */
+    transition: transform 0.3s ease; /* Smooth transition */
+     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+
 }
 
 .hot__deal__sticker {
@@ -2271,9 +2300,15 @@ ol {
 }
 
 .footer__widget ul li a {
-	color: #b7b7b7;
-	font-size: 15px;
+    color: #b7b7b7;
+    font-size: 15px;
+    transition: color 0.3s ease; /* Smooth transition for color change */
 }
+
+.footer__widget ul li a:hover {
+    color: #d78093; /* Change color on hover */
+}
+
 
 .footer__widget .footer__newslatter p {
 	color: #b7b7b7;
@@ -3595,10 +3630,15 @@ ol {
 	margin-bottom: 18px;
 }
 
+.section-title p{
+    padding-top: 10px;
+}
+
 .contact__text .section-title p {
 	color: #707070;
 	line-height: 26px;
 	margin-bottom: 0;
+
 }
 
 .contact__text ul li {

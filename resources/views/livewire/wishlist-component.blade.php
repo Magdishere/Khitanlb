@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="continue__btn update__btn">
-                            <a href="#"><i class="fa fa-plus"></i> Add To Cart</a>
+                            <a href="" wire:click="addToCartAll"><i class="fa fa-plus"></i> Add To Cart</a>
                         </div>
                     </div>
                 </div>

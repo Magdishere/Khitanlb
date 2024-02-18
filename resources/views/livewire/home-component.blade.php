@@ -37,7 +37,7 @@
                         <div class="circle-container">
                             <img src="{{ asset('admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Logo" class="img-inside-circle">
                         </div>
-                        <h5 class="text-center pt-5">{{$category->name}}</h5>
+                        <h5 class="text-center pt-5 cat-name-text">{{$category->name}}</h5>
                     </div>
                     @endforeach
                 </div>
@@ -322,11 +322,11 @@
 
 
 @if($bannerSale)
-   <section class="product spad">
+   <section class="product spad" id="sales-section">
             <div class="container">
                 <div class="col-lg-12">
                     <div class="section-title centered-paragraph">
-                        <h2>Sales</h2>
+                        <h2>Sales Section</h2>
                         <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
                     </div>
                 </div>
@@ -335,7 +335,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
                             <div class="d-flex align-items-center mb-4 text-center">
                                 <a href="{{route('sale.product', ['id'=>$banners->id])}}">
-                                    <img src="{{asset($banners->banner)}} " style="height: 300px; width: 600px">
+                                    <img class="sales-images-banner" src="{{asset($banners->banner)}} ">
                                 </a>
                             </div>
                         </div>

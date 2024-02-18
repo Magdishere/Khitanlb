@@ -21,10 +21,10 @@
                     <div class="footer__widget">
                         <h6>Shopping</h6>
                         <ul>
-                            <li><a href="#">Clothing Store</a></li>
+                            <li><a href="{{route('shop')}}">Shopping Page</a></li>
                             <li><a href="#">Trending Shoes</a></li>
                             <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
+                            <li><a href="#sales-section">Sales</a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,9 +32,9 @@
                     <div class="footer__widget">
                         <h6>Shopping</h6>
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="{{route('contact')}}">Contact Us</a></li>
                             <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
+                            <li><a href="#">Delivery</a></li>
                             <li><a href="#">Return & Exchanges</a></li>
                         </ul>
                     </div>
