@@ -49,9 +49,8 @@ class BaseComponent extends Component
         $cartService = app(CartService::class);
         $cartService->addToCart($product_id, $product_name, $product_price, $selectedColor, $selectedSize);
 
-        // Flash success message and redirect
-        session()->flash('success_message', 'Item added to the cart');
-        return redirect()->route('shop');
+        $this->emitTo('cart-icon-component', 'refreshComponent');
+
     }
 
     public function changePageSize($size)

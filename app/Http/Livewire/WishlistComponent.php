@@ -84,19 +84,15 @@ class WishlistComponent extends BaseComponent
 
 
     public function addToCartAll()
-{
-    foreach ($this->wishlistContent as $item) {
-        $this->addToCart($item['id'], $item['name'], $item['price']);
+    {
+        foreach ($this->wishlistContent as $item) {
+            $this->addToCart($item['id'], $item['name'], $item['price']);
+        }
+
+        Cart::instance('wishlist')->destroy();
+
+        $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
-
-    Cart::instance('wishlist')->destroy();
-
-    $this->emitTo('wishlist-icon-component', 'refreshComponent');
-    // Flash success message and redirect
-    session()->flash('success_message', 'All items from the wishlist added to the cart');
-    return redirect()->back();
-}
-
 
 
 

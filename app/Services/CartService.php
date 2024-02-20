@@ -28,9 +28,6 @@ class CartService implements CartServiceInterface
             $this->addNewCartItem($product_id, $product_name, $product_price, $selectedColor, $selectedSize);
         }
 
-        // Flash success message and redirect
-        session()->flash('success_message', 'Item added to the cart');
-        return redirect()->route('shop');
     }
 
     private function setDefaultOptions($product_id, $selectedColor, $selectedSize)
