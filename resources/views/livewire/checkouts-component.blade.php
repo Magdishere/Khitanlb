@@ -105,26 +105,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="acc">
-                                        Create an account?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create an account by entering the information below. If you are a returning customer
-                                    please login at the top of the page</p>
-                                </div>
-                                <div class="checkout__input">
-                                    <p>Account Password<span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="diff-acc">
-                                        Note about your order, e.g, special noe for delivery
-                                        <input type="checkbox" id="diff-acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
+                                @guest
+                                    <div class="checkout__input">
+                                        <p>Account Password<span>*</span></p>
+                                        <input type="password" name="password" placeholder="Your password" wire:model="password">
+                                    </div>
+                                @endguest
                                 <div class="checkout__input">
                                     <p>Order notes<span>*</span></p>
                                     <input type="text"

@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\OrderItem;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -15,6 +17,7 @@ class CheckoutsComponent extends Component
     public $lastname;
     public $mobile;
     public $email;
+    public $password;
     public $city;
     public $street_address;
     public $state;
@@ -39,7 +42,7 @@ class CheckoutsComponent extends Component
 
     public function placeOrder()
     {
-        $this->validate([
+        $validationRules = [
             'firstname' => 'required',
             'lastname' => 'required',
             'country' => 'required',
@@ -49,14 +52,22 @@ class CheckoutsComponent extends Component
             'zipcode' => 'required',
             'mobile' => 'required',
             'email' => 'required|email',
-        ]);
+        ];
+
+        // Add password validation rule only if the user is not authenticated
+        if (!Auth::check()) {
+            $validationRules['password'] = 'required|min:8';
+            $validationRules['email'] = 'unique:users';
+
+        }
+
+        $this->validate($validationRules);
 
         // Retrieve checkout data from the session
         $cartContent = Cart::instance('cart')->content();
 
 
         $order = new Order();
-        $order->user_id = Auth::user()->id;
         $order->subtotal = Cart::subtotal();
         $order->discount = $order->discount = $cartContent['discount'] ?? 0;  // Use default value if not set
         $order->total = Cart::total();
@@ -71,6 +82,18 @@ class CheckoutsComponent extends Component
         $order->zipcode = $this->zipcode;
         $order->status = 'ordered';
         $order->is_shipping_different = $this->ship_to_different ? 1 : 0;
+
+        if (Auth::user()->id === null) {
+            $order->user_id = Auth::user()->id;
+        } else {
+            $placeholderUser = User::create([
+                'name'      => $this->firstname . ' ' . $this->lastname,
+                'email'     => $this->email,
+                'password'  => bcrypt($this->password),
+            ]);
+            $order->user_id = $placeholderUser->id;
+        }
+
         $order->save();
 
         session()->flash('message', 'Order made successfully!');
@@ -78,13 +101,23 @@ class CheckoutsComponent extends Component
         foreach (Cart::instance('cart')->content() as $item) {
             $orderItem = new OrderItem();
             $orderItem->product_id = $item->id;
-            $orderItem->order_id = $order->id; // Use the newly created order's ID
+            $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
             $orderItem->save();
         }
 
 
+    }
+    private function createNewUser()
+    {
+        $user = new User();
+        $user->name = $this->firstname . ' ' . $this->lastname;
+        $user->email = $this->email;
+        $user->password = bcrypt($this->password);
+        $user->save();
+
+        return $user;
     }
 
 
