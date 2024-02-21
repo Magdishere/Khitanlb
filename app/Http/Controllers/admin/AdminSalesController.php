@@ -114,18 +114,19 @@ class AdminSalesController extends Controller
         $associatedIds = [];
 
         // 2. Check the target_type of the sale
-            if ($sale->target_type === 'category') {
-            // If target_type is category, get category IDs associated with this sale
-            $associatedIds = $sale->categories()->select('categories.id')->pluck('id')->toArray();
+        if ($sale->target_type === 'category') {
+        // If target_type is category, get category IDs associated with this sale
+        $associatedIds = $sale->categories()->select('categories.id')->pluck('id')->toArray();
         } elseif ($sale->target_type === 'product') {
             // If target_type is product, get product IDs associated with this sale
             $associatedIds = $sale->products()->select('products.id')->pluck('id')->toArray();
         }
 
+
         // Get all categories and products
         $categories = Category::get();
         $products = Product::get();
-
+        dd($categories);
         return view('Back.Sales.edit', compact('associatedIds', 'products', 'categories', 'saleId', 'sale'));
     }
 

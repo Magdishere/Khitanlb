@@ -86,13 +86,13 @@
 
                                     <h4 class="form-section"><i class="ft-home"></i>Sales Details</h4>
                                     <div class="form-group row">
-                                        <label class="col-2 col-form-label" for="choose-for-category">Sale for category or product</label>
+                                        <label class="col-2 col-form-label" for="choose-for-category">Category Or Product</label>
                                     </div>
                                     <!-- Update the radio inputs with the new name -->
 
                                         <div class="col-md-3">
                                             <div>
-                                                <input type="radio"  name="sale_type" id="radio2" class="radio" value="1" @if($sale->target_type === 'category') checked @endif />
+                                                <input type="radio"  name="sale_type" id="radio2" class="radio" value="1" {{ $sale->target_type === 'category' ? 'checked' : '' }} />
                                                 <label for="radio2">For Category</label>
                                             </div>
                                             @error("sale_type")
@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div>
-                                                <input type="radio" name="sale_type" id="radio3" class="radio" value="2" @if($sale->target_type === 'product') checked @endif />
+                                                <input type="radio" name="sale_type" id="radio3" class="radio" value="2" {{ $sale->target_type === 'product' ? 'checked' : '' }} />
                                                 <label for="radio3">For product</label>
                                                 @error("sale_type")
                                                 <span class="text-danger">{{$message }}</span>
@@ -114,7 +114,7 @@
                                         <div class="col-10">
                                             <select multiple name="category_id[]" id="choose-for-category" class="filter-multi-select">
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category }}">
+                                                <option value="{{ $category->id }}" {{ in_array($category->id, $associatedIds) ? 'selected' : '' }}>
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $category->image) }}" alt="Sales Image" style="max-width: 50px;">
 
                                                         {{ $category->name }}
@@ -128,7 +128,7 @@
                                         <div class="col-10">
                                             <select multiple name="product_id[]" id="choose-for-product" class="filter-multi-select">
                                                 @foreach($products as $product)
-                                                    <option value="{{ $product->id }}">
+                                                <option value="{{ $product->id }}" {{ in_array($product->id, $associatedIds) ? 'selected' : '' }}>
                                                         <img src="{{ asset('../admin-assets/uploads/images/products/' . $product->image) }}" alt="Sales Image" style="max-width: 50px;">
 
                                                         {{ $product->name }}
@@ -153,8 +153,8 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Type</label>
                                                 <select name="type" class="form-control">
-                                                    <option value="fixed">Fixed</option>
-                                                    <option value="percent">Percent</option>
+                                                    <option value="fixed" {{ $sale->type == 'fixed' ? 'selected' : '' }}>Fixed</option>
+                                                    <option value="percent" {{ $sale->type == 'percent' ? 'selected' : '' }}>Percent</option>
                                                 </select>
                                                 @error("name")
                                                 <span class="text-danger">{{$message}}</span>
@@ -167,7 +167,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1">Value</label>
-                                                <input type="number" name="value" id="value" class="form-control" required>
+                                                <input type="number" name="value" id="value" class="form-control" value="{{ $sale->value }}" required>
                                                 @error("value")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -178,13 +178,10 @@
                                             <div class="form-group">
                                                 <label for="projectinput1">Position</label>
                                                 <select name="position" class="form-control">
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
+                                                    @for($i = 0; $i <= 4; $i++)
+                                                        <option value="{{ $i }}" {{ $sale->position == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                                    @endfor
                                                 </select>
-
                                                 @error("position")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -195,7 +192,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1">Start Date</label>
-                                                <input type="datetime-local" name="starts_date" id="starts_date" class="form-control" required>
+                                                <input type="datetime-local" name="starts_date" id="starts_date" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($sale->start_date)) }}" required>
                                                 @error("starts_date")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -205,7 +202,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="projectinput1">End Date</label>
-                                                <input type="datetime-local" name="ends_date" id="ends_date" class="form-control" required>
+                                                <input type="datetime-local" name="ends_date" id="ends_date" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($sale->end_date)) }}" required>
                                                 @error("ends_date")
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
@@ -238,8 +235,8 @@
                                 <div class="form-group">
                                     <label for="banner_type">Select Banner Type</label>
                                     <select name="banner_type" id="banner_type" class="form-control">
-                                        <option value="countdown">Countdown Banner</option>
-                                        <option value="image">Image Banner</option>
+                                        <option value="countdown" {{ $sale->banner_type === 'countdown' ? 'selected' : '' }}>Countdown Banner</option>
+                                        <option value="image" {{ $sale->banner_type === 'image' ? 'selected' : '' }}>Image Banner</option>
                                     </select>
                                 </div>
 
