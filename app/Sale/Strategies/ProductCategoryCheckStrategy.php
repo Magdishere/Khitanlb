@@ -9,10 +9,16 @@ class ProductCategoryCheckStrategy implements ProductCategoryCheckStrategyInterf
 {
     public function checkProductsInSameCategory($request)
     {
-        /// Check if there are any products in the same category as the new sale
+        $saleId = $request->input('sale_id');
+
+        // Check if there are any products in the same category as the new sale
         $productsInSameCategory = Product::where('category_id', $request->input('category_id'))
-            ->whereHas('sales', function ($query) use ($request) {
+            ->whereHas('sales', function ($query) use ($request, $saleId) {
                 $query->activeSales();
+                if ($saleId !== null) {
+                    // Exclude the sale with the given ID
+                    $query->where('sales.id', '!=', $saleId);
+                }
             })
             ->exists();
 
@@ -20,6 +26,5 @@ class ProductCategoryCheckStrategy implements ProductCategoryCheckStrategyInterf
         if ($productsInSameCategory) {
             throw new \Exception('Cannot create a new sale as there are products in the same category.');
         }
-
     }
 }

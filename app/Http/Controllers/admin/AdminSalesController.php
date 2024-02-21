@@ -126,7 +126,6 @@ class AdminSalesController extends Controller
         // Get all categories and products
         $categories = Category::get();
         $products = Product::get();
-        dd($categories);
         return view('Back.Sales.edit', compact('associatedIds', 'products', 'categories', 'saleId', 'sale'));
     }
 
@@ -159,6 +158,7 @@ class AdminSalesController extends Controller
 
             return redirect()->route('admin-sales.index')->with('success', 'Sale has been updated');
         } catch (\Exception $exception) {
+            return $exception;
             DB::rollBack();
             return redirect()->route('admin-sales.index')->with(['error' => 'An error occurred. Please try again later.']);
         }

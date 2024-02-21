@@ -72,6 +72,12 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" name="sale_id" id="sale_id" class="form-control" value="{{$sale->id}}" hidden>
+                                        </div>
+                                    </div>
+
                                     <label>Sales Image</label>
                                     <input type="file" name="banner" id="banner" accept="image/*" onchange="previewImage(this)">
                                     @error('banner')

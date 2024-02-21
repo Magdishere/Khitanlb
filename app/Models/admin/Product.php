@@ -69,6 +69,20 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         return $query;
     }
 
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'product_attribute_options')
+            ->withPivot('is_default', 'price', 'attribute_option_id');
+    }
+    public function getAttributesWithTranslations()
+    {
+        // Eager load the attributes with their options and translations
+        $this->load('attributes');
+
+        // Return the product with loaded attributes
+        return $this;
+    }
+
     public function attributeOptions()
     {
         return $this->belongsToMany(AttributeOption::class, 'product_attribute_options')

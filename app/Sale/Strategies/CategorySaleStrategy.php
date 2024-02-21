@@ -9,10 +9,17 @@ class CategorySaleStrategy implements CategorySaleStrategyInterface
 {
     public function checkExistingCategorySale($request)
     {
+        $saleId = $request->input('sale_id');
+
         // Check if there is another sale in the same category
         $existingCategorySale = Sale::where('target_type', 'category')
-            ->activeSales()
-            ->whereHas('categories', function ($query) use ($request) {
+            ->activeSales();
+             // Exclude the sale with the given ID if $saleId is not null
+            if ($saleId !== null) {
+                $existingCategorySale->where('id', '!=', $saleId);
+            }
+
+            $existingCategorySale = $existingCategorySale->whereHas('categories', function ($query) use ($request) {
                 $query->where('category_id', $request->input('category_id'));
             })
             ->first();
