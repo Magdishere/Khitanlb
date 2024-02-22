@@ -32,6 +32,8 @@ class SaleProducts extends Component
     public function mount($id)
     {
         $this->id = $id;
+        $this->sale = Sale::with(['products', 'categories'])->find($this->id);
+
         // Initialize selectedColors for each product
         $products = Product::all();
         foreach ($products as $product) {
@@ -106,12 +108,10 @@ class SaleProducts extends Component
 
     public function render()
     {
-        $sale = Sale::where('id', $this->id)->with(['products', 'categories'])->first();
-
         $productsQuery = Product::query();
 
-        if ($sale->target_type == 'product') {
-            $productIds = $sale->products->pluck('id')->toArray();
+        if ($this->sale->target_type == 'product') {
+            $productIds = $this->sale->products->pluck('id')->toArray();
 
             if (!empty($this->categoryInputs)) {
                 $productsQuery->whereIn('category_id', $this->categoryInputs);
@@ -127,8 +127,8 @@ class SaleProducts extends Component
 
             // Paginate the results
             $products = $productsQuery->whereIn('id', $productIds)->paginate();
-        } elseif ($sale->target_type == 'category') {
-            $categoryId = $sale->categories->first()->id;
+        } elseif ($this->sale->target_type == 'category') {
+            $categoryId = $this->sale->categories->first()->id;
 
             if (!empty($this->categoryInputs)) {
                 $productsQuery->whereIn('category_id', $this->categoryInputs);
