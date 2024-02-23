@@ -25,16 +25,6 @@ class BaseComponent extends Component
     public $orderBy = 'featured';
     protected $listeners = ['sortBy'];
 
-    public function mount()
-    {
-        // Initialize selectedColors for each product
-        $products = Product::all();
-        foreach ($products as $product) {
-            $this->selectedColors[$product->id] = null;
-        }
-
-    }
-
 
     public function setPriceRange($min, $max)
     {

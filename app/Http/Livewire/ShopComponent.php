@@ -16,6 +16,16 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class ShopComponent extends BaseComponent
 {
 
+    public function mount()
+    {
+        // Initialize selectedColors for each product
+        $products = Product::all();
+        foreach ($products as $product) {
+            $this->selectedColors[$product->id] = null;
+        }
+
+    }
+
 
 
     public function render()

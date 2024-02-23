@@ -22,6 +22,17 @@ class HomeComponent extends BaseComponent
     public $seconds;
     public $email;
 
+    public function mount()
+    {
+        // Initialize selectedColors for each product
+        $products = Product::all();
+        foreach ($products as $product) {
+            $this->selectedColors[$product->id] = null;
+        }
+
+    }
+
+
     public function updateTimeValues($diff)
     {
         $timeValues = TimeService::updateTimeValues($diff);

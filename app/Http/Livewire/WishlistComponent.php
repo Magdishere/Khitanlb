@@ -2,11 +2,24 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\admin\Product;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class WishlistComponent extends BaseComponent
 {
+    public function mount()
+    {
+        $this->wishlistContent = Cart::instance('wishlist')->content();
+
+        // Initialize selectedColors for each product
+        $products = Product::all();
+        foreach ($products as $product) {
+            $this->selectedColors[$product->id] = null;
+        }
+
+    }
+
 
     public $wishlistContent = [];
 
@@ -76,11 +89,6 @@ class WishlistComponent extends BaseComponent
 
 }
 
-    public function mount()
-    {
-        // Retrieve all items from the wishlist when the component is mounted
-        $this->wishlistContent = Cart::instance('wishlist')->content();
-    }
 
 
     public function addToCartAll()

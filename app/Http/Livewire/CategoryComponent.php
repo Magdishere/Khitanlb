@@ -2,135 +2,63 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\admin\Category;
-use App\Models\admin\Product;
-use Livewire\Component;
 use App\Models\admin\AttributeOption;
-use App\Models\Sale;
+use App\Models\admin\Product;
+use App\Models\admin\Category;
 use App\Services\ProductRepository;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Livewire\Component;
 use Livewire\WithPagination;
 
-class CategoryComponent extends Component
+class CategoryComponent extends BaseComponent
 {
     use WithPagination;
 
-    public $selectedColors = [];
-    public $selectedSize = [];
-
-    public $min_value = 10;
-    public $max_value = 1000;
+    public $categoryId;
+    public $orderBy;
     public $min_price;
     public $max_price;
     public $categoryInputs = [];
-
-    public $pageSize = 12;
-
-    public $orderBy = 'featured';
-    protected $listeners = ['sortBy'];
+    public $selectedColors = [];
 
     public function mount($id)
     {
-        $this->id = $id;
-        $this->sale = Product::query();
+        $this->categoryId = $id;
 
         // Initialize selectedColors for each product
-        $products = Product::all();
+        $products = Product::where('category_id', $id)->get();
         foreach ($products as $product) {
             $this->selectedColors[$product->id] = null;
         }
     }
 
-    public function setPriceRange($min, $max)
-    {
-        $this->min_price = $min;
-        $this->max_price = $max;
-    }
-
-    public function addToCart($product_id, $product_name, $product_price)
-    {
-        // Get the selected color and size from the corresponding arrays
-        $selectedColor = $this->selectedColors[$product_id] ?? null;
-        $selectedSize = $this->selectedSizes[$product_id] ?? null;
-
-        // If selectedColor or selectedSize is null, get the default options of the product
-        if ($selectedColor === null || $selectedSize === null) {
-            $defaultOptions = Product::find($product_id);
-            $defaultOptionsColor = $defaultOptions->getDefaultOptionsColor($product_id);
-            $defaultOptionsSize = $defaultOptions->getDefaultOptionsSize($product_id);
-            $defaultOptionsSizePrice = $defaultOptions->getDefaultSizePrice($product_id);
-            $selectedColor = $selectedColor ?? $defaultOptionsColor['color'] ?? null;
-            $selectedSize = $selectedSize ?? $defaultOptionsSize['size'] ?? null;
-        }
-
-        // Check if the product with the same ID and attributes already exists in the cart
-        $existingItem = Cart::instance('cart')->search(function ($cartItem, $rowId) use ($product_id, $selectedColor, $selectedSize) {
-            return $cartItem->id == $product_id && $cartItem->options->color == $selectedColor && $cartItem->options->size == $selectedSize;
-        });
-
-        // Update quantity if the same product with attributes already exists
-        $existingItem->isNotEmpty() ? Cart::instance('cart')->update($existingItem->first()->rowId, 1) :
-            // Add as a new item if not already in the cart
-            $totalPrice = $product_price + $defaultOptionsSizePrice;
-        Cart::instance('cart')->add($product_id, $product_name, 1, $totalPrice, ['color' => $selectedColor, 'size' => $selectedSize])->associate('\App\Models\admin\Product');
-
-        session()->flash('success_message', 'Item added to the cart');
-        return redirect()->route('shop');
-    }
-
-    public function changePageSize($size)
-    {
-        $this->pageSize = $size;
-    }
-
-    public function changeOrder($order)
-    {
-        $this->orderBy = $order;
-    }
-
-    public function addToWishlist($product_id, $product_name, $product_price)
-    {
-        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate("App\Models\admin\Product");
-        $this->emitTo('wishlist-icon-component', 'refreshComponent');
-    }
-
-    public function removeFromWishlist($product_id)
-    {
-        foreach (Cart::instance('wishlist')->content() as $item) {
-            if ($item->id == $product_id) {
-                Cart::instance('wishlist')->remove($item->rowId);
-                $this->emitTo('wishlist-icon-component', 'refreshComponent');
-
-            }
-        }
-    }
-
-
     public function render()
     {
+        $productsQuery = Product::query()->where('category_id', $this->categoryId);
 
-            if (!empty($this->categoryInputs)) {
-                $this->sale->whereIn('category_id', $this->categoryInputs);
-            }
-
-            if (!empty($this->orderBy)) {
-                ProductRepository::sortBy($this->sale, $this->orderBy);
-            }
-
-            if (!empty($this->min_price) && !empty($this->max_price)) {
-                $this->sale->whereBetween('regular_price', [$this->min_price, $this->max_price]);
-            }
-
-            // Paginate the results
-            $products = $this->sale->where('category_id', $this->id)->paginate($this->pageSize);
-            $categories = Category::where('parent_id', null)->orderByTranslation('name', 'ASC')->get();
-            $attributeOptions = AttributeOption::with('attribute')->get();
-            return view('livewire.shop-component', [
-                'products' => $products,
-                'categories' => $categories,
-                'attributeOptions' => $attributeOptions,
-            ]);
+        if (!empty($this->categoryInputs)) {
+            $productsQuery->whereIn('category_id', $this->categoryInputs);
         }
+
+        if (!empty($this->orderBy)) {
+            ProductRepository::sortBy($productsQuery, $this->orderBy);
+        }
+
+        if (!empty($this->min_price) && !empty($this->max_price)) {
+            $productsQuery->whereBetween('regular_price', [$this->min_price, $this->max_price]);
+        }
+
+        // Paginate the results
+        $products = $productsQuery->paginate($this->pageSize);
+        $categories = Category::where('parent_id', null)->orderByTranslation('name', 'ASC')->get();
+        $attributeOptions = AttributeOption::with('attribute')->get();
+
+        return view('livewire.category-component', [
+            'products' => $products,
+            'categories' => $categories,
+            'attributeOptions' => $attributeOptions,
+        ]);
+    }
 
     public function sortBy($field)
     {
