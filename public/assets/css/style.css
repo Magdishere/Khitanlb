@@ -402,11 +402,11 @@ ol {
 
 .header__top {
 	background: #111111;
-	padding: 10px 0;
+	padding: 15px 0;
 }
 
 .header__top__left p {
-	color: #ffffff;
+	color: #d78093;
 	margin-bottom: 0;
 }
 
@@ -871,12 +871,20 @@ ol {
 
 .img-inside-circle:hover{
     transform: scale(1.1); /* Increase size on hover */
+    cursor: pointer;
 
+}
+
+.cat-name-text{
+    color: black;
+    transition: transform 0.3s ease;
 }
 
 .cat-name-text:hover{
     color: #d78093;
     font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 

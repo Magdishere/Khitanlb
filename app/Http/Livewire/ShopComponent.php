@@ -15,6 +15,9 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopComponent extends BaseComponent
 {
+
+
+
     public function render()
     {
         $productsQuery = Product::query();
@@ -41,6 +44,8 @@ class ShopComponent extends BaseComponent
             'attributeOptions' => $attributeOptions,
         ]);
     }
+
+
     public function sortBy($field)
     {
         $this->orderBy = $field;

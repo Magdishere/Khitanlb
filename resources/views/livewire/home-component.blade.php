@@ -37,7 +37,9 @@
                         <div class="circle-container">
                             <img src="{{ asset('admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Logo" class="img-inside-circle">
                         </div>
-                        <h5 class="text-center pt-5 cat-name-text">{{$category->name}}</h5>
+                        <h5 class="text-center pt-5 cat-name-text">
+                            <a href="{{ route('category', ['id' => $category->id]) }}" class="cat-name-text">{{ $category->name }}</a> <!-- Link to the category route with the category ID -->
+                        </h5>
                     </div>
                     @endforeach
                 </div>
@@ -326,7 +328,7 @@
             <div class="container">
                 <div class="col-lg-12">
                     <div class="section-title centered-paragraph">
-                        <h2>Sales Section</h2>
+                        <h2>Discover Our Sales</h2>
                         <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
                     </div>
                 </div>

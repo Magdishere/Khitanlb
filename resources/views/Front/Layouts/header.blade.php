@@ -7,14 +7,14 @@
             <div class="row">
                 <div class="col-lg-6 col-md-7">
                     <div class="header__top__left">
-                        <p>Cash on delivery, we delivery all over Lebanon.</p>
+                        <p class="cashondevilery">Cash on delivery, we delivery all over Lebanon.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
                     <div class="header__top__right">
                         <div class="header__top__links">
                         @guest <!-- Check if the user is a guest (not logged in) -->
-                        <a href="{{ route('login') }}">Sign in</a>
+                        <a href="{{ route('login') }}" class="logout-btn-style">Sign in</a>
                         @else <!-- If the user is logged in, show the user's name and logout link -->
                             <a href="#" class="pulse-link" style="color: #d78093;">{{ Auth::user()->name }}</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn-style">Logout</a>

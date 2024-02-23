@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\CartComponent;
+use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\CheckoutsComponent;
 use App\Http\Livewire\ContactComponent;
@@ -10,6 +11,7 @@ use App\Http\Livewire\SaleProducts;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\WishlistComponent;
+use App\Models\admin\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,7 @@ Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/checkouts', CheckoutsComponent::class)->name('checkouts');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/sale-product/{id}', SaleProducts::class)->name('sale.product');
+Route::get('/category/{id}', CategoryComponent::class)->name('category');
 // Route::get('/search', SearchComponent::class)->name('product.search');
 
 Auth::routes();

@@ -32,6 +32,7 @@ class BaseComponent extends Component
         foreach ($products as $product) {
             $this->selectedColors[$product->id] = null;
         }
+
     }
 
 
