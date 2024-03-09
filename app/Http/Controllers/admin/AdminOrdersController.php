@@ -10,58 +10,15 @@ use Illuminate\Http\Request;
 class AdminOrdersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function processOrders()
+    public function index()
     {
-        $priorityQueue = new PriorityQueue();
-
-        // Fetch a batch of orders from the database and insert into the priority queue.
-        $orders = Order::where('status', 'pending')->get();
-
-        foreach ($orders as $order) {
-            $priorityQueue->insert($order);
-        }
-
-        // Process orders based on priority.
-        while (!empty($priorityQueue)) {
-            $maxPriorityOrder = $priorityQueue->extractMax();
-
-            // Simulate processing the order (e.g., updating the order status).
-            $this->processOrder($maxPriorityOrder);
-
-            // Perform other processing tasks related to $maxPriorityOrder.
-            $this->sendConfirmationEmail($maxPriorityOrder);
-            $this->updateInventory($maxPriorityOrder);
-        }
-
-        return response()->json(['message' => 'Orders processed successfully']);
+        $orders = Order::get();
+        return view('Back.Orders.index', compact('orders'));
     }
-
-    protected function processOrder($order)
-    {
-        // Simulate processing the order by updating its status to 'processed' in the database.
-        $order->update(['status' => 'processed']);
-
-        // You can add additional processing logic based on your application's requirements.
-    }
-
-    protected function sendConfirmationEmail($order)
-    {
-        // Simulate sending a confirmation email to the customer.
-        // Add your email sending logic here.
-        // For example, you might use Laravel's built-in Mail facade.
-    }
-
-    protected function updateInventory($order)
-    {
-        // Simulate updating the inventory based on the processed order.
-        // Add your inventory update logic here.
-        // For example, you might decrement the quantity of products in stock.
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -126,5 +83,59 @@ class AdminOrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function processOrders()
+    {
+        $priorityQueue = new PriorityQueue();
+
+        // Fetch a batch of orders from the database and insert into the priority queue.
+        $orders = Order::where('status', 'pending')->get();
+
+        foreach ($orders as $order) {
+            $priorityQueue->insert($order);
+        }
+
+        // Process orders based on priority.
+        while (!empty($priorityQueue)) {
+            $maxPriorityOrder = $priorityQueue->extractMax();
+
+            // Simulate processing the order (e.g., updating the order status).
+            $this->processOrder($maxPriorityOrder);
+
+            // Perform other processing tasks related to $maxPriorityOrder.
+            $this->sendConfirmationEmail($maxPriorityOrder);
+            $this->updateInventory($maxPriorityOrder);
+        }
+
+        return response()->json(['message' => 'Orders processed successfully']);
+    }
+
+    protected function processOrder($order)
+    {
+        // Simulate processing the order by updating its status to 'processed' in the database.
+        $order->update(['status' => 'processed']);
+
+        // You can add additional processing logic based on your application's requirements.
+    }
+
+    protected function sendConfirmationEmail($order)
+    {
+        // Simulate sending a confirmation email to the customer.
+        // Add your email sending logic here.
+        // For example, you might use Laravel's built-in Mail facade.
+    }
+
+    protected function updateInventory($order)
+    {
+        // Simulate updating the inventory based on the processed order.
+        // Add your inventory update logic here.
+        // For example, you might decrement the quantity of products in stock.
     }
 }

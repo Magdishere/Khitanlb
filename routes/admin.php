@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminAttributeController;
 use App\Http\Controllers\admin\AdminCategoriesController;
+use App\Http\Controllers\admin\AdminOrdersController;
 use App\Http\Controllers\admin\AdminProductsController;
 use App\Http\Controllers\admin\AdminSalesController;
 use App\Http\Controllers\admin\AdminSlidesController;
@@ -43,4 +44,5 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('admin-attributes', AdminAttributeController::class);
     Route::resource('admin-options', ProductAttributeOption::class);
     Route::resource('admin-slides', AdminSlidesController::class);
+    Route::resource('admin-orders', AdminOrdersController::class);
 });

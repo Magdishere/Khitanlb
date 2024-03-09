@@ -83,7 +83,7 @@ class CheckoutsComponent extends Component
         $order->status = 'ordered';
         $order->is_shipping_different = $this->ship_to_different ? 1 : 0;
 
-        if (Auth::user()->id === null) {
+        if (Auth::check()) {
             $order->user_id = Auth::user()->id;
         } else {
             $placeholderUser = User::create([
