@@ -109,7 +109,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         $defaultOptions = [];
 
         foreach ($this->attributeOptions as $options) {
-            if ($options['attribute_id'] == 9 && $options->pivot->is_default == 1) {
+            if ($options->attribute->name === 'size' && $options->pivot->is_default == 1) {
                 $defaultOptions['size'] = optional($options->translations->where('locale', 'en')->first())->value;
             }
         }
@@ -122,7 +122,7 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
         $defaultSizePrice = 0;
 
         foreach ($this->attributeOptions as $options) {
-            if ($options['attribute_id'] == 9 && $options->pivot->is_default == 1) {
+            if ($options->attribute->name === 'size' && $options->pivot->is_default == 1) {
                 $defaultSizePrice = $options->pivot->price;
             }
         }
