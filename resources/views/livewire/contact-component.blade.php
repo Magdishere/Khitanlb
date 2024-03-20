@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <textarea placeholder="Message"></textarea>
-                                    <button type="submit" class="site-btn">Send Message</button>
+                                    <button type="submit" class="site-btn continue__btn">Send Message</button>
                                 </div>
                             </div>
                         </form>
