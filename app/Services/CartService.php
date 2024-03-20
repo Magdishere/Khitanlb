@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\admin\Attribute;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\admin\Product;
 
@@ -34,12 +35,17 @@ class CartService implements CartServiceInterface
     {
         // Retrieve default options for the product
         $defaultOptions = Product::find($product_id);
-        $defaultOptionsColor = $defaultOptions->getDefaultOptionsColor($product_id);
-        $defaultOptionsSize = $defaultOptions->getDefaultOptionsSize($product_id);
+        $attributes = Attribute::all();
+        $selectedOptions = [];
+
+        foreach ($attributes as $attribute) {
+            $defaultOptionsAttribute = $defaultOptions->getDefaultOptions($attribute->name);
+            $selectedOptions[strtolower($attribute->name)] = $selectedOptions[strtolower($attribute->name)] ?? $defaultOptionsAttribute[$attribute->name] ?? null;
+        }
 
         // Update selected color and size if they are null
-        $selectedColor = $selectedColor ?? $defaultOptionsColor['color'] ?? null;
-        $selectedSize = $selectedSize ?? $defaultOptionsSize['size'] ?? null;
+        $selectedColor = $selectedColor ?? $selectedOptions['color'];
+        $selectedSize = $selectedSize ?? $selectedOptions['size'];
 
         return [$selectedColor, $selectedSize];
     }

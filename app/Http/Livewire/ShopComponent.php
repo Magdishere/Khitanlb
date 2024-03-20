@@ -33,6 +33,7 @@ class ShopComponent extends BaseComponent
     {
         $productsQuery = Product::query();
 
+        //Search
         if (!empty($this->search)) {
             $searchTerm = '%' . $this->search . '%';
             $productsQuery->where(function ($query) use ($searchTerm) {

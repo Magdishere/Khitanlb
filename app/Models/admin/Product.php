@@ -90,14 +90,26 @@ class Product extends Model implements \Astrotomic\Translatable\Contracts\Transl
             ->withTimestamps();
     }
 
+    public function getDefaultOptions($attribute_name)
+    {
+        $defaultOptions = [];
+
+        foreach ($this->attributeOptions as $options) {
+            if ($options->attribute->name === $attribute_name && $options->pivot->is_default == 1) {
+                $defaultOptions[strtolower($attribute_name)] = optional($options->translations->where('locale', 'en')->first())->value;
+            }
+        }
+
+        return $defaultOptions;
+    }
+
     public function getDefaultOptionsColor($product_id)
     {
         $defaultOptions = [];
 
         foreach ($this->attributeOptions as $options) {
-            if ($options->attribute->name === 'color') {
-                $defaultOption = $options->pivot->where('is_default', 1)->where('product_id', $product_id)->first();
-                $defaultOptions['color'] = optional($options->translations->where('attribute_option_id', optional($defaultOption)->attribute_option_id)->first())->value;
+            if ($options->attribute->name === 'color' && $options->pivot->is_default == 1) {
+                $defaultOptions['color'] = optional($options->translations->where('locale', 'en')->first())->value;
             }
         }
 
