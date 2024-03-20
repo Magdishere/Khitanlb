@@ -10,7 +10,7 @@
                     <div class="col-xl-5 col-lg-7 col-md-8">
                         <div class="hero__text">
                             <h2 style="color: #d78093;">{{$slide->title}}</h2>
-                            <p class="text-white">{{$slide->description}}</p>
+                            <p class="slide-text">{{$slide->description}}</p>
                             <a href="{{route('shop')}}" class="primary-btn slide-btn" style="background-color: transparent;">Shop now <span class="arrow_right"></span></a>
                             <div class="hero__social">
                                 <a class="socialmedia-btn" href="#"><i class="fa fa-facebook"></i></a>
@@ -120,21 +120,21 @@
         <!-- Services Section Begin -->
         <section class="product spad">
             <div class="container">
-                <header class="row" style="color:#FFFFFF;background:rgba(0, 0, 0);">
+                <header class="row" style="color:#000000;background:rgba(215, 128, 147, 0.795);">
                     <div class="col-md-6">
-                        <h4 class="-m -fs20 -elli mt-1" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;">Flash sales, Up to 50%.</h4>
+                        <h3 class="-m -fs20 -elli mt-2" style="color: #000000; font-style:italic; font-weight:bold;  text-transform: uppercase;">{{$flashSale->name}}, Up to {{$flashSale->value}}%.</h3>
 
                     </div>
-                    <div class="col-md-6" style="font-size: 24px; text-align: right;">
-                        Time Left:
+                    <div class="col-md-6" style="font-size: 24px; margin-top:3px;  text-transform: uppercase; text-align: right;">
+                        Hurry Up:
                         <time id="countdownTimer" class="-b -ws-p" datetime="{{$flashSale->start_date}}" data-cd="true">{{$flashSale->start_date}}</time>
-                        <a href="{{route('sale.product', ['id'=>$flashSale->id])}}" class="-df -i-ctr -upp -m -mls -pvxs" style="color: rgb(240, 102, 166); text-shadow: 0 0 10px pink;"> >>
+                        <a href="{{route('sale.product', ['id'=>$flashSale->id])}}" class="-df -i-ctr -upp -m -mls -pvxs" style="color: #d78093; ">  ->
                             <svg style="fill:#FFFFFF;" viewBox="0 0 24 24" class="ic" width="24" height="24">
                                 <use xlink:href="https://www.jumia.com.eg/assets_he/images/i-icons.a66628fd.svg#arrow-right"></use></svg>
                         </a>
                     </div>
                 </header>
-                <div class="row" style="background-color: white; box-shadow: 5px 5px 10px rgb(0 0 0 / 7%); border-radius: 12px;">
+                <div class="row" style="background-color:rgba(215, 128, 147, 0.3);  ">
                     <div class="col-md-12">
                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                             <!-- Carousel indicators -->
@@ -164,7 +164,7 @@
                                     <div class="item carousel-item {{$key == 0 ? 'active' : ''}}">
                                         <div class="row product__filter">
                                             @foreach($chunk as $product)
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="product__item">
                                                         <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                                             <ul class="product__hover">
@@ -316,48 +316,23 @@
                         </div>
                     </div>
                 </div>
+                <footer class="row" style="background: rgba(215, 128, 147, 0.795); color: #000000;">
+                    <div class="col-md-6">
+                        <h5 class="-m -fs20 -elli mt-2" style="font-style:italic; font-weight:bold; text-transform: uppercase;">High Quality Products</h5>
+
+                    </div>
+                    <div class="col-md-6" style="font-size: 24px; margin-top:3px; text-transform: uppercase; text-align: right;">
+                        <h5 class="-m -fs20 -elli mt-1" style="font-style:italic; font-weight:bold; text-transform: uppercase;">P.S: Limited Quantity!</h5>
+                    </div>
+                </footer>
             </div>
         </section>
         <!-- Services Section Begin -->
     @endif
 
-
-
-@if($bannerSale)
-   <section class="product spad" id="sales-section">
-            <div class="container">
-                <div class="col-lg-12">
-                    <div class="section-title centered-paragraph">
-                        <h2>Discover Our Sales</h2>
-                        <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach($bannerSale as $banners)
-                        <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
-                            <div class="d-flex align-items-center mb-4 text-center">
-                                <a href="{{route('sale.product', ['id'=>$banners->id])}}">
-                                    <img class="sales-images-banner" src="{{asset($banners->banner)}} ">
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-@endif
-
     <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title centered-paragraph">
-                    <h2>Check Our Poducts</h2>
-                    <p>Discover our beautiful crocheted products. Each piece is carefully handmade to add warmth and charm to your space. Explore the artistry in every stitch.</p>
-                </div>
-            </div>
-        </div>
         <div class="row mt-20">
             <div class="col-lg-12">
                 <ul class="filter__controls">
@@ -559,6 +534,7 @@
 
 </section>
 
+
 <!-- Product Section End -->
 @if($countdownSale)
 <!-- Categories Section Begin -->
@@ -614,7 +590,7 @@
                         </div>
                         </div>
                     </div>
-                    <a href="{{route('sale.product', ['id'=>$countdownSale->id])}}" class="primary-btn">Shop now</a>
+                    <a href="{{route('sale.product', ['id'=>$countdownSale->id])}}" class="primary-btn slide-btn2">Check It Out</a>
                 @else
                     <h2>Wait for new sale soon</h2>
                 </div>
@@ -626,6 +602,27 @@
 
         <!-- Categories Section End -->
 @endif
+
+
+
+
+@if($bannerSale)
+<section class="product spad" id="sales-section">
+    <div class="container">
+        <div class="row">
+            @foreach($bannerSale as $banners)
+                <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
+                    <div class="d-flex mb-4 align-items-center text-center">
+                        <a href="{{route('sale.product', ['id'=>$banners->id])}}">
+                            <img class="sales-images-banner" src="{{asset($banners->banner)}} ">
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 <section class="categories spad" style="position: relative; background-image: url('assets/img/model2.jpg'); background-size: cover;">
     <div class="container">
         <div class="row">
@@ -636,7 +633,7 @@
             </div>
         </div>
     </div>
-    <div class="shadow-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 0;"></div>
+    <div class="shadow-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
 </section>
 <!-- Latest Blog Section Begin -->
 <section class="latest spad">

@@ -16,8 +16,15 @@
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__option">
             <div class="offcanvas__links">
-                <a href="{{route('login')}}">Sign in</a>
-                <a href="#">FAQs</a>
+                @guest <!-- Check if the user is a guest (not logged in) -->
+                    <a href="{{ route('login') }}" class="logout-btn-style">Sign in</a>
+                    @else <!-- If the user is logged in, show the user's name and logout link -->
+                    <a href="#" class="pulse-link" style="color: #d78093;">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn-style">Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @endguest
             </div>
             <div class="offcanvas__top__hover">
                 <span>Usd <i class="arrow_carrot-down"></i></span>
@@ -34,9 +41,19 @@
             @livewire('wishlist-icon-component')
         </div>
         <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__option">
+            <ul style="list-style: none;">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="{{url('about')}}">About Us</a></li>
+                <li><a href="./blog.html">Blog</a></li>
+                <li><a href="{{route('contact')}}">Contact</a></li>
+            </ul>
+        </div>
         <div class="offcanvas__text">
             <p>Cash on delivery, we delivery all over Lebanon.</p>
         </div>
+
     </div>
     {{-- <div id="global-loader">
         <img src="{{asset('assets/img/loading.gif')}}" class="loader-img" alt="Loader">

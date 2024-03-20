@@ -198,6 +198,10 @@ ol {
 	padding: 14px 30px;
 }
 
+.site-btn:hover {
+	color: #d78093;
+}
+
 /* Preloder */
 
 #preloder {
@@ -308,20 +312,11 @@ ol {
     0% {
         color: #000000; /* Start color */
     }
-    25% {
-        color: #ff99cc; /* Intermediate color 1 - Pink */
-    }
-    50% {
-        color: #aa106a; /* Intermediate color 2 - Yellow */
-    }
-    75% {
-        color: #ff66de; /* Intermediate color 3 - Blue */
-    }
+
     100% {
         color: #d78093; /* End color - Main color */
     }
 }
-
 
 
 .spacial-controls {
@@ -541,8 +536,15 @@ ol {
 /* Slide Button */
 
 .slide-btn {
-    color: palevioletred;
-    border: 1px solid palevioletred;
+    color: #d78093;
+    border: 1px solid #d78093;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
+}
+.slide-btn2 {
+    color: #d78093;
+    border: 1px solid #d78093;
     border-radius: 5px;
     background-color: transparent;
     transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
@@ -562,7 +564,7 @@ ol {
 }
 
 .socialmedia-btn{
-    color: palevioletred;
+    color: #d78093;
     transition: all 0.3s ease; /* Smooth transition over 0.3 seconds */
 }
 
@@ -571,11 +573,19 @@ ol {
     color: #ffffff;
 }
 
+.slide-text{
+    color: #dfdfdf;
+}
 
 .slide-btn:hover{
     transform: scale(1.2); /* Increase the size on hover */
     color: #ffffff;
     border: 1px solid rgb(255, 255, 255);
+}
+.slide-btn2:hover{
+    transform: scale(1.2); /* Increase the size on hover */
+    color: #000000;
+    border: 1px solid rgb(0, 0, 0);
 }
 
 
@@ -1214,7 +1224,7 @@ ol {
 .product {
 	padding-top: 50px;
 	padding-bottom: 20px;
-    background: #f3f2ee;
+    background: #ffffff;
 }
 
 .filter__controls {
@@ -3101,7 +3111,7 @@ ol {
 
 .latest {
 	padding-bottom: 55px;
-    background: #f3f2ee;
+    background: #ffffff;
 }
 
 .blog__item {
@@ -3775,6 +3785,7 @@ ol {
 	}
 
 
+
     .offcanvas__nav__option a span {
 		position: absolute;
         top: 0;
@@ -3792,6 +3803,8 @@ ol {
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
     }
+
+
 
 	.header__nav__option .price {
 		margin-left: 0;
@@ -3919,6 +3932,7 @@ ol {
 	}
 	.slicknav_nav ul {
 		margin: 0;
+
 	}
 	.slicknav_nav .slicknav_row,
 	.slicknav_nav a {
@@ -3946,6 +3960,7 @@ ol {
 	.offcanvas__option {
 		text-align: center;
 		margin-bottom: 30px;
+
 	}
 	.offcanvas__links {
 		display: inline-block;
@@ -4008,6 +4023,7 @@ ol {
 		padding: 2px 15px;
 		cursor: pointer;
 	}
+
 	.offcanvas__nav__option {
 		text-align: center;
 		margin-bottom: 25px;
@@ -4050,6 +4066,7 @@ ol {
 		color: #111111;
 		margin-bottom: 0;
 	}
+
 	.header__top {
 		display: none;
 	}
@@ -4204,6 +4221,11 @@ ol {
 	.cart__total {
 		padding: 35px 30px 40px;
 	}
+
+    .offcanvas__option ul li a {
+        color: black; /* Set the text color to black */
+        text-decoration: none;
+    }
 
 	.hero__items {
 		height: auto;
@@ -4479,3 +4501,28 @@ td {
   .logout-btn-style:hover {
     color: #d78093;
   }
+
+
+.image-product-wishlist {
+    transition: transform 0.3s ease;
+    width: 100px;
+    border-radius: 3px;
+}
+
+.image-product-wishlist:hover{
+    transform: scale(1.1); /* Adjust the scale value to your preference */
+}
+.name-product-wishlist {
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    display:inline-table;
+}
+
+.name-product-wishlist:hover{
+    transform: scale(1.1); /* Adjust the scale value to your preference */
+    color: #d78093;
+    transition: transform 0.3s ease;
+
+
+}

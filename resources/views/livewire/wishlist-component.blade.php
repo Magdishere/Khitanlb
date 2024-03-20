@@ -43,12 +43,14 @@
                                     <div class="product__cart__item__pic">
                                         <img src="img/shopping-cart/cart-1.jpg" alt="">
                                     </div>
-                                    <div class="product__cart__item__text">
-                                        <h6 class="text-center">{{$item->model->name}}</h6>
+                                    <div class="product__cart__item__text text-center">
+                                        <a class="name-product-wishlist" href="{{ route('product.details', ['slug' => $item->model->slug]) }}">{{$item->model->name}}</a>
                                     </div>
                                 </td>
-                                <td class="product__cart__item">
-                                    <img src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}">
+                                <td class="product__cart__item text-center">
+                                    <a href="{{ route('product.details', ['slug' => $item->model->slug]) }}">
+                                        <img class="image-product-wishlist" src="{{ asset('../admin-assets/uploads/images/products/' . $item->model->image) }}" alt="">
+                                    </a>
                                 </td>
                                 <td class="cart__price text-center">${{ $item->price }}</td>
                                 <td class="action cart__close text-center" data-title="Remove"><a href="#" class="text-muted" wire:click.prevent="removeFromWishlist('{{$item->rowId}}')"><i class="fa fa-close"></i></a></td>

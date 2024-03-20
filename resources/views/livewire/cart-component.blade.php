@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                                <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
+                                <a href="{{route('checkouts')}}"></i> Proceed To Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -109,28 +109,9 @@
                             <li>Shipping <span>${{ 5.00 }}</span></li>
                             <li>Total <span>${{ number_format($subtotal, 2) }}</span></li>
                         </ul>
-                        <div class="checkout__input__checkbox">
-                            <label for="acc-or">
-                                Create an account?
-                                <input type="checkbox" id="acc-or">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="checkout__input__checkbox">
-                            <label for="payment">
-                                Check Payment
-                                <input type="checkbox" id="payment">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="checkout__input__checkbox">
-                            <label for="paypal">
-                                Paypal
-                                <input type="checkbox" id="paypal">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <a href="{{route('checkouts')}}" class="site-btn text-center">PROCEED TO CHECKOUT</a>
+
+                        <!-- Add Cupons Section -->
+
                     </div>
                 </div>
             </div>

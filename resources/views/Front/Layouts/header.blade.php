@@ -53,15 +53,7 @@
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/shop">Shop</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="{{url('about')}}">About Us</a></li>
-                                <li><a href="./shop-details.html">Shop Details</a></li>
-                                <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                <li><a href="./checkout.html">Check Out</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{{url('about')}}">About Us</a></li>
                         <li><a href="./blog.html">Blog</a></li>
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
