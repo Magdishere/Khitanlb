@@ -16,6 +16,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class ShopComponent extends BaseComponent
 {
 
+    public $search;
+
     public function mount()
     {
         // Initialize selectedColors for each product
