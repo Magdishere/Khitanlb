@@ -32,6 +32,14 @@ class ShopComponent extends BaseComponent
     {
         $productsQuery = Product::query();
 
+        if (!empty($this->search)) {
+            $searchTerm = '%' . $this->search . '%';
+            $productsQuery->where(function ($query) use ($searchTerm) {
+                $query->whereTranslationLike('name', $searchTerm)
+                    ->orWhereTranslationLike('description', $searchTerm);
+            });
+        }
+
         if (!empty($this->categoryInputs)) {
             $productsQuery->whereIn('category_id', $this->categoryInputs);
         }
