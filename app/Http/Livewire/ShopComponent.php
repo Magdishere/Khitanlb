@@ -15,6 +15,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopComponent extends BaseComponent
 {
+    public $search;
 
     public function mount()
     {
@@ -31,6 +32,14 @@ class ShopComponent extends BaseComponent
     public function render()
     {
         $productsQuery = Product::query();
+
+        if (!empty($this->search)) {
+            $searchTerm = '%' . $this->search . '%';
+            $productsQuery->where(function ($query) use ($searchTerm) {
+                $query->whereTranslationLike('name', $searchTerm)
+                    ->orWhereTranslationLike('description', $searchTerm);
+            });
+        }
 
         if (!empty($this->categoryInputs)) {
             $productsQuery->whereIn('category_id', $this->categoryInputs);
