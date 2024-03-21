@@ -28,12 +28,11 @@ class ShopComponent extends BaseComponent
 
     }
 
-
-
-    public function render()
+    public function search($productsQuery)
     {
         $productsQuery = Product::query();
 
+        //Search
         if (!empty($this->search)) {
             $searchTerm = '%' . $this->search . '%';
             $productsQuery->where(function ($query) use ($searchTerm) {
@@ -41,6 +40,14 @@ class ShopComponent extends BaseComponent
                     ->orWhereTranslationLike('description', $searchTerm);
             });
         }
+    }
+
+
+    public function render()
+    {
+        $productsQuery = Product::query();
+
+        $this->search($productsQuery);
 
         if (!empty($this->categoryInputs)) {
             $productsQuery->whereIn('category_id', $this->categoryInputs);
