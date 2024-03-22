@@ -2776,6 +2776,26 @@ ol {
 	border-color: #111111;
 }
 
+.coupon_form input {
+    height: 30px;
+    border: 1px solid #e1e1e1;
+    font-size: 15px;
+    color: #333; /* Changed text color for better visibility */
+}
+
+.coupon_btn {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 25px;
+    transition: 0.3s ease;
+    background-color: black;
+    color: #fff; /* Changed text color to white */
+    border: none; /* Removed border */
+    cursor: pointer; /* Added pointer cursor */
+}
+
 .continue__btn.update__btn a i {
 	margin-right: 5px;
 }

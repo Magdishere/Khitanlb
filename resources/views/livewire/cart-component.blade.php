@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="continue__btn update__btn">
-                                <a href="{{route('checkouts')}}"></i> Proceed To Checkout</a>
+                                <a href="{{route('checkouts')}}"> Proceed To Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -111,6 +111,16 @@
                         </ul>
 
                         <!-- Add Cupons Section -->
+                        <form class="coupon_form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" wire:model="coupon" placeholder="Write your coupon">
+                                </div>
+                                <div class="col-md-6 px-lg-5">
+                                    <button class="coupon_btn" type="button">Apply</button>
+                                </div>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
