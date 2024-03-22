@@ -114,7 +114,7 @@
                         <form class="coupon_form">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input type="text" wire:model="coupon" placeholder="Write your coupon">
+                                    <input type="text" wire:model="couponCode" placeholder="Write your coupon">
                                 </div>
                                 <div class="col-md-6 px-lg-5">
                                     <button class="coupon_btn" type="button">Apply</button>
