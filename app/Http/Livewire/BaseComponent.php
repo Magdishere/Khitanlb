@@ -20,8 +20,7 @@ class BaseComponent extends Component
     public $max_price;
     public $categoryInputs = [];
 
-
-    public $pageSize = 12;
+    public $pageSize = 9;
 
     public $orderBy = 'featured';
     protected $listeners = ['sortBy'];

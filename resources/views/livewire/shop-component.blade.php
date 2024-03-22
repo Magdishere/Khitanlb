@@ -72,30 +72,6 @@
                             </div>
                             <div class="card">
                                 <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseFour">Size</a>
-                                </div>
-                                <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__size">
-                                            @foreach($attributeOptions as $options)
-                                                @if($options->attribute->name === 'size')
-                                                    @foreach($options->translations as $translation)
-                                                        @if($translation->locale == 'en')
-                                                            <label class="{{--{{/* ($selectedSize !== null ) ? 'active' : ''*/ }}--}}" for="{{ $translation->value }}">
-                                                                {{ $translation->value }}
-                                                                <input type="radio" id="{{ $translation->value }}" wire:model="selectedSize" value="">
-                                                            </label>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-heading">
                                     <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
                                 </div>
                                 <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
@@ -108,24 +84,6 @@
                                                     </label>
                                                 @endforeach
                                             @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
-                                </div>
-                                <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__tags">
-                                            <a href="#">Product</a>
-                                            <a href="#">Bags</a>
-                                            <a href="#">Shoes</a>
-                                            <a href="#">Fashio</a>
-                                            <a href="#">Clothing</a>
-                                            <a href="#">Hats</a>
-                                            <a href="#">Accessories</a>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +128,8 @@
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ asset('admin-assets/uploads/images/products/' . $product['image']) }}" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
+
+                                <div class="product__item__pic set-bg" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                     <ul class="product__hover">
                                         <li>
                                     @if($items->contains($product->id))
@@ -233,9 +192,11 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+                        <!-- Product Pagination -->
                         <div class="product__pagination">
                             {{ $products->links() }}
                         </div>
+                        <!-- End Product Pagination -->
                     </div>
                 </div>
             </div>
