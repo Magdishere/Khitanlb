@@ -74,6 +74,7 @@
                     <span>{{$string->length}} - {{$string->material}} - {{$string->weight}}Kg</span>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
