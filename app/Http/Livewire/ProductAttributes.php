@@ -6,6 +6,7 @@ use App\Models\admin\Product;
 use App\Models\admin\ProductAttributeOption;
 use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProductAttributes extends BaseComponent
@@ -34,31 +35,34 @@ class ProductAttributes extends BaseComponent
     {
         $basePrice = $this->product->regular_price;
         $colorPrice = $this->selectedColors ? $this->selectedColors : 0;
+
+        $sizePrice = 0;
+
         if (!empty($this->selectedSize)) {
-            $sizeId = \App\Models\admin\AttributeOption::query()
-                ->join('attribute_option_translations', 'attribute_options.id', '=', 'attribute_option_translations.attribute_option_id')
-                ->where('attribute_option_translations.locale', 'en')
-                ->where('attribute_option_translations.value', current($this->selectedSize))
-                ->value('attribute_options.id');
+            $sizePriceQuery = "
+            SELECT pa.price
+            FROM product_attribute_options pa
+            JOIN attribute_options ao ON pa.attribute_option_id = ao.id
+            JOIN attribute_option_translations aot ON ao.id = aot.attribute_option_id
+            WHERE pa.product_id = :productId
+            AND aot.locale = 'en'
+            AND aot.value = :sizeValue
+            LIMIT 1
+        ";
 
-            $sizePriceModel = ProductAttributeOption::where('product_id', $this->product->id)
-                ->where('attribute_option_id', $sizeId)
-                ->first();
+            $sizePriceModel = DB::select($sizePriceQuery, [
+                'productId' => $this->product->id,
+                'sizeValue' => current($this->selectedSize)
+            ]);
 
-            if ($sizePriceModel) {
-                dd($sizePriceModel);
-                $sizePrice = $sizePriceModel->price;
+            if (!empty($sizePriceModel)) {
+                $sizePrice = floatval($sizePriceModel[0]->price);
             }
-        } else {
-            $defaultOptions = Product::find($this->product->id);
-            $sizePrice = $defaultOptions->getDefaultSizePrice($this->product->id) ?? 0;
         }
-
 
         $totalPrice = $basePrice + $sizePrice;
         $this->calculatedPrice = $totalPrice;
     }
-
     public function render()
     {
         return view('livewire.product-attributes');
