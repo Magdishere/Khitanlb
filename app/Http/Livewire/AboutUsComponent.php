@@ -11,7 +11,7 @@ class AboutUsComponent extends Component
 
     public function render()
     {
-        $strings = Strings::where('id', 3)->get();
+        $strings = Strings::get();
         return view('livewire.about-component', ['strings' => $strings]);
     }
 }

@@ -53,7 +53,7 @@
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/shop">Shop</a></li>
-                        <li><a href="/about">About Us</a></li>
+                        <li><a href="{{route('about-us')}}">About Us</a></li>
                         <li><a href="./blog.html">Blog</a></li>
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>

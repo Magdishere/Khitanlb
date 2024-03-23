@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\AboutUs;
 use App\Http\Livewire\AboutUsComponent;
+use App\Http\Livewire\AboutUsPageComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
@@ -39,7 +40,7 @@ Route::get('/cart', CartComponent::class)->name('shop.cart');
 Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 Route::get('/contact', ContactComponent::class)->name('contact');
 Route::get('/checkouts', CheckoutsComponent::class)->name('checkouts');
-Route::get('/about', AboutUsComponent::class)->name('about');
+Route::get('/about-us', AboutUsComponent::class)->name('about-us');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/sale-product/{id}', SaleProducts::class)->name('sale.product');
 Route::get('/category/{id}', CategoryComponent::class)->name('category');
