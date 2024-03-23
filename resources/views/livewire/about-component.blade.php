@@ -64,6 +64,8 @@
                     <h2>Our Crochet Threads</h2>
                 </div>
             </div>
+        </div>
+        <div class="row">
             @foreach($strings as $string)
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="team__item">
@@ -72,7 +74,6 @@
                     <span>{{$string->length}} - {{$string->material}} - {{$string->weight}}Kg</span>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 </section>
