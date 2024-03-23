@@ -3,10 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\admin\Product;
+use App\Services\CartService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
-class ProductAttributes extends Component
+class ProductAttributes extends BaseComponent
 {
     public $product;
     public $selectedColors = [];
@@ -17,47 +18,7 @@ class ProductAttributes extends Component
     {
         $this->product = $product;
         $this->calculatePrice();
-
-        $this->emit('colorSelected', $this->selectedColors);
     }
-
-    public function addToCart($product_id, $product_name, $product_price)
-    {
-        // Get the selected color and size from the corresponding arrays
-        $selectedColor = $this->selectedColors[$product_id] ?? null;
-        $selectedSize = $this->selectedSize[$product_id] ?? null;
-
-        // Initialize $totalPrice
-        $totalPrice = 0;
-
-        // If selectedColor or selectedSize is null, get the default options of the product
-        if ($selectedColor === null || $selectedSize === null) {
-            $defaultOptions = Product::find($product_id);
-            $defaultOptionsColor = $defaultOptions->getDefaultOptionsColor($product_id);
-            $defaultOptionsSize = $defaultOptions->getDefaultOptionsSize($product_id);
-            $defaultOptionsSizePrice = $defaultOptions->getDefaultSizePrice($product_id) ?? 0;
-            $selectedColor = $selectedColor ?? $defaultOptionsColor['color'] ?? null;
-            $selectedSize = $selectedSize ?? $defaultOptionsSize['size'] ?? null;
-            $totalPrice = $product_price;
-        }
-
-        // Check if the product with the same ID and attributes already exists in the cart
-        $existingItem = Cart::instance('cart')->search(function ($cartItem, $rowId) use ($product_id, $selectedColor, $selectedSize) {
-            return $cartItem->id == $product_id && $cartItem->options->color == $selectedColor && $cartItem->options->size == $selectedSize;
-        });
-
-        // Update quantity if the same product with attributes already exists
-        if ($existingItem->isNotEmpty()) {
-            Cart::instance('cart')->update($existingItem->first()->rowId, 1);
-        } else {
-            // Add as a new item if not already in the cart
-            Cart::instance('cart')->add($product_id, $product_name, 1, $totalPrice, ['color' => $selectedColor, 'size' => $selectedSize])->associate('\App\Models\admin\Product');
-        }
-
-        session()->flash('success_message', 'Item added to the cart');
-        return redirect()->route('shop');
-    }
-
 
     public function updatedSelectedColor()
     {
