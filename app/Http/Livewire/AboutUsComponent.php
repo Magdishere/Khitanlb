@@ -7,11 +7,9 @@ use Livewire\Component;
 
 class AboutUsComponent extends Component
 {
-
-
     public function render()
     {
-        $strings = Strings::where('id', 3)->get();
-        return view('livewire.about-component', ['strings' => $strings]);
+        $string = Strings::find(1);
+        return view('livewire.about-component', ['string' => $string]);
     }
 }

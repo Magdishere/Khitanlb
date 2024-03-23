@@ -1,11 +1,4 @@
-@include('Front.Layouts.head')
-
-@include('Front.Layouts.menu')
-
-
-@include('Front.Layouts.header')
-
-   <!-- Breadcrumb Section Begin -->
+<!-- Breadcrumb Section Begin -->
    <section class="breadcrumb-option">
     <div class="container">
         <div class="row">
@@ -71,7 +64,6 @@
             </div>
         </div>
         <div class="row">
-            @foreach($strings as $string)
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="team__item">
                     <img src="{{asset('assets/img/about/team-1.jpg')}}" alt="">
@@ -79,10 +71,8 @@
                     <span>Fashion Design</span>
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 </section>
 <!-- Team Section End -->
 
-@include('Front.Layouts.footer')
