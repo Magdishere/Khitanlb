@@ -71,34 +71,15 @@
             </div>
         </div>
         <div class="row">
+            @foreach($strings as $string)
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="team__item">
                     <img src="{{asset('assets/img/about/team-1.jpg')}}" alt="">
-                    <h4>Christina Makhlouf</h4>
+                    <h4>{{$string->brand}}</h4>
                     <span>Fashion Design</span>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item">
-                    <img src="{{asset('assets/img/about/team-2.jpg')}}" alt="">
-                    <h4>Christine Wise</h4>
-                    <span>C.E.O</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item">
-                    <img src="{{asset('assets/img/about/team-3.jpg')}}" alt="">
-                    <h4>Sean Robbins</h4>
-                    <span>Manager</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="team__item">
-                    <img src="{{asset('assets/img/about/team-4.jpg')}}" alt="">
-                    <h4>Lucy Myers</h4>
-                    <span>Delivery</span>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

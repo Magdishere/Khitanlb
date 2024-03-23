@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminOrdersController;
 use App\Http\Controllers\admin\AdminProductsController;
 use App\Http\Controllers\admin\AdminSalesController;
 use App\Http\Controllers\admin\AdminSlidesController;
+use App\Http\Controllers\admin\AdminStringsController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Models\admin\ProductAttributeOption;
@@ -45,4 +46,5 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('admin-options', ProductAttributeOption::class);
     Route::resource('admin-slides', AdminSlidesController::class);
     Route::resource('admin-orders', AdminOrdersController::class);
+    Route::resource('admin-strings', AdminStringsController::class);
 });
