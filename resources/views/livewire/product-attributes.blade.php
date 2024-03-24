@@ -3,7 +3,7 @@
 @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
     <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id']) + $calculatedPrice}} <span>{{ $product['regular_price'] }}</span></h3>
 @else
-    <h3>${{$calculatedPrice ? $calculatedPrice : $product->regular_price}}</h3>
+    <h3>${{$product->regular_price + $calculatedPrice}}</h3>
 @endif
 
     @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
