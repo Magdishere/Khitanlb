@@ -33,7 +33,8 @@ class ProductAttributes extends BaseComponent
 
     private function calculatePrice()
     {
-        $basePrice = $this->product->regular_price;
+
+        // $basePrice = $this->product->regular_price;
         $colorPrice = $this->selectedColors ? $this->selectedColors : 0;
 
         $sizePrice = 0;
@@ -61,7 +62,8 @@ class ProductAttributes extends BaseComponent
             }
         }
 
-        $totalPrice = $basePrice + $sizePrice;
+
+        $totalPrice = $sizePrice;
         $this->calculatedPrice = $totalPrice;
     }
     public function render()
