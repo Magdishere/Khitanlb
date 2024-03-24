@@ -38,6 +38,7 @@ class ProductAttributes extends BaseComponent
 
         $sizePrice = 0;
 
+        //
         if (!empty($this->selectedSize)) {
             $sizePriceQuery = "
             SELECT pa.price
