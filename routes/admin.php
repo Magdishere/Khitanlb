@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminAttributeController;
 use App\Http\Controllers\admin\AdminCategoriesController;
+use App\Http\Controllers\admin\AdminContactController;
 use App\Http\Controllers\admin\AdminCouponsController;
 use App\Http\Controllers\admin\AdminOrdersController;
 use App\Http\Controllers\admin\AdminProductsController;
@@ -49,4 +50,5 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('admin-orders', AdminOrdersController::class);
     Route::resource('admin-strings', AdminStringsController::class);
     Route::resource('admin-coupons', AdminCouponsController::class);
+    Route::resource('admin-messages', AdminContactController::class);
 });
