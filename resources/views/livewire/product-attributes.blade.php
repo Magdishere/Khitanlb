@@ -1,13 +1,13 @@
 <div>
 
-@if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-    <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id']) + $calculatedPrice}} <span>{{ $product['regular_price'] }}</span></h3>
-@else
-    <h3>${{$product->regular_price + $calculatedPrice}}</h3>
-@endif
+    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
+        <h3>${{ App\Sale\Sale::calculateDiscountedPrice($product['id']) + $calculatedPrice}} <span>{{ $product['regular_price'] }}</span></h3>
+    @else
+        <h3>${{$calculatedPrice ? $calculatedPrice : $product->regular_price}}</h3>
+    @endif
 
     @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-        <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
+        <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) + $calculatedPrice }})"                                            >+ Add To Cart</a>
     @else
         <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$calculatedPrice ? $calculatedPrice : $product->regular_price}})">Add To Cart</a>
     @endif

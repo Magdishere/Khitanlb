@@ -40,14 +40,8 @@
                     <div class="col-lg-8">
                         <div class="product__details__text">
                             <h4>{{$product->name}}</h4>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                                <span> - 5 Reviews</span>
-                            </div>
+                            <livewire:reviews-component :productId="$product->id" />
+
                             <livewire:product-attributes :product="$product" />
 
                             <div class="product__details__cart__option">
