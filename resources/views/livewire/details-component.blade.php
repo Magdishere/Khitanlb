@@ -198,13 +198,9 @@
                             @else
                                 <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
                             @endif
-                            <div class="rating">
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </div>
+
+                            <livewire:reviews-component :productId="$product->id" />
+
                             @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
                             <span class="text-1000 fw-bold"><del>${{$product['regular_price']}}</del></span>
                             <span class="text-1000" style="font-weight: bold;">${{ App\Sale\Sale::calculateDiscountedPrice($product['id'])}}</span>

@@ -13,9 +13,5 @@
         @endfor
             <span> - {{ $totalReviews }} Reviews</span>
     </div>
-    @if(auth()->check())
-        <!-- No need for the form -->
-    @else
-        <p>Please <a href="{{ route('login') }}" style="color:#d78093">login</a> to leave a rating.</p>
-    @endif
+
 </div>
