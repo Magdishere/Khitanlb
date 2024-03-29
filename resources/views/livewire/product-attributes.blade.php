@@ -11,7 +11,6 @@
     @else
         <a href="#" class="primary-btn" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$calculatedPrice ? $calculatedPrice : $product->regular_price}})">Add To Cart</a>
     @endif
-<p style="padding-top: 10px;">{{$product->short_description}}
 
 <div class="row product__details__option">
     <div class="col-md-12 my-3 product__details__option__color">

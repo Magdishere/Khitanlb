@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            {{-- <div class="card">
                                 <div class="card-heading">
                                     <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
                                 </div>
@@ -78,16 +78,20 @@
                                     <div class="card-body">
                                         <div class="shop__sidebar__color">
                                             @foreach($attributeOptions->where('attribute.name', 'color') as $options)
-                                                @foreach($options->translations->where('locale', app()->getLocale()) as $translation)
-                                                    <label class="c-{{ $loop->index + 1 }}" for="sp-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
-                                                        <input type="radio" wire:model="selectedColor" value="">
+                                                @foreach($options->translations->where('locale', App::getLocale()) as $translation)
+                                                    <label class="c-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
+                                                        <input type="radio" wire:model="selectedColor" value="{{ $translation->value }}">
+
                                                     </label>
                                                 @endforeach
                                             @endforeach
+                                            <label>
+                                                <input type="radio" wire:model="selectedColor" value=""> All Colors
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

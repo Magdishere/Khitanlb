@@ -17,15 +17,21 @@ class ShopComponent extends BaseComponent
 {
 
 
-    public $search;
+    public $search ;
+
+    public $selectedColor;
+
 
     public function mount()
     {
+
+
         // Initialize selectedColors for each product
         $products = Product::all();
         foreach ($products as $product) {
             $this->selectedColors[$product->id] = null;
         }
+
 
     }
 
@@ -39,6 +45,11 @@ class ShopComponent extends BaseComponent
             });
         }
     }
+
+    // public function selectColor($productId, $color)
+    // {
+    //     $this->selectedColors[$productId] = $color;
+    // }
 
 
     public function render()
@@ -60,6 +71,13 @@ class ShopComponent extends BaseComponent
         if (!empty($this->min_price) && !empty($this->max_price)) {
             $productsQuery->whereBetween('regular_price', [$this->min_price, $this->max_price]);
         }
+
+        // if (!empty($this->selectedColor)) {
+        //     $productsQuery->whereHas('attributeOptions', function ($query) {
+        //         $query->where('value', $this->selectedColor);
+        //     });
+        // }
+
 
         // Paginate the results
         $products = $productsQuery->paginate($this->pageSize);
