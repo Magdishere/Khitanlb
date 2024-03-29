@@ -18,6 +18,8 @@ class HomeComponent extends BaseComponent
 {
 
 
+    protected $listeners = ['refreshComponent' => '$refresh', 'colorSelected' => 'updateSelectedColors'];
+
     public function mount()
     {
         // Initialize selectedColors for each product

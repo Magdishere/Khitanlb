@@ -37,8 +37,6 @@ class BaseComponent extends Component
         $selectedColor = $this->selectedColors[$product_id] ?? null;
         $selectedSize = $this->selectedSize[$product_id] ?? null;
 
-        dd($selectedColor);
-
         $cartService = app(CartService::class);
         $cartService->addToCart($product_id, $product_name, $product_price, $selectedColor, $selectedSize);
 

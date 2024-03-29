@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class BestNewHotComponent extends BaseComponent
 {
+    protected $listeners = ['refreshComponent' => '$refresh', 'colorSelected' => 'updateSelectedColors'];
+
 
     public function mount()
     {

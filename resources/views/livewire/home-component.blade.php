@@ -47,21 +47,13 @@
         </div>
     </section>
 </div>
-    <!-- Flash Sale -->
     <livewire:home-page.flash-sale-component />
-    <!-- End Flash Sale -->
 
-    <!-- Product Section Begin -->
     <livewire:home-page.best-new-hot-component />
-    <!-- Product Section End -->
 
-    <!-- Countdown Sale Begin -->
     <livewire:home-page.count-down-component />
-    <!-- Countdown Sale End -->
 
-    <!-- Banner Sale Begin -->
     <livewire:home-page.banner-sale-component />
-    <!-- Banner Sale End -->
 
 
 
