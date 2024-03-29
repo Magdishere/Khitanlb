@@ -6,46 +6,47 @@
 
     <livewire:home-page.categories-component />
 
-<section class="product spad">
-    <div class="tickerwrapper">
-        <ul class='list'>
-           <li class='listitem'>
-             <span>Free & Fast Shipping</span>
-           </li>
-           <li class='listitem'>
+<div>
+    <section class="product spad">
+        <div class="tickerwrapper">
+            <ul class='list'>
+            <li class='listitem'>
+                <span>Free & Fast Shipping</span>
+            </li>
+            <li class='listitem'>
+                <span>High Quality</span>
+            </li>
+            <li class='listitem'>
+                <span>14-Day Return</span>
+            </li>
+            <li class='listitem'>
+                <span>24/7 Support</span>
+            </li>
+            <li class='listitem'>
+                <span>Free & Fast Shipping</span>
+            </li>
+            <li class='listitem'>
             <span>High Quality</span>
-           </li>
-           <li class='listitem'>
+            </li>
+            <li class='listitem'>
             <span>14-Day Return</span>
-           </li>
-           <li class='listitem'>
+            </li>
+            <li class='listitem'>
             <span>24/7 Support</span>
-           </li>
-           <li class='listitem'>
+            </li>
+            <li class='listitem'>
             <span>Free & Fast Shipping</span>
-          </li>
-          <li class='listitem'>
-           <span>High Quality</span>
-          </li>
-          <li class='listitem'>
-           <span>14-Day Return</span>
-          </li>
-          <li class='listitem'>
-           <span>24/7 Support</span>
-          </li>
-          <li class='listitem'>
-           <span>Free & Fast Shipping</span>
-          </li>
-          <li class='listitem'>
-           <span>High Quality</span>
-          </li>
-          <li class='listitem'>
-           <span>14-Day Return</span>
-          </li>
-       </ul>
-     </div>
-</section>
-
+            </li>
+            <li class='listitem'>
+            <span>High Quality</span>
+            </li>
+            <li class='listitem'>
+            <span>14-Day Return</span>
+            </li>
+        </ul>
+        </div>
+    </section>
+</div>
     <!-- Flash Sale -->
     <livewire:home-page.flash-sale-component />
     <!-- End Flash Sale -->
@@ -58,25 +59,28 @@
     <livewire:home-page.count-down-component />
     <!-- Countdown Sale End -->
 
-    <!-- Countdown Sale Begin -->
+    <!-- Banner Sale Begin -->
     <livewire:home-page.banner-sale-component />
-    <!-- Countdown Sale End -->
+    <!-- Banner Sale End -->
 
 
 
-
-<section class="categories spad" style="position: relative; background-image: url('assets/img/model2.jpg'); background-size: cover;">
-    <div class="container">
-        <div class="row">
-            <div class="section-title centered-paragraph" style="position: relative; z-index: 1;">
-                <h2 style="color: #d78093;">Up for Collaboration?</h2>
-                <p class="text-white" style="padding-top: 10px;">Join us as a model and showcase the elegance of our handmade crochet creations, adding warmth and charm to every moment.</p>
-                <a href="https://wa.me/70366100" class="primary-btn slide-btn" style="background-color: transparent;">Contact Us</a>
+<div>
+    <section class="categories spad" style="position: relative; background-image: url('assets/img/model2.jpg'); background-size: cover;">
+        <div class="container">
+            <div class="row">
+                <div class="section-title centered-paragraph" style="position: relative; z-index: 1;">
+                    <h2 style="color: #d78093;">Up for Collaboration?</h2>
+                    <p class="text-white" style="padding-top: 10px;">Join us as a model and showcase the elegance of our handmade crochet creations, adding warmth and charm to every moment.</p>
+                    <a href="https://wa.me/70366100" class="primary-btn slide-btn" style="background-color: transparent;">Contact Us</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="shadow-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
-</section>
+        <div class="shadow-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+    </section>
+</div>
+
+<div>
 <!-- Latest Blog Section Begin -->
 <section class="latest spad">
     <div class="container">
@@ -192,6 +196,7 @@
     }).on("mouseleave", function(){
         infinite.play();
     });
+
 
     </script>
 

@@ -53,6 +53,7 @@
                             </div>
 
                             <livewire:details-product-wishlist-button :product="$product" :items="$items" wire:key="{{ $product->id }}" />
+
                             <div class="product__details__last__option">
                                 <ul>
                                     <li><span>SKU:</span> {{$product->SKU}}</li>

@@ -11,7 +11,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class SaleProducts extends Component
+class SaleProducts extends BaseComponent
 {
     use WithPagination;
 
