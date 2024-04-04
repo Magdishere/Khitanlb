@@ -6,7 +6,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Categories</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ All Categories</span>
+                <h4 class="content-title mb-0 my-auto">Orders</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ All Orders</span>
             </div>
         </div>
 
@@ -20,36 +20,47 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">CATEGORIES TABLE</h4>
-                        <a class="btn add-btn"  href="{{route('Admin-Categories.create')}}"><i class="fa fa-plus"></i> Add Category</a>
+                        <h4 class="card-title mg-b-0">ORDERS TABLE</h4>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Categories</p>
+                    <p class="tx-12 tx-gray-500 mb-2">All Orders</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table text-md-nowrap table-bordered">
                             <thead class="">
                                 <tr>
-                                    <th class="wd-15p border-bottom-0 text-center">#</th>
-                                    <th class="wd-15p border-bottom-0 text-center">Category Image</th>
-                                    <th class="wd-20p border-bottom-0 text-center">Name</th>
-                                    <th class="wd-15p border-bottom-0 text-center">Slug</th>
-                                    <th class="wd-15p border-bottom-0 text-center">Actions</th>
+                                    <th class="wd-5p border-bottom-0 text-center">#</th>
+                                    <th class="wd-15p border-bottom-0 text-center">Client</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Subtotal</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Discount</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Total</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Status</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($orders as $order)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->index + 1 }}</td>
-                                        <td class="text-center"><img src="{{ asset('../admin-assets/uploads/images/categories/' . $order->image_path) }}" alt="Category Image" style="max-width: 50px;"></td>
-                                        <td class="text-center">{{$order->name}}</td>
-                                        <td class="text-center">{{$order->slug}}</td>
-                                        <td class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('Admin-Categories.edit', $order->id)}}"><i class="fa fa-edit"></i> Edit</a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$order->id}}"><i class="fa fa-trash"></i> Delete</a>
-                                        </td>
-                                    </tr>
-                                    @include('Back.Categories.delete')
+                                <tr>
+                                    <td class="text-center">{{ $loop->index + 1 }}</td>
+                                    <td class="text-center">{{ $order->firstname }} {{ $order->lastname }}</td>
+                                    <td class="text-center">${{ $order->subtotal }}</td>
+                                    <td class="text-center">${{ $order->discount }}</td>
+                                    <td class="text-center">${{ $order->total }}</td>
+                                    <td class="text-center">
+                                        @if ($order->status == 'delivered')
+                                            <span class="text-success"><strong>{{ strtoupper($order->status) }}</strong></span>
+                                        @elseif($order->status == 'canceled')
+                                            <span class="text-danger"><strong>{{ strtoupper($order->status) }}</strong></span>
+                                        @else
+                                            <span class="text-warning"><strong>{{ strtoupper($order->status) }}</strong></span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        {{-- <a class="modal-effect btn btn-sm btn-warning" href="{{ route('Admin-Orders.edit', $order->id) }}"><i class="fa fa-edit"></i></a> --}}
+                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#delete{{ $order->id }}"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @include('Back.Orders.delete')
                                 @endforeach
                             </tbody>
                         </table>

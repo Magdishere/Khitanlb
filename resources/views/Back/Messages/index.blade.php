@@ -43,7 +43,7 @@
                                         <td class="text-center">{{ $message->email }}</td>
                                         <td class="text-center">{{ $message->message }}</td>
                                         <td class="text-center" class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$message->id}}"><i class="fa fa-trash"></i> Delete</a>
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$message->id}}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @include('Back.Messages.delete')

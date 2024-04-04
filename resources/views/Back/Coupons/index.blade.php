@@ -50,8 +50,8 @@
                                         <td class="text-center">{{ $coupon->max_uses }}</td>
                                         <td class="text-center">{{ $coupon->expires_at }}</td>
                                         <td class="text-center" class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('admin-coupons.edit', $coupon->id)}}"><i class="fa fa-edit"></i>Edit</a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$coupon->id}}"><i class="fa fa-trash"></i>Delete</a>
+                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('admin-coupons.edit', $coupon->id)}}"><i class="fa fa-edit"></i></a>
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$coupon->id}}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @include('Back.Coupons.delete')

@@ -80,9 +80,14 @@ class AdminOrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $orders = Order::findOrFail($request->id);
+
+
+        $orders->delete();
+        toastr()->addSuccess('Order deleted successfully.');
+        return redirect()->route('admin-orders.index');
     }
 
 

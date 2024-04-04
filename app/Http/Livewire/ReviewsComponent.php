@@ -10,10 +10,10 @@ class ReviewsComponent extends Component
     public $productId;
     public $rating;
 
-    public function mount($productId)
-    {
-        $this->productId = $productId;
-    }
+    // public function mount($productId)
+    // {
+    //     $this->productId = $productId;
+    // }
 
     public function render()
     {
@@ -36,8 +36,7 @@ class ReviewsComponent extends Component
                 ['rating' => $rating]
             );
 
-            // Refresh the component to update the displayed rating
-            $this->render();
+
         } else {
             // Handle the case where the user is not authenticated
             // You can redirect to login or display a message

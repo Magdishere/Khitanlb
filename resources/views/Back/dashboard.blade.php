@@ -10,15 +10,22 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-                <p class="mg-b-0">Sales monitoring dashboard template.</p>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Khitan Dashboard</h2>
+                <p class="mg-b-0">Welcome Back!</p>
             </div>
         </div>
         <div class="main-dashboard-header-right">
             <div>
                 <label class="tx-13">Customer Ratings</label>
                 <div class="main-star">
-                    <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
+                    @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= round($averageRating))
+                            <i class="typcn typcn-star active"></i>
+                        @else
+                            <i class="typcn typcn-star"></i>
+                        @endif
+                    @endfor
+                    <span>({{\App\Models\admin\Reviews::count()}})</span>
                 </div>
             </div>
             <div>
@@ -40,18 +47,14 @@
             <div class="card overflow-hidden sales-card bg-primary-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TODAY ORDERS</h6>
+                        <h6 class="mb-3 tx-12 text-white">TOTAL ORDERS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{\App\Models\Order::count()}}</h4>
                                 <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                             </div>
-                            <span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> +427</span>
-										</span>
                         </div>
                     </div>
                 </div>
@@ -62,12 +65,12 @@
             <div class="card overflow-hidden sales-card bg-danger-gradient">
                 <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                     <div class="">
-                        <h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
+                        <h6 class="mb-3 tx-12 text-white">TOTAL USERS</h6>
                     </div>
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">{{\App\Models\User::count()}}</h4>
                                 <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
@@ -89,7 +92,7 @@
                     <div class="pb-0 mt-0">
                         <div class="d-flex">
                             <div class="">
-                                <h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
+                                <h4 class="tx-20 font-weight-bold mb-1 text-white">${{number_format(\App\Models\Order::sum('total'), 2)}}</h4>
                                 <p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
                             </div>
                             <span class="float-right my-auto mr-auto">

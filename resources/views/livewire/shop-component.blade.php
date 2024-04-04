@@ -70,28 +70,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="card">
-                                <div class="card-heading">
-                                    <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
-                                </div>
-                                <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="shop__sidebar__color">
-                                            @foreach($attributeOptions->where('attribute.name', 'color') as $options)
-                                                @foreach($options->translations->where('locale', App::getLocale()) as $translation)
-                                                    <label class="c-{{ $loop->index + 1 }}" style="background: {{ $translation->value }}">
-                                                        <input type="radio" wire:model="selectedColor" value="{{ $translation->value }}">
-
-                                                    </label>
-                                                @endforeach
-                                            @endforeach
-                                            <label>
-                                                <input type="radio" wire:model="selectedColor" value=""> All Colors
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -125,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     @php
                         $items = Cart::instance('wishlist')->content()->pluck('id');
                     @endphp
@@ -135,17 +113,9 @@
 
                                 <div class="product__item__pic set-bg" style="background-image: url({{ asset('admin-assets/uploads/images/products/' . $product['image']) }})">
                                     <ul class="product__hover">
-                                        <li>
-                                    @if($items->contains($product->id))
-                                        <a href="#" class="add-cart" wire:click.prevent="removeFromWishlist('{{ $product['id'] }}')"><img class="heart" src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                    @else
-                                        @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                        @else
-                                            <a href="#" class="add-cart" wire:click.prevent="addToWishlist('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"><img src="{{asset('assets/img/icon/heart.png')}}" alt=""></a>
-                                        @endif
-                                    @endif
-                                        </li>
+
+                                        <livewire:home-page.add-to-wishlist-component :product="$product" :items="$items" wire:key="{{ $product->id }}" />
+
                                         <li><a href=""><img src="{{asset('assets/img/icon/compare.png')}}" alt=""> <span>Compare</span></a>
                                         </li>
                                         <li><a href="{{route('product.details', ['slug'=>$product->slug])}}"><img class="p_details" src="{{asset('assets/img/icon/search.png')}}" alt=""></a></li>
@@ -153,14 +123,10 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6>{{$product['name']}}</h6>
-                                    @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{ App\Sale\Sale::calculateDiscountedPrice($product['id']) }})"                                            >+ Add To Cart</a>
-                                    @else
-                                        <a href="#" class="add-cart" wire:click.prevent="addToCart('{{ $product['id'] }}', '{{ $product['name'] }}', {{$product['regular_price']}})"                                            >+ Add To Cart</a>
-                                    @endif
+
+                                    <livewire:add-to-cart-component :product='$product' :items='$items' wire:key="{{ $product->id }}">
 
                                     <livewire:reviews-component :productId="$product->id" />
-
 
                                     @if (App\Sale\Sale::calculateDiscountedPrice($product['id']) != '-')
                                     <span class="text-1000 fw-bold">
@@ -190,6 +156,8 @@
                         </div>
                     @endforeach
                 </div>
+
+
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Product Pagination -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin\Reviews;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +14,14 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        return view('Back.dashboard');
+        // Fetch all reviews
+        $reviews = Reviews::all();
+
+        // Calculate the average rating
+        $totalRatings = $reviews->count();
+        $averageRating = $totalRatings > 0 ? $reviews->avg('rating') : 0;
+
+        return view('Back.dashboard', ['averageRating' => $averageRating, 'totalRatings' => $totalRatings]);
     }
 
     /**
