@@ -59,7 +59,11 @@ class AdminOrdersController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Find the order by its ID
+        $order = Order::findOrFail($id);
+
+        // Return the edit view with the order data
+        return view('Back.Orders.edit', compact('order'));
     }
 
     /**
@@ -71,7 +75,19 @@ class AdminOrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Find the order by its ID
+        $order = Order::findOrFail($id);
+
+        // Validate the incoming request data
+        $request->validate([
+            'status' => 'required|in:ordered,delivered,canceled',
+        ]);
+
+        // Update the order status
+        $order->update(['status' => $request->status]);
+
+        // Redirect back to the index page with a success message
+        return redirect()->route('admin-orders.index')->with('success', 'Order status updated successfully.');
     }
 
     /**
@@ -89,6 +105,13 @@ class AdminOrdersController extends Controller
         toastr()->addSuccess('Order deleted successfully.');
         return redirect()->route('admin-orders.index');
     }
+
+    public function getOrdersByStatus($status)
+    {
+        $orders = Order::where('status', $status)->get();
+        return view('Back.Orders.ordersByStatus', compact('orders', 'status'));
+    }
+
 
 
     /**
@@ -121,6 +144,8 @@ class AdminOrdersController extends Controller
 
         return response()->json(['message' => 'Orders processed successfully']);
     }
+
+
 
     protected function processOrder($order)
     {

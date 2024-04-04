@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\AdminSlidesController;
 use App\Http\Controllers\admin\AdminStringsController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admin\OrdersController;
 use App\Models\admin\ProductAttributeOption;
 use Illuminate\Support\Facades\Route;
 
@@ -53,4 +54,8 @@ Route::prefix('admin')->middleware(['admin'])->group(function () {
     Route::resource('admin-coupons', AdminCouponsController::class);
     Route::resource('admin-messages', AdminContactController::class);
     Route::resource('admin-reviews', AdminReviewsController::class);
+
+    //Orders by Status
+    Route::get('/orders/status/{status}', [AdminOrdersController::class, 'getOrdersByStatus'])->name('orders.status');
+
 });

@@ -6,7 +6,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Orders</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ All Orders</span>
+                <h4 class="content-title mb-0 my-auto">Orders</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ ucfirst($status) }} Orders</span>
             </div>
         </div>
 
@@ -22,7 +22,7 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">ORDERS TABLE</h4>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Orders</p>
+                    <p class="tx-12 tx-gray-500 mb-2">{{ ucfirst($status) }} Orders</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -46,14 +46,15 @@
                                     <td class="text-center">${{ $order->subtotal }}</td>
                                     <td class="text-center">${{ $order->discount }}</td>
                                     <td class="text-center">${{ $order->total }}</td>
-                                    <td class="text-center">
-                                        @if ($order->status == 'delivered')
-                                            <a href="{{ route('orders.status', ['status' => 'delivered']) }}" class="text-success"><strong>{{ strtoupper($order->status) }}</strong></a>
+                                    <td class="text-center
+                                        @if($order->status == 'delivered')
+                                            text-success
                                         @elseif($order->status == 'canceled')
-                                            <a href="{{ route('orders.status', ['status' => 'canceled']) }}" class="text-danger"><strong>{{ strtoupper($order->status) }}</strong></a>
+                                            text-danger
                                         @else
-                                            <a href="{{ route('orders.status', ['status' => 'ordered']) }}" class="text-warning"><strong>{{ strtoupper($order->status) }}</strong></a>
-                                        @endif
+                                            text-warning
+                                        @endif">
+                                        <strong>{{ strtoupper($order->status) }}</strong>
                                     </td>
                                     <td class="text-center">
                                         <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$order->id}}"><i class="fa fa-edit"></i></a>
