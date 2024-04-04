@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap table-bordered">
+                        <table class="table text-md-nowrap table-bordered" id="example2">
                             <thead class="">
                                 <tr>
                                     <th class="wd-5p border-bottom-0 text-center">#</th>
@@ -78,5 +78,4 @@
     </div>
     <!-- main-content closed -->
 @endsection
-@section('js')
-@endsection
+
