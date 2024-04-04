@@ -39,6 +39,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($orders->isEmpty())
+                                    <tr>
+                                        <td colspan="7" class="text-center">No orders available.</td>
+                                    </tr>
+                                @else
                                 @foreach($orders as $order)
                                 <tr>
                                     <td class="text-center">{{ $loop->index + 1 }}</td>
@@ -63,6 +68,7 @@
                                 @include('Back.Orders.edit')
                                 @include('Back.Orders.delete')
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
