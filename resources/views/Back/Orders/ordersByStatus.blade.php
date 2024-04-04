@@ -1,5 +1,15 @@
 @extends('layouts.master')
 @section('css')
+    <!-- Internal Data table css -->
+    <link href="{{URL::asset('admin-assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{URL::asset('admin-assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('admin-assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{URL::asset('admin-assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('admin-assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('admin-assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('admin-assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -26,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap table-bordered" id="example2">
+                        <table class="table text-md-nowrap" id="example">
                             <thead class="">
                                 <tr>
                                     <th class="wd-5p border-bottom-0 text-center">#</th>
@@ -35,6 +45,9 @@
                                     <th class="wd-10p border-bottom-0 text-center">Discount</th>
                                     <th class="wd-10p border-bottom-0 text-center">Total</th>
                                     <th class="wd-10p border-bottom-0 text-center">Status</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Full Address</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Email</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Phone Number</th>
                                     <th class="wd-10p border-bottom-0 text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -56,6 +69,9 @@
                                         @endif">
                                         <strong>{{ strtoupper($order->status) }}</strong>
                                     </td>
+                                    <td class="text-center">{{ $order->country }} - {{ $order->state }} - {{ $order->city }} - {{ $order->street_address }}</td>
+                                    <td class="text-center">{{ $order->email}}</td>
+                                    <td class="text-center">{{ $order->zipcode}}-{{$order->mobile}}</td>
                                     <td class="text-center">
                                         <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$order->id}}"><i class="fa fa-edit"></i></a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#delete{{ $order->id }}"><i class="fa fa-trash"></i></a>
@@ -77,5 +93,31 @@
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
+@endsection
+@section('js')
+
+    <!-- Internal Data tables -->
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/jszip.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{URL::asset('admin-assets/js/table-data.js')}}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('admin-assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('admin-assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
 @endsection
 

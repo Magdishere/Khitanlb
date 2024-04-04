@@ -45,6 +45,9 @@
                                     <th class="wd-10p border-bottom-0 text-center">Discount</th>
                                     <th class="wd-10p border-bottom-0 text-center">Total</th>
                                     <th class="wd-10p border-bottom-0 text-center">Status</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Full Address</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Email</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Phone Number</th>
                                     <th class="wd-10p border-bottom-0 text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -70,6 +73,9 @@
                                             <a href="{{ route('orders.status', ['status' => 'ordered']) }}" class="text-warning"><strong>{{ strtoupper($order->status) }}</strong></a>
                                         @endif
                                     </td>
+                                    <td class="text-center">{{ $order->country }} - {{ $order->state }} - {{ $order->city }} - {{ $order->street_address }}</td>
+                                    <td class="text-center">{{ $order->email}}</td>
+                                    <td class="text-center">{{ $order->zipcode}}-{{$order->mobile}}</td>
                                     <td class="text-center">
                                         <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$order->id}}"><i class="fa fa-edit"></i></a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#delete{{ $order->id }}"><i class="fa fa-trash"></i></a>
