@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->enum('status',['ordered','delivered','canceled'])->default('ordered');
             $table->boolean('is_shipping_different')->default(false);
+
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

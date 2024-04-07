@@ -16,7 +16,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Orders</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ All Orders</span>
+                <h4 class="content-title mb-0 my-auto">Orders</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Archived Orders</span>
             </div>
         </div>
 
@@ -31,9 +31,9 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">ORDERS TABLE</h4>
-                        <a class="btn add-btn"  href="{{route('admin-archived_orders.index')}}"><i class="fas fa-exchange-alt"></i> Archive</a>
+                        <a class="btn add-btn"  href="{{route('admin-orders.index')}}"><i class="fas fa-shopping-bag"></i> All Orders</a>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Orders</p>
+                    <p class="tx-12 tx-gray-500 mb-2">Archived Orders</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -78,16 +78,13 @@
                                     <td class="text-center">{{ $order->email}}</td>
                                     <td class="text-center">{{ $order->zipcode}}-{{$order->mobile}}</td>
                                     <td class="text-center">
-                                        <a class="modal-effect btn btn-sm btn-success"
-                                            href="#" data-order_id="{{ $order->id }}"
+                                        <a class="modal-effect btn btn-sm btn-success" href="#" data-order_id="{{ $order->id }}"
                                             data-toggle="modal" data-target="#Transfer_order"><i
-                                            class="fas fa-exchange-alt"></i></a>
-                                        <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$order->id}}"><i class="fa fa-edit"></i></a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-order_id="{{ $order->id }}" data-toggle="modal" href="#delete_order"><i class="fa fa-trash"></i></a>
+                                                class="fas fa-exchange-alt"></i></a>
+                                        <a class="modal-effect btn btn-sm btn-danger" href="#" data-order_id="{{ $order->id }}"
+                                            data-toggle="modal" data-target="#delete_order"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
-                                @include('Back.Orders.edit')
-                                @include('Back.Orders.delete')
                                 @endforeach
                                 @endif
                             </tbody>
@@ -99,24 +96,49 @@
         <!--/div-->
     </div>
 
-            <!-- Order Archive -->
-    <div class="modal fade" id="Transfer_order" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Delete Order -->
+    <div class="modal fade" id="delete_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Archive Order</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Order</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form action="{{ route('admin-orders.destroy', 'test') }}" method="post">
+                    <form action="{{ route('admin-archived_orders.destroy', 'test') }}" method="post">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                 </div>
                 <div class="modal-body">
-                    Are You Sure You Want To Archive This Order ?
-                    <input type="hidden" name="order_id" id="order_id" value="" >
-                    <input type="hidden" name="id_page" id="id_page" value="2">
+                    Are You Sure You Want To Delete This Order ?
+                    <input type="hidden" name="order_id" id="order_id" value="">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Confirm</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Transfer_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Unarchive Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form action="{{ route('admin-archived_orders.update', 'test') }}" method="post">
+                        {{ method_field('patch') }}
+                        {{ csrf_field() }}
+                </div>
+                <div class="modal-body">
+                    Are You Sure You Want To Unarchive This Order ?
+                    <input type="hidden" name="order_id" id="order_id" value="">
 
                 </div>
                 <div class="modal-footer">

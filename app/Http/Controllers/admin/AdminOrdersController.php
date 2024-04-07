@@ -87,7 +87,8 @@ class AdminOrdersController extends Controller
         $order->update(['status' => $request->status]);
 
         // Redirect back to the index page with a success message
-        return redirect()->route('admin-orders.index')->with('success', 'Order status updated successfully.');
+        toastr()->addSuccess('Status Updated Successfully.');
+        return redirect()->route('admin-orders.index');
     }
 
     /**
@@ -96,14 +97,26 @@ class AdminOrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id)
     {
-        $orders = Order::findOrFail($request->id);
 
+        $id = $request->order_id;
+        $order = Order::where('id', $id)->first();
 
-        $orders->delete();
-        toastr()->addSuccess('Order deleted successfully.');
+        $id_page = $request->id_page;
+
+        if (!$id_page == 2) {
+            $order->forceDelete();
+            toastr()->addSuccess('Order Deleted Successfully.');
+
+        } else {
+
+            $order->delete();
+            toastr()->addSuccess('Order Archived Successfully.');
+        }
+
         return redirect()->route('admin-orders.index');
+
     }
 
     public function getOrdersByStatus($status)

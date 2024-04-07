@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="delete{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="delete_order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -13,8 +13,8 @@
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
             <div class="modal-body">
-                <input type="hidden" name="id" value="{{ $order->id }}">
-                <h5>Are You Sure You Want To Delete This Order ?</h5>
+                Are You Sure You Want To Delete This Order ?
+                <input type="hidden" name="order_id" id="order_id" value="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
