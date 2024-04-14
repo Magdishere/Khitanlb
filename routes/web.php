@@ -11,6 +11,7 @@ use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\OrdersComponent;
 use App\Http\Livewire\SaleProducts;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\ShopComponent;
@@ -46,5 +47,9 @@ Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/sale-product/{id}', SaleProducts::class)->name('sale.product');
 Route::get('/category/{id}', CategoryComponent::class)->name('category');
 // Route::get('/search', SearchComponent::class)->name('product.search');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-orders', OrdersComponent::class)->name('my-orders');
+});
 
 Auth::routes();

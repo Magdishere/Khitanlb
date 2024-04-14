@@ -21,7 +21,7 @@
 	<body class="main-body app sidebar-mini">
 		<!-- Loader -->
 		<div id="global-loader">
-			<img src="{{asset('admin-assets/img/loader.svg')}}" class="loader-img" alt="Loader">
+			<img src="{{asset('assets/img/loader.gif')}}" class="loader-img" style="width: 150px;" alt="Loader">
 		</div>
 		<!-- /Loader -->
 		@include('layouts.main-sidebar')

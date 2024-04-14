@@ -4433,7 +4433,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     transition: none; } }
 
 select.form-control:focus::-ms-value {
-  color: #ffff;
+  color: black;
   background-color: #fff; }
 
 .form-control-file, .form-control-range {

@@ -13,7 +13,7 @@
 	<body class="main-body bg-primary-transparent">
 		<!-- Loader -->
 		<div id="global-loader">
-			<img src="{{asset('assets/img/loader.gif')}}" style="width: 250px" class="loader-img">
+			<img src="{{asset('assets/img/loader.gif')}}" style="width: 150px" class="loader-img">
 		</div>
 		<!-- /Loader -->
 		@yield('content')
