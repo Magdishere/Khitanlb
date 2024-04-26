@@ -45,7 +45,7 @@
                                 @foreach($orders as $order)
                                 <tr>
                                     <td class="text-center">{{ $loop->index + 1 }}</td>
-                                    <td class="text-center">{{ $order->firstname }} {{ $order->lastname }}</td>
+                                    <td class="text-center"><a href="{{ route('order.details', ['id' => $order->id]) }}">{{ $order->firstname }} {{ $order->lastname }}</a></td>
                                     <td class="text-center">${{ $order->subtotal }}</td>
                                     <td class="text-center">${{ $order->discount }}</td>
                                     <td class="text-center">${{ $order->total }}</td>

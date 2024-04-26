@@ -4,19 +4,23 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\Order;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DisplayOrderDetails extends Component
 {
 
-    public $orders;
 
-    public function mount()
+    public $orderId;
+
+    public function mount($id)
     {
-        $this->orders = Auth::user()->orders;
+        $this->orderId = $id;
     }
 
     public function render()
     {
-        return view('livewire.display-order-details');
+        $order = Order::with('orderItems')->findOrFail($this->orderId);
+        return view('livewire.display-order-details', ['order' => $order]);
     }
 }

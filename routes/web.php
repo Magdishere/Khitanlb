@@ -10,6 +10,7 @@ use App\Http\Livewire\CheckoutsComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\DetailsComponent;
+use App\Http\Livewire\DisplayOrderDetails;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\OrdersComponent;
 use App\Http\Livewire\SaleProducts;
@@ -50,6 +51,8 @@ Route::get('/category/{id}', CategoryComponent::class)->name('category');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/my-orders', OrdersComponent::class)->name('my-orders');
+    Route::get('/order/{id}', DisplayOrderDetails::class)->name('order.details');
+
 });
 
 Auth::routes();
