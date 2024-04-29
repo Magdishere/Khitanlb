@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Models\OrderItem;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,5 +21,10 @@ class AttributeOption extends Model
     public function options()
     {
         return $this->hasMany(AttributeOption::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->belongsToMany(OrderItem::class);
     }
 }

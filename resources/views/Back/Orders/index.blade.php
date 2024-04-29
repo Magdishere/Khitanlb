@@ -31,9 +31,8 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">ORDERS TABLE</h4>
-                        <a class="btn add-btn"  href="{{route('admin-archived_orders.index')}}"><i class="fas fa-exchange-alt"></i> Archive</a>
+                        <a class="btn btn-md btn-dark"  href="{{route('admin-archived_orders.index')}}"><i class="fas fa-exchange-alt"></i> Archive</a>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Orders</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -84,6 +83,7 @@
                                             class="fas fa-exchange-alt"></i></a>
                                         <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$order->id}}"><i class="fa fa-edit"></i></a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-order_id="{{ $order->id }}" data-toggle="modal" href="#delete_order"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('admin.order.details', ['id' => $order->id]) }}" class="modal-effect btn btn-sm btn-danger">Details</strong></a>
                                     </td>
                                 </tr>
                                 @include('Back.Orders.edit')

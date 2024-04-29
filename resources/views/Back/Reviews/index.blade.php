@@ -31,11 +31,10 @@
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">REVIEWS TABLE</h4>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Reviews</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap" id="example1">
+                        <table class="table text-md-nowrap" id="example2">
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0 text-center">#</th>
