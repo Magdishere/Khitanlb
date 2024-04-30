@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\admin\AttributeOption;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Notifications\AddOrder;
@@ -105,6 +106,14 @@ class CheckoutsComponent extends Component
         $orderItem->price = $item->price;
         $orderItem->quantity = $item->qty;
         $orderItem->save();
+
+        //Sizes and Colors of each Product
+
+        // $colorOptionId = AttributeOption::whereTranslation('value', $item->options['color'])->first()->id;
+        // $sizeOptionId = AttributeOption::whereTranslation('value', $item->options['size'])->first()->id;
+
+        // $orderItem->attributeOptions()->attach([$colorOptionId, $sizeOptionId]);
+
     }
 
     // Pass the $order instance itself to the notification constructor

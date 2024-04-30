@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\admin\AttributeOption;
+use App\Models\admin\Product;
+use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,5 +17,15 @@ class OrderItem extends Model
     public function order()
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function attributeOptions()
+    {
+        return $this->belongsToMany(AttributeOption::class);
     }
 }

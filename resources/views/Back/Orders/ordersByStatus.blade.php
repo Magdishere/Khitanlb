@@ -30,13 +30,13 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">ORDERS TABLE</h4>
+                        <h4 class="card-title mg-b-0">{{ ucfirst($status) }} ORDERS TABLE</h4>
+                        <a class="btn btn-md btn-dark"  href="{{route('admin-orders.index')}}"><i class="fas fa-shopping-bag"></i> All Orders</a>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">{{ ucfirst($status) }} Orders</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap" id="example">
+                        <table class="table text-md-nowrap" id="example2">
                             <thead class="">
                                 <tr>
                                     <th class="wd-5p border-bottom-0 text-center">#</th>
