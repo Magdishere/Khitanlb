@@ -11,14 +11,8 @@
     <link href="{{URL::asset('admin-assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('admin-assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <!--Internal   Notify -->
-    <link href="{{URL::asset('dashboard/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <link href="{{URL::asset('admin-assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 
-    {{-- <style>
-        .btn-section{
-            background-color: #F77D0A !important;
-            color: #2B2E4A !important;
-        }
-    </style> --}}
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -52,7 +46,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap" id="example2">
+                        <table class="table text-md-nowrap" id="example">
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">#</th>
@@ -127,5 +121,23 @@
     <!--Internal  Notify js -->
     <script src="{{URL::asset('admin-assets/plugins/notify/js/notifIt.js')}}"></script>
     <script src="{{URL::asset('admin-assets/plugins/notify/js/notifit-custom.js')}}"></script>
+
+    <script>
+        $('#delete_order').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var order_id = button.data('order_id')
+            var modal = $(this)
+            modal.find('.modal-body #order_id').val(order_id);
+        })
+    </script>
+
+    <script>
+        $('#Transfer_order').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var order_id = button.data('order_id')
+            var modal = $(this)
+            modal.find('.modal-body #order_id').val(order_id);
+        })
+    </script>
 
 @endsection

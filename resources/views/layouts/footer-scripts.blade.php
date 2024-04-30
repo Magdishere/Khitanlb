@@ -40,3 +40,49 @@
         });
     });
 </script>
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('91b7ac88e04f9dae10f5', {
+        cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        alert(JSON.stringify(data));
+    });
+
+    window.Echo.private('order-channel')
+        .listen('.OrderPlacedEvent', (e) => {
+            // Update the notification count
+            let countElement = document.getElementById('notification-count');
+            let count = parseInt(countElement.innerText);
+            count++;
+            countElement.innerText = count;
+
+            // Add a new notification item to the list
+            let listElement = document.getElementById('notification-list');
+            let newItem = document.createElement('a');
+            newItem.classList.add('d-flex', 'p-3', 'border-bottom');
+            newItem.href = '#';
+            newItem.innerHTML = `
+            <div class="notifyimg bg-warning">
+                <i class="la la-bell text-white"></i>
+            </div>
+            <div class="mr-3">
+                <h5 class="notification-label mb-1">${e.notification.title}</h5>
+                <div class="notification-subtext">${e.notification.time}</div>
+            </div>
+            <div class="mr-auto" >
+                <i class="las la-angle-left text-left text-muted"></i>
+            </div>
+        `;
+            listElement.insertBefore(newItem, listElement.firstChild);
+        });
+
+</script>
+
+

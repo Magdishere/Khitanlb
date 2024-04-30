@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -15,4 +16,11 @@ use Illuminate\Support\Facades\Broadcast;
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('order-channel', function ($user) {
+    // Here you can define your authorization logic
+    // For example, you may check if the user is authenticated
+    // or if the user has specific permissions to access the channel
+    return Auth::check(); // This example authorizes any authenticated user
 });
