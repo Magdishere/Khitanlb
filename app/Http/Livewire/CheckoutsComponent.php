@@ -120,7 +120,7 @@ class CheckoutsComponent extends Component
 
     // Pass the $order instance itself to the notification constructor
     $user = User::first();
-    //Notification::send($user, new AddOrder($order));
+    Notification::send($user, new AddOrder($order));
 }
 
     private function createNewUser()
