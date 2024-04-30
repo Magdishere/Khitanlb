@@ -107,18 +107,20 @@ class CheckoutsComponent extends Component
         $orderItem->quantity = $item->qty;
         $orderItem->save();
 
-        //Sizes and Colors of each Product
-
-        // $colorOptionId = AttributeOption::whereTranslation('value', $item->options['color'])->first()->id;
-        // $sizeOptionId = AttributeOption::whereTranslation('value', $item->options['size'])->first()->id;
-
-        // $orderItem->attributeOptions()->attach([$colorOptionId, $sizeOptionId]);
-
+        // Attach attribute options to the order item
+        $attributeOptionsIds = [];
+        foreach ($item->options as $optionKey => $optionValue) {
+            $attributeOption = AttributeOption::whereTranslation('value', $optionValue)->first();
+            if ($attributeOption) {
+                $attributeOptionsIds[] = $attributeOption->id;
+            }
+        }
+        $orderItem->attributeOptions()->attach($attributeOptionsIds);
     }
 
     // Pass the $order instance itself to the notification constructor
     $user = User::first();
-    Notification::send($user, new AddOrder($order));
+    //Notification::send($user, new AddOrder($order));
 }
 
     private function createNewUser()
