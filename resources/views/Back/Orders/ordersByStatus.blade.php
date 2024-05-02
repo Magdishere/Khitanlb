@@ -31,7 +31,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">{{ ucfirst($status) }} ORDERS TABLE</h4>
-                        <a class="btn btn-md btn-dark"  href="{{route('admin-orders.index')}}"><i class="fas fa-shopping-bag"></i> All Orders</a>
+                        <a class="btn btn-md btn-dark"  href="{{route('admin-orders.index')}}"><i class="bx bx-box"></i> All Orders</a>
                     </div>
                 </div>
                 <div class="card-body">

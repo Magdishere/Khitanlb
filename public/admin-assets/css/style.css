@@ -4,7 +4,7 @@
 Project        :   VALEX - HTML5 Bootstrap Admin Template
 Version        :   V.1
 Create Date    :   09/05/20
-Copyright      :   Spruko Technologies Private Limited 
+Copyright      :   Spruko Technologies Private Limited
 Author         :   SprukoSoft
 Author URL     :   https://themeforest.net/user/sprukosoft
 Support	       :   support@spruko.com
@@ -83,6 +83,7 @@ License        :   Licensed under ThemeForest License
 /* ######## FONT ######## */
 /* ############### FONTS IMPORT ############### */
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap');
 /* ######## BOOTSTRAP ######## */
 /*Color variables*/
 /*gray variables*/
@@ -6412,7 +6413,8 @@ textarea.form-control.is-invalid, textarea.form-control.parsley-error {
       font-weight: 500; }
   .table th, .table td {
     padding: 9px 15px;
-    line-height: 1.462; }
+    line-height: 1.462;
+vertical-align: middle;}
 
 .table-striped tbody tr:nth-of-type(2n+1) {
   background-color: rgba(238, 238, 247, 0.5); }
@@ -10174,7 +10176,7 @@ a.close.disabled {
 /* ############### PAGE LAYOUT STYLES ############### */
 /* ###### 6.3 Global  ###### */
 body {
-  font-family: "Roboto", sans-serif; }
+  font-family: 'Tajawal', sans-serif; }
 
 .main-body, .main-dashboard {
   min-height: 100vh;
@@ -10625,8 +10627,8 @@ body {
   font-size: 12px; }
 
 .country-Flag img {
-  width: 1.5rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
   line-height: 0.1rem;
   font-size: .75rem; }
 

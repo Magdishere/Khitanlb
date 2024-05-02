@@ -29,7 +29,7 @@
             <div class="card card-invoice">
                 <div class="card-body">
                     <div class="invoice-header">
-                        <h1 class="invoice-title">Order Details</h1>
+                        <h1 class="invoice-title">Order Invoice</h1>
                         <div class="billed-from">
                             <h6>Khitan Shop</h6>
                             <p>Beshmezzine, North-Lebanon<br>
@@ -57,7 +57,7 @@
                             <thead>
                                 <tr>
                                     <th class="wd-20p">Product</th>
-                                    <th class="wd-40p">Description</th>
+                                    <th class="wd-40p">Images</th>
                                     <th class="tx-center">Quantity</th>
                                     <th class="tx-right">Price</th>
                                     <th class="tx-right">Amount</th>
@@ -68,20 +68,7 @@
                                 @foreach($orders->orderItems as $item)
                                     <tr>
                                     <td>{{$item->product->name}}</td>
-                                    {{-- <td>
-                                        @foreach($item->product->attributes as $attribute)
-                                            @if($attribute->name == 'color')
-                                                {{ $attribute->pivot->value }}
-                                            @endif
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($item->product->attributes as $attribute)
-                                            @if($attribute->name == 'size')
-                                                {{ $attribute->pivot->value }}
-                                            @endif
-                                        @endforeach
-                                    </td> --}}
+                                    <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $item->product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
                                     <td class="tx-center">{{$item->quantity}}</td>
                                     <td class="tx-right">${{$item->price}}</td>
                                     <td class="tx-right">${{ number_format($item->quantity * $item->price, 2) }}</td>
@@ -107,8 +94,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <hr class="mg-b-40">
-                    <!-- Action Buttons -->
+                    <button type="button" class="btn btn-dark" onclick="window.history.back()">Back</button>
                 </div>
             </div>
         </div>

@@ -31,14 +31,8 @@
                                 @endif
                                 <div class="form-group">
                                     <label>Category Image</label>
-                                    <input type="file" name="category_image" class="file-upload custom-file-input hidden" id="input_scr" onchange="previewFile()" hidden>
-                                    <label class="border-0 mb-0 cursor" for="restaurant-logo">
-                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="img-fluid" style="width: 130px; height: 130px" onchange="previewImage(this)">
-                                        <span id="img_here"></span>
-                                        <img src="{{asset('admin-assets/img/camera-icon.png')}}" id="img_scr" alt="img" class="provider-rest-img d-none" style="width: 130px; height: 130px">
+                                    <input type="file" name="category_image" class="form-control" accept="image/*" id="input_scr" onchange="previewFile()">
 
-                                        <span class="file-custom"></span>
-                                    </label>
                                     @error('category_image')
                                     <span class="text-danger">{{$message}}</span>
                                     @enderror
@@ -138,7 +132,7 @@
 
                                 <ul class="pro-submit" style="list-style:none;">
                                     <li>
-                                        <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Category</button>
+                                        <button type="submit"  class="btn btn-success">Save Category</button>
                                     </li>
                                 </ul>
                             </form>
