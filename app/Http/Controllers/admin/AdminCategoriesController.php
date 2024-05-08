@@ -12,7 +12,7 @@ class AdminCategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::orderBy('id', 'DESC')->get();
         return view('Back.Categories.index', compact('categories'));
     }
 

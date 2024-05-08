@@ -20,7 +20,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">COUPONS TABLE</h4>
-                        <a class="btn btn-dark"  href="{{route('admin-coupons.create')}}"><i class="fa fa-plus"></i> Add Coupon</a>
+                        <a class="btn btn-dark"  data-effect="effect-scale" data-toggle="modal" href="#add"><i class="fa fa-plus"></i> Add Coupon</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -54,6 +54,7 @@
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$coupon->id}}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
+                                    @include('Back.Coupons.add')
                                     @include('Back.Coupons.edit')
                                     @include('Back.Coupons.delete')
                                 @endforeach
