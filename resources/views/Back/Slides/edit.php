@@ -17,11 +17,11 @@
                         @error('image')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
-                        {{-- @if($slide->image)
+                        @if($slide->image)
                             <img id="image-preview" src="{{ asset('../admin-assets/uploads/images/slides/' . $slide->image) }}" style="width: 150px; height: 100px" alt="Slide Image">
                         @else
-                            <img id="image-preview" style="width: 50px; height: 50px" alt="No Image">
-                        @endif --}}
+                            <img id="image-preview" style="width: 150px; height: 100px" alt="No Image">
+                        @endif
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -97,4 +97,3 @@
         </div>
     </div>
 </div>
-

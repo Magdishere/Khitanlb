@@ -17,7 +17,7 @@ class AdminSlidesController extends Controller
      */
     public function index()
     {
-        $slides = Slides::get();
+        $slides = Slides::orderBy('id', 'DESC')->get();
         return view('Back.Slides.index', compact('slides'));
     }
 

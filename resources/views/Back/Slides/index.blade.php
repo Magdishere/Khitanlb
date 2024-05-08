@@ -20,7 +20,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <h4 class="card-title mg-b-0">SLIDES TABLE</h4>
-                        <a class="btn btn-dark"  href="{{route('admin-slides.create')}}"><i class="fa fa-plus"></i> Add Slide</a>
+                        <a class="btn btn-dark"  data-effect="effect-scale" data-toggle="modal" href="#add"><i class="fa fa-plus"></i> Add Slide</a>
                     </div>
                     <p class="tx-12 tx-gray-500 mb-2">All Slides</p>
                 </div>
@@ -46,10 +46,12 @@
                                         <td class="text-center">{{ $slide->description }}</td>
                                         <td class="text-center">{{ $slide->link }}</td>
                                         <td class="text-center" class="text-center">
-                                            <a class="modal-effect btn btn-sm btn-warning" href="{{route('admin-slides.edit', $slide->id)}}"><i class="fa fa-edit"></i></a>
+                                            <a class="modal-effect btn btn-sm btn-warning" data-effect="effect-scale" data-toggle="modal" href="#edit{{$slide->id}}"><i class="fa fa-edit"></i></a>
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$slide->id}}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
+                                    @include('Back.Slides.add')
+                                    @include('Back.Slides.edit')
                                     @include('Back.Slides.delete')
                                 @endforeach
                             </tbody>
@@ -76,5 +78,22 @@
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #section_name').val(section_name);
     })
+</script>
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('image-preview');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+        }
+    }
 </script>
 @endsection
