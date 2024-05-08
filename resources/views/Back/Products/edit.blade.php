@@ -262,11 +262,9 @@
                                 </div>
 
 
-                                <ul class="pro-submit" style="list-style:none;">
-                                    <li>
-                                        <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Slide</button>
-                                    </li>
-                                </ul>
+                                <div class="pro-submit">
+                                    <button type="submit"  class="btn btn-success">Save Changes</button>
+                                </div>
                             </form>
                         </div>
                     </div>

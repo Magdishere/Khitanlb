@@ -58,6 +58,7 @@
                                 <tr>
                                     <th class="wd-20p">Product</th>
                                     <th class="wd-40p">Images</th>
+                                    <th class="wd-40p">Specefications</th>
                                     <th class="tx-center">Quantity</th>
                                     <th class="tx-right">Price</th>
                                     <th class="tx-right">Amount</th>
@@ -69,6 +70,19 @@
                                     <tr>
                                     <td>{{$item->product->name}}</td>
                                     <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $item->product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
+                                    <td class="tx-center">
+                                        @foreach($item->attributeOptions as $options)
+                                            @if($options->attribute->name == 'color')
+                                                @foreach($options->translations as $translation)
+                                                    @if($translation->locale == app()->getLocale())
+                                                        <label class="{{ ($selectedColors[$product->id] === $translation->value || ($selectedColors[$product->id] === null && $options->pivot->is_default === 1)) ? 'active ' . $translation->value : $translation->value  }}" for="{{ 'pc-' . $product->id . '-' . $translation->value }}" style="background: {{ $translation->value }}">
+                                                            <input type="radio" id="{{ 'pc-' . $product->id . '-' . $translation->value }}" wire:model="selectedColors.{{ $product->id }}" value="{{ $translation->value }}">
+                                                        </label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td class="tx-center">{{$item->quantity}}</td>
                                     <td class="tx-right">${{$item->price}}</td>
                                     <td class="tx-right">${{ number_format($item->quantity * $item->price, 2) }}</td>

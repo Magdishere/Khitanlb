@@ -35,11 +35,11 @@
                         <h4 class="card-title mg-b-0">PRODUCTS TABLE</h4>
 
                         <div class="mb-3 mb-xl-0">
-                                <a class="btn add-btn" href="{{route('admin-products.create')}}"><i class="fa fa-plus"></i> Add Product</a>
+                                <a class="btn btn-dark" href="{{route('admin-products.create')}}"><i class="fa fa-plus"></i> Add Product</a>
 
                             <div class="btn-group dropdown">
-                                <button type="button" class="btn add-btn">14 Aug 2019</button>
-                                <button type="button"  class="btn add-btn dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button type="button" class="btn btn-dark">14 Aug 2019</button>
+                                <button type="button"  class="btn btn-dark dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
@@ -51,11 +51,10 @@
                             </div>
                         </div>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">All Products</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap table-bordered">
+                        <table class="table text-md-nowrap" id="example2">
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">#</th>

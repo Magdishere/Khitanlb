@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Edit a Category</h4>
-                            <form action="{{route('Admin-Categories.edit', $category->id)}}" method="POST" class="form-sample" enctype="multipart/form-data">
+                            <form action="{{ route('Admin-Categories.update', $category->id) }}" method="POST" class="form-sample" enctype="multipart/form-data">
                                 @csrf
                                 @if($category->exists)
                                     @method('PUT')
@@ -128,13 +128,9 @@
 
                                     </div>
 
-
-
-                                <ul class="pro-submit" style="list-style:none;">
-                                    <li>
-                                        <button type="submit"  class="btn btn-success">Save Category</button>
-                                    </li>
-                                </ul>
+                                    <div class="pro-submit">
+                                        <button type="submit"  class="btn btn-success">Save Changes</button>
+                                    </div>
                             </form>
                         </div>
                     </div>

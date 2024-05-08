@@ -11,7 +11,7 @@ class AdminCouponsController extends Controller
 {
     public function index()
     {
-        $coupons = Coupons::get();
+        $coupons = Coupons::orderBy('id', 'DESC')->get();
         return view('Back.Coupons.index', compact('coupons'));
     }
 

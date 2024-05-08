@@ -98,7 +98,7 @@
 
                                 <ul class="pro-submit" style="list-style:none;">
                                     <li>
-                                        <button type="submit"  class="btn" style="background-color: black; color:pink;">Save Thread</button>
+                                        <button type="submit"  class="btn btn-success">Add Thread</button>
                                     </li>
                                 </ul>
                             </form>
