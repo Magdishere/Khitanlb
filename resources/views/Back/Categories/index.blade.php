@@ -34,6 +34,7 @@
                                     <th class="wd-15p border-bottom-0 text-center">Category Image</th>
                                     <th class="wd-20p border-bottom-0 text-center">Name</th>
                                     <th class="wd-15p border-bottom-0 text-center">Slug</th>
+                                    <th class="wd-15p border-bottom-0 text-center">Type</th>
                                     <th class="wd-15p border-bottom-0 text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -44,6 +45,13 @@
                                         <td class="text-center"><img src="{{ asset('../admin-assets/uploads/images/categories/' . $category->image_path) }}" alt="Category Image" style="max-width: 50px;"></td>
                                         <td class="text-center">{{$category->name}}</td>
                                         <td class="text-center">{{$category->slug}}</td>
+                                        <td class="text-center">
+                                            @if($category->parent_id == null)
+                                                Main Category
+                                            @else
+                                                Sub-category
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <a class="modal-effect btn btn-sm btn-warning" href="{{route('Admin-Categories.edit', $category->id)}}"><i class="fa fa-edit"></i></a>
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$category->id}}"><i class="fa fa-trash"></i></a>
