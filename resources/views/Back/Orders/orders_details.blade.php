@@ -72,11 +72,20 @@
                                     <td><img src="{{ asset('../admin-assets/uploads/images/products/' . $item->product->image) }}" alt="Slide Image" style="max-width: 50px;"></td>
                                         <td class="tx-right">
                                             @foreach($item->attributeOptions as $option)
-                                                @foreach($option->translations as $translation)
-                                                    @if($translation->locale == 'en')
-                                                        {{$translation->value}}
+                                                @if($option->attribute_id == $attributes['color'])
+                                                    @foreach($option->translations as $translation)
+                                                        @if($translation->locale == 'en')
+                                                            <h4 style="color: {{$translation->value}}">Color</h4>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                                    @if($option->attribute_id !== $attributes['color'])
+                                                        @foreach($option->translations as $translation)
+                                                            @if($translation->locale == 'en')
+                                                                {{$translation->value}}
+                                                            @endif
+                                                        @endforeach
                                                     @endif
-                                                @endforeach
                                             @endforeach
                                         </td>
                                     <td class="tx-center">{{$item->quantity}}</td>

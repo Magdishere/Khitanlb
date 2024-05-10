@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\Attribute;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class OrderDetailsController extends Controller
      */
     public function index($id)
     {
+        $attributes = Attribute::withTranslation()->get()->pluck('id', 'name');
         $orders = Order::with('orderItems.product')->find($id); // Assuming Order is your model representing orders
-        return view('Back.Orders.orders_details', compact('orders'));
+        return view('Back.Orders.orders_details', compact('orders', 'attributes'));
     }
 
     /**
