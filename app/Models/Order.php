@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use App\Models\admin\AttributeOption;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,12 @@ class Order extends Model
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function attributeOptions()
+    {
+        return $this->belongsToMany(AttributeOption::class, 'attribute_option_order_item', 'order_item_id', 'attribute_option_id')
+            ->withTimestamps();
     }
 
     public function shipping()
