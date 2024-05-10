@@ -31,10 +31,10 @@
                                     <th class="wd-15p border-bottom-0 text-center">#</th>
                                     <th class="wd-20p border-bottom-0 text-center">Brand</th>
                                     <th class="wd-15p border-bottom-0 text-center">Material</th>
-                                    <th class="wd-20p border-bottom-0 text-center">Image</th>
+                                    <th class="wd-10p border-bottom-0 text-center">Image</th>
                                     <th class="wd-15p border-bottom-0 text-center">Length</th>
                                     <th class="wd-10p border-bottom-0 text-center">Weight</th>
-                                    <th class="wd-10p border-bottom-0 text-center">Actions</th>
+                                    <th class="wd-20p border-bottom-0 text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

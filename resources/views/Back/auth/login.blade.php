@@ -34,7 +34,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password</label> <input name="password" class="form-control" placeholder="Enter your password" type="password">
-                                                </div><button class="btn btn-main-primary btn-block">Sign In</button>
+                                                    @error('password')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <button class="btn btn-main-primary btn-block">Sign In</button>
                                                 <div class="row row-xs">
                                                     <div class="col-sm-6">
                                                         <button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>

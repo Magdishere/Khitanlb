@@ -22,13 +22,20 @@ class AdminAuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Email must be a valid email address.',
+            'password.required' => 'Password is required.',
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended(route('admin.dashboard')); // Change 'admin.dashboard' to your admin dashboard route
+            return redirect()->intended(route('admin.dashboard'));
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back()->withErrors([
+            'email' => 'These credentials do not match our records.',
+            'password' => 'Incorrect password.',
+        ]);
     }
     public function register(Request $request)
     {
@@ -56,7 +63,7 @@ class AdminAuthController extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
 
-        return redirect(url('/'));
+        return view('Back.auth.login');
     }
 
 }
