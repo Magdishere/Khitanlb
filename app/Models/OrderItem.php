@@ -26,6 +26,6 @@ class OrderItem extends Model
 
     public function attributeOptions()
     {
-        return $this->belongsToMany(AttributeOption::class);
+        return $this->belongsToMany(AttributeOption::class, 'attribute_option_order_item', 'order_item_id', 'attribute_option_id');
     }
 }
