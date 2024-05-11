@@ -88,6 +88,12 @@ class AdminProductsController extends Controller
                 }
             }
 
+            if ($request->has('default_attribute_options')) {
+                $attributeOptions = $request->input('default_attribute_options');
+                $products->attributeOptions()->attach($attributeOptions, ['is_default' => 1]);
+            }
+
+
             if ($request->has('attribute_options')) {
                 $attributeOptions = $request->input('attribute_options');
                 $products->attributeOptions()->attach($attributeOptions);

@@ -52,7 +52,12 @@
                                                     <input type="radio" wire:model="selectedColor" value="">
                                                 </label>
                                             </div>
-                                            <h6> Size: {{ $item->options['size'] ?? '-' }}</h6>
+                                            @foreach($item->options as $key=>$option)
+                                                @if($key !== 'color')
+                                                    <h6> {{ucfirst($key)}}: {{ $option ?? '-' }}</h6>
+                                                @endif
+                                            @endforeach
+
 
                                             <h5>{{$item->regular_price}}</h5>
                                         </div>

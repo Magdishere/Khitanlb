@@ -150,8 +150,8 @@
                                                 @if($attribute['name'] !== null)
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1">default {{$attribute['name']}}</label>
-                                                            <select class="js-example-basic-multiple" name="default_attribute_options" {{ isset($attribute['select_attributes']) ? $attribute['select_attributes'] : '' }}>
+                                                            <label for="projectinput1">Default {{$attribute['name']}}</label>
+                                                            <select class="js-example-basic-multiple" name="default_attribute_options[]" {{ isset($attribute['select_attributes']) ? $attribute['select_attributes'] : '' }}>
                                                                 @foreach($attribute['options'] as $option)
                                                                     <option value="{{ $option['id'] }}" {{ isset($option['attributes']) ? $option['attributes'] : '' }}>
                                                                         {{ $option['translations'][0]['value'] }}
