@@ -95,7 +95,8 @@ class AdminSalesController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin-sales.index')->with('success', 'Sales has been applied');
+            toastr()->addSuccess('Sale Added Successfully.');
+            return redirect()->route('admin-sales.index');
         } catch (\Exception $exception) {
             return $exception;
             DB::rollBack();

@@ -78,7 +78,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->slug}}</td>
-                                    <td>{{$product->regular_price}}
+                                    <td>${{$product->regular_price}}
                                         {{ App\Sale\Sale::calculateDiscountedPrice($product->id)}}
                                     </td>
                                     <td>{{$product->SKU}}</td>

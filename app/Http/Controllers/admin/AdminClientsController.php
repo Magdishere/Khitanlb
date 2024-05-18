@@ -1,28 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Admin;
-use App\Models\admin\Reviews;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class AdminClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function index()
     {
-        // Fetch all reviews
-        $reviews = Reviews::all();
-        $admins = Admin::all();
-        // Calculate the average rating
-        $totalRatings = $reviews->count();
-        $averageRating = $totalRatings > 0 ? $reviews->avg('rating') : 0;
-
-        return view('Back.dashboard', ['averageRating' => $averageRating, 'totalRatings' => $totalRatings, 'admins' => $admins]);
+        $clients = User::orderBy('id', 'DESC')->get();
+        return view('Back.Clients.index', compact('clients'));
     }
 
     /**
@@ -88,6 +82,8 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $clients = User::findOrFail($id);
+        $clients->delete();
+        return redirect()->route('admin-clients.index')->with('success', 'Client deleted successfully!');
     }
 }
