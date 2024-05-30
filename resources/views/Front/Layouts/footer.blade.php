@@ -219,7 +219,8 @@
 
     </script>
 
-
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
 
     @livewireScripts
 </body>
